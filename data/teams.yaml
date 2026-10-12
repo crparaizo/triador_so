@@ -1,0 +1,96 @@
+# =============================================================================
+# teams.yaml — Equipes de manutenção da planta industrial fictícia
+#
+# AVISO: Dados completamente sintéticos para protótipo acadêmico.
+# Não representam equipes, pessoas ou contatos reais.
+#
+# Campos por equipe:
+#   id           : identificador único da equipe
+#   nome         : nome oficial da equipe
+#   especialidades: lista de competências técnicas
+#   contato      : e-mail de contato (fictício)
+#   disponivel   : true se a equipe aceita novas ordens de serviço
+# =============================================================================
+
+teams:
+
+  - id: "team-mecanica"
+    nome: "Manutenção Mecânica"
+    especialidades:
+      - "bombas centrífugas"
+      - "compressores"
+      - "motores elétricos"
+      - "válvulas"
+      - "rolamentos"
+      - "correias e polias"
+      - "alinhamento de eixos"
+      - "lubrificação industrial"
+    contato: "mecanica@planta.com"
+    disponivel: true
+
+  - id: "team-eletrica"
+    nome: "Manutenção Elétrica"
+    especialidades:
+      - "painéis elétricos"
+      - "transformadores"
+      - "geradores"
+      - "motores elétricos"
+      - "inversores de frequência"
+      - "sistema de aterramento"
+      - "iluminação industrial"
+      - "cabos e conexões"
+    contato: "eletrica@planta.com"
+    disponivel: true
+
+  - id: "team-instrumentacao"
+    nome: "Instrumentação e Controle"
+    especialidades:
+      - "sensores de temperatura"
+      - "transmissores de pressão"
+      - "válvulas de controle"
+      - "controladores PID"
+      - "calibração de instrumentos"
+      - "sistemas SCADA"
+      - "CLPs e sistemas de controle"
+      - "malhas de controle"
+    contato: "instrumentacao@planta.com"
+    disponivel: true
+
+  - id: "team-utilidades"
+    nome: "Utilidades"
+    especialidades:
+      - "caldeiras"
+      - "chillers"
+      - "compressores de refrigeração"
+      - "sistemas de vapor"
+      - "tratamento de água"
+      - "ar comprimido"
+      - "sistema de vácuo"
+    contato: "utilidades@planta.com"
+    disponivel: true
+
+  - id: "team-infraestrutura"
+    nome: "Infraestrutura e Facilities"
+    especialidades:
+      - "climatização HVAC"
+      - "rede de incêndio"
+      - "elevadores"
+      - "estrutura civil"
+      - "telhados e vedações"
+      - "iluminação predial"
+      - "instalações hidráulicas"
+    contato: "facilities@planta.com"
+    disponivel: true
+
+  - id: "team-ti"
+    nome: "TI e Automação"
+    especialidades:
+      - "sistemas SCADA"
+      - "redes industriais"
+      - "CLPs programáveis"
+      - "servidores industriais"
+      - "cibersegurança industrial"
+      - "historiadores de dados"
+      - "integração OPC"
+    contato: "automacao@planta.com"
+    disponivel: true

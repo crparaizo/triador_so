@@ -5,6 +5,7 @@ Lê variáveis de ambiente e arquivo .env (opcional). Todos os campos têm
 valores padrão funcionais para que o sistema execute sem .env configurado.
 
 Usar get_settings() para obter a instância cacheada.
+Chamar get_settings.cache_clear() em testes para reiniciar o cache.
 """
 
 from functools import lru_cache
@@ -21,7 +22,12 @@ class Settings(BaseSettings):
     .env na raiz do projeto. Consulte .env.example para referência.
     """
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        # Não lança exceção se .env não existir
+    )
 
     # LLM / Ollama
     ollama_model: str = Field(
@@ -53,8 +59,23 @@ class Settings(BaseSettings):
         description="Nível de log (DEBUG, INFO, WARNING, ERROR)",
     )
 
+    # Controle de chamadas LLM
+    max_retries_llm: int = Field(
+        default=3,
+        ge=1,
+        description="Número máximo de tentativas para chamadas LLM",
+    )
+    llm_timeout_seconds: int = Field(
+        default=60,
+        ge=1,
+        description="Timeout em segundos para chamadas LLM",
+    )
 
-@lru_cache()
+
+@lru_cache(maxsize=1)
 def get_settings() -> Settings:
-    """Retorna instância cacheada das configurações. Lê .env uma única vez."""
+    """
+    Retorna instância singleton de Settings com cache.
+    Usar get_settings.cache_clear() em testes para reiniciar.
+    """
     return Settings()

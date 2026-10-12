@@ -1,0 +1,345 @@
+# =============================================================================
+# categories.yaml — Categorias de falha e palavras-chave para o motor de regras
+#
+# AVISO: Dados sintéticos para protótipo acadêmico de triagem de OS industriais.
+#
+# Estrutura: dicionário cujas chaves correspondem aos valores do enum
+# FailureCategory (exceto FORA_DO_ESCOPO e DESCONHECIDA, tratadas pelo motor).
+#
+# Cada categoria contém:
+#   descricao      : descrição da categoria para documentação
+#   equipe_padrao  : equipe responsável pelo atendimento padrão
+#   urgencia_padrao: nível de urgência padrão (IMEDIATA, ALTA, MEDIA, BAIXA)
+#   palavras_chave : lista de termos (≥20) em português, incluindo variações,
+#                    abreviações e termos técnicos usados no chão de fábrica
+# =============================================================================
+
+categorias:
+
+  MECANICA:
+    descricao: >
+      Falhas em componentes mecânicos como bombas, compressores, motores
+      e sistemas de transmissão.
+    equipe_padrao: "Manutenção Mecânica"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "vibração"
+      - "ruído"
+      - "barulho"
+      - "trepidação"
+      - "bomba"
+      - "compressor"
+      - "motor"
+      - "rolamento"
+      - "correia"
+      - "polia"
+      - "eixo"
+      - "acoplamento"
+      - "vazamento"
+      - "vazamento de óleo"
+      - "vazamento mecânico"
+      - "superaquecimento"
+      - "aquecimento excessivo"
+      - "emperrado"
+      - "travado"
+      - "temperatura alta"
+      - "temperatura elevada"
+      - "desgaste"
+      - "folga"
+      - "desalinhamento"
+      - "cavitação"
+      - "selo mecânico"
+      - "gaxeta"
+      - "flange"
+      - "tubulação"
+      - "válvula mecânica"
+
+  ELETRICA:
+    descricao: >
+      Falhas elétricas em painéis, transformadores, geradores e sistemas
+      de distribuição de energia.
+    equipe_padrao: "Manutenção Elétrica"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "curto"
+      - "curto-circuito"
+      - "disjuntor"
+      - "chave"
+      - "fusível"
+      - "queimado"
+      - "faísca"
+      - "cheiro de queimado"
+      - "sem energia"
+      - "queda de energia"
+      - "energia elétrica"
+      - "tensão"
+      - "corrente alta"
+      - "sobrecarga"
+      - "painel"
+      - "quadro elétrico"
+      - "transformador"
+      - "gerador"
+      - "aterramento"
+      - "isolamento"
+      - "cabos"
+      - "fiação"
+      - "relé"
+      - "contator"
+      - "inversor"
+      - "variador"
+      - "frequência"
+      - "alarme elétrico"
+      - "falta de fase"
+      - "desequilíbrio de fase"
+
+  INSTRUMENTACAO:
+    descricao: >
+      Falhas em instrumentos de medição, sensores, transmissores, válvulas
+      de controle e sistemas de automação.
+    equipe_padrao: "Instrumentação e Controle"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "sensor"
+      - "transmissor"
+      - "medidor"
+      - "instrumento"
+      - "calibração"
+      - "deriva"
+      - "leitura errada"
+      - "sinal falso"
+      - "sinal de erro"
+      - "válvula de controle"
+      - "posicionador"
+      - "atuador"
+      - "CLP"
+      - "controlador"
+      - "malha de controle"
+      - "PID"
+      - "set point"
+      - "setpoint"
+      - "desvio"
+      - "alarme de processo"
+      - "falha de comunicação"
+      - "sinal 4-20mA"
+      - "loop"
+      - "indicação incorreta"
+      - "temperatura incorreta"
+      - "pressão incorreta"
+      - "fluxo incorreto"
+      - "nível incorreto"
+      - "SCADA"
+      - "DCS"
+
+  UTILIDADES:
+    descricao: >
+      Falhas em sistemas de utilidades industriais como caldeiras, chillers,
+      sistemas de vapor e ar comprimido.
+    equipe_padrao: "Utilidades"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "caldeira"
+      - "vapor"
+      - "steam"
+      - "chiller"
+      - "água gelada"
+      - "refrigeração"
+      - "ar comprimido"
+      - "compressor de ar"
+      - "pressão do ar"
+      - "ar instrumento"
+      - "torre de resfriamento"
+      - "água de resfriamento"
+      - "tratamento de água"
+      - "osmose"
+      - "geração de vapor"
+      - "consumo de vapor"
+      - "condensado"
+      - "purgador"
+      - "vácuo"
+      - "sistema de vácuo"
+      - "bomba de vácuo"
+      - "nitrogênio"
+      - "gás técnico"
+      - "utilidades"
+      - "sistema de suporte"
+      - "falha de utilidade"
+      - "perda de utilidade"
+
+  SEGURANCA:
+    descricao: >
+      Ocorrências que representam risco à segurança das pessoas ou ao processo,
+      incluindo emergências e condições perigosas.
+    equipe_padrao: "Manutenção Mecânica"
+    urgencia_padrao: "IMEDIATA"
+    palavras_chave:
+      - "incêndio"
+      - "fogo"
+      - "fumaça"
+      - "explosão"
+      - "risco de explosão"
+      - "vazamento de gás"
+      - "gas"
+      - "produto químico"
+      - "derramamento"
+      - "acidente"
+      - "lesão"
+      - "ferimento"
+      - "emergência"
+      - "pânico"
+      - "evacuação"
+      - "EPI"
+      - "equipamento de proteção"
+      - "risco elétrico"
+      - "choque elétrico"
+      - "área de risco"
+      - "zona de perigo"
+      - "alarme de gás"
+      - "detector de fumaça"
+      - "sprinkler"
+      - "segurança crítica"
+      - "parada de emergência"
+      - "E-stop"
+      - "perigo imediato"
+
+  QUALIDADE:
+    descricao: >
+      Problemas que afetam a qualidade do produto ou processo, como
+      contaminação, desvios de especificação e não conformidades.
+    equipe_padrao: "Instrumentação e Controle"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "qualidade"
+      - "contaminação"
+      - "contaminado"
+      - "especificação"
+      - "fora de especificação"
+      - "não conformidade"
+      - "nc"
+      - "produto fora do padrão"
+      - "análise"
+      - "laboratório"
+      - "pureza"
+      - "concentração"
+      - "viscosidade"
+      - "cor"
+      - "odor"
+      - "sabor"
+      - "pH"
+      - "temperatura de processo"
+      - "desvio de processo"
+      - "parâmetro fora"
+      - "reprovado"
+      - "rejeito"
+      - "sucata"
+      - "retrabalho"
+      - "inspeção"
+      - "auditoria"
+      - "certificado"
+      - "rastreabilidade"
+
+  PROCESSO:
+    descricao: >
+      Falhas no processo produtivo que não se enquadram em categoria específica
+      de equipamento, incluindo desvios de processo e paradas de produção.
+    equipe_padrao: "Instrumentação e Controle"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "processo"
+      - "produção"
+      - "parada de produção"
+      - "linha parada"
+      - "linha de produção"
+      - "reator"
+      - "coluna"
+      - "misturador"
+      - "agitador"
+      - "filtro"
+      - "centrífuga"
+      - "secador"
+      - "extrusor"
+      - "molde"
+      - "capacidade"
+      - "produtividade"
+      - "rendimento"
+      - "eficiência"
+      - "perda de produção"
+      - "atraso"
+      - "interrupção"
+      - "shutdown"
+      - "parada não programada"
+      - "desvio de receita"
+      - "batelada"
+      - "batch"
+      - "sequência"
+      - "falha de sequência"
+
+  INFRAESTRUTURA:
+    descricao: >
+      Problemas em infraestrutura predial como climatização, rede de incêndio,
+      elevadores e instalações civis.
+    equipe_padrao: "Infraestrutura e Facilities"
+    urgencia_padrao: "MEDIA"
+    palavras_chave:
+      - "climatização"
+      - "ar condicionado"
+      - "HVAC"
+      - "ventilação"
+      - "temperatura ambiente"
+      - "umidade"
+      - "infiltração"
+      - "telhado"
+      - "goteira"
+      - "parede"
+      - "piso"
+      - "elevador"
+      - "plataforma"
+      - "rede de incêndio"
+      - "hidrante"
+      - "sprinkler"
+      - "iluminação"
+      - "lâmpada"
+      - "energia predial"
+      - "instalação hidráulica"
+      - "vaso sanitário"
+      - "desentupimento"
+      - "estrutura"
+      - "reforma"
+      - "manutenção predial"
+      - "facilities"
+
+  TI_AUTOMACAO:
+    descricao: >
+      Falhas em sistemas de TI industrial, redes, servidores, CLPs e sistemas
+      de automação e controle.
+    equipe_padrao: "TI e Automação"
+    urgencia_padrao: "ALTA"
+    palavras_chave:
+      - "SCADA"
+      - "sistema supervisório"
+      - "rede industrial"
+      - "rede"
+      - "comunicação"
+      - "CLP"
+      - "PLC"
+      - "controlador programável"
+      - "servidor"
+      - "workstation"
+      - "computador"
+      - "software"
+      - "falha de software"
+      - "tela preta"
+      - "sistema travado"
+      - "falha de comunicação"
+      - "OPC"
+      - "Modbus"
+      - "Profibus"
+      - "Ethernet"
+      - "switch"
+      - "roteador"
+      - "firewall"
+      - "backup"
+      - "banco de dados"
+      - "historiador"
+      - "alarme de sistema"
+      - "licença"
+      - "atualização"

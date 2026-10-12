@@ -1,0 +1,258 @@
+# =============================================================================
+# assets.yaml — Ativos industriais fictícios para o protótipo acadêmico
+#
+# AVISO: Dados completamente sintéticos. Não representam nenhuma instalação
+# industrial real. Criados apenas para fins de demonstração e teste acadêmico.
+#
+# Campos obrigatórios por ativo:
+#   id              : identificador único interno (string)
+#   nome            : nome descritivo do equipamento
+#   tag             : código de identificação (ex: BOMB-001)
+#   tipo            : categoria do equipamento (Mecânico, Elétrico, etc.)
+#   localizacao     : localização física na planta
+#   equipe_responsavel : equipe de manutenção responsável
+#   criticidade     : ALTA, MEDIA ou BAIXA
+#   observacoes     : notas relevantes sobre o equipamento
+# =============================================================================
+
+assets:
+
+  # -------------------------------------------------------------------------
+  # ATIVOS MECÂNICOS (5)
+  # -------------------------------------------------------------------------
+
+  - id: "bomb-001"
+    nome: "Bomba Centrífuga de Resfriamento"
+    tag: "BOMB-001"
+    tipo: "Mecânico"
+    localizacao: "Setor A - Utilidades"
+    equipe_responsavel: "Manutenção Mecânica"
+    criticidade: "ALTA"
+    observacoes: >
+      Bomba principal do circuito de resfriamento do processo. Opera
+      continuamente 24h/dia. Falha causa parada imediata da linha de produção.
+      Verificar selos mecânicos a cada 3 meses.
+
+  - id: "bomb-002"
+    nome: "Bomba de Transferência de Produto"
+    tag: "BOMB-002"
+    tipo: "Mecânico"
+    localizacao: "Setor B - Produção"
+    equipe_responsavel: "Manutenção Mecânica"
+    criticidade: "ALTA"
+    observacoes: >
+      Transfere produto acabado do reator para o tanque de armazenagem.
+      Fluido de trabalho é corrosivo — usar EPI completo em intervenções.
+      Rolamentos com histórico de desgaste acelerado por partículas abrasivas.
+
+  - id: "comp-001"
+    nome: "Compressor de Ar Instrumento"
+    tag: "COMP-001"
+    tipo: "Mecânico"
+    localizacao: "Sala de Compressores"
+    equipe_responsavel: "Manutenção Mecânica"
+    criticidade: "ALTA"
+    observacoes: >
+      Fornece ar comprimido seco para válvulas de controle pneumáticas.
+      Falha afeta todas as malhas de controle que utilizam atuadores
+      pneumáticos. Possui redundância com COMP-003 apenas em situações de
+      emergência de curto prazo.
+
+  - id: "comp-002"
+    nome: "Compressor de Processo"
+    tag: "COMP-002"
+    tipo: "Mecânico"
+    localizacao: "Setor C - Produção"
+    equipe_responsavel: "Manutenção Mecânica"
+    criticidade: "ALTA"
+    observacoes: >
+      Compressor de processo responsável por manter pressão de operação do
+      Setor C. Equipamento de alta pressão — procedimento de bloqueio e
+      etiquetagem obrigatório antes de qualquer intervenção.
+
+  - id: "motor-001"
+    nome: "Motor de Correia Transportadora"
+    tag: "MOTOR-001"
+    tipo: "Mecânico"
+    localizacao: "Setor A - Logística"
+    equipe_responsavel: "Manutenção Mecânica"
+    criticidade: "MEDIA"
+    observacoes: >
+      Aciona correia transportadora de matéria-prima. Possui motor de
+      reserva disponível em almoxarifado. Inspeção de correia e polias
+      quinzenal. Verificar alinhamento a cada troca de correia.
+
+  # -------------------------------------------------------------------------
+  # ATIVOS ELÉTRICOS (4)
+  # -------------------------------------------------------------------------
+
+  - id: "panel-001"
+    nome: "Painel de Distribuição Principal"
+    tag: "PANEL-001"
+    tipo: "Elétrico"
+    localizacao: "Subestação Principal"
+    equipe_responsavel: "Manutenção Elétrica"
+    criticidade: "ALTA"
+    observacoes: >
+      Painel de distribuição de 480V que alimenta toda a planta industrial.
+      Acesso restrito — somente pessoal autorizado com NR-10. Termografia
+      semestral obrigatória. Falha causa blackout geral da instalação.
+
+  - id: "panel-002"
+    nome: "Painel MCC - Motor Control Center"
+    tag: "PANEL-002"
+    tipo: "Elétrico"
+    localizacao: "Setor A - Utilidades"
+    equipe_responsavel: "Manutenção Elétrica"
+    criticidade: "ALTA"
+    observacoes: >
+      Centraliza partida e proteção dos motores do Setor A. Contém
+      inversores de frequência para controle de velocidade das bombas.
+      Limpeza e inspeção de conexões semestrais.
+
+  - id: "trans-001"
+    nome: "Transformador 13,8kV/480V"
+    tag: "TRANS-001"
+    tipo: "Elétrico"
+    localizacao: "Subestação Principal"
+    equipe_responsavel: "Manutenção Elétrica"
+    criticidade: "ALTA"
+    observacoes: >
+      Transformador de potência principal. Análise de óleo dielétrico anual.
+      Monitoramento de temperatura contínuo via sensor instalado. Requer
+      empresa especializada para manutenção maior.
+
+  - id: "ger-001"
+    nome: "Gerador de Emergência 500kVA"
+    tag: "GER-001"
+    tipo: "Elétrico"
+    localizacao: "Área Externa - Gerador"
+    equipe_responsavel: "Manutenção Elétrica"
+    criticidade: "ALTA"
+    observacoes: >
+      Gerador a diesel para suprimento de emergência em caso de falta de
+      energia da concessionária. Partida automática testada semanalmente.
+      Nível de combustível monitorado — mínimo de 80% no tanque.
+
+  # -------------------------------------------------------------------------
+  # ATIVOS DE INSTRUMENTAÇÃO (4)
+  # -------------------------------------------------------------------------
+
+  - id: "sens-001"
+    nome: "Sensor de Temperatura PT100"
+    tag: "SENS-001"
+    tipo: "Instrumentação"
+    localizacao: "Setor B - Reator 1"
+    equipe_responsavel: "Instrumentação e Controle"
+    criticidade: "MEDIA"
+    observacoes: >
+      Sensor PT100 para medição de temperatura do produto no Reator 1.
+      Calibração anual obrigatória. Desvio acima de 2°C deve ser investigado.
+      Possui indicador redundante SENS-002 (não cadastrado individualmente).
+
+  - id: "trans-002"
+    nome: "Transmissor de Pressão 4-20mA"
+    tag: "TRANS-002"
+    tipo: "Instrumentação"
+    localizacao: "Setor C - Linha 2"
+    equipe_responsavel: "Instrumentação e Controle"
+    criticidade: "ALTA"
+    observacoes: >
+      Transmissor de pressão diferencial da Linha 2 do Setor C. Sinal 4-20mA
+      conectado ao CLP de controle. Falha pode causar operação fora dos
+      limites de segurança de pressão. Calibração semestral.
+
+  - id: "valv-001"
+    nome: "Válvula de Controle Pneumática"
+    tag: "VALV-001"
+    tipo: "Instrumentação"
+    localizacao: "Setor B - Reator 1"
+    equipe_responsavel: "Instrumentação e Controle"
+    criticidade: "ALTA"
+    observacoes: >
+      Válvula de controle de fluxo de produto para o Reator 1. Atuador
+      pneumático com posicionador digital. Fail-close (fecha em falta de ar).
+      Calibração do posicionador anual — verificar histerese.
+
+  - id: "valv-002"
+    nome: "Válvula de Controle Elétrica"
+    tag: "VALV-002"
+    tipo: "Instrumentação"
+    localizacao: "Setor C - Linha 2"
+    equipe_responsavel: "Instrumentação e Controle"
+    criticidade: "MEDIA"
+    observacoes: >
+      Válvula motorizada para controle de temperatura da Linha 2. Atuador
+      elétrico 24VDC com feedback de posição. Fail-open (abre em falta de
+      energia). Verificar limite-switches periodicamente.
+
+  # -------------------------------------------------------------------------
+  # ATIVOS DE UTILIDADES (3)
+  # -------------------------------------------------------------------------
+
+  - id: "cal-001"
+    nome: "Caldeira de Vapor"
+    tag: "CAL-001"
+    tipo: "Utilidades"
+    localizacao: "Casa de Caldeiras"
+    equipe_responsavel: "Utilidades"
+    criticidade: "ALTA"
+    observacoes: >
+      Caldeira flamotubular de 10 toneladas/hora para geração de vapor de
+      processo. Operação supervisionada por caldeirista habilitado (NR-13).
+      Inspeção periódica obrigatória pelo órgão competente. Válvulas de
+      segurança calibradas semestralmente.
+
+  - id: "chil-001"
+    nome: "Chiller de Água Gelada"
+    tag: "CHIL-001"
+    tipo: "Utilidades"
+    localizacao: "Casa de Máquinas"
+    equipe_responsavel: "Utilidades"
+    criticidade: "ALTA"
+    observacoes: >
+      Chiller de expansão direta para resfriamento do processo. Fluido
+      refrigerante R-134a. Capacidade nominal 120TR. Falha impacta
+      diretamente a qualidade do produto final por variação de temperatura.
+
+  - id: "comp-003"
+    nome: "Compressor de Refrigeração"
+    tag: "COMP-003"
+    tipo: "Utilidades"
+    localizacao: "Casa de Máquinas"
+    equipe_responsavel: "Utilidades"
+    criticidade: "MEDIA"
+    observacoes: >
+      Compressor do circuito de refrigeração auxiliar do chiller CHIL-001.
+      Unidade de backup — normalmente em standby. Partida automática
+      programada se temperatura do processo exceder 35°C.
+
+  # -------------------------------------------------------------------------
+  # ATIVOS DE INFRAESTRUTURA (2)
+  # -------------------------------------------------------------------------
+
+  - id: "hvac-001"
+    nome: "Sistema de Climatização Sala de Controle"
+    tag: "HVAC-001"
+    tipo: "Infraestrutura"
+    localizacao: "Sala de Controle Principal"
+    equipe_responsavel: "Infraestrutura e Facilities"
+    criticidade: "ALTA"
+    observacoes: >
+      Sistema de ar condicionado de precisão para a sala de controle.
+      Mantém temperatura entre 20-24°C e umidade relativa entre 40-60%.
+      Temperatura elevada pode causar sobreaquecimento de servidores e
+      CLPs. Possui unidade redundante (HVAC-002, não cadastrada).
+
+  - id: "elev-001"
+    nome: "Elevador de Carga Industrial"
+    tag: "ELEV-001"
+    tipo: "Infraestrutura"
+    localizacao: "Área de Armazenagem"
+    equipe_responsavel: "Infraestrutura e Facilities"
+    criticidade: "BAIXA"
+    observacoes: >
+      Elevador de carga com capacidade de 2 toneladas para movimentação
+      de materiais entre andares do armazém. Inspeção anual obrigatória
+      por empresa credenciada. Em caso de parada, utilizar rampa de
+      acesso alternativo até reparo.
