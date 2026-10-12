@@ -1,0 +1,396 @@
+# =============================================================================
+# Regras de Produção para Triagem de Ordens de Serviço Industriais
+# =============================================================================
+# Protótipo acadêmico — monografia de especialização em Controle e Automação.
+# Dados sintéticos para fins de pesquisa. Não usar em ambiente industrial real.
+#
+# Estrutura de cada regra:
+#   id              — identificador único (RULE-NNN)
+#   descricao       — descrição legível em português
+#   condicoes       — conjunto de condições de disparo (AND/OR)
+#     categoria          — valor de FailureCategory (ex: MECANICA)
+#     urgencia_mencionada — substring check em ExtractedInfo.urgencia_mencionada
+#     risco_seguranca    — bool
+#     impacto_producao   — bool
+#     criticidade_ativo  — "ALTA" | "MEDIA" | "BAIXA"
+#     palavras_chave     — lista; internamente é OR (basta uma corresponder)
+#     operador           — "AND" (padrão) ou "OR" entre as condições acima
+#   acoes           — ações disparadas quando as condições são satisfeitas
+#     urgencia           — valor de UrgencyLevel
+#     prioridade         — valor de PriorityLevel
+#     equipe             — nome da equipe responsável
+#     requer_revisao_humana — bool
+#     motivo_revisao     — obrigatório quando requer_revisao_humana=true
+#     confianca          — float 0..1
+#   prioridade_regra — inteiro; maior valor = maior precedência no motor
+#
+# Semântica de operador:
+#   AND: TODAS as condições não-nulas devem ser satisfeitas.
+#   OR : QUALQUER condição não-nula satisfeita dispara a regra.
+#   palavras_chave internamente é sempre OR (basta uma palavra corresponder).
+# =============================================================================
+
+regras:
+
+  # ---------------------------------------------------------------------------
+  # RULE-001 — Risco de segurança confirmado (prioridade máxima)
+  # Cobre: cenário de segurança imediata (NR-35, NR-10, etc.)
+  # ---------------------------------------------------------------------------
+  - id: "RULE-001"
+    descricao: "Risco de segurança confirmado pelo extrator — atendimento imediato obrigatório"
+    condicoes:
+      risco_seguranca: true
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      requer_revisao_humana: true
+      motivo_revisao: "Risco de segurança confirmado — revisão humana obrigatória antes de qualquer ação"
+      confianca: 0.95
+    prioridade_regra: 100
+
+  # ---------------------------------------------------------------------------
+  # RULE-002 — Palavras de emergência detectadas no relato
+  # Cobre: incêndio, explosão, evacuação e situações de emergência geral
+  # ---------------------------------------------------------------------------
+  - id: "RULE-002"
+    descricao: "Palavras de emergência detectadas no texto — triagem como situação crítica"
+    condicoes:
+      palavras_chave:
+        - "incêndio"
+        - "fogo"
+        - "explosão"
+        - "fumaça"
+        - "evacuação"
+        - "emergência"
+        - "parada de emergência"
+      operador: "OR"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      requer_revisao_humana: true
+      motivo_revisao: "Palavras de emergência detectadas — situação crítica requer avaliação imediata"
+      confianca: 0.90
+    prioridade_regra: 95
+
+  # ---------------------------------------------------------------------------
+  # RULE-003 — Falha elétrica em equipamento de alta tensão (NR-10)
+  # Cobre: painel, transformador, subestação, quadro elétrico de alta tensão
+  # ---------------------------------------------------------------------------
+  - id: "RULE-003"
+    descricao: "Falha elétrica em equipamento de alta tensão — risco NR-10"
+    condicoes:
+      categoria: "ELETRICA"
+      palavras_chave:
+        - "painel"
+        - "alta tensão"
+        - "transformador"
+        - "subestação"
+        - "quadro elétrico"
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      equipe: "Manutenção Elétrica"
+      requer_revisao_humana: true
+      motivo_revisao: "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização"
+      confianca: 0.90
+    prioridade_regra: 90
+
+  # ---------------------------------------------------------------------------
+  # RULE-004 — Impacto na produção + ativo de criticidade ALTA
+  # Cobre: parada de linha com ativo crítico
+  # ---------------------------------------------------------------------------
+  - id: "RULE-004"
+    descricao: "Impacto na produção com ativo de criticidade ALTA — urgência elevada"
+    condicoes:
+      impacto_producao: true
+      criticidade_ativo: "ALTA"
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P1"
+      requer_revisao_humana: false
+      confianca: 0.85
+    prioridade_regra: 85
+
+  # ---------------------------------------------------------------------------
+  # RULE-005 — Falha mecânica grave (ruptura, rompimento, fratura)
+  # Cobre: falhas estruturais que exigem intervenção imediata
+  # ---------------------------------------------------------------------------
+  - id: "RULE-005"
+    descricao: "Falha mecânica grave identificada — ruptura, rompimento ou fratura"
+    condicoes:
+      categoria: "MECANICA"
+      palavras_chave:
+        - "ruptura"
+        - "rompimento"
+        - "quebrou"
+        - "fratura"
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      equipe: "Manutenção Mecânica"
+      requer_revisao_humana: true
+      motivo_revisao: "Falha mecânica grave (ruptura/rompimento) — avaliação estrutural necessária antes do retorno"
+      confianca: 0.88
+    prioridade_regra: 82
+
+  # ---------------------------------------------------------------------------
+  # RULE-006 — Caldeira com problema + impacto na produção (NR-13)
+  # Cobre: falhas em caldeiras e sistemas de vapor com impacto produtivo
+  # ---------------------------------------------------------------------------
+  - id: "RULE-006"
+    descricao: "Falha em caldeira ou sistema de vapor com impacto na produção — risco NR-13"
+    condicoes:
+      categoria: "UTILIDADES"
+      palavras_chave:
+        - "caldeira"
+        - "vapor"
+      impacto_producao: true
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      equipe: "Utilidades"
+      requer_revisao_humana: true
+      motivo_revisao: "Caldeira com impacto na produção — intervenção sujeita a NR-13, requer inspetor habilitado"
+      confianca: 0.88
+    prioridade_regra: 80
+
+  # ---------------------------------------------------------------------------
+  # RULE-007 — Instrumentação com leitura incorreta ou sinal falso
+  # Cobre: desvios de medição que podem esconder falhas reais
+  # ---------------------------------------------------------------------------
+  - id: "RULE-007"
+    descricao: "Instrumentação com sinal falso ou leitura incorreta — operador sem visibilidade confiável"
+    condicoes:
+      categoria: "INSTRUMENTACAO"
+      palavras_chave:
+        - "sinal falso"
+        - "leitura errada"
+        - "indicação incorreta"
+        - "deriva"
+        - "indicação falsa"
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Instrumentação e Controle"
+      requer_revisao_humana: false
+      confianca: 0.80
+    prioridade_regra: 75
+
+  # ---------------------------------------------------------------------------
+  # RULE-008 — Falha de utilidades com impacto generalizado na produção
+  # Cobre: falhas em sistemas de utilidades que afetam a linha produtiva
+  # ---------------------------------------------------------------------------
+  - id: "RULE-008"
+    descricao: "Falha de utilidades com impacto confirmado na produção"
+    condicoes:
+      categoria: "UTILIDADES"
+      impacto_producao: true
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Utilidades"
+      requer_revisao_humana: false
+      confianca: 0.78
+    prioridade_regra: 70
+
+  # ---------------------------------------------------------------------------
+  # RULE-009 — Compressor de ar instrumento (COMP-001, COMP-003, ar comprimido)
+  # Cobre: falhas em compressores de ar instrumento e ar comprimido
+  # ---------------------------------------------------------------------------
+  - id: "RULE-009"
+    descricao: "Falha em compressor de ar instrumento ou sistema de ar comprimido"
+    condicoes:
+      palavras_chave:
+        - "ar instrumento"
+        - "compressor de ar"
+        - "ar comprimido"
+        - "COMP-001"
+        - "COMP-003"
+      operador: "OR"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Manutenção Mecânica"
+      requer_revisao_humana: false
+      confianca: 0.78
+    prioridade_regra: 68
+
+  # ---------------------------------------------------------------------------
+  # RULE-010 — Falha elétrica geral (sem alta tensão)
+  # Cobre: qualquer falha categorizada como elétrica
+  # ---------------------------------------------------------------------------
+  - id: "RULE-010"
+    descricao: "Falha elétrica geral — encaminhar para Manutenção Elétrica"
+    condicoes:
+      categoria: "ELETRICA"
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Manutenção Elétrica"
+      requer_revisao_humana: false
+      confianca: 0.75
+    prioridade_regra: 65
+
+  # ---------------------------------------------------------------------------
+  # RULE-011 — Falha mecânica em ativo de criticidade ALTA
+  # Cobre: falhas mecânicas em equipamentos críticos para a produção
+  # ---------------------------------------------------------------------------
+  - id: "RULE-011"
+    descricao: "Falha mecânica em ativo de criticidade ALTA"
+    condicoes:
+      categoria: "MECANICA"
+      criticidade_ativo: "ALTA"
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Manutenção Mecânica"
+      requer_revisao_humana: false
+      confianca: 0.75
+    prioridade_regra: 60
+
+  # ---------------------------------------------------------------------------
+  # RULE-012 — Falha de TI ou automação industrial
+  # Cobre: CLPs, SCADA, redes industriais, sistemas de controle
+  # ---------------------------------------------------------------------------
+  - id: "RULE-012"
+    descricao: "Falha de TI ou automação industrial — encaminhar para TI e Automação"
+    condicoes:
+      categoria: "TI_AUTOMACAO"
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "TI e Automação"
+      requer_revisao_humana: false
+      confianca: 0.75
+    prioridade_regra: 55
+
+  # ---------------------------------------------------------------------------
+  # RULE-013 — Falha de processo com impacto na produção
+  # Cobre: desvios de processo que afetam diretamente a linha produtiva
+  # ---------------------------------------------------------------------------
+  - id: "RULE-013"
+    descricao: "Falha de processo com impacto confirmado na produção"
+    condicoes:
+      categoria: "PROCESSO"
+      impacto_producao: true
+      operador: "AND"
+    acoes:
+      urgencia: "ALTA"
+      prioridade: "P2"
+      equipe: "Instrumentação e Controle"
+      requer_revisao_humana: false
+      confianca: 0.72
+    prioridade_regra: 52
+
+  # ---------------------------------------------------------------------------
+  # RULE-014 — Falha mecânica padrão (sem criticidade especificada)
+  # Cobre: falhas mecânicas comuns sem fatores de elevação de urgência
+  # ---------------------------------------------------------------------------
+  - id: "RULE-014"
+    descricao: "Falha mecânica padrão — urgência média, encaminhar para Manutenção Mecânica"
+    condicoes:
+      categoria: "MECANICA"
+      operador: "AND"
+    acoes:
+      urgencia: "MEDIA"
+      prioridade: "P3"
+      equipe: "Manutenção Mecânica"
+      requer_revisao_humana: false
+      confianca: 0.65
+    prioridade_regra: 40
+
+  # ---------------------------------------------------------------------------
+  # RULE-015 — Falha de utilidades padrão
+  # Cobre: falhas em utilidades sem impacto produtivo confirmado
+  # ---------------------------------------------------------------------------
+  - id: "RULE-015"
+    descricao: "Falha de utilidades padrão — urgência média, encaminhar para Utilidades"
+    condicoes:
+      categoria: "UTILIDADES"
+      operador: "AND"
+    acoes:
+      urgencia: "MEDIA"
+      prioridade: "P3"
+      equipe: "Utilidades"
+      requer_revisao_humana: false
+      confianca: 0.65
+    prioridade_regra: 35
+
+  # ---------------------------------------------------------------------------
+  # RULE-016 — Manutenção preventiva ou programada
+  # Cobre: ordens de manutenção planejada, agendada ou preventiva
+  # ---------------------------------------------------------------------------
+  - id: "RULE-016"
+    descricao: "Manutenção preventiva ou programada — baixa urgência"
+    condicoes:
+      palavras_chave:
+        - "preventiva"
+        - "programada"
+        - "agendada"
+        - "preventivo"
+        - "pm"
+        - "revisão programada"
+      operador: "OR"
+    acoes:
+      urgencia: "BAIXA"
+      prioridade: "P4"
+      requer_revisao_humana: false
+      confianca: 0.80
+    prioridade_regra: 30
+
+  # ---------------------------------------------------------------------------
+  # RULE-017 — Solicitação fora do escopo de manutenção industrial
+  # Cobre: RH, financeiro, jurídico e demais áreas administrativas
+  # ---------------------------------------------------------------------------
+  - id: "RULE-017"
+    descricao: "Solicitação fora do escopo de manutenção industrial — encaminhar para revisão"
+    condicoes:
+      palavras_chave:
+        - "recursos humanos"
+        - "financeiro"
+        - "contabilidade"
+        - "jurídico"
+        - "administrativo"
+        - "marketing"
+        - "vendas"
+        - "rh"
+      operador: "OR"
+    acoes:
+      urgencia: "BAIXA"
+      prioridade: "P4"
+      requer_revisao_humana: true
+      motivo_revisao: "Solicitação fora do escopo de manutenção industrial — encaminhar ao setor competente"
+      confianca: 0.70
+    prioridade_regra: 15
+
+  # ---------------------------------------------------------------------------
+  # RULE-018 — Relato com informação insuficiente
+  # Cobre: relatos vagos, incompletos ou sem dados suficientes para triagem
+  # ---------------------------------------------------------------------------
+  - id: "RULE-018"
+    descricao: "Relato com informação insuficiente para triagem automática"
+    condicoes:
+      palavras_chave:
+        - "não sei"
+        - "sem informação"
+        - "sem detalhes"
+        - "relato incompleto"
+        - "informação insuficiente"
+      operador: "OR"
+    acoes:
+      urgencia: "DESCONHECIDA"
+      prioridade: "DESCONHECIDA"
+      requer_revisao_humana: true
+      motivo_revisao: "Relato com informação insuficiente — dados necessários para triagem automática não encontrados"
+      confianca: 0.30
+    prioridade_regra: 5
