@@ -16,14 +16,13 @@ por especialistas de manutenção e segurança.
 
 import logging
 import time
-from typing import Optional
 
+from src.data.context_enricher import enrich_context
 from src.data.loader import load_categories, load_knowledge_base
 from src.extraction.keyword_extractor import KeywordExtractor
 from src.rules.definitions import load_rules
 from src.rules.engine import apply_rules
-from src.schemas.assets import KnowledgeBase
-from src.schemas.extraction import ContextData, ExtractedInfo
+from src.schemas.extraction import ExtractedInfo
 from src.schemas.triage import (
     ApproachType,
     FailureCategory,
@@ -35,49 +34,6 @@ from src.schemas.triage import (
 # Logger do módulo — erros registrados sem expor traceback ao usuário final
 logger = logging.getLogger(__name__)
 
-
-def _enrich_context(extracted: ExtractedInfo, kb: KnowledgeBase) -> ContextData:
-    """
-    Enriquece o contexto cruzando ExtractedInfo com a base de conhecimento.
-
-    Ordem de busca do ativo:
-        1. Por tag (get_asset_by_tag) se ativo_mencionado preenchido.
-        2. Por localização (find_assets_by_location) se localização preenchida.
-
-    Se ativo encontrado, busca a equipe responsável correspondente.
-    A fonte_enriquecimento indica se dados locais foram usados.
-
-    Args:
-        extracted: informações extraídas do relato.
-        kb: base de conhecimento com ativos e equipes.
-
-    Returns:
-        ContextData com ativo_encontrado, equipes_candidatas e fonte.
-    """
-    ativo = None
-
-    # Busca por tag de ativo
-    if extracted.ativo_mencionado:
-        ativo = kb.get_asset_by_tag(extracted.ativo_mencionado)
-
-    # Fallback: busca por localização mencionada
-    if ativo is None and extracted.localizacao:
-        ativos_por_local = kb.find_assets_by_location(extracted.localizacao)
-        if ativos_por_local:
-            ativo = ativos_por_local[0]
-
-    # Buscar equipe responsável pelo ativo encontrado
-    equipes_candidatas = []
-    if ativo and ativo.equipe_responsavel:
-        equipe = kb.get_team_by_name(ativo.equipe_responsavel)
-        if equipe:
-            equipes_candidatas.append(equipe)
-
-    return ContextData(
-        ativo_encontrado=ativo,
-        equipes_candidatas=equipes_candidatas,
-        fonte_enriquecimento="base_local" if ativo else "sem_dados",
-    )
 
 
 def run_rules_only(texto: str) -> TriageResult:
@@ -114,7 +70,7 @@ def run_rules_only(texto: str) -> TriageResult:
         categoria = extractor.detect_category(texto)
 
         # Enriquecer contexto com dados locais
-        context = _enrich_context(extracted, kb)
+        context = enrich_context(extracted, kb)
 
         # Aplicar motor de regras
         resultado = apply_rules(
