@@ -1,0 +1,86 @@
+# =============================================================================
+# .gitignore — Sistema de triagem de OS industriais (protótipo acadêmico)
+# =============================================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# --- Distribuição e build ---
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# --- Ambientes virtuais ---
+.venv/
+venv/
+env/
+ENV/
+.env.bak
+
+# --- Variáveis de ambiente (NUNCA versionar) ---
+.env
+
+# --- Testes e coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# --- Type checking ---
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# --- Sessões e resultados gerados (manter apenas .gitkeep) ---
+sessions/*.json
+sessions/*.csv
+
+results/*.json
+results/*.csv
+
+# --- Datasets gerados automaticamente ---
+datasets/generated/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Artefatos de workflow e agentes (não versionar) ---
+.agents/
+
+# --- IDE e editores ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- Windows ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Misc ---
+*.bak
+*.tmp

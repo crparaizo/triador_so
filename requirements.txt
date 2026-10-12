@@ -1,0 +1,31 @@
+# Dependências do projeto de triagem de OS industriais
+# Versões verificadas para Python 3.14.4 no Windows x64
+# Gerar via: pip install -r requirements.txt
+
+# Validação de dados
+pydantic==2.14.1
+pydantic-settings==2.15.0
+
+# Orquestração LLM
+langchain==1.4.4
+langchain-core==1.6.9
+langchain-ollama==1.1.0
+
+# Interface
+streamlit==1.65.0
+
+# Dados
+pyyaml==6.0.3
+python-dotenv==1.2.2
+pandas==3.0.6
+
+# Avaliação
+scikit-learn==1.9.1
+tabulate==0.10.0
+
+# Utilitários
+rich==15.0.0
+
+# Testes
+pytest==9.1.1
+pytest-mock==3.16.0
