@@ -89,3 +89,30 @@ def build_hybrid_chain() -> RunnableLambda:
         return run_hybrid(inputs["texto"])
 
     return RunnableLambda(_invocar)
+
+
+def build_rules_catref_chain() -> RunnableLambda:
+    """
+    Constrói chain do cenário-diagnóstico "regras com categoria de referência".
+
+    Igual à abordagem por regras, mas a categoria é fixada no valor de referência
+    (gabarito), em vez de detectada por palavras-chave. Serve para medir quanto do
+    erro das regras decorre da detecção de categoria, isolando-o da decisão.
+
+    IMPORTANTE: não é um teto por "fatos de referência" completos — o dataset não
+    contém os atributos intermediários (risco, impacto, ativo) como gabarito; apenas
+    a categoria está disponível. Risco/impacto continuam vindo da extração por
+    palavras-chave. Cenário opcional, não executado por padrão.
+
+    A chain aceita um dict com 'texto' (str) e 'categoria_ref' (str) e não depende
+    de LLM nem de Ollama — execução completamente local.
+
+    Returns:
+        RunnableLambda que envolve run_rules_only(texto, categoria_ref).
+    """
+
+    def _invocar(inputs: dict) -> TriageResult:
+        """Adaptador: repassa texto e categoria de referência a run_rules_only."""
+        return run_rules_only(inputs["texto"], inputs.get("categoria_ref"))
+
+    return RunnableLambda(_invocar)

@@ -30,7 +30,7 @@ from src.data.context_enricher import enrich_context
 from src.data.loader import load_categories, load_knowledge_base
 from src.extraction.keyword_extractor import KeywordExtractor
 from src.extraction.llm_extractor import LLMExtractor
-from src.rules.definitions import load_rules
+from src.rules.definitions import RULE_FORA_DO_ESCOPO_ID, load_rules
 from src.rules.engine import apply_rules
 from src.schemas.extraction import ExtractedInfo
 from src.schemas.triage import (
@@ -201,7 +201,7 @@ def run_hybrid(texto: str) -> TriageResult:
             campos_sem_suporte.append("urgencia")
 
         # Tratar RULE-017: relato reconhecido como fora do escopo do sistema
-        if "RULE-017" in resultado["regras_acionadas"]:
+        if RULE_FORA_DO_ESCOPO_ID in resultado["regras_acionadas"]:
             categoria = FailureCategory.FORA_DO_ESCOPO
 
         latencia = (time.perf_counter() - inicio) * 1000

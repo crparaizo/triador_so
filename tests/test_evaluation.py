@@ -5,10 +5,11 @@ de triagem de ordens de serviço industriais.
 Todos os testes usam mocks via pytest-mock. Nenhum teste conecta ao Ollama
 nem depende de arquivos externos — todos os dados são criados inline.
 
-Nota de implementação: runner.py armazena referências de função em _ABORDAGENS
-em tempo de importação, portanto o padrão correto para mockar abordagens é
-mocker.patch.dict('src.evaluation.runner._ABORDAGENS', ...) e não
-mocker.patch('src.evaluation.runner.run_rules_only', ...).
+Nota de implementação: runner.py armazena as chains LangChain (Runnable) em
+_ABORDAGENS em tempo de importação e as executa por fn.invoke({"texto": ...}).
+Portanto, o padrão correto para mockar abordagens é
+mocker.patch.dict('src.evaluation.runner._ABORDAGENS', {nome: mock})
+com mock.invoke.return_value/side_effect configurado.
 
 Dados de teste são completamente sintéticos, gerados para fins acadêmicos.
 Não representam eventos, equipamentos ou instalações industriais reais.
@@ -283,8 +284,10 @@ def test_run_evaluation_tres_abordagens(mocker):
         "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False
     )
 
-    # Mockar as 3 funções de abordagem via _ABORDAGENS (dict populado em import time)
-    mock_fn = mocker.Mock(return_value=triage_result)
+    # Mockar as 3 chains via _ABORDAGENS (dict populado em import time).
+    # Como o runner invoca fn.invoke({"texto": ...}), configura-se o .invoke do mock.
+    mock_fn = mocker.Mock()
+    mock_fn.invoke.return_value = triage_result
     mocker.patch.dict(
         "src.evaluation.runner._ABORDAGENS",
         {"regras": mock_fn, "llm": mock_fn, "hibrido": mock_fn},
@@ -323,8 +326,9 @@ def test_run_evaluation_excecao_marca_erro_continua(mocker):
         "CASE-002", "CANONICO", "MEDIA", "P3", "ELETRICA", "Manutenção Elétrica", False
     )
 
-    # Função de abordagem que sempre falha
-    mock_fn = mocker.Mock(side_effect=RuntimeError("falha simulada no teste"))
+    # Chain cujo invoke sempre falha
+    mock_fn = mocker.Mock()
+    mock_fn.invoke.side_effect = RuntimeError("falha simulada no teste")
     mocker.patch.dict("src.evaluation.runner._ABORDAGENS", {"regras": mock_fn})
     mocker.patch(
         "src.evaluation.runner.load_dataset", return_value=[case1, case2]
@@ -460,7 +464,8 @@ def test_evaluate_approach_errors_vazio(mocker):
         "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False
     )
 
-    mock_fn = mocker.Mock(return_value=triage_result)
+    mock_fn = mocker.Mock()
+    mock_fn.invoke.return_value = triage_result
     mocker.patch.dict("src.evaluation.runner._ABORDAGENS", {"regras": mock_fn})
     mocker.patch(
         "src.evaluation.runner.get_settings",
@@ -484,7 +489,8 @@ def test_evaluate_approach_errors_com_case_id(mocker):
         False,
     )
 
-    mock_fn = mocker.Mock(side_effect=RuntimeError("crash simulado no teste"))
+    mock_fn = mocker.Mock()
+    mock_fn.invoke.side_effect = RuntimeError("crash simulado no teste")
     mocker.patch.dict("src.evaluation.runner._ABORDAGENS", {"regras": mock_fn})
     mocker.patch(
         "src.evaluation.runner.get_settings",
@@ -497,3 +503,24 @@ def test_evaluate_approach_errors_com_case_id(mocker):
     assert result["errors"][0]["case_id"] == "CASE-MOCK-001"
     # Fallback gerado → results com 1 entrada (mesmo em falha)
     assert len(result["results"]) == 1
+
+
+# ---------------------------------------------------------------------------
+# Testes 21–22: cenário-diagnóstico opcional "regras com categoria de referência"
+# ---------------------------------------------------------------------------
+
+
+def test_regras_catref_e_abordagem_valida():
+    """'regras_catref' deve constar entre as abordagens válidas (cenário opcional)."""
+    assert "regras_catref" in ABORDAGENS_VALIDAS
+
+
+def test_run_rules_only_fixa_categoria_de_referencia():
+    """Com categoria_ref, a categoria é fixada no valor informado (override da detecção)."""
+    from src.approaches.rules_only import run_rules_only
+
+    # Texto propositalmente vago: a detecção por palavras-chave retorna DESCONHECIDA,
+    # mas categoria_ref deve forçar a categoria para o valor de referência.
+    texto = "Nao sei o que esta acontecendo, o equipamento esta estranho."
+    r = run_rules_only(texto, categoria_ref="INSTRUMENTACAO")
+    assert r.categoria == FailureCategory.INSTRUMENTACAO

@@ -18,11 +18,14 @@ import datetime
 import logging
 import time
 
-from src.approaches.hybrid import run_hybrid
-from src.approaches.llm_only import run_llm_only
-from src.approaches.rules_only import run_rules_only
 from src.config.loader import get_settings
 from src.data.dataset_loader import DatasetCase, load_dataset
+from src.orchestration.chains import (
+    build_hybrid_chain,
+    build_llm_chain,
+    build_rules_catref_chain,
+    build_rules_chain,
+)
 from src.schemas.triage import (
     ApproachType,
     FailureCategory,
@@ -33,14 +36,21 @@ from src.schemas.triage import (
 
 logger = logging.getLogger(__name__)
 
-# Abordagens válidas — frozenset para checagem O(1)
-ABORDAGENS_VALIDAS: frozenset[str] = frozenset({"regras", "llm", "hibrido"})
+# Abordagens válidas — frozenset para checagem O(1).
+# "regras_catref" é um cenário-diagnóstico opcional (regras com categoria de
+# referência); não entra nas abordagens padrão de run_evaluation.
+ABORDAGENS_VALIDAS: frozenset[str] = frozenset(
+    {"regras", "llm", "hibrido", "regras_catref"}
+)
 
-# Mapeamento de nome para função de triagem
+# Mapeamento de nome para a chain LangChain (Runnable) de cada abordagem.
+# A execução passa, assim, pela camada de orquestração do LangChain (invoke),
+# e não por uma chamada direta à função do pipeline.
 _ABORDAGENS: dict = {
-    "regras": run_rules_only,
-    "llm": run_llm_only,
-    "hibrido": run_hybrid,
+    "regras": build_rules_chain(),
+    "llm": build_llm_chain(),
+    "hibrido": build_hybrid_chain(),
+    "regras_catref": build_rules_catref_chain(),
 }
 
 
@@ -67,6 +77,7 @@ def _fallback_result_erro(
         "regras": ApproachType.REGRAS,
         "llm": ApproachType.LLM,
         "hibrido": ApproachType.HIBRIDO,
+        "regras_catref": ApproachType.REGRAS,
     }
     abordagem = _mapa.get(approach_name, ApproachType.REGRAS)
     texto_seguro = texto.strip() if texto.strip() else "(relato vazio)"
@@ -120,39 +131,48 @@ def evaluate_approach(approach_name: str, cases: list[DatasetCase]) -> dict:
     results: list[dict] = []
     errors: list[dict] = []
 
-    for i, caso in enumerate(cases):
-        print(
-            f"  [{approach_name}] Caso {i + 1}/{len(cases)}: {caso.id}", flush=True
-        )
-        inicio = time.perf_counter()
+    # Um único executor por abordagem evita criar/destruir 100 thread pools.
+    # Nota: com max_workers=1, uma thread que ultrapassar o timeout continuará
+    # rodando até concluir antes que o próximo caso seja despachado, pois o
+    # executor só tem uma worker thread. Isso é aceitável para o protótipo —
+    # threads de Python não podem ser canceladas externamente. Para cancelamento
+    # real em produção, usar ProcessPoolExecutor.
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        for i, caso in enumerate(cases):
+            print(
+                f"  [{approach_name}] Caso {i + 1}/{len(cases)}: {caso.id}", flush=True
+            )
+            inicio = time.perf_counter()
 
-        executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
-        try:
-            future = executor.submit(fn, caso.texto)
-            result = future.result(timeout=timeout)
-            results.append(result.model_dump(mode="json"))
-        except (concurrent.futures.TimeoutError, TimeoutError):
-            latencia = (time.perf_counter() - inicio) * 1000
-            motivo = f"Timeout após {timeout}s"
-            logger.warning(
-                "Timeout no caso %s (abordagem=%s)", caso.id, approach_name
-            )
-            fallback = _fallback_result_erro(caso.texto, approach_name, latencia, motivo)
-            results.append(fallback.model_dump(mode="json"))
-            errors.append({"case_id": caso.id, "error": motivo})
-        except Exception as exc:
-            latencia = (time.perf_counter() - inicio) * 1000
-            motivo = f"{type(exc).__name__}: {exc}"
-            logger.error(
-                "Erro no caso %s (abordagem=%s): %s", caso.id, approach_name, motivo
-            )
-            fallback = _fallback_result_erro(caso.texto, approach_name, latencia, motivo)
-            results.append(fallback.model_dump(mode="json"))
-            errors.append({"case_id": caso.id, "error": motivo})
-        finally:
-            # Não bloquear em threads ainda em execução — o thread pode continuar
-            # em background, mas a avaliação segue sem travar
-            executor.shutdown(wait=False)
+            # Invoca a chain LangChain (Runnable). 'categoria_ref' (categoria do
+            # gabarito) é usada apenas pelo cenário 'regras_catref'; as demais
+            # abordagens leem somente 'texto' e ignoram essa chave.
+            entrada = {
+                "texto": caso.texto,
+                "categoria_ref": caso.esperado.categoria.value,
+            }
+            future = executor.submit(fn.invoke, entrada)
+            try:
+                result = future.result(timeout=timeout)
+                results.append(result.model_dump(mode="json"))
+            except (concurrent.futures.TimeoutError, TimeoutError):
+                latencia = (time.perf_counter() - inicio) * 1000
+                motivo = f"Timeout após {timeout}s"
+                logger.warning(
+                    "Timeout no caso %s (abordagem=%s)", caso.id, approach_name
+                )
+                fallback = _fallback_result_erro(caso.texto, approach_name, latencia, motivo)
+                results.append(fallback.model_dump(mode="json"))
+                errors.append({"case_id": caso.id, "error": motivo})
+            except Exception as exc:
+                latencia = (time.perf_counter() - inicio) * 1000
+                motivo = f"{type(exc).__name__}: {exc}"
+                logger.error(
+                    "Erro no caso %s (abordagem=%s): %s", caso.id, approach_name, motivo
+                )
+                fallback = _fallback_result_erro(caso.texto, approach_name, latencia, motivo)
+                results.append(fallback.model_dump(mode="json"))
+                errors.append({"case_id": caso.id, "error": motivo})
 
     return {
         "results": results,

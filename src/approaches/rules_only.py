@@ -20,9 +20,8 @@ import time
 from src.data.context_enricher import enrich_context
 from src.data.loader import load_categories, load_knowledge_base
 from src.extraction.keyword_extractor import KeywordExtractor
-from src.rules.definitions import load_rules
+from src.rules.definitions import RULE_FORA_DO_ESCOPO_ID, load_rules
 from src.rules.engine import apply_rules
-from src.schemas.extraction import ExtractedInfo
 from src.schemas.triage import (
     ApproachType,
     FailureCategory,
@@ -36,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 
 
-def run_rules_only(texto: str) -> TriageResult:
+def run_rules_only(texto: str, categoria_ref: str | None = None) -> TriageResult:
     """
     Executa o pipeline completo de triagem pela abordagem de regras.
 
@@ -52,6 +51,11 @@ def run_rules_only(texto: str) -> TriageResult:
 
     Args:
         texto: relato livre da ocorrência.
+        categoria_ref: quando informado (valor de FailureCategory, ex.: "MECANICA"),
+            a categoria é fixada neste valor em vez de ser detectada por
+            palavras-chave. Usado apenas no cenário-diagnóstico opcional
+            "regras com categoria de referência" (ver src/evaluation/runner.py);
+            None (padrão) mantém a detecção determinística por palavras-chave.
 
     Returns:
         TriageResult com resultado da triagem ou sinalização de revisão humana.
@@ -67,10 +71,18 @@ def run_rules_only(texto: str) -> TriageResult:
         # Extrair informações do texto
         extractor = KeywordExtractor(kb, cats)
         extracted = extractor.extract(texto)
-        categoria = extractor.detect_category(texto)
+        # Categoria: de referência (diagnóstico) ou detectada por palavras-chave
+        if categoria_ref is not None:
+            try:
+                categoria = FailureCategory(categoria_ref)
+            except ValueError:
+                categoria = FailureCategory.DESCONHECIDA
+        else:
+            categoria = extractor.detect_category(texto)
 
-        # Enriquecer contexto com dados locais
-        context = enrich_context(extracted, kb)
+        # Enriquecer contexto com dados locais (categoria incluída para que a
+        # equipe-padrão da categoria também seja considerada, como no híbrido)
+        context = enrich_context(extracted, kb, cats, categoria.value)
 
         # Aplicar motor de regras
         resultado = apply_rules(
@@ -82,7 +94,7 @@ def run_rules_only(texto: str) -> TriageResult:
         )
 
         # Tratamento especial: RULE-017 força categoria FORA_DO_ESCOPO
-        if "RULE-017" in resultado["regras_acionadas"]:
+        if RULE_FORA_DO_ESCOPO_ID in resultado["regras_acionadas"]:
             categoria = FailureCategory.FORA_DO_ESCOPO
 
         latencia = (time.perf_counter() - inicio) * 1000

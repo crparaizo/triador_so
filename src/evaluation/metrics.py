@@ -86,10 +86,18 @@ def unsupported_fields_rate(results: list) -> float:
     Calcula a taxa de campos sem suporte textual direto no relato.
 
     Indicador de possível alucinação ou preenchimento por inferência sem
-    evidência explícita. Taxa = Σ|campos_sem_suporte| / (n × NUM_CAMPOS).
+    evidência explícita. Taxa = Σ|campos_sem_suporte| / (n × NUM_CAMPOS),
+    em que NUM_CAMPOS (=4) é uma constante de normalização, e não o número de
+    itens que podem aparecer em campos_sem_suporte.
 
-    Limitação: o indicador não distingue preenchimento legítimo por inferência
-    contextual de alucinação propriamente dita.
+    Limitação (importante para comparação entre abordagens): a semântica de
+    campos_sem_suporte difere por abordagem. Em 'regras' e 'hibrido', a lista
+    contém campos de EXTRAÇÃO sem evidência (ativo, localização, impacto, risco,
+    urgência mencionada — até 5 itens); em 'llm', contém os campos de
+    CLASSIFICAÇÃO que o próprio modelo declarou sem suporte. Portanto, a taxa é
+    um indicador por abordagem, e não uma medida diretamente equivalente entre
+    as três. O indicador também não distingue inferência contextual legítima de
+    alucinação propriamente dita.
 
     Args:
         results: lista de TriageResult.
@@ -252,7 +260,10 @@ def latency_stats(results: list) -> dict:
     }
 
 
-def per_approach_summary(approach_results: list, dataset_cases: list) -> dict:
+def per_approach_summary(
+    approach_results: "list[TriageResult | None]",
+    dataset_cases: "list[DatasetCase | None]",
+) -> dict:
     """
     Calcula resumo completo de métricas para uma abordagem de triagem.
 
@@ -260,12 +271,18 @@ def per_approach_summary(approach_results: list, dataset_cases: list) -> dict:
     elemento é None. Acessa .value nos campos de enum pois o TriageResult
     usa use_enum_values=False (enums armazenados como instâncias).
 
+    Espera objetos TriageResult (não dicts). A desserialização de dicts para
+    TriageResult é responsabilidade do chamador — em report.py isso é feito
+    por _gerar_summary() via TriageResult.model_validate() antes desta chamada.
+
     Para robustez: identifica pares canônico/paráfrase pelos campos
     caso.tipo=='PARAFRASES' e caso.referencia_caso_canonico.
 
     Args:
-        approach_results: lista de TriageResult (pode conter None para erros).
-        dataset_cases: lista de DatasetCase correspondentes (pode conter None).
+        approach_results: lista de TriageResult ou None (None para casos com erro).
+                          Deve ter o mesmo comprimento que dataset_cases.
+        dataset_cases: lista de DatasetCase ou None correspondentes.
+                       None para casos que falharam a validação do schema.
 
     Returns:
         Dicionário com classification, confusion_matrices, f1_urgencia,

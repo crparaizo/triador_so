@@ -38,6 +38,22 @@ class Settings(BaseSettings):
         default="http://localhost:11434",
         description="URL base do servidor Ollama",
     )
+    ollama_temperature: float = Field(
+        default=0.0,
+        ge=0.0,
+        le=2.0,
+        description=(
+            "Temperatura de geração do LLM. 0.0 torna a saída praticamente "
+            "determinística — recomendado para reprodutibilidade da avaliação."
+        ),
+    )
+    ollama_seed: int = Field(
+        default=42,
+        description=(
+            "Semente de geração do LLM. Fixá-la, junto com temperature=0, "
+            "reduz a variação entre execuções e favorece a reprodutibilidade."
+        ),
+    )
 
     # Diretórios
     data_dir: str = Field(

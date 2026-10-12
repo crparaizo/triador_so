@@ -20,13 +20,15 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from src.approaches.hybrid import run_hybrid
-from src.approaches.llm_only import run_llm_only
-from src.approaches.rules_only import run_rules_only
 from src.config.loader import get_settings
 from src.data.dataset_loader import load_dataset
 from src.evaluation.report import save_evaluation_report
 from src.evaluation.runner import evaluate_approach
+from src.orchestration.chains import (
+    build_hybrid_chain,
+    build_llm_chain,
+    build_rules_chain,
+)
 from src.interface.session_manager import clear_sessions, load_sessions, save_session
 from src.schemas.triage import TriageResult
 
@@ -219,8 +221,6 @@ def _pagina_triagem() -> None:
         key="texto_triagem",
     )
 
-    modelo_sidebar = st.session_state.get("modelo_ollama", get_settings().ollama_model)
-
     if st.button("🔍 Analisar", type="primary", use_container_width=True):
         # Validação de entrada
         if not texto or not texto.strip():
@@ -233,14 +233,14 @@ def _pagina_triagem() -> None:
         with st.spinner("Executando análise — aguarde..."):
             # Regras
             try:
-                results["regras"] = run_rules_only(texto.strip())
+                results["regras"] = build_rules_chain().invoke({"texto": texto.strip()})
             except Exception as exc:
                 logger.error("Erro na abordagem regras: %s", exc)
                 erros["regras"] = str(exc)
 
             # LLM puro
             try:
-                results["llm"] = run_llm_only(texto.strip())
+                results["llm"] = build_llm_chain().invoke({"texto": texto.strip()})
             except ConnectionError as exc:
                 logger.error("Ollama indisponível (LLM puro): %s", exc)
                 erros["llm"] = "ollama_indisponivel"
@@ -255,7 +255,7 @@ def _pagina_triagem() -> None:
 
             # Híbrido
             try:
-                results["hibrido"] = run_hybrid(texto.strip())
+                results["hibrido"] = build_hybrid_chain().invoke({"texto": texto.strip()})
             except ConnectionError as exc:
                 logger.error("Ollama indisponível (híbrido): %s", exc)
                 erros["hibrido"] = "ollama_indisponivel"
@@ -271,10 +271,11 @@ def _pagina_triagem() -> None:
         # Verificar se Ollama está indisponível
         ollama_erro = any(v == "ollama_indisponivel" for v in erros.values())
         if ollama_erro:
+            modelo_atual = get_settings().ollama_model
             st.error(
                 "🔌 **Ollama indisponível.** Verifique se o servidor Ollama está em execução "
-                f"(`ollama serve`) e se o modelo `{modelo_sidebar}` está baixado "
-                f"(`ollama pull {modelo_sidebar}`). "
+                f"(`ollama serve`) e se o modelo `{modelo_atual}` está baixado "
+                f"(`ollama pull {modelo_atual}`). "
                 "A abordagem de Regras não depende do Ollama e foi executada normalmente."
             )
 
@@ -597,22 +598,10 @@ def main() -> None:
         st.divider()
 
         modelo_atual = get_settings().ollama_model
-        modelo_input = st.text_input(
-            label="Modelo Ollama",
-            value=modelo_atual,
-            help=(
-                "Nome do modelo Ollama a ser utilizado pelas abordagens LLM. "
-                "Deve corresponder a um modelo baixado localmente. "
-                "Alterar este campo não afeta sessões já executadas."
-            ),
-            key="modelo_ollama",
+        st.caption(
+            f"**Modelo em uso:** `{modelo_atual}`  \n"
+            "Para alterar, edite `OLLAMA_MODEL` no arquivo `.env` e reinicie o servidor."
         )
-        if modelo_input != modelo_atual:
-            st.info(
-                f"⚠️ O modelo foi alterado para `{modelo_input}`. "
-                "A mudança é refletida nas próximas chamadas ao LLM, mas não persiste entre sessões "
-                "do servidor. Para persistir, edite o arquivo `.env`."
-            )
 
         st.divider()
         st.warning(

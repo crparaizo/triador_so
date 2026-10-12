@@ -11,15 +11,14 @@ no escopo de módulo.
 AVISO: Protótipo acadêmico. Revisão humana obrigatória antes de uso operacional.
 """
 
-import json
 import logging
-import re
 from typing import Optional
 
 from langchain_ollama import ChatOllama  # import seguro — sem conexão TCP
 
 from src.config.loader import get_settings
 from src.schemas.extraction import ExtractedInfo
+from src.utils.parsers import parsear_json_llm
 
 logger = logging.getLogger(__name__)
 
@@ -76,36 +75,6 @@ Texto do relato:
 Retorne APENAS o JSON puro. Sem explicações, sem markdown, sem comentários."""
 
 
-def _parsear_resposta_llm(texto_resposta: str) -> tuple[dict | None, str | None]:
-    """
-    Tenta extrair JSON da resposta do LLM em três passos.
-
-    Passo 1: json.loads direto (resposta já é JSON puro).
-    Passo 2: regex {.*} com DOTALL (extrai bloco JSON de resposta em markdown).
-    Passo 3: falha total — retorna mensagem de erro.
-
-    Retorna (dict, None) em sucesso ou (None, mensagem_de_erro) em falha.
-    """
-    texto_limpo = texto_resposta.strip()
-
-    # Passo 1: tentativa direta
-    try:
-        return json.loads(texto_limpo), None
-    except json.JSONDecodeError:
-        pass
-
-    # Passo 2: extrair bloco {...} via regex — lida com ```json ... ```
-    match = re.search(r"\{.*\}", texto_limpo, re.DOTALL)
-    if match:
-        try:
-            return json.loads(match.group()), None
-        except json.JSONDecodeError as exc:
-            return None, f"Falha ao parsear JSON: {exc}"
-
-    # Passo 3: nenhum objeto JSON encontrado na resposta
-    return None, "Falha ao parsear JSON: nenhum objeto JSON encontrado na resposta"
-
-
 class LLMExtractor:
     """
     Extrator de informações de relatos via LLM (ChatOllama).
@@ -130,6 +99,8 @@ class LLMExtractor:
         self._base_url: str = settings.ollama_base_url
         self._max_retries: int = settings.max_retries_llm
         self._timeout: int = settings.llm_timeout_seconds
+        self._temperature: float = settings.ollama_temperature
+        self._seed: int = settings.ollama_seed
 
     def _build_prompt(self, texto: str) -> str:
         """Monta o prompt substituindo {texto} no template."""
@@ -140,7 +111,12 @@ class LLMExtractor:
         Instancia ChatOllama em runtime. Chamado apenas dentro de extract().
         Separado para facilitar testes e eventual parametrização.
         """
-        return ChatOllama(model=self._model, base_url=self._base_url)
+        return ChatOllama(
+            model=self._model,
+            base_url=self._base_url,
+            temperature=self._temperature,
+            seed=self._seed,
+        )
 
     def _dict_para_extracted_info(self, data: dict) -> ExtractedInfo:
         """
@@ -215,7 +191,7 @@ class LLMExtractor:
                     resposta.content if hasattr(resposta, "content") else str(resposta)
                 )
 
-                data, erro = _parsear_resposta_llm(texto_resposta)
+                data, erro = parsear_json_llm(texto_resposta)
 
                 if erro:
                     # Erro de parse: retornar imediatamente, sem retry

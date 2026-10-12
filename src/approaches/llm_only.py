@@ -16,9 +16,7 @@ por especialistas de manutenção e segurança. Toda saída deve ser revisada
 por profissional habilitado antes de qualquer ação operacional.
 """
 
-import json
 import logging
-import re
 import time
 import unicodedata
 from typing import Optional
@@ -34,6 +32,7 @@ from src.schemas.triage import (
     TriageResult,
     UrgencyLevel,
 )
+from src.utils.parsers import parsear_json_llm
 
 # Logger do módulo — erros registrados sem expor traceback ao usuário final
 logger = logging.getLogger(__name__)
@@ -108,37 +107,6 @@ def _mapear_categoria(valor: str) -> FailureCategory:
         return FailureCategory[chave]
     except KeyError:
         return FailureCategory.DESCONHECIDA
-
-
-# ---------------------------------------------------------------------------
-# Parser defensivo — idêntico ao de llm_extractor.py (módulos independentes)
-# ---------------------------------------------------------------------------
-
-
-def _parsear_resposta_llm(texto_resposta: str) -> tuple[Optional[dict], Optional[str]]:
-    """
-    Tenta extrair JSON da resposta do LLM em três passos.
-
-    Retorna (dict, None) em sucesso ou (None, mensagem_de_erro) em falha.
-    """
-    texto_limpo = texto_resposta.strip()
-
-    # Passo 1: json.loads direto
-    try:
-        return json.loads(texto_limpo), None
-    except json.JSONDecodeError:
-        pass
-
-    # Passo 2: extrair bloco {...} via regex (lida com markdown ```json ... ```)
-    match = re.search(r"\{.*\}", texto_limpo, re.DOTALL)
-    if match:
-        try:
-            return json.loads(match.group()), None
-        except json.JSONDecodeError as exc:
-            return None, f"Falha ao parsear JSON: {exc}"
-
-    # Passo 3: nenhum objeto JSON encontrado na resposta
-    return None, "Falha ao parsear JSON: nenhum objeto JSON encontrado na resposta"
 
 
 # ---------------------------------------------------------------------------
@@ -299,15 +267,21 @@ def run_llm_only(texto: str) -> TriageResult:
             texto=texto_entrada,
         )
 
-        # Instanciar ChatOllama em runtime (não em escopo de módulo nem em __init__)
-        llm = ChatOllama(model=settings.ollama_model, base_url=settings.ollama_base_url)
+        # Instanciar ChatOllama em runtime (não em escopo de módulo nem em __init__).
+        # temperature=0 e seed fixos (settings) favorecem a reprodutibilidade.
+        llm = ChatOllama(
+            model=settings.ollama_model,
+            base_url=settings.ollama_base_url,
+            temperature=settings.ollama_temperature,
+            seed=settings.ollama_seed,
+        )
         resposta = llm.invoke(prompt)
 
         # Extrair texto da resposta (AIMessage.content ou str)
         texto_resposta = resposta.content if hasattr(resposta, "content") else str(resposta)
 
         # Parser defensivo: três passos (json direto → regex → erro)
-        data, erro = _parsear_resposta_llm(texto_resposta)
+        data, erro = parsear_json_llm(texto_resposta)
         latencia_ms = (time.perf_counter() - inicio) * 1000
 
         if erro or data is None:

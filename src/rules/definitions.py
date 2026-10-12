@@ -20,6 +20,11 @@ from pydantic import BaseModel, Field, ValidationError
 
 from src.config.loader import get_settings
 
+# Identificador da regra que sinaliza relato fora do escopo de manutenção.
+# Centralizado aqui para evitar a repetição da string literal nos pipelines
+# (rules_only e hybrid), que forçam a categoria FORA_DO_ESCOPO quando ela dispara.
+RULE_FORA_DO_ESCOPO_ID = "RULE-017"
+
 
 class RuleCondition(BaseModel):
     """

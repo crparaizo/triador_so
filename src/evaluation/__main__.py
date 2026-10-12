@@ -40,12 +40,13 @@ def main() -> None:
     parser.add_argument(
         "--approaches",
         nargs="+",
-        choices=["regras", "llm", "hibrido"],
+        choices=["regras", "llm", "hibrido", "regras_catref"],
         default=["regras", "llm", "hibrido"],
         metavar="ABORDAGEM",
         help=(
-            "Abordagens a avaliar: regras, llm, hibrido "
-            "(padrão: todas as três)"
+            "Abordagens a avaliar: regras, llm, hibrido (padrão: as três). "
+            "O cenário-diagnóstico opcional 'regras_catref' (regras com "
+            "categoria de referência) pode ser adicionado explicitamente."
         ),
     )
     parser.add_argument(
