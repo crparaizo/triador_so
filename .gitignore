@@ -84,3 +84,7 @@ $RECYCLE.BIN/
 # --- Misc ---
 *.bak
 *.tmp
+
+# --- Arquivos extras locais (monografia, scripts auxiliares) ---
+# Pasta com arquivos que não devem subir ao repositório
+extra/

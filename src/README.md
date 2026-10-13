@@ -44,8 +44,8 @@ Implementa as regras de decisão declarativas: dadas as informações extraídas
 ### `approaches/` — As três abordagens comparadas
 Monta os três pipelines completos de triagem: regras puras, LLM puro e híbrido.
 
-### `orchestration/` — Integração com LangChain
-Envolve cada pipeline numa estrutura do LangChain (`RunnableSequence`) para compatibilidade com o ecossistema da biblioteca.
+### `orchestration/` — Orquestração com LangChain (LCEL)
+Define a composição de cada pipeline como uma cadeia LCEL de nós `Runnable` nomeados (carregamento de dados, extração, detecção de categoria, enriquecimento, motor de regras, montagem do resultado), com fallbacks nativos do LangChain. Os fluxos por regras e híbrido compartilham a mesma estrutura e diferem só no nó de extração. `python -m src.orchestration` exporta os grafos em Mermaid para `docs/fluxos_langchain.md`.
 
 ### `evaluation/` — Avaliação e métricas
 Executa os três pipelines sobre o dataset sintético, calcula as métricas de desempenho e salva os relatórios.

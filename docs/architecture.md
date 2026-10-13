@@ -36,33 +36,53 @@ dados de domínio (ativos, equipes, categorias e regras).
 
 ---
 
+## Orquestração LCEL (LangChain)
+
+Cada pipeline é uma cadeia LCEL (LangChain Expression Language) de nós `Runnable`
+nomeados que trocam um dicionário de estado. A topologia comum está em
+`src/orchestration/triage_flow.py`; as funções de cada nó ficam em
+`src/approaches/`. Os três fluxos começam com `preparacao_entrada` e envolvem o
+núcleo em `triagem_com_falha_segura` (`RunnableWithFallbacks`): qualquer exceção
+leva ao fallback `resultado_seguro`, que devolve um resultado com revisão humana
+obrigatória.
+
+**Os pipelines 1 e 3 usam a mesma estrutura de grafo** (mesma fábrica,
+`compor_fluxo_triagem`) e diferem apenas no nó de extração. O motor de regras é um
+único nó (`motor_regras_producao`); as regras continuam em `data/rules.yaml`.
+Os grafos exportados do código estão em [`fluxos_langchain.md`](fluxos_langchain.md)
+(regenerar com `python -m src.orchestration`).
+
+---
+
 ## Pipeline 1 — Regras de Produção
 
-**Módulo principal:** `src/approaches/rules_only.py`
+**Módulo principal:** `src/approaches/rules_only.py` — `build_rules_flow()`
 
 ```
 Texto livre
     │
     ▼
-keyword_extractor.extract(texto)
-  src/extraction/keyword_extractor.py
-  → ExtractedInfo (categoria, palavras-chave, risco, impacto)
-    (sem chamada LLM — baseado em matching de termos)
+preparacao_entrada            (início da medição de latência)
     │
     ▼
-context_enricher.enrich(extracted_info, texto)
-  src/data/context_enricher.py
-  → ExtractedInfo enriquecida com dados de ativos/equipes
-    (criticidade_ativo, equipe_default do ativo, etc.)
+carregamento_dados            (assets/teams, categories, rules — YAML cacheado)
     │
-    ▼
-rules/engine.evaluate(extracted_info)
-  src/rules/engine.py
-  → dispara regras em ordem decrescente de prioridade_regra
-  → primeira regra satisfeita define urgência/prioridade/equipe
-    │
-    ▼
-TriageResult (abordagem=REGRAS)
+    ├──────────────────────────────┐   RunnableParallel
+    ▼                              ▼
+extracao_palavras_chave        deteccao_categoria
+  KeywordExtractor.extract       KeywordExtractor.detect_category
+  → ExtractedInfo                → FailureCategory
+  (sem LLM)                      (ou categoria_ref no cenário-diagnóstico)
+    │                              │
+    └──────────────┬───────────────┘
+                   ▼
+enriquecimento_contexto       (enrich_context: ativo, criticidade, equipe)
+                   │
+                   ▼
+motor_regras_producao         (apply_rules: avalia as 18 regras por prioridade_regra)
+                   │
+                   ▼
+montagem_resultado → TriageResult (abordagem=REGRAS)
 ```
 
 **Características:**
@@ -75,27 +95,28 @@ TriageResult (abordagem=REGRAS)
 
 ## Pipeline 2 — LLM Puro
 
-**Módulo principal:** `src/approaches/llm_only.py`
+**Módulo principal:** `src/approaches/llm_only.py` — `build_llm_flow()`
 
 ```
 Texto livre
     │
     ▼
-orchestration/chains.py  (LangChain Runnable)
-  + llm_extractor.classify_full(texto)
-  src/extraction/llm_extractor.py
-  → chamada única ao Ollama:
-    extrai E classifica (urgência, prioridade, categoria, equipe)
-    em uma única prompt
+preparacao_entrada
     │
     ▼
-Parser defensivo (JSON)
-  → tenta recuperar JSON mesmo de respostas parcialmente malformadas
-  → campos ausentes → DESCONHECIDA / campos_sem_suporte
+preparacao_prompt             (prompt único com ativos e equipes da planta)
     │
     ▼
-TriageResult (abordagem=LLM)
-  regras_acionadas=[]
+chamada_llm                   (ChatOllama instanciado em runtime; llm.invoke(prompt))
+  → extrai E classifica (urgência, prioridade, categoria, equipe) num único passo
+    │
+    ▼
+parser_defensivo              (json direto → regex → erro)
+    │
+    ▼
+montagem_resultado → TriageResult (abordagem=LLM, regras_acionadas=[])
+  → valores inválidos → DESCONHECIDA; JSON inválido → revisão humana
+  → falha de conexão → resultado_seguro ("LLM indisponível: ...")
 ```
 
 **Características:**
@@ -109,31 +130,40 @@ TriageResult (abordagem=LLM)
 
 ## Pipeline 3 — Híbrido
 
-**Módulo principal:** `src/approaches/hybrid.py`
+**Módulo principal:** `src/approaches/hybrid.py` — `build_hybrid_flow()`
+
+Mesmo grafo do Pipeline 1; muda apenas o nó de extração.
 
 ```
 Texto livre
     │
     ▼
-llm_extractor.extract_info(texto)
-  src/extraction/llm_extractor.py
-  → chamada ao Ollama APENAS para extração:
-    categoria, sintomas, risco, impacto, abreviações resolvidas
-  → produz ExtractedInfo (não inclui urgência/prioridade)
+preparacao_entrada
     │
     ▼
-context_enricher.enrich(extracted_info, texto)
-  src/data/context_enricher.py
-  → recupera criticidade_ativo, equipe_default dos dados locais
+carregamento_dados            (mesmos YAML + instância do LLMExtractor)
     │
-    ▼
-rules/engine.evaluate(extracted_info_enriquecida)
-  src/rules/engine.py
-  → regras determinísticas determinam urgência/prioridade/equipe
-    │
-    ▼
-TriageResult (abordagem=HIBRIDO)
-  regras_acionadas=[...]
+    ├──────────────────────────────────────┐   RunnableParallel
+    ▼                                      ▼
+extracao_llm_com_fallback              deteccao_categoria
+  (RunnableWithFallbacks)                KeywordExtractor.detect_category
+  extracao_llm: LLMExtractor.extract
+    → ExtractedInfo (sem urgência/prioridade)
+  se erro_parse ou exceção:
+    extracao_palavras_chave (KeywordExtractor)
+    + evidência extracao_fallback + revisão obrigatória
+    │                                      │
+    └──────────────────┬───────────────────┘
+                       ▼
+enriquecimento_contexto
+                       │
+                       ▼
+motor_regras_producao         (regras determinam urgência/prioridade/equipe)
+                       │
+                       ▼
+montagem_resultado → TriageResult (abordagem=HIBRIDO, regras_acionadas=[...])
+  (evidências LLM + ativo_encontrado + regras_classificacao;
+   revisão se fallback ou confiança de extração < 0,4)
 ```
 
 **Características:**
@@ -157,7 +187,8 @@ TriageResult (abordagem=HIBRIDO)
 | `data/dataset_loader` | `src/data/dataset_loader.py` | Carrega e valida `datasets/synthetic_cases.json` |
 | `extraction/keyword_extractor` | `src/extraction/keyword_extractor.py` | Extração por palavras-chave (sem LLM) |
 | `extraction/llm_extractor` | `src/extraction/llm_extractor.py` | Extração estruturada via Ollama |
-| `orchestration/chains` | `src/orchestration/chains.py` | Chains LangChain para LLM puro e híbrido |
+| `orchestration/triage_flow` | `src/orchestration/triage_flow.py` | Fábrica comum LCEL: nomes dos nós, envelope de falha segura, fallback da extração |
+| `orchestration/chains` | `src/orchestration/chains.py` | Builders `build_*_chain()` dos três fluxos e exportação Mermaid dos grafos |
 | `rules/definitions` | `src/rules/definitions.py` | Carrega e valida `data/rules.yaml` |
 | `rules/engine` | `src/rules/engine.py` | Motor de regras: avalia condições e dispara ações |
 | `approaches/*` | `src/approaches/` | Os três pipelines comparáveis |
@@ -359,9 +390,11 @@ Amostra pequena limita a generalização.
 ### Latência (`latency_stats`)
 
 **Definição:** estatísticas descritivas (média, desvio padrão, mínimo, máximo)
-da latência de processamento em ms, medida no executor.
+da latência de processamento em ms, medida dentro do fluxo LCEL, do nó
+`preparacao_entrada` até a montagem do resultado.
 
-**Limitação:** inclui overhead de serialização Python e variações de carga do
+**Limitação:** inclui o custo da orquestração LangChain (threads dos
+`RunnableParallel`, callbacks), overhead de serialização Python e variações de carga do
 sistema. Para abordagens LLM, a variância é alta e depende do hardware local.
 
 ---

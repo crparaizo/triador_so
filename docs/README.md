@@ -16,6 +16,9 @@ Descreve como o sistema é organizado internamente. Inclui:
 - **Como adicionar casos ao dataset**: instruções para expandir o conjunto de teste
 - **Definições das métricas de avaliação**: o que cada métrica mede, como é calculada e quais são suas limitações
 
+### `fluxos_langchain.md` — Grafos LCEL dos três fluxos
+Diagramas Mermaid gerados a partir do código (`get_graph().draw_mermaid()`), com os nós reais de cada fluxo LangChain. É regenerado com `python -m src.orchestration` e não deve ser editado à mão; um teste verifica se está atualizado.
+
 ---
 
 ## Para quem é esta documentação?

@@ -13,14 +13,15 @@ Configurações disponíveis:
 
 | Variável | Padrão | Descrição |
 |----------|--------|-----------|
-| `OLLAMA_MODEL` | `qwen3:4b` | Nome do modelo a usar no Ollama |
+| `OLLAMA_MODEL` | `qwen3:0.6b` | Nome do modelo a usar no Ollama. Padrão compacto (~500 MB), roda inteiramente em GPU com ~1 GB de VRAM. Para melhor qualidade use `qwen3:4b` se a GPU tiver 4 GB+ de VRAM. |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Endereço do servidor Ollama |
 | `LOG_LEVEL` | `INFO` | Nível de detalhamento dos logs |
 | `SESSIONS_DIR` | `sessions` | Pasta para salvar histórico da interface |
 | `RESULTS_DIR` | `results` | Pasta para salvar relatórios de avaliação |
 | `DATA_DIR` | `data` | Pasta com os YAMLs de ativos e regras |
 | `MAX_RETRIES_LLM` | `3` | Quantas vezes tentar novamente em caso de falha de conexão |
-| `LLM_TIMEOUT_SECONDS` | `60` | Tempo máximo de espera por resposta do LLM |
+| `LLM_TIMEOUT_SECONDS` | `60` | Base do timeout por caso na avaliação (o runner aguarda 2× este valor); não é repassado ao cliente do Ollama |
+| `OLLAMA_NUM_PREDICT` | `1024` | Limite de tokens gerados por chamada ao LLM; impede que o modelo repita chaves indefinidamente com `format="json"` |
 
 A função `get_settings()` retorna o objeto de configurações. Ela usa `lru_cache` — ou seja, o arquivo `.env` é lido **uma única vez** durante toda a execução do programa, não a cada chamada.
 

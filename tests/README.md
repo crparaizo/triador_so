@@ -19,7 +19,7 @@ pytest tests/test_rules_engine.py -v
 pytest tests/ -v --tb=short
 ```
 
-O resultado esperado é `183 passed` em aproximadamente 7 segundos.
+O resultado esperado é `232 passed` em aproximadamente 40 segundos.
 
 ---
 
@@ -46,6 +46,7 @@ Define **fixtures** (objetos de exemplo reutilizáveis) que todos os arquivos de
 | `test_hybrid.py` | Pipeline híbrido: fluxo completo, fallback LLM → palavras-chave |
 | `test_evaluation.py` | Módulo de avaliação: métricas, runner, geração de relatórios |
 | `test_interface.py` | Gerenciador de sessões: salvar, carregar e limpar histórico |
+| `test_orchestration.py` | Fluxos LCEL: nós esperados, regras × híbrido diferindo só na extração, fallback LLM → palavras-chave via `with_fallbacks`, resultado seguro, exportação Mermaid |
 
 ---
 

@@ -293,3 +293,16 @@ def test_json_com_campos_extras_nao_causa_erro(mock_ollama):
     result = LLMExtractor().extract("Bomba BOMB-001 vibrando no Setor A.")
 
     assert result.erro_parse is None
+
+
+def test_chatollama_extrator_recebe_format_json_e_limite_de_tokens(mocker):
+    """O extrator do híbrido deve pedir JSON ao Ollama e limitar os tokens gerados."""
+    from src.config.loader import get_settings
+    from src.extraction.llm_extractor import LLMExtractor
+
+    mock_classe = mocker.patch("src.extraction.llm_extractor.ChatOllama")
+    LLMExtractor()._criar_llm()
+
+    kwargs = mock_classe.call_args.kwargs
+    assert kwargs["format"] == "json"
+    assert kwargs["num_predict"] == get_settings().ollama_num_predict

@@ -101,6 +101,7 @@ class LLMExtractor:
         self._timeout: int = settings.llm_timeout_seconds
         self._temperature: float = settings.ollama_temperature
         self._seed: int = settings.ollama_seed
+        self._num_predict: int = settings.ollama_num_predict
 
     def _build_prompt(self, texto: str) -> str:
         """Monta o prompt substituindo {texto} no template."""
@@ -116,6 +117,10 @@ class LLMExtractor:
             base_url=self._base_url,
             temperature=self._temperature,
             seed=self._seed,
+            format="json",  # força geração de JSON válido no nível do tokenizador
+            # Limite de tokens: com format="json" o modelo pode repetir chaves
+            # indefinidamente sem fechar o objeto (observado no qwen3:0.6b).
+            num_predict=self._num_predict,
         )
 
     def _dict_para_extracted_info(self, data: dict) -> ExtractedInfo:
@@ -132,7 +137,9 @@ class LLMExtractor:
         impacto = data.get("impacto_producao")
         risco = data.get("risco_seguranca")
         urgencia = data.get("urgencia_mencionada")
-        evidencias_raw = data.get("evidencias") or {}
+        # Normalizar evidencias: LLM pode retornar dict, lista ou None
+        _ev = data.get("evidencias")
+        evidencias_raw = _ev if isinstance(_ev, dict) else {}
 
         # Campos rastreáveis com valor None no dict = sem suporte no texto
         campos_sem_suporte = [

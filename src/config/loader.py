@@ -86,6 +86,16 @@ class Settings(BaseSettings):
         ge=1,
         description="Timeout em segundos para chamadas LLM",
     )
+    ollama_num_predict: int = Field(
+        default=1024,
+        ge=64,
+        description=(
+            "Limite de tokens gerados por chamada ao LLM (inclui o raciocínio do "
+            "qwen3). Com format='json', modelos pequenos podem entrar em laço "
+            "repetindo chaves sem fechar o objeto; o limite encerra a geração e a "
+            "resposta truncada segue a política de falha segura (revisão humana)."
+        ),
+    )
 
 
 @lru_cache(maxsize=1)

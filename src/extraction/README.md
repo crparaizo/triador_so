@@ -43,5 +43,7 @@ Abordagem **baseada em modelo de linguagem**: envia o texto para o Ollama com um
 
 > **Importante**: o `LLMExtractor` instancia a conexão com o Ollama **somente dentro do método `extract()`**, nunca no `__init__`. Isso garante que importar o módulo não cause erros mesmo sem o Ollama rodando.
 
+**Como o fluxo híbrido usa os dois extratores.** O `LLMExtractor` não lança exceção quando falha: devolve `ExtractedInfo` com `erro_parse` preenchido (as tentativas de reconexão continuam no laço interno de `extract()`, sem `with_retry` do LangChain). No fluxo LCEL do híbrido, o nó `extracao_llm` converte esse sinal em uma exceção `FalhaExtracaoLLM`, e o fallback nativo do LangChain (`RunnableWithFallbacks`) passa a extração para o `KeywordExtractor` (nó `extracao_palavras_chave`), registrando a evidência `extracao_fallback` e exigindo revisão humana. A detecção de categoria (`detect_category`) roda em paralelo, no nó `deteccao_categoria`. Detalhes em `src/orchestration/README.md`.
+
 ### `__init__.py`
 Marca a pasta como submódulo Python.

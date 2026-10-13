@@ -9,7 +9,7 @@ description = "Protótipo acadêmico de triagem de ordens de serviço industriai
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name = "Autor", email = "autor@example.com"}]
+authors = [{name = "Cândida Rosa Paraizo", email = "N/A"}]
 keywords = ["triagem", "manutenção industrial", "LLM", "regras de produção"]
 classifiers = [
     "Development Status :: 3 - Alpha",

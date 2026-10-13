@@ -271,3 +271,56 @@ def test_texto_vazio_retorna_triage_result_valido(mock_ollama, mock_kb):
     resultado = run_llm_only("")
 
     assert isinstance(resultado, TriageResult)
+
+
+# ---------------------------------------------------------------------------
+# Validação do nome de equipe retornado pelo LLM (_mapear_equipe_valida)
+# ---------------------------------------------------------------------------
+
+_EQUIPES_REAIS = [
+    "Manutenção Mecânica",
+    "Manutenção Elétrica",
+    "Instrumentação e Controle",
+    "Utilidades",
+    "Infraestrutura e Facilities",
+    "TI e Automação",
+]
+
+
+@pytest.mark.parametrize(
+    "valor,esperado",
+    [
+        # Match exato normalizado (acentos e caixa ignorados)
+        ("TI e Automação", "TI e Automação"),
+        ("manutencao eletrica", "Manutenção Elétrica"),
+        # Nome completo da equipe contido no valor
+        ("Manutenção Mecânica Turno A", "Manutenção Mecânica"),
+        ("Equipe de Utilidades", "Utilidades"),
+        # Fragmentos não podem ser aceitos (antes: "TI" → "Utilidades")
+        ("TI", "Revisão Manual"),
+        ("MECANICA", "Revisão Manual"),
+        ("MANUTENCAO", "Revisão Manual"),
+        # Tags de ativos e valores com duas equipes (ambíguos)
+        ("BOMB-001", "Revisão Manual"),
+        ("Manutenção Mecânica ou Manutenção Elétrica", "Revisão Manual"),
+        ("", "Revisão Manual"),
+    ],
+)
+def test_mapear_equipe_valida(valor, esperado):
+    """Somente o nome completo de uma única equipe cadastrada é aceito."""
+    from src.approaches.llm_only import _mapear_equipe_valida
+
+    assert _mapear_equipe_valida(valor, _EQUIPES_REAIS) == esperado
+
+
+def test_chatollama_recebe_format_json_e_limite_de_tokens(mocker, mock_kb):
+    """O LLM puro deve pedir JSON ao Ollama e limitar os tokens gerados (evita laço)."""
+    from src.config.loader import get_settings
+
+    mock_ollama_cls = mocker.patch("src.approaches.llm_only.ChatOllama")
+    mock_ollama_cls.return_value.invoke.return_value = MagicMock(content=JSON_VALIDO)
+    run_llm_only("BOMB-001 com vibração excessiva")
+
+    kwargs = mock_ollama_cls.call_args.kwargs
+    assert kwargs["format"] == "json"
+    assert kwargs["num_predict"] == get_settings().ollama_num_predict

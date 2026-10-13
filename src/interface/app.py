@@ -185,7 +185,7 @@ def _exibir_comparacao(results: dict[str, TriageResult]) -> None:
         index=[colunas_map.get(a, a) for a in ["regras", "llm", "hibrido"]],
     ).T
 
-    st.dataframe(df, use_container_width=True)
+    st.dataframe(df, width='stretch')
 
     # Indicadores de revisão humana por abordagem
     cols = st.columns(3)
@@ -221,7 +221,7 @@ def _pagina_triagem() -> None:
         key="texto_triagem",
     )
 
-    if st.button("🔍 Analisar", type="primary", use_container_width=True):
+    if st.button("🔍 Analisar", type="primary", width='stretch'):
         # Validação de entrada
         if not texto or not texto.strip():
             st.warning("⚠️ Por favor, insira um relato antes de analisar.")
@@ -338,8 +338,10 @@ def _pagina_avaliacao() -> None:
     )
 
     st.warning(
-        "⏳ A avaliação pode demorar vários minutos, especialmente para as abordagens que utilizam "
-        "o LLM (LLM Puro e Híbrido). Certifique-se de que o Ollama está em execução antes de iniciar."
+        "⏳ As abordagens LLM Puro e Híbrido chamam o modelo de linguagem para cada caso — "
+        "podem ser muito lentas com datasets grandes. Use a **avaliação rápida** (≤ 20 casos) "
+        "na interface. Para o dataset completo (100 casos), prefira o comando: "
+        "`python -m src.evaluation`"
     )
 
     st.subheader("Abordagens a avaliar")
@@ -351,6 +353,20 @@ def _pagina_avaliacao() -> None:
     with col_cb3:
         cb_hibrido = st.checkbox("Híbrido", value=True, key="cb_hibrido")
 
+    max_casos = st.slider(
+        "Número de casos por abordagem",
+        min_value=5,
+        max_value=100,
+        value=20,
+        step=5,
+        help=(
+            "Reduza para uma avaliação rápida na interface. "
+            "Para avaliar todos os 100 casos, use o comando de linha: "
+            "`python -m src.evaluation`"
+        ),
+        key="max_casos_slider",
+    )
+
     abordagens_selecionadas = []
     if cb_regras:
         abordagens_selecionadas.append("regras")
@@ -359,14 +375,14 @@ def _pagina_avaliacao() -> None:
     if cb_hibrido:
         abordagens_selecionadas.append("hibrido")
 
-    if st.button("▶ Executar Avaliação Completa", type="primary", use_container_width=True):
+    if st.button("▶ Executar Avaliação", type="primary", width='stretch'):
         if not abordagens_selecionadas:
             st.warning("⚠️ Selecione ao menos uma abordagem para avaliar.")
             return
 
         # Carregar dataset
         try:
-            cases = load_dataset()
+            cases_todos = load_dataset()
         except FileNotFoundError as exc:
             st.error(f"❌ Dataset não encontrado: {exc}")
             return
@@ -378,7 +394,11 @@ def _pagina_avaliacao() -> None:
             st.error(f"❌ Erro ao carregar dataset: {exc}")
             return
 
-        st.info(f"Dataset carregado: {len(cases)} casos sintéticos.")
+        cases = cases_todos[:max_casos]
+        st.info(
+            f"Dataset: {len(cases_todos)} casos disponíveis — "
+            f"avaliando os primeiros **{len(cases)}**."
+        )
 
         barra = st.progress(0, text="Iniciando avaliação...")
         eval_data: dict = {
@@ -386,6 +406,7 @@ def _pagina_avaliacao() -> None:
             "dataset_size": len(cases),
             "approaches": {},
         }
+        caminhos: dict = {}
 
         total = len(abordagens_selecionadas)
         for i, abordagem in enumerate(abordagens_selecionadas):
@@ -396,18 +417,30 @@ def _pagina_avaliacao() -> None:
                 int(i / total * 100),
                 text=f"Avaliando abordagem: {nome_display} ({i + 1}/{total})...",
             )
-            with st.spinner(f"Executando {nome_display}..."):
+            with st.spinner(f"Executando {nome_display} ({len(cases)} casos)..."):
                 try:
                     resultado_abordagem = evaluate_approach(abordagem, cases)
                     eval_data["approaches"][abordagem] = resultado_abordagem
                     erros_abordagem = resultado_abordagem.get("errors", [])
                     if erros_abordagem:
                         st.warning(
-                            f"⚠️ {nome_display}: {len(erros_abordagem)} caso(s) com erro durante a avaliação."
+                            f"⚠️ {nome_display}: {len(erros_abordagem)} caso(s) com erro."
                         )
+                    else:
+                        st.success(f"✅ {nome_display} concluído ({len(cases)} casos).")
                 except Exception as exc:
                     logger.error("Erro ao avaliar abordagem %s: %s", abordagem, exc)
                     st.error(f"❌ Erro ao avaliar {nome_display}: {exc}")
+                    continue
+
+            # Salvar resultado parcial após cada abordagem — garante que resultados
+            # já concluídos não sejam perdidos se uma abordagem seguinte falhar
+            if eval_data["approaches"]:
+                try:
+                    caminhos = save_evaluation_report(eval_data)
+                    logger.info("Resultado parcial salvo após %s", abordagem)
+                except Exception as exc:
+                    logger.error("Erro ao salvar resultado parcial após %s: %s", abordagem, exc)
 
         barra.progress(100, text="Avaliação concluída.")
 
@@ -415,10 +448,10 @@ def _pagina_avaliacao() -> None:
             st.error("❌ Nenhuma abordagem produziu resultados.")
             return
 
-        # Salvar relatório
+        # Salvar relatório final consolidado (sobrescreve o parcial com o completo)
         try:
             caminhos = save_evaluation_report(eval_data)
-            st.success(f"✅ Relatório salvo em: `{Path(caminhos['summary_json']).parent}`")
+            st.success(f"✅ Relatório final salvo em: `{Path(caminhos['summary_json']).parent}`")
         except Exception as exc:
             logger.error("Erro ao salvar relatório de avaliação: %s", exc)
             st.error(f"❌ Erro ao salvar relatório: {exc}")
@@ -447,7 +480,7 @@ def _pagina_avaliacao() -> None:
                     })
 
                 df_summary = pd.DataFrame(linhas)
-                st.dataframe(df_summary, use_container_width=True, hide_index=True)
+                st.dataframe(df_summary, width='stretch', hide_index=True)
             except Exception as exc:
                 logger.error("Erro ao exibir resumo: %s", exc)
                 st.warning(f"Não foi possível exibir o resumo: {exc}")
@@ -466,7 +499,7 @@ def _pagina_avaliacao() -> None:
                             data=f.read(),
                             file_name=Path(csv_path).name,
                             mime="text/csv",
-                            use_container_width=True,
+                            width='stretch',
                         )
 
             with col_dl2:
@@ -478,7 +511,7 @@ def _pagina_avaliacao() -> None:
                             data=f.read(),
                             file_name=Path(json_path).name,
                             mime="application/json",
-                            use_container_width=True,
+                            width='stretch',
                         )
 
         st.caption(
@@ -563,7 +596,7 @@ def _pagina_historico() -> None:
     if st.button(
         "🧹 Limpar histórico",
         disabled=not confirmar,
-        use_container_width=True,
+        width='stretch',
     ):
         try:
             removidos = clear_sessions()

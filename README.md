@@ -42,14 +42,14 @@ sintéticos e genéricos. O sistema não está conectado a sistemas reais nem ex
 
 ```powershell
 # PowerShell (Windows)
-git clone <url-do-repositorio>
-cd hibrido
+git clone https://github.com/crparaizo/triador_so
+cd triador_so
 ```
 
 ```bash
 # Bash (Linux / macOS)
-git clone <url-do-repositorio>
-cd hibrido
+git clone https://github.com/crparaizo/triador_so
+cd triador_so
 ```
 
 ### 2. Crie e ative o ambiente virtual
@@ -96,14 +96,15 @@ Todos os campos têm valores padrão funcionais — o sistema roda sem `.env` co
 
 | Variável | Padrão | Descrição |
 |---|---|---|
-| `OLLAMA_MODEL` | `qwen3:4b` | Nome do modelo Ollama. Deve estar baixado localmente (`ollama pull <modelo>`). |
+| `OLLAMA_MODEL` | `qwen3:0.6b` | Nome do modelo Ollama. Deve estar baixado localmente (`ollama pull <modelo>`). |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | URL base do servidor Ollama. Alterar se a porta 11434 estiver em uso. |
 | `DATA_DIR` | `data` | Diretório com os arquivos YAML de ativos, equipes e categorias. |
 | `RESULTS_DIR` | `results` | Diretório onde os relatórios de avaliação são salvos. |
 | `SESSIONS_DIR` | `sessions` | Diretório onde as sessões da interface são persistidas. |
 | `LOG_LEVEL` | `INFO` | Nível de log: `DEBUG`, `INFO`, `WARNING` ou `ERROR`. |
 | `MAX_RETRIES_LLM` | `3` | Número máximo de tentativas para chamadas ao LLM em caso de erro. |
-| `LLM_TIMEOUT_SECONDS` | `60` | Timeout em segundos para cada chamada ao LLM. |
+| `LLM_TIMEOUT_SECONDS` | `60` | Base do timeout por caso na avaliação (o runner aguarda 2× este valor). Não é repassado ao cliente HTTP do Ollama. |
+| `OLLAMA_NUM_PREDICT` | `1024` | Limite de tokens gerados por chamada ao LLM (inclui o raciocínio do qwen3). Evita que o modelo entre em laço com `format="json"`; resposta truncada vai para revisão humana. |
 
 ---
 
@@ -125,10 +126,19 @@ Mantenha este terminal aberto. O servidor roda na porta 11434 por padrão.
 ### Baixar o modelo padrão
 
 ```powershell
-ollama pull qwen3:4b
+ollama pull qwen3:0.6b
 ```
 
-O download pode levar alguns minutos dependendo da conexão (o modelo tem aproximadamente 2,6 GB).
+O download pode levar alguns minutos dependendo da conexão (o modelo tem aproximadamente 500 MB).
+
+> **Nota sobre escolha de modelo:** `qwen3:0.6b` é o modelo padrão deste protótipo por rodar inteiramente em GPU mesmo com VRAM limitada (~1 GB disponível). Se a sua máquina tiver GPU com 4 GB ou mais de VRAM, você pode usar modelos maiores para melhor qualidade de extração:
+>
+> ```powershell
+> ollama pull qwen3:4b   # requer ~2.7 GB de VRAM para rodar 100% em GPU
+> ollama pull qwen3:1.7b # requer ~1.5 GB de VRAM
+> ```
+>
+> Altere `OLLAMA_MODEL` no `.env` após baixar. Verifique qual percentual está rodando em GPU com `ollama ps` — quanto maior a fração GPU, menor a latência.
 
 ### Verificar modelos disponíveis
 
@@ -155,7 +165,7 @@ para mais detalhes.
 ### Interface gráfica (Streamlit) — recomendado
 
 ```powershell
-streamlit run src/interface/app.py
+python -m streamlit run src/interface/app.py
 ```
 
 Acesse **http://localhost:8501** no navegador. A interface possui três páginas
@@ -222,7 +232,7 @@ Um exemplo de relatório de avaliação sintético está disponível em
 pytest tests/ -v
 ```
 
-Resultado esperado: **183 testes aprovados, 0 falhas.**
+Resultado esperado: **232 testes aprovados, 0 falhas.**
 
 > Os testes **não dependem do Ollama**. Chamadas ao LLM são simuladas por mocks.
 > Execute os testes mesmo sem o Ollama instalado.
@@ -265,7 +275,9 @@ hibrido/
 │   │   ├── app.py               # Interface Streamlit (Triagem / Avaliação / Histórico)
 │   │   └── session_manager.py   # Persistência de sessões em JSON
 │   ├── orchestration/
-│   │   └── chains.py            # Chains LangChain para o pipeline híbrido
+│   │   ├── triage_flow.py       # Fábrica comum LCEL: nós, fallbacks, falha segura
+│   │   ├── chains.py            # build_*_chain() dos três fluxos + exportação Mermaid
+│   │   └── __main__.py          # Gera docs/fluxos_langchain.md (python -m src.orchestration)
 │   ├── rules/
 │   │   ├── engine.py            # Motor de regras de produção
 │   │   └── definitions.py       # Carregamento e validação das regras do YAML
@@ -283,13 +295,15 @@ hibrido/
 │   ├── DATASET_README.md    # Documentação e limitações do dataset
 │   └── sample_report.json   # Exemplo pré-computado de relatório de avaliação
 ├── docs/
-│   └── architecture.md      # Arquitetura detalhada e diagramas
+│   ├── architecture.md      # Arquitetura detalhada e diagramas
+│   └── fluxos_langchain.md  # Grafos LCEL (Mermaid) gerados a partir do código
 ├── tests/                   # Testes automatizados (pytest)
 │   ├── conftest.py
 │   ├── test_schemas.py
 │   ├── test_rules_engine.py
 │   ├── test_evaluation.py
 │   ├── test_dataset.py
+│   ├── test_orchestration.py  # Estrutura dos grafos LCEL e fallbacks
 │   └── ...
 ├── results/                 # Relatórios gerados (*.json, *.csv — não versionados)
 │   └── .gitkeep
@@ -310,42 +324,44 @@ detalhada dos módulos. Esta seção apresenta um resumo.
 
 ### Três pipelines comparáveis
 
+Os três pipelines são cadeias LCEL (LangChain Expression Language) de nós `Runnable`
+nomeados, definidas em `src/orchestration/` e `src/approaches/`. Todos começam em
+`preparacao_entrada` e ficam dentro do envelope `triagem_com_falha_segura`
+(`RunnableWithFallbacks`): qualquer exceção leva ao nó `resultado_seguro`, que exige
+revisão humana. **Regras e híbrido usam a mesma estrutura de grafo e diferem apenas no
+nó de extração.**
+
 ```
 Texto livre
     │
-    ├─── [1] REGRAS ──────────────────────────────────────────────────┐
-    │         │                                                        │
-    │    keyword_extractor                                             │
-    │    (ExtractedInfo por palavras-chave)                            │
-    │         │                                                        │
-    │    context_enricher                                              │
-    │    (enriquece com dados de ativos/equipes)                       │
-    │         │                                                        │
-    │    rules/engine                                                  │
-    │    (dispara regras, determina urgência/prioridade/equipe)        │
-    │         │                                                        │
-    │         └──────────────────────────────────────────────────→ TriageResult
+    ├─── [1] REGRAS ─────────────────────────────────────────────────────────┐
+    │    carregamento_dados                                                   │
+    │    extracao_palavras_chave  ∥  deteccao_categoria   (RunnableParallel)  │
+    │    enriquecimento_contexto  (dados de ativos/equipes)                   │
+    │    motor_regras_producao    (apply_rules: um nó, regras em rules.yaml)  │
+    │    montagem_resultado ─────────────────────────────────────────→ TriageResult
     │
-    ├─── [2] LLM PURO ───────────────────────────────────────────────┐
-    │         │                                                       │
-    │    orchestration/chains (LangChain)                             │
-    │    + llm_extractor (Ollama / qwen3:4b)                          │
-    │    (extrai E classifica em uma única chamada)                   │
-    │         │                                                       │
-    │         └─────────────────────────────────────────────────→ TriageResult
+    ├─── [2] LLM PURO ───────────────────────────────────────────────────────┐
+    │    preparacao_prompt        (ativos + equipes + relato)                 │
+    │    chamada_llm              (ChatOllama — extrai E classifica)          │
+    │    parser_defensivo         (JSON direto → regex → erro)                │
+    │    montagem_resultado ─────────────────────────────────────────→ TriageResult
     │
-    └─── [3] HÍBRIDO ────────────────────────────────────────────────┐
-              │
-         llm_extractor (Ollama)
-         (extrai informações estruturadas: categoria, sintomas, etc.)
-              │
-         context_enricher
-         (enriquece ExtractedInfo com dados locais de ativos/equipes)
-              │
-         rules/engine
-         (regras explícitas determinam urgência/prioridade/equipe)
-              │
-              └─────────────────────────────────────────────────→ TriageResult
+    └─── [3] HÍBRIDO (mesmo grafo de [1]) ───────────────────────────────────┐
+         carregamento_dados       (+ LLMExtractor)                            │
+         extracao_llm_com_fallback  ∥  deteccao_categoria                     │
+           └ extracao_llm (Ollama, só extração)                               │
+             → se falhar: extracao_palavras_chave + revisão obrigatória       │
+         enriquecimento_contexto                                              │
+         motor_regras_producao    (regras determinam urgência/prioridade/equipe)
+         montagem_resultado ─────────────────────────────────────────→ TriageResult
+```
+
+Os grafos exatos, exportados do código com `get_graph().draw_mermaid()`, estão em
+[`docs/fluxos_langchain.md`](docs/fluxos_langchain.md). Para regenerá-los:
+
+```powershell
+python -m src.orchestration
 ```
 
 ### Separação entre informação observada e inferida
@@ -360,7 +376,7 @@ O sistema diferencia:
 ## Dados Sintéticos
 
 > ⚠️ **ATENÇÃO: Os 100 casos do dataset são completamente sintéticos.**
-> Foram criados manualmente para fins acadêmicos e **não representam incidentes,
+> Foram criados com auxílio de IA Generativa para fins acadêmicos e **não representam incidentes,
 > equipamentos ou instalações reais.**
 
 ### Distribuição por tipo
@@ -381,7 +397,7 @@ O sistema diferencia:
 
 ### Limitações do dataset
 
-- Gerado manualmente — não cobre a diversidade real de relatos de campo
+- Gerado com auxílio de IA Generativa — não cobre a diversidade real de relatos de campo
 - Sem dados temporais (turno, histórico de falhas, sazonalidade)
 - Gabarito anotado com base nas regras do sistema e julgamento editorial, não por especialistas
 - Tamanho insuficiente para conclusões estatísticas robustas (apenas demonstração)
@@ -457,13 +473,13 @@ A abordagem por **Regras** não depende do Ollama e funciona normalmente sem ele
 
 **Erro esperado:**
 ```
-model 'qwen3:4b' not found
+model 'qwen3:0.6b' not found
 ```
 
-**Solução:** baixe o modelo configurado:
+**Solução:** baixe o modelo configurado no `.env`:
 
 ```powershell
-ollama pull qwen3:4b
+ollama pull qwen3:0.6b
 ```
 
 Ou altere `OLLAMA_MODEL` no `.env` para um modelo já disponível:
@@ -608,14 +624,16 @@ Este protótipo foi desenvolvido exclusivamente para fins de pesquisa acadêmica
 **Não está pronto para uso em ambiente industrial real.**
 
 ### Dataset sintético
-Os 100 casos foram criados manualmente seguindo padrões genéricos de manutenção
+Os 100 casos foram criados com auxílio de IA Generativa seguindo padrões genéricos de manutenção
 industrial. Não representam a distribuição real de falhas de nenhuma planta específica.
 O tamanho do dataset é insuficiente para afirmações de significância estatística.
 
 ### Modelo LLM local
-O comportamento do LLM varia com o modelo e a quantização utilizada. O `qwen3:4b` é
-um modelo pequeno — pode produzir saídas inconsistentes, especialmente para relatos
+O comportamento do LLM varia com o modelo e a quantização utilizada. O modelo padrão (`qwen3:0.6b`)
+é um modelo muito compacto — pode produzir saídas inconsistentes, especialmente para relatos
 ambíguos ou com erros de escrita. Resultados variam entre execuções (temperatura > 0).
+Se a infraestrutura disponível permitir (GPU com 4 GB+ de VRAM), recomenda-se utilizar
+modelos maiores como `qwen3:4b` para maior qualidade de extração.
 
 ### Motor de regras
 O sistema contém **18 regras de produção** que cobrem cenários genéricos. Cenários

@@ -13,7 +13,7 @@
 ## Versão e Data de Criação
 
 - **Versão**: 1.0.0
-- **Data de criação**: 2025-07-01
+- **Data de criação**: 2026-07-01
 - **Arquivo**: `datasets/synthetic_cases.json`
 - **Total de casos**: 100
 
@@ -151,7 +151,7 @@ As seguintes situações expõem limitações conhecidas do motor de regras:
 
 ## Limitações do Dataset Sintético
 
-1. **Geração artificial**: Os casos foram escritos manualmente seguindo padrões industriais genéricos. Não representam incidentes reais documentados.
+1. **Geração artificial**: Os casos foram escritos com auxílio de IA Generativa seguindo padrões industriais genéricos. Não representam incidentes reais documentados.
 
 2. **Viés de cobertura**: As categorias e regras refletem apenas os dados de domínio configurados em `data/`. Falhas em equipamentos não cadastrados não estão representadas.
 
