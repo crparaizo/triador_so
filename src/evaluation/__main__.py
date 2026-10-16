@@ -16,12 +16,21 @@ uso operacional. Este módulo NÃO executa ações em sistemas reais.
 
 Pré-requisitos para abordagens LLM e híbrido:
   - Ollama instalado e rodando: ollama serve
-  - Modelo baixado: ollama pull qwen3:4b  (ou o configurado em OLLAMA_MODEL)
+  - Modelo baixado: ollama pull qwen3:0.6b  (ou o configurado em OLLAMA_MODEL)
 """
 
 import argparse
 import json
 import sys
+
+
+def _formatar_duracao(segundos: float) -> str:
+    """Formata uma duração em segundos como '12,3 s', '4,5 min' ou '1,8 h'."""
+    if segundos < 60:
+        return f"{segundos:.1f} s"
+    if segundos < 3600:
+        return f"{segundos / 60:.1f} min"
+    return f"{segundos / 3600:.2f} h"
 
 
 def main() -> None:
@@ -33,7 +42,7 @@ def main() -> None:
             "AVISO: Protótipo acadêmico — não usar em ambiente industrial real.\n"
             "Para abordagens LLM/híbrido, o Ollama deve estar rodando:\n"
             "  ollama serve\n"
-            "  ollama pull qwen3:4b"
+            "  ollama pull qwen3:0.6b"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -78,6 +87,13 @@ def main() -> None:
             summary = json.load(f)
 
         print_summary_table(summary)
+
+        # Tempo total de execução por abordagem (para a Seção 3.3 da monografia)
+        print("\nTempo de execução por abordagem:")
+        for nome_abordagem, dados in eval_data.get("approaches", {}).items():
+            elapsed = dados.get("elapsed_seconds")
+            if elapsed is not None:
+                print(f"  {nome_abordagem}: {_formatar_duracao(elapsed)}")
 
         print("\nArquivos gerados:")
         for nome, caminho in caminhos.items():

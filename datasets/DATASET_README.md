@@ -107,6 +107,67 @@ Para casos sem regra aplicável, o gabarito reflete o julgamento humano esperado
 
 ---
 
+## Fundamentação Normativa
+
+Embora sintético, o dataset e os dados de domínio não foram concebidos de forma
+arbitrária: sua nomenclatura, estrutura e critérios de conformidade apoiam-se em
+normas reconhecidas de manutenção industrial e segurança do trabalho. O objetivo
+é dar rastreabilidade normativa ao caso de uso — e não certificar conformidade,
+já que se trata de um protótipo acadêmico com dados fictícios.
+
+### Normas de referência
+
+| Norma | Título | O que fundamenta neste projeto |
+|---|---|---|
+| **ABNT NBR ISO 14224** (base ISO 14224:2016) | Indústrias de petróleo e gás natural — Coleta e intercâmbio de dados de confiabilidade e manutenção para equipamentos | Taxonomia de classes de equipamento (campo `classe_iso14224` em `data/assets.yaml`) e a organização dos dados de falha/manutenção. |
+| **ABNT NBR 5462:1994** | Confiabilidade e mantenabilidade (terminologia) | Vocabulário de falha, defeito, pane, manutenção corretiva/preventiva, confiabilidade, mantenabilidade e criticidade usado nos relatos e no sistema. |
+| **NR-10** | Segurança em Instalações e Serviços em Eletricidade | Gatilho de revisão humana obrigatória para intervenções elétricas de risco (RULE-003; ver `data/rules.yaml`). |
+| **NR-13** | Caldeiras, Vasos de Pressão, Tubulações e Tanques Metálicos de Armazenamento | Gatilho de revisão humana obrigatória para caldeiras/vapor (RULE-006). |
+| **NR-35** | Trabalho em Altura | Gatilho de revisão para cenários de segurança em altura (RULE-001/002, categoria SEGURANCA). |
+
+> Confira o título e o ano/edição vigentes no catálogo oficial da ABNT e no site do
+> Ministério do Trabalho e Emprego (MTE) antes da citação final na monografia — a
+> edição nacional da NBR ISO 14224 e as redações das NRs são atualizadas
+> periodicamente.
+
+### Mapeamento ISO 14224 dos ativos
+
+Cada ativo em `data/assets.yaml` recebeu o campo `classe_iso14224`, mapeando-o à
+taxonomia de classes de equipamento da norma. Como a ISO 14224 é específica das
+indústrias de petróleo, gás e petroquímica, parte dos ativos (quadros de
+distribuição, MCC, HVAC, elevador) **não possui classe direta** — esses casos são
+marcados explicitamente como "Não coberto diretamente pela ISO 14224", evidenciando
+os limites de aplicabilidade da norma a uma planta genérica.
+
+| Classe ISO 14224 | Ativos (tags) |
+|---|---|
+| Bombas (Pumps) | BOMB-001, BOMB-002 |
+| Compressores (Compressors) | COMP-001, COMP-002, COMP-003 |
+| Motores elétricos (Electric motors) | MOTOR-001 |
+| Transformadores de potência (Power transformers) | TRANS-001 |
+| Geradores elétricos (Electric generators) | GER-001 |
+| Dispositivos de entrada (Input devices) | SENS-001, TRANS-002 |
+| Válvulas (Valves) | VALV-001, VALV-002 |
+| Aquecedores e caldeiras (Heaters and boilers) | CAL-001 |
+| Trocadores de calor (Heat exchangers) | CHIL-001 |
+| Não coberto diretamente pela ISO 14224 | PANEL-001, PANEL-002, HVAC-001, ELEV-001 |
+
+### Glossário (terminologia ABNT NBR 5462:1994)
+
+Termos empregados nos relatos, regras e métricas, conforme a terminologia da norma:
+
+- **Falha**: término da capacidade de um item desempenhar a função requerida.
+- **Defeito**: desvio de uma característica em relação aos requisitos, que pode ou não levar à falha.
+- **Pane**: estado de um item incapaz de desempenhar a função requerida (resultado de uma falha).
+- **Manutenção corretiva**: efetuada após a ocorrência de uma pane, para recolocar o item em condição de funcionamento.
+- **Manutenção preventiva**: efetuada em intervalos predeterminados para reduzir a probabilidade de falha (relacionada ao tipo de caso e à RULE-016).
+- **Criticidade**: grau de impacto de um item sobre a produção/segurança — base do campo `criticidade` (ALTA/MEDIA/BAIXA) dos ativos.
+
+> As definições acima são paráfrases para uso interno; o texto normativo exato
+> deve ser consultado na ABNT NBR 5462:1994 ao citá-las na monografia.
+
+---
+
 ## Lacunas Documentadas
 
 As seguintes situações expõem limitações conhecidas do motor de regras:
@@ -143,7 +204,7 @@ As seguintes situações expõem limitações conhecidas do motor de regras:
 | Arquivo | Conteúdo |
 |---|---|
 | `data/rules.yaml` | 18 regras de produção com condições e ações |
-| `data/assets.yaml` | 18 ativos com tag, criticidade, localização e equipe responsável |
+| `data/assets.yaml` | 18 ativos com tag, criticidade, localização, equipe responsável e classe ISO 14224 |
 | `data/teams.yaml` | 6 equipes com especialidades e disponibilidade |
 | `data/categories.yaml` | 12 categorias com palavras-chave e equipe padrão |
 

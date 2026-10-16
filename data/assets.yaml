@@ -12,6 +12,11 @@
 #   localizacao     : localização física na planta
 #   equipe_responsavel : equipe de manutenção responsável
 #   criticidade     : ALTA, MEDIA ou BAIXA
+#   classe_iso14224 : classe de equipamento conforme a taxonomia da ABNT NBR
+#                     ISO 14224 (base ISO 14224:2016). Rastreabilidade normativa;
+#                     não altera o comportamento da triagem. "Não coberto..."
+#                     indica ativo sem classe direta na norma (específica de
+#                     óleo e gás). Ver docs em datasets/DATASET_README.md.
 #   observacoes     : notas relevantes sobre o equipamento
 # =============================================================================
 
@@ -28,6 +33,7 @@ assets:
     localizacao: "Setor A - Utilidades"
     equipe_responsavel: "Manutenção Mecânica"
     criticidade: "ALTA"
+    classe_iso14224: "Bombas (Pumps)"
     observacoes: >
       Bomba principal do circuito de resfriamento do processo. Opera
       continuamente 24h/dia. Falha causa parada imediata da linha de produção.
@@ -40,6 +46,7 @@ assets:
     localizacao: "Setor B - Produção"
     equipe_responsavel: "Manutenção Mecânica"
     criticidade: "ALTA"
+    classe_iso14224: "Bombas (Pumps)"
     observacoes: >
       Transfere produto acabado do reator para o tanque de armazenagem.
       Fluido de trabalho é corrosivo — usar EPI completo em intervenções.
@@ -52,6 +59,7 @@ assets:
     localizacao: "Sala de Compressores"
     equipe_responsavel: "Manutenção Mecânica"
     criticidade: "ALTA"
+    classe_iso14224: "Compressores (Compressors)"
     observacoes: >
       Fornece ar comprimido seco para válvulas de controle pneumáticas.
       Falha afeta todas as malhas de controle que utilizam atuadores
@@ -65,6 +73,7 @@ assets:
     localizacao: "Setor C - Produção"
     equipe_responsavel: "Manutenção Mecânica"
     criticidade: "ALTA"
+    classe_iso14224: "Compressores (Compressors)"
     observacoes: >
       Compressor de processo responsável por manter pressão de operação do
       Setor C. Equipamento de alta pressão — procedimento de bloqueio e
@@ -77,6 +86,7 @@ assets:
     localizacao: "Setor A - Logística"
     equipe_responsavel: "Manutenção Mecânica"
     criticidade: "MEDIA"
+    classe_iso14224: "Motores elétricos (Electric motors)"
     observacoes: >
       Aciona correia transportadora de matéria-prima. Possui motor de
       reserva disponível em almoxarifado. Inspeção de correia e polias
@@ -93,6 +103,7 @@ assets:
     localizacao: "Subestação Principal"
     equipe_responsavel: "Manutenção Elétrica"
     criticidade: "ALTA"
+    classe_iso14224: "Não coberto diretamente pela ISO 14224 (quadro de distribuição elétrica)"
     observacoes: >
       Painel de distribuição de 480V que alimenta toda a planta industrial.
       Acesso restrito — somente pessoal autorizado com NR-10. Termografia
@@ -105,6 +116,7 @@ assets:
     localizacao: "Setor A - Utilidades"
     equipe_responsavel: "Manutenção Elétrica"
     criticidade: "ALTA"
+    classe_iso14224: "Não coberto diretamente pela ISO 14224 (centro de controle de motores)"
     observacoes: >
       Centraliza partida e proteção dos motores do Setor A. Contém
       inversores de frequência para controle de velocidade das bombas.
@@ -117,6 +129,7 @@ assets:
     localizacao: "Subestação Principal"
     equipe_responsavel: "Manutenção Elétrica"
     criticidade: "ALTA"
+    classe_iso14224: "Transformadores de potência (Power transformers)"
     observacoes: >
       Transformador de potência principal. Análise de óleo dielétrico anual.
       Monitoramento de temperatura contínuo via sensor instalado. Requer
@@ -129,6 +142,7 @@ assets:
     localizacao: "Área Externa - Gerador"
     equipe_responsavel: "Manutenção Elétrica"
     criticidade: "ALTA"
+    classe_iso14224: "Geradores elétricos (Electric generators)"
     observacoes: >
       Gerador a diesel para suprimento de emergência em caso de falta de
       energia da concessionária. Partida automática testada semanalmente.
@@ -145,6 +159,7 @@ assets:
     localizacao: "Setor B - Reator 1"
     equipe_responsavel: "Instrumentação e Controle"
     criticidade: "MEDIA"
+    classe_iso14224: "Dispositivos de entrada (Input devices)"
     observacoes: >
       Sensor PT100 para medição de temperatura do produto no Reator 1.
       Calibração anual obrigatória. Desvio acima de 2°C deve ser investigado.
@@ -157,6 +172,7 @@ assets:
     localizacao: "Setor C - Linha 2"
     equipe_responsavel: "Instrumentação e Controle"
     criticidade: "ALTA"
+    classe_iso14224: "Dispositivos de entrada (Input devices)"
     observacoes: >
       Transmissor de pressão diferencial da Linha 2 do Setor C. Sinal 4-20mA
       conectado ao CLP de controle. Falha pode causar operação fora dos
@@ -169,6 +185,7 @@ assets:
     localizacao: "Setor B - Reator 1"
     equipe_responsavel: "Instrumentação e Controle"
     criticidade: "ALTA"
+    classe_iso14224: "Válvulas (Valves)"
     observacoes: >
       Válvula de controle de fluxo de produto para o Reator 1. Atuador
       pneumático com posicionador digital. Fail-close (fecha em falta de ar).
@@ -181,6 +198,7 @@ assets:
     localizacao: "Setor C - Linha 2"
     equipe_responsavel: "Instrumentação e Controle"
     criticidade: "MEDIA"
+    classe_iso14224: "Válvulas (Valves)"
     observacoes: >
       Válvula motorizada para controle de temperatura da Linha 2. Atuador
       elétrico 24VDC com feedback de posição. Fail-open (abre em falta de
@@ -197,6 +215,7 @@ assets:
     localizacao: "Casa de Caldeiras"
     equipe_responsavel: "Utilidades"
     criticidade: "ALTA"
+    classe_iso14224: "Aquecedores e caldeiras (Heaters and boilers)"
     observacoes: >
       Caldeira flamotubular de 10 toneladas/hora para geração de vapor de
       processo. Operação supervisionada por caldeirista habilitado (NR-13).
@@ -210,6 +229,7 @@ assets:
     localizacao: "Casa de Máquinas"
     equipe_responsavel: "Utilidades"
     criticidade: "ALTA"
+    classe_iso14224: "Trocadores de calor (Heat exchangers)"
     observacoes: >
       Chiller de expansão direta para resfriamento do processo. Fluido
       refrigerante R-134a. Capacidade nominal 120TR. Falha impacta
@@ -222,6 +242,7 @@ assets:
     localizacao: "Casa de Máquinas"
     equipe_responsavel: "Utilidades"
     criticidade: "MEDIA"
+    classe_iso14224: "Compressores (Compressors)"
     observacoes: >
       Compressor do circuito de refrigeração auxiliar do chiller CHIL-001.
       Unidade de backup — normalmente em standby. Partida automática
@@ -238,6 +259,7 @@ assets:
     localizacao: "Sala de Controle Principal"
     equipe_responsavel: "Infraestrutura e Facilities"
     criticidade: "ALTA"
+    classe_iso14224: "Não coberto diretamente pela ISO 14224 (sistema de climatização/HVAC)"
     observacoes: >
       Sistema de ar condicionado de precisão para a sala de controle.
       Mantém temperatura entre 20-24°C e umidade relativa entre 40-60%.
@@ -251,6 +273,7 @@ assets:
     localizacao: "Área de Armazenagem"
     equipe_responsavel: "Infraestrutura e Facilities"
     criticidade: "BAIXA"
+    classe_iso14224: "Não coberto diretamente pela ISO 14224 (elevador de carga)"
     observacoes: >
       Elevador de carga com capacidade de 2 toneladas para movimentação
       de materiais entre andares do armazém. Inspeção anual obrigatória

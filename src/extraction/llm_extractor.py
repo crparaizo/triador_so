@@ -19,6 +19,7 @@ from langchain_ollama import ChatOllama  # import seguro — sem conexão TCP
 from src.config.loader import get_settings
 from src.schemas.extraction import ExtractedInfo
 from src.utils.parsers import parsear_json_llm
+from src.utils.tokens import extrair_uso_tokens
 
 logger = logging.getLogger(__name__)
 
@@ -123,13 +124,20 @@ class LLMExtractor:
             num_predict=self._num_predict,
         )
 
-    def _dict_para_extracted_info(self, data: dict) -> ExtractedInfo:
+    def _dict_para_extracted_info(
+        self, data: dict, tokens: tuple[int, int, int] = (0, 0, 0)
+    ) -> ExtractedInfo:
         """
         Converte dict retornado pelo LLM em ExtractedInfo.
 
         Calcula campos_sem_suporte e confianca_extracao localmente —
         não usa o valor de confianca_extracao informado pelo próprio LLM.
+
+        Args:
+            data: dicionário já parseado da resposta do LLM.
+            tokens: (entrada, saida, total) medidos na chamada LLM de extração.
         """
+        tok_entrada, tok_saida, tok_total = tokens
         # Extração defensiva de cada campo
         ativo = data.get("ativo_mencionado")
         sintomas_raw = data.get("sintomas") or []
@@ -162,6 +170,9 @@ class LLMExtractor:
             confianca_extracao=confianca,
             campos_sem_suporte=campos_sem_suporte,
             erro_parse=None,
+            tokens_entrada=tok_entrada,
+            tokens_saida=tok_saida,
+            tokens_total=tok_total,
         )
 
     def extract(self, texto: str) -> ExtractedInfo:
@@ -205,8 +216,9 @@ class LLMExtractor:
                     logger.warning("LLMExtractor: erro de parse na tentativa %d: %s", tentativa + 1, erro)
                     return ExtractedInfo(erro_parse=erro)
 
-                # Parse bem-sucedido
-                return self._dict_para_extracted_info(data)
+                # Parse bem-sucedido — anexar contagem de tokens da chamada
+                tokens = extrair_uso_tokens(resposta)
+                return self._dict_para_extracted_info(data, tokens)
 
             except Exception as exc:
                 # Qualquer exceção de invoke = falha de conexão/runtime → retry

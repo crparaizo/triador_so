@@ -114,6 +114,7 @@ def evaluate_approach(approach_name: str, cases: list[DatasetCase]) -> dict:
             de cases; fallbacks para casos com erro.
           - 'errors': lista de {'case_id', 'error'} para casos com falha.
           - 'dataset_cases': lista de dicts dos casos avaliados.
+          - 'elapsed_seconds': tempo total (wall-clock) de execução da abordagem.
 
     Raises:
         ValueError: se approach_name não pertencer a ABORDAGENS_VALIDAS.
@@ -130,6 +131,7 @@ def evaluate_approach(approach_name: str, cases: list[DatasetCase]) -> dict:
 
     results: list[dict] = []
     errors: list[dict] = []
+    inicio_abordagem = time.perf_counter()
 
     # Um único executor por abordagem evita criar/destruir 100 thread pools.
     # Nota: com max_workers=1, uma thread que ultrapassar o timeout continuará
@@ -174,10 +176,18 @@ def evaluate_approach(approach_name: str, cases: list[DatasetCase]) -> dict:
                 results.append(fallback.model_dump(mode="json"))
                 errors.append({"case_id": caso.id, "error": motivo})
 
+    elapsed_seconds = time.perf_counter() - inicio_abordagem
+    print(
+        f"  [{approach_name}] Tempo total: {elapsed_seconds:.1f}s "
+        f"({elapsed_seconds / 60:.1f} min)",
+        flush=True,
+    )
+
     return {
         "results": results,
         "errors": errors,
         "dataset_cases": [c.model_dump(mode="json") for c in cases],
+        "elapsed_seconds": elapsed_seconds,
     }
 
 

@@ -60,6 +60,7 @@ from src.schemas.triage import (
     UrgencyLevel,
 )
 from src.utils.parsers import parsear_json_llm
+from src.utils.tokens import extrair_uso_tokens
 
 # Logger do módulo — erros registrados sem expor traceback ao usuário final
 logger = logging.getLogger(__name__)
@@ -162,8 +163,17 @@ def _fallback_conexao(texto_entrada: str, latencia: float, motivo: str) -> Triag
     )
 
 
-def _fallback_parse(texto_entrada: str, latencia: float, motivo: str) -> TriageResult:
-    """Retorna TriageResult de erro quando o JSON retornado pelo LLM é inválido."""
+def _fallback_parse(
+    texto_entrada: str,
+    latencia: float,
+    motivo: str,
+    tokens: tuple[int, int, int] = (0, 0, 0),
+) -> TriageResult:
+    """Retorna TriageResult de erro quando o JSON retornado pelo LLM é inválido.
+
+    Mesmo em falha de parse a contagem de tokens é preservada: o LLM foi
+    efetivamente chamado e consumiu tokens, que devem entrar no custo medido.
+    """
     return TriageResult(
         abordagem=ApproachType.LLM,
         texto_entrada=texto_entrada,
@@ -176,6 +186,9 @@ def _fallback_parse(texto_entrada: str, latencia: float, motivo: str) -> TriageR
         motivo_revisao=f"Falha na classificação: {motivo}",
         confianca=0.0,
         latencia_ms=max(latencia, 0.0),
+        tokens_entrada=tokens[0],
+        tokens_saida=tokens[1],
+        tokens_total=tokens[2],
     )
 
 
@@ -239,12 +252,14 @@ def _dict_para_triage_result(
     texto_entrada: str,
     latencia: float,
     equipes_validas: list[str] | None = None,
+    tokens: tuple[int, int, int] = (0, 0, 0),
 ) -> TriageResult:
     """
     Converte o dict retornado pelo LLM para TriageResult com mapeamento defensivo de enums.
 
     regras_acionadas é SEMPRE [] — mesmo que o LLM retorne valores nesse campo.
     equipes_validas: lista de nomes exatos do KnowledgeBase para validar equipe_sugerida.
+    tokens: (entrada, saida, total) medidos na chamada ao LLM.
     """
     # Mapeamento defensivo de enums
     urgencia = _mapear_urgencia(str(data.get("urgencia", "")))
@@ -301,6 +316,9 @@ def _dict_para_triage_result(
         motivo_revisao=motivo_revisao,
         confianca=confianca,
         latencia_ms=max(latencia, 0.0),
+        tokens_entrada=tokens[0],
+        tokens_saida=tokens[1],
+        tokens_total=tokens[2],
         campos_sem_suporte=campos_sem_suporte,
     )
 
@@ -400,13 +418,17 @@ def _montar_resultado(estado: dict) -> TriageResult:
     latencia_ms = (time.perf_counter() - estado["inicio"]) * 1000
     # Equipes válidas armazenadas por _preparar_prompt para validação pós-parse
     equipes_validas = estado.get("preparo", {}).get("equipes_validas", [])
+    # Contagem de tokens da resposta do LLM (custo computacional da abordagem)
+    tokens = extrair_uso_tokens(estado.get("resposta"))
 
     if erro or data is None:
         return _fallback_parse(
-            estado["texto_entrada"], latencia_ms, f"Resposta inválida do LLM: {erro}"
+            estado["texto_entrada"], latencia_ms, f"Resposta inválida do LLM: {erro}", tokens
         )
 
-    return _dict_para_triage_result(data, estado["texto_entrada"], latencia_ms, equipes_validas)
+    return _dict_para_triage_result(
+        data, estado["texto_entrada"], latencia_ms, equipes_validas, tokens
+    )
 
 
 def _resultado_seguro(estado: dict) -> TriageResult:

@@ -31,8 +31,13 @@ class Settings(BaseSettings):
 
     # LLM / Ollama
     ollama_model: str = Field(
-        default="qwen3:4b",
-        description="Nome do modelo Ollama a ser utilizado",
+        default="qwen3:0.6b",
+        description=(
+            "Nome do modelo Ollama a ser utilizado. Padrão qwen3:0.6b (~500 MB), "
+            "escolhido para rodar inteiramente em GPU com VRAM limitada — o modelo "
+            "efetivamente usado nos experimentos da monografia. Modelos maiores "
+            "(qwen3:1.7b, qwen3:4b) exigem mais VRAM; configurável via .env."
+        ),
     )
     ollama_base_url: str = Field(
         default="http://localhost:11434",

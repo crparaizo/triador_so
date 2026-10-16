@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1080" height="300" fill="#ffffff"/>
+
+  <g stroke="#374151" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <path d="M160,170 L196,104"/>
+    <path d="M160,170 L196,230"/>
+    <path d="M430,100 L466,165"/>
+    <path d="M410,233 L466,176"/>
+    <path d="M640,170 L676,170"/>
+    <path d="M870,170 L906,170"/>
+  </g>
+
+  <rect x="20" y="130" width="140" height="80" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.6"/>
+  <text x="90" y="166" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="90" dy="0">Relato textual</tspan><tspan x="90" dy="17">da ocorrência</tspan>
+  </text>
+
+  <rect x="200" y="58" width="230" height="84" rx="8" fill="#e7edfb" stroke="#374151" stroke-width="1.6"/>
+  <text x="315" y="83" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="315" dy="0">Extração via LLM</tspan><tspan x="315" dy="17">(recuo para</tspan><tspan x="315" dy="17">palavras-chave)</tspan>
+  </text>
+
+  <rect x="200" y="200" width="210" height="66" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.6"/>
+  <text x="305" y="229" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="305" dy="0">Detecção de</tspan><tspan x="305" dy="17">categoria</tspan>
+  </text>
+
+  <rect x="470" y="135" width="170" height="70" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.6"/>
+  <text x="555" y="166" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="555" dy="0">Enriquecimento</tspan><tspan x="555" dy="17">de contexto</tspan>
+  </text>
+
+  <rect x="680" y="135" width="190" height="70" rx="8" fill="#eef3ee" stroke="#374151" stroke-width="1.6"/>
+  <text x="775" y="166" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="775" dy="0">Motor de regras</tspan><tspan x="775" dy="17">de produção</tspan>
+  </text>
+
+  <rect x="910" y="130" width="150" height="80" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.6"/>
+  <text x="985" y="166" text-anchor="middle" fill="#111827" font-size="13">
+    <tspan x="985" dy="0" font-weight="bold">Resultado</tspan><tspan x="985" dy="17">(classificação)</tspan>
+  </text>
+</svg>

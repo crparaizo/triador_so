@@ -29,6 +29,15 @@ class Asset(BaseModel):
     criticidade: Literal["ALTA", "MEDIA", "BAIXA"] = Field(
         ..., description="Criticidade do ativo para a produção"
     )
+    classe_iso14224: Optional[str] = Field(
+        default=None,
+        description=(
+            "Classe de equipamento conforme a taxonomia da ABNT NBR ISO 14224 "
+            "(base ISO 14224:2016). Campo de rastreabilidade normativa — não "
+            "altera o comportamento da triagem. 'Não coberto...' indica ativo "
+            "sem classe direta na norma (que é específica de óleo e gás)."
+        ),
+    )
     observacoes: str = Field(
         default="", description="Observações adicionais sobre o ativo"
     )

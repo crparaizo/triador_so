@@ -34,6 +34,7 @@ from src.evaluation.metrics import (
     human_review_rate,
     latency_stats,
     robustness_score,
+    token_stats,
     unsupported_fields_rate,
 )
 from src.evaluation.report import print_summary_table, save_evaluation_report
@@ -74,6 +75,7 @@ def _make_triage_result(
     campos_sem_suporte: list[str] | None = None,
     latencia_ms: float = 10.0,
     abordagem: ApproachType = ApproachType.REGRAS,
+    tokens_total: int = 0,
 ) -> TriageResult:
     """
     Cria um TriageResult sintético para uso nos testes.
@@ -92,6 +94,8 @@ def _make_triage_result(
         motivo_revisao="Revisão de teste" if revisao else None,
         confianca=0.8,
         latencia_ms=latencia_ms,
+        tokens_entrada=tokens_total,
+        tokens_total=tokens_total,
         campos_sem_suporte=campos_sem_suporte if campos_sem_suporte is not None else [],
     )
 
@@ -267,6 +271,29 @@ def test_latency_stats_basico():
     assert stats["max"] == 30.0
 
 
+def test_token_stats_basico():
+    """Tokens [0, 100, 200] devem produzir total_medio=100 e total_soma=300."""
+    r1 = _make_triage_result(
+        "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False, tokens_total=0
+    )
+    r2 = _make_triage_result(
+        "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False, tokens_total=100
+    )
+    r3 = _make_triage_result(
+        "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False, tokens_total=200
+    )
+    stats = token_stats([r1, r2, r3])
+    assert stats["total_medio"] == 100.0
+    assert stats["total_soma"] == 300.0
+
+
+def test_token_stats_lista_vazia():
+    """token_stats([]) deve retornar zeros sem lançar exceção."""
+    stats = token_stats([])
+    assert stats["total_medio"] == 0.0
+    assert stats["total_soma"] == 0.0
+
+
 # ---------------------------------------------------------------------------
 # Testes 12–14: runner.py — run_evaluation e evaluate_approach
 # ---------------------------------------------------------------------------
@@ -375,7 +402,7 @@ def test_save_evaluation_report_quatro_arquivos(tmp_path):
 
 
 def test_csv_per_case_colunas(tmp_path):
-    """CSV por caso deve conter todas as 20 colunas definidas em COLUNAS_PER_CASE."""
+    """CSV por caso deve conter todas as 21 colunas definidas em COLUNAS_PER_CASE."""
     r1 = _make_triage_result("ALTA", "P2", "MECANICA", "Manutenção Mecânica", False)
     c1 = _make_dataset_case(
         "CASE-001", "CANONICO", "ALTA", "P2", "MECANICA", "Manutenção Mecânica", False
@@ -409,6 +436,7 @@ def test_csv_per_case_colunas(tmp_path):
         "equipe_correta",
         "campos_sem_suporte",
         "latencia_ms",
+        "tokens_total",
     ]
     for col in colunas_esperadas:
         assert col in headers, f"Coluna ausente no CSV por caso: {col}"

@@ -260,6 +260,44 @@ def latency_stats(results: list) -> dict:
     }
 
 
+def token_stats(results: list) -> dict:
+    """
+    Estatísticas descritivas de consumo de tokens do LLM.
+
+    Mede o custo computacional da abordagem. Para regras puras o consumo é
+    sempre 0 (nenhuma chamada a LLM); para o híbrido reflete apenas a extração;
+    para o LLM puro reflete extração + classificação + roteamento num só prompt.
+
+    Limitação: a contagem depende dos metadados devolvidos pelo Ollama. Quando
+    indisponíveis, os campos valem 0 e não devem ser confundidos com ausência
+    de chamada ao modelo.
+
+    Args:
+        results: lista de TriageResult.
+
+    Returns:
+        Dicionário com 'entrada_media', 'saida_media', 'total_medio',
+        'total_soma'; todos 0.0 se lista vazia.
+    """
+    if not results:
+        return {
+            "entrada_media": 0.0,
+            "saida_media": 0.0,
+            "total_medio": 0.0,
+            "total_soma": 0.0,
+        }
+
+    entrada = [r.tokens_entrada for r in results]
+    saida = [r.tokens_saida for r in results]
+    total = [r.tokens_total for r in results]
+    return {
+        "entrada_media": float(np.mean(entrada)),
+        "saida_media": float(np.mean(saida)),
+        "total_medio": float(np.mean(total)),
+        "total_soma": float(np.sum(total)),
+    }
+
+
 def per_approach_summary(
     approach_results: "list[TriageResult | None]",
     dataset_cases: "list[DatasetCase | None]",
@@ -310,6 +348,12 @@ def per_approach_summary(
         "critical_underestimation_rate": 0.0,
         "human_review_rate": 0.0,
         "latency": {"media": 0.0, "std": 0.0, "min": 0.0, "max": 0.0},
+        "tokens": {
+            "entrada_media": 0.0,
+            "saida_media": 0.0,
+            "total_medio": 0.0,
+            "total_soma": 0.0,
+        },
         "robustness": {"urgencia": 0.0, "prioridade": 0.0, "categoria": 0.0},
         "total_cases": 0,
     }
@@ -363,6 +407,9 @@ def per_approach_summary(
     # Latência
     lat = latency_stats(resultados)
 
+    # Tokens (custo computacional)
+    tok = token_stats(resultados)
+
     # Robustez: pares canônico → paráfrase identificados por referencia_caso_canonico
     id_to_result = {c.id: r for r, c in pares}
     canonical_res: list = []
@@ -394,6 +441,7 @@ def per_approach_summary(
         "critical_underestimation_rate": taxa_criticos,
         "human_review_rate": taxa_revisao,
         "latency": lat,
+        "tokens": tok,
         "robustness": rob,
         "total_cases": len(pares),
     }

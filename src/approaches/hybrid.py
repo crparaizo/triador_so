@@ -258,6 +258,9 @@ def _montar_resultado(estado: dict) -> TriageResult:
         motivo_revisao=motivo,
         confianca=resultado["confianca"],
         latencia_ms=latencia,
+        tokens_entrada=extracted.tokens_entrada,
+        tokens_saida=extracted.tokens_saida,
+        tokens_total=extracted.tokens_total,
         campos_sem_suporte=campos_sem_suporte,
     )
 

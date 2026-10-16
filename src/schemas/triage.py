@@ -121,6 +121,30 @@ class TriageResult(BaseModel):
     latencia_ms: float = Field(
         ..., ge=0.0, description="Latência de processamento em milissegundos"
     )
+    tokens_entrada: int = Field(
+        default=0,
+        ge=0,
+        description=(
+            "Tokens de entrada (prompt) consumidos pelo LLM. 0 para abordagens "
+            "sem LLM (regras puras) ou quando a contagem não está disponível."
+        ),
+    )
+    tokens_saida: int = Field(
+        default=0,
+        ge=0,
+        description=(
+            "Tokens de saída (geração) produzidos pelo LLM. 0 para abordagens "
+            "sem LLM (regras puras) ou quando a contagem não está disponível."
+        ),
+    )
+    tokens_total: int = Field(
+        default=0,
+        ge=0,
+        description=(
+            "Soma de tokens de entrada e saída. 0 para abordagens sem LLM — "
+            "indicador direto do custo computacional da abordagem."
+        ),
+    )
     campos_sem_suporte: list[str] = Field(
         default_factory=list,
         description="Campos inferidos sem evidência direta no texto (indicador de possível alucinação)",

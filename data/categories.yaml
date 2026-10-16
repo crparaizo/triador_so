@@ -12,6 +12,10 @@
 #   urgencia_padrao: nível de urgência padrão (IMEDIATA, ALTA, MEDIA, BAIXA)
 #   palavras_chave : lista de termos (≥20) em português, incluindo variações,
 #                    abreviações e termos técnicos usados no chão de fábrica
+#
+# Terminologia: os termos de falha, defeito, manutenção e criticidade usados
+# neste protótipo seguem a ABNT NBR 5462:1994 (Confiabilidade e mantenabilidade).
+# A fundamentação normativa e o glossário estão em datasets/DATASET_README.md.
 # =============================================================================
 
 categorias:

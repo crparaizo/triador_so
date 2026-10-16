@@ -80,6 +80,21 @@ def test_get_asset_by_tag_case_insensitive():
     assert result.tag == "BOMB-001"
 
 
+def test_asset_tem_classe_iso14224():
+    """Todos os ativos devem ter o campo classe_iso14224 preenchido (rastreabilidade normativa)."""
+    kb = load_knowledge_base()
+    sem_classe = [a.tag for a in kb.assets if not a.classe_iso14224]
+    assert sem_classe == [], f"Ativos sem classe_iso14224: {sem_classe}"
+
+
+def test_asset_classe_iso14224_valor_conhecido():
+    """BOMB-001 deve ser mapeado à classe ISO 14224 de bombas."""
+    kb = load_knowledge_base()
+    bomb = kb.get_asset_by_tag("BOMB-001")
+    assert bomb is not None
+    assert "Pumps" in (bomb.classe_iso14224 or "")
+
+
 def test_find_assets_by_location_setor_a():
     """find_assets_by_location deve retornar ao menos um ativo no Setor A."""
     kb = load_knowledge_base()

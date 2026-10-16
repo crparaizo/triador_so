@@ -50,6 +50,7 @@ COLUNAS_PER_CASE: list[str] = [
     "equipe_correta",
     "campos_sem_suporte",
     "latencia_ms",
+    "tokens_total",
 ]
 
 
@@ -167,6 +168,7 @@ def _gerar_csv_por_caso(eval_data: dict, path: Path) -> None:
                     "equipe_correta": str(eq_esp == eq_pred),
                     "campos_sem_suporte": len(result.get("campos_sem_suporte", [])),
                     "latencia_ms": result.get("latencia_ms", 0.0),
+                    "tokens_total": result.get("tokens_total", 0),
                 })
 
 
@@ -236,6 +238,8 @@ def _gerar_summary_csv(summary_data: dict, path: Path) -> None:
         "taxa_revisao_humana",
         "taxa_subestimacao_critica",
         "latencia_media_ms",
+        "tokens_total_medio",
+        "tokens_total_soma",
         "total_cases",
         "total_errors",
     ]
@@ -256,6 +260,8 @@ def _gerar_summary_csv(summary_data: dict, path: Path) -> None:
                     "critical_underestimation_rate", 0.0
                 ),
                 "latencia_media_ms": metrics.get("latency", {}).get("media", 0.0),
+                "tokens_total_medio": metrics.get("tokens", {}).get("total_medio", 0.0),
+                "tokens_total_soma": metrics.get("tokens", {}).get("total_soma", 0.0),
                 "total_cases": metrics.get("total_cases", 0),
                 "total_errors": metrics.get("total_errors", 0),
             })
@@ -293,6 +299,7 @@ def print_summary_table(summary: dict) -> None:
     tabela.add_column("Taxa Revisão", justify="right")
     tabela.add_column("Taxa Subest.", justify="right")
     tabela.add_column("Lat. Média (ms)", justify="right")
+    tabela.add_column("Tokens (méd.)", justify="right")
 
     for approach_name, metrics in summary.items():
         tabela.add_row(
@@ -304,6 +311,7 @@ def print_summary_table(summary: dict) -> None:
             f"{metrics.get('human_review_rate', 0.0):.3f}",
             f"{metrics.get('critical_underestimation_rate', 0.0):.3f}",
             f"{metrics.get('latency', {}).get('media', 0.0):.1f}",
+            f"{metrics.get('tokens', {}).get('total_medio', 0.0):.1f}",
         )
 
     console.print(tabela)

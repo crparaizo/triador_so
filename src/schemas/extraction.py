@@ -68,6 +68,21 @@ class ExtractedInfo(BaseModel):
         None,
         description="Mensagem de erro quando a extração falhou (ex: resposta malformada do LLM)",
     )
+    tokens_entrada: int = Field(
+        default=0,
+        ge=0,
+        description="Tokens de entrada da chamada LLM de extração. 0 no extrator por palavras-chave.",
+    )
+    tokens_saida: int = Field(
+        default=0,
+        ge=0,
+        description="Tokens de saída da chamada LLM de extração. 0 no extrator por palavras-chave.",
+    )
+    tokens_total: int = Field(
+        default=0,
+        ge=0,
+        description="Soma de tokens de entrada e saída da extração LLM. 0 no extrator por palavras-chave.",
+    )
 
 
 class ContextData(BaseModel):
