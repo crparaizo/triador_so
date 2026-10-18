@@ -18,7 +18,7 @@ from langchain_ollama import ChatOllama  # import seguro — sem conexão TCP
 
 from src.config.loader import get_settings
 from src.schemas.extraction import ExtractedInfo
-from src.utils.parsers import parsear_json_llm
+from src.utils.parsers import parsear_json_llm, truncar_resposta
 from src.utils.tokens import extrair_uso_tokens
 
 logger = logging.getLogger(__name__)
@@ -212,9 +212,13 @@ class LLMExtractor:
                 data, erro = parsear_json_llm(texto_resposta)
 
                 if erro:
-                    # Erro de parse: retornar imediatamente, sem retry
+                    # Erro de parse: retornar imediatamente, sem retry.
+                    # Preserva o texto bruto como evidência da falha (análise).
                     logger.warning("LLMExtractor: erro de parse na tentativa %d: %s", tentativa + 1, erro)
-                    return ExtractedInfo(erro_parse=erro)
+                    return ExtractedInfo(
+                        erro_parse=erro,
+                        evidencias={"resposta_llm_bruta": truncar_resposta(texto_resposta)},
+                    )
 
                 # Parse bem-sucedido — anexar contagem de tokens da chamada
                 tokens = extrair_uso_tokens(resposta)

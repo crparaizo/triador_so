@@ -298,6 +298,36 @@ def token_stats(results: list) -> dict:
     }
 
 
+def failure_event_counts(results: list) -> dict:
+    """
+    Conta eventos de falha tratada pelo sistema, a partir das evidências.
+
+    Não são erros fatais — são tratamentos defensivos registrados para análise:
+      - equipes_alucinadas: o LLM retornou um nome de equipe fora do catálogo
+        (evidência 'equipe_llm_bruta'); relevante para a abordagem LLM puro.
+      - parse_falhou: a resposta do LLM não pôde ser parseada como JSON
+        (evidência 'resposta_llm_bruta').
+      - fallbacks_extracao: a extração LLM falhou e o extrator por palavras-chave
+        assumiu (evidência 'extracao_fallback'); relevante para a abordagem híbrida.
+
+    Args:
+        results: lista de TriageResult.
+
+    Returns:
+        Dicionário com 'equipes_alucinadas', 'parse_falhou', 'fallbacks_extracao'.
+    """
+
+    def _tem(r, chave: str) -> bool:
+        ev = getattr(r, "evidencias", None) or {}
+        return chave in ev
+
+    return {
+        "equipes_alucinadas": sum(1 for r in results if _tem(r, "equipe_llm_bruta")),
+        "parse_falhou": sum(1 for r in results if _tem(r, "resposta_llm_bruta")),
+        "fallbacks_extracao": sum(1 for r in results if _tem(r, "extracao_fallback")),
+    }
+
+
 def per_approach_summary(
     approach_results: "list[TriageResult | None]",
     dataset_cases: "list[DatasetCase | None]",
@@ -355,6 +385,11 @@ def per_approach_summary(
             "total_soma": 0.0,
         },
         "robustness": {"urgencia": 0.0, "prioridade": 0.0, "categoria": 0.0},
+        "failure_events": {
+            "equipes_alucinadas": 0,
+            "parse_falhou": 0,
+            "fallbacks_extracao": 0,
+        },
         "total_cases": 0,
     }
 
@@ -410,6 +445,9 @@ def per_approach_summary(
     # Tokens (custo computacional)
     tok = token_stats(resultados)
 
+    # Eventos de falha tratada (equipes alucinadas, parse falho, fallbacks)
+    eventos = failure_event_counts(resultados)
+
     # Robustez: pares canônico → paráfrase identificados por referencia_caso_canonico
     id_to_result = {c.id: r for r, c in pares}
     canonical_res: list = []
@@ -443,5 +481,6 @@ def per_approach_summary(
         "latency": lat,
         "tokens": tok,
         "robustness": rob,
+        "failure_events": eventos,
         "total_cases": len(pares),
     }

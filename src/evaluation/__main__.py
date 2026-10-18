@@ -35,6 +35,15 @@ def _formatar_duracao(segundos: float) -> str:
 
 def main() -> None:
     """Ponto de entrada da CLI de avaliação das abordagens de triagem."""
+    # Forçar saída em UTF-8: no Windows, o console (cp1252) não codifica alguns
+    # caracteres (ex.: o emoji de aviso), o que quebrava a impressão da tabela
+    # final, sobretudo quando a saída é redirecionada (Tee-Object).
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+
     parser = argparse.ArgumentParser(
         prog="python -m src.evaluation",
         description=(

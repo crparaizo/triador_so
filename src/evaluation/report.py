@@ -240,6 +240,9 @@ def _gerar_summary_csv(summary_data: dict, path: Path) -> None:
         "latencia_media_ms",
         "tokens_total_medio",
         "tokens_total_soma",
+        "equipes_alucinadas",
+        "parse_falhou",
+        "fallbacks_extracao",
         "total_cases",
         "total_errors",
     ]
@@ -262,6 +265,13 @@ def _gerar_summary_csv(summary_data: dict, path: Path) -> None:
                 "latencia_media_ms": metrics.get("latency", {}).get("media", 0.0),
                 "tokens_total_medio": metrics.get("tokens", {}).get("total_medio", 0.0),
                 "tokens_total_soma": metrics.get("tokens", {}).get("total_soma", 0.0),
+                "equipes_alucinadas": metrics.get("failure_events", {}).get(
+                    "equipes_alucinadas", 0
+                ),
+                "parse_falhou": metrics.get("failure_events", {}).get("parse_falhou", 0),
+                "fallbacks_extracao": metrics.get("failure_events", {}).get(
+                    "fallbacks_extracao", 0
+                ),
                 "total_cases": metrics.get("total_cases", 0),
                 "total_errors": metrics.get("total_errors", 0),
             })

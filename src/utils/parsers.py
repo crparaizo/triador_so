@@ -14,6 +14,30 @@ Estratégia em três passos:
 import json
 import re
 
+# Limite de caracteres ao persistir a resposta bruta do LLM como evidência de
+# falha. Evita inflar o relatório com respostas muito longas (ex.: modo thinking).
+LIMITE_RESPOSTA_BRUTA = 2000
+
+
+def truncar_resposta(texto: str, limite: int = LIMITE_RESPOSTA_BRUTA) -> str:
+    """
+    Trunca o texto bruto de uma resposta de LLM para persistência como evidência.
+
+    Args:
+        texto: texto a truncar (qualquer tipo é convertido para str).
+        limite: número máximo de caracteres preservados.
+
+    Returns:
+        O texto original se couber no limite, ou o texto truncado com um
+        marcador '…[truncado]' ao final. String vazia para entrada None.
+    """
+    if texto is None:
+        return ""
+    texto = str(texto)
+    if len(texto) <= limite:
+        return texto
+    return texto[:limite] + "…[truncado]"
+
 
 def parsear_json_llm(texto_resposta: str) -> tuple[dict | None, str | None]:
     """

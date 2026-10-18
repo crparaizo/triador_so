@@ -111,7 +111,10 @@ def _extrair_llm(estado: dict) -> dict:
     # Adaptador: LLMExtractor sinaliza falha por erro_parse, sem exceção.
     # 'is not None' preserva o comportamento anterior (erro_parse="" também falha).
     if extracted.erro_parse is not None:
-        raise FalhaExtracaoLLM(extracted.erro_parse)
+        raise FalhaExtracaoLLM(
+            extracted.erro_parse,
+            extracted.evidencias.get("resposta_llm_bruta", ""),
+        )
     return {"extraido": extracted, "fallback_ativado": False}
 
 
@@ -141,6 +144,9 @@ def _extrair_palavras_chave_fallback(estado: dict) -> dict:
         f"Extração LLM falhou ({erro_extracao}); "
         "usado extrator por palavras-chave."
     )
+    # Preservar a resposta bruta do LLM (quando disponível) como evidência
+    if isinstance(exc, FalhaExtracaoLLM) and exc.resposta_bruta:
+        evidencias_com_fallback["resposta_llm_bruta"] = exc.resposta_bruta
     # Recriar extracted com campos do KeywordExtractor e evidências mescladas
     extracted = ExtractedInfo(
         ativo_mencionado=extracted_kw.ativo_mencionado,

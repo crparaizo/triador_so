@@ -94,6 +94,37 @@ def test_json_valido_completo_retorna_abordagem_llm(mock_ollama, mock_kb):
     assert resultado.abordagem == ApproachType.LLM
 
 
+def test_equipe_alucinada_registrada_em_evidencias(mock_ollama, mock_kb):
+    """Equipe inválida retornada pelo LLM deve ser descartada e registrada em evidencias."""
+    json_equipe_invalida = json.dumps(
+        {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe_sugerida": "CHIL-001",  # tag de ativo, não é equipe
+            "requer_revisao_humana": False,
+            "confianca": 0.7,
+        }
+    )
+    mock_ollama.invoke.return_value = MagicMock(content=json_equipe_invalida)
+
+    resultado = run_llm_only("algum relato")
+
+    assert resultado.equipe_sugerida == "Revisão Manual"
+    assert resultado.evidencias.get("equipe_llm_bruta") == "CHIL-001"
+
+
+def test_parse_falho_registra_resposta_bruta(mock_ollama, mock_kb):
+    """Falha de parse deve preservar a resposta bruta do LLM em evidencias."""
+    conteudo = "não vou responder em JSON, vou pensar em voz alta..."
+    mock_ollama.invoke.return_value = MagicMock(content=conteudo)
+
+    resultado = run_llm_only("algum relato")
+
+    assert resultado.requer_revisao_humana is True
+    assert resultado.evidencias.get("resposta_llm_bruta") == conteudo
+
+
 def test_urgencia_invalida_mapeada_para_desconhecida(mock_ollama, mock_kb):
     """Urgência com valor fora do enum deve ser mapeada para DESCONHECIDA."""
     json_urgencia_invalida = json.dumps(

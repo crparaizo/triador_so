@@ -31,6 +31,7 @@ from src.evaluation.metrics import (
     classification_report_dict,
     confusion_matrix_dict,
     critical_underestimation_rate,
+    failure_event_counts,
     human_review_rate,
     latency_stats,
     robustness_score,
@@ -292,6 +293,33 @@ def test_token_stats_lista_vazia():
     stats = token_stats([])
     assert stats["total_medio"] == 0.0
     assert stats["total_soma"] == 0.0
+
+
+def test_failure_event_counts():
+    """failure_event_counts deve contar os marcadores de falha nas evidencias."""
+    base = dict(
+        abordagem=ApproachType.LLM,
+        texto_entrada="t",
+        urgencia=UrgencyLevel.ALTA,
+        prioridade=PriorityLevel.P2,
+        categoria=FailureCategory.MECANICA,
+        equipe_sugerida="Revisão Manual",
+        requer_revisao_humana=False,
+        confianca=0.5,
+        latencia_ms=1.0,
+    )
+    r1 = TriageResult(**base, evidencias={"equipe_llm_bruta": "CHIL-001"})
+    r2 = TriageResult(**base, evidencias={"resposta_llm_bruta": "texto bruto"})
+    r3 = TriageResult(
+        **base, evidencias={"extracao_fallback": "x", "resposta_llm_bruta": "y"}
+    )
+    r4 = TriageResult(**base, evidencias={})
+
+    counts = failure_event_counts([r1, r2, r3, r4])
+
+    assert counts["equipes_alucinadas"] == 1
+    assert counts["parse_falhou"] == 2
+    assert counts["fallbacks_extracao"] == 1
 
 
 # ---------------------------------------------------------------------------

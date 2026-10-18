@@ -100,9 +100,11 @@ class FalhaExtracaoLLM(Exception):
     original em erro_parse (inclusive string vazia).
     """
 
-    def __init__(self, erro_parse: str) -> None:
+    def __init__(self, erro_parse: str, resposta_bruta: str = "") -> None:
         super().__init__(erro_parse)
         self.erro_parse = erro_parse
+        # Texto bruto devolvido pelo LLM, preservado como evidência da falha.
+        self.resposta_bruta = resposta_bruta
 
 
 def no(funcao: Etapa, nome: str) -> RunnableLambda:

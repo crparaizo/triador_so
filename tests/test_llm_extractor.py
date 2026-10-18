@@ -136,6 +136,17 @@ def test_resposta_vazia_retorna_erro_parse(mock_ollama):
     assert result.erro_parse is not None
 
 
+def test_parse_falho_preserva_resposta_bruta_em_evidencias(mock_ollama):
+    """Em falha de parse, a resposta bruta do LLM é preservada em evidencias."""
+    conteudo = "Desculpe, não entendi o pedido."
+    mock_ollama.invoke.return_value = MagicMock(content=conteudo)
+
+    result = LLMExtractor().extract("texto qualquer")
+
+    assert result.erro_parse is not None
+    assert result.evidencias.get("resposta_llm_bruta") == conteudo
+
+
 def test_json_sem_ativo_mencionado_nao_gera_erro_parse(mock_ollama):
     """T06 — JSON válido sem chave 'ativo_mencionado' não gera erro_parse; campo fica None."""
     json_sem_ativo = json.dumps(

@@ -1,4 +1,4 @@
-# Triador de Ordens de Serviço Industrial — Protótipo Acadêmico
+# Comparação de Arquiteturas de Orquestração (Regras, LLM e Híbrida) — Protótipo Acadêmico
 
 > ⚠️ **PROTÓTIPO ACADÊMICO** — desenvolvido como parte de monografia de especialização em
 > Controle e Automação (IFSP). **Não destinado a uso industrial real.**
@@ -10,11 +10,16 @@
 
 ## Sobre o Projeto
 
-Sistema de triagem de ordens de serviço industriais que recebe um relato em texto livre,
-enriquece o caso com dados locais de ativos e equipes, classifica urgência e prioridade,
-recomenda uma equipe responsável e apresenta a justificativa com evidências textuais.
+Este projeto é um estudo comparativo de três arquiteturas de orquestração de fluxos para
+sistemas de apoio à decisão: determinística (regras de produção), não determinística (modelo
+de linguagem) e híbrida (neurossimbólica). O objeto de estudo é a **arquitetura de software**.
 
-O protótipo compara três abordagens sobre os mesmos casos de teste e dados de contexto:
+Como caso de uso, o protótipo implementa a triagem de ordens de serviço industriais: recebe um
+relato em texto livre, enriquece o caso com dados locais de ativos e equipes, classifica urgência
+e prioridade, recomenda uma equipe responsável e apresenta a justificativa com evidências textuais.
+A triagem é o cenário de validação, não o foco do estudo.
+
+As três abordagens são comparadas sobre os mesmos casos de teste e dados de contexto:
 
 | Abordagem | Descrição |
 |---|---|
@@ -22,9 +27,10 @@ O protótipo compara três abordagens sobre os mesmos casos de teste e dados de 
 | **LLM puro** | Extração e classificação inteiramente via modelo de linguagem local (Ollama) |
 | **Híbrido** | LLM extrai informações estruturadas do texto; regras de produção classificam e encaminham |
 
-**Contexto acadêmico:** este sistema foi desenvolvido para explorar e comparar diferentes
-estratégias de triagem automática. Os dados de domínio (ativos, equipes, categorias) são
-sintéticos e genéricos. O sistema não está conectado a sistemas reais nem executa ações externas.
+**Contexto acadêmico:** este protótipo foi desenvolvido para comparar empiricamente as três
+arquiteturas de orquestração, usando a triagem automática como caso de uso. Os dados de domínio
+(ativos, equipes, categorias) são sintéticos e genéricos. O sistema não está conectado a sistemas
+reais nem executa ações externas.
 
 ---
 

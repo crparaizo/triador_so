@@ -59,7 +59,7 @@ from src.schemas.triage import (
     TriageResult,
     UrgencyLevel,
 )
-from src.utils.parsers import parsear_json_llm
+from src.utils.parsers import parsear_json_llm, truncar_resposta
 from src.utils.tokens import extrair_uso_tokens
 
 # Logger do módulo — erros registrados sem expor traceback ao usuário final
@@ -168,12 +168,16 @@ def _fallback_parse(
     latencia: float,
     motivo: str,
     tokens: tuple[int, int, int] = (0, 0, 0),
+    resposta_bruta: str = "",
 ) -> TriageResult:
     """Retorna TriageResult de erro quando o JSON retornado pelo LLM é inválido.
 
     Mesmo em falha de parse a contagem de tokens é preservada: o LLM foi
     efetivamente chamado e consumiu tokens, que devem entrar no custo medido.
+    Quando fornecida, a resposta bruta do modelo é registrada em 'evidencias'
+    (chave 'resposta_llm_bruta') como evidência da falha, para fins de análise.
     """
+    evidencias = {"resposta_llm_bruta": resposta_bruta} if resposta_bruta else {}
     return TriageResult(
         abordagem=ApproachType.LLM,
         texto_entrada=texto_entrada,
@@ -182,6 +186,7 @@ def _fallback_parse(
         categoria=FailureCategory.DESCONHECIDA,
         equipe_sugerida="Revisão Manual",
         regras_acionadas=[],
+        evidencias=evidencias,
         requer_revisao_humana=True,
         motivo_revisao=f"Falha na classificação: {motivo}",
         confianca=0.0,
@@ -279,6 +284,12 @@ def _dict_para_triage_result(
     else:
         # Lista, None ou tipo inesperado → ignorar, sem evidências
         evidencias = {}
+
+    # Registrar a equipe bruta quando o LLM retornou um valor descartado pela
+    # validação (alucinação de equipe). 'Revisão Manual' com valor bruto não
+    # vazio indica que o nome retornado não pertence ao catálogo de equipes.
+    if equipe_str and equipe == "Revisão Manual":
+        evidencias["equipe_llm_bruta"] = equipe_str
     campos_sem_suporte = [
         str(c) for c in (data.get("campos_sem_suporte") or []) if isinstance(c, str)
     ]
@@ -422,8 +433,17 @@ def _montar_resultado(estado: dict) -> TriageResult:
     tokens = extrair_uso_tokens(estado.get("resposta"))
 
     if erro or data is None:
+        # Preservar o texto bruto devolvido pelo modelo como evidência da falha
+        resposta = estado.get("resposta")
+        texto_bruto = resposta.content if hasattr(resposta, "content") else (
+            str(resposta) if resposta is not None else ""
+        )
         return _fallback_parse(
-            estado["texto_entrada"], latencia_ms, f"Resposta inválida do LLM: {erro}", tokens
+            estado["texto_entrada"],
+            latencia_ms,
+            f"Resposta inválida do LLM: {erro}",
+            tokens,
+            truncar_resposta(texto_bruto),
         )
 
     return _dict_para_triage_result(
