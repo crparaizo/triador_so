@@ -1,0 +1,41 @@
+﻿case_id,texto,urgencia_esperada,urgencia_predita,regras_acionadas,causa_numero,causa
+CASE-008,Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.,IMEDIATA,ALTA,RULE-004;RULE-006;RULE-008;RULE-015,4,Conflito de prioridade entre regras
+CASE-010,Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.,MEDIA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-013,Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.,ALTA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-015,Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.,BAIXA,MEDIA,RULE-014;RULE-016,4,Conflito de prioridade entre regras
+CASE-018,Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.,IMEDIATA,ALTA,RULE-011;RULE-014,3,Limitação lexical da extração por palavras-chave
+CASE-021,Indicação do TRANS-002 travada no fundo de escala. Sinal fixo sem variação há horas.,ALTA,DESCONHECIDA,,3,Limitação lexical da extração por palavras-chave
+CASE-023,Urgente: caldeira CAL-001 sem vapor e produção parou. Necessário atendimento imediato.,IMEDIATA,ALTA,RULE-004;RULE-006;RULE-008;RULE-015,4,Conflito de prioridade entre regras
+CASE-025,Sala de controle esquentou muito. HVAC-001 parado e temperatura ambiente já em 29°C.,MEDIA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-027,Processo com sequência incorreta paralisou a linha de produção. Reator operando fora dos limites.,ALTA,DESCONHECIDA,,3,Limitação lexical da extração por palavras-chave
+CASE-028,Lote reprovado pelo laboratório. Produto não atende o pH exigido pela especificação.,ALTA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-030,Programação de PM semestral do MOTOR-001 conforme plano de manutenção aprovado.,BAIXA,MEDIA,RULE-014;RULE-016,4,Conflito de prioridade entre regras
+CASE-032,COMP-002 c/ rupt. na tub. de alta press. Proc. interrompido. Manut. imediata req.,IMEDIATA,DESCONHECIDA,,3,Limitação lexical da extração por palavras-chave
+CASE-036,Cal. CAL-001 s/ press. de vapor. Prod. parada. O.S. urg. p/ utilidades.,IMEDIATA,MEDIA,RULE-015,3,Limitação lexical da extração por palavras-chave
+CASE-038,MOTOR-001 c/ barulho e vibr. intermit. Linha parada. O.S. aberta p/ manut. mec.,ALTA,MEDIA,RULE-014,3,Limitação lexical da extração por palavras-chave
+CASE-040,COMP-002 com ruptura na tubulasão de alta presão. Processo intetrompido imediatamente.,IMEDIATA,DESCONHECIDA,,3,Limitação lexical da extração por palavras-chave
+CASE-043,Trasmissor de pressão TRANS-002 com sençor falso. Indicação fixa sem variasão.,ALTA,DESCONHECIDA,,3,Limitação lexical da extração por palavras-chave
+CASE-044,Caldira CAL-001 sem presão de vapor. Sitema de vapor desligado e produçao parada.,IMEDIATA,ALTA,RULE-004;RULE-006;RULE-008;RULE-015,4,Conflito de prioridade entre regras
+CASE-049,"PANEL-002 com sobrecarga, superaquecimento e disjuntor disparado. Setor C parcialmente sem energia.",IMEDIATA,ALTA,RULE-010,6,Julgamento do anotador sem regra correspondente
+CASE-052,"SENS-001 com leitura instável, TRANS-001 com offset persistente e alarme de processo HIGH-HIGH ativo.",ALTA,DESCONHECIDA,,6,Julgamento do anotador sem regra correspondente
+CASE-053,"CAL-001 com baixa pressão de vapor, alarme de temperatura e restrição de fluxo no circuito.",ALTA,MEDIA,RULE-015,6,Julgamento do anotador sem regra correspondente
+CASE-054,"Equipamento não identificado no Setor A com ruído, vibração e aquecimento simultâneos. Sem tag visível.",DESCONHECIDA,ALTA,RULE-011;RULE-014,5,Gabarito sem classificação e regra acionada
+CASE-056,O compressor parou. Urgente.,DESCONHECIDA,MEDIA,RULE-014,5,Gabarito sem classificação e regra acionada
+CASE-060,Bomba com problema mecânico não especificado. Setor A. Sem tag visível no momento.,MEDIA,ALTA,RULE-011;RULE-014,6,Julgamento do anotador sem regra correspondente
+CASE-062,Problema elétrico no painel. Localização e detalhes não informados.,MEDIA,IMEDIATA,RULE-003;RULE-010,6,Julgamento do anotador sem regra correspondente
+CASE-063,"Problema pequeno na BOMB-001, mas a produção parou completamente por causa disso.",DESCONHECIDA,ALTA,RULE-004;RULE-013,5,Gabarito sem classificação e regra acionada
+CASE-067,CAL-001 sem pressão de vapor confirmado pelo painel. Setor de produção reporta operação normal sem interrupção.,ALTA,DESCONHECIDA,,6,Julgamento do anotador sem regra correspondente
+CASE-068,Fogo reportado no Setor C mas já extinto segundo bombeiro. Nenhum dano visível identificado até o momento.,ALTA,IMEDIATA,RULE-001;RULE-002,6,Julgamento do anotador sem regra correspondente
+CASE-072,Preciso de nota fiscal do equipamento comprado em janeiro para fins contábeis.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
+CASE-073,Sistema de e-mail corporativo fora do ar. Não consigo enviar nem receber mensagens.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
+CASE-074,Preciso de ajuda para revisão de contrato de prestação de serviço com terceiros.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
+CASE-076,Solicitação de reembolso de despesas de viagem corporativa da semana passada.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
+CASE-083,Gerador GER-001 com falha catastrófica no alternador. Planta inteira sem energia elétrica.,IMEDIATA,ALTA,RULE-010,6,Julgamento do anotador sem regra correspondente
+CASE-086,Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada.,IMEDIATA,MEDIA,RULE-015,3,Limitação lexical da extração por palavras-chave
+CASE-092,Ruído incomum ouvido pelo turno da manhã não foi confirmado pelo turno da tarde. Sem evidência física.,DESCONHECIDA,MEDIA,RULE-014,5,Gabarito sem classificação e regra acionada
+CASE-095,Sensor SENS-001 apresentou leitura muito alta por 30 segundos e logo voltou ao normal. Investigar causa.,MEDIA,DESCONHECIDA,,6,Julgamento do anotador sem regra correspondente
+CASE-096,HVAC-001 oscilando entre 18°C e 32°C sem causa aparente. Sala de controle com temperatura instável.,MEDIA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-097,Sala de controle com temperatura crescente. HVAC possivelmente com problema mas sem alarme ativo.,MEDIA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-098,"Elevador ELEV-001 com operação errática. Pode ser problema mecânico, elétrico ou de controlador lógico.",ALTA,DESCONHECIDA,,1,Categoria sem regra aplicável
+CASE-099,Barulho intermitente na linha de produção. Origem incerta: pode ser BOMB-001 ou COMP-001. Investigar.,MEDIA,ALTA,RULE-009,6,Julgamento do anotador sem regra correspondente
+CASE-100,Múltiplos alarmes ativos simultâneos sem causa raiz identificada. Sistema em estado de alerta geral.,ALTA,DESCONHECIDA,,1,Categoria sem regra aplicável
