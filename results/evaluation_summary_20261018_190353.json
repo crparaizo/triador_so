@@ -1,0 +1,1451 @@
+{
+  "regras": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1-score": 0.9090909090909091,
+          "support": 5.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "IMEDIATA": {
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.8,
+          "support": 3.0
+        },
+        "MEDIA": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.7083333333333334,
+          "recall": 0.5416666666666666,
+          "f1-score": 0.5939393939393939,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.9166666666666667,
+          "recall": 0.8,
+          "f1-score": 0.8278787878787879,
+          "support": 10.0
+        }
+      },
+      "prioridade": {
+        "DESCONHECIDA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "P1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        },
+        "P2": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        },
+        "P3": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "accuracy": 0.9,
+        "macro avg": {
+          "precision": 0.75,
+          "recall": 0.625,
+          "f1-score": 0.6666666666666666,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1-score": 0.9333333333333333,
+          "support": 10.0
+        }
+      },
+      "categoria": {
+        "ELETRICA": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "MECANICA": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1-score": 0.8571428571428571,
+          "support": 3.0
+        },
+        "UTILIDADES": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "accuracy": 0.9,
+        "macro avg": {
+          "precision": 0.95,
+          "recall": 0.9,
+          "f1-score": 0.9047619047619048,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.925,
+          "recall": 0.9,
+          "f1-score": 0.8904761904761905,
+          "support": 10.0
+        }
+      },
+      "equipe": {
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1-score": 0.8571428571428571,
+          "support": 3.0
+        },
+        "Revisão necessária": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Utilidades": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.625,
+          "recall": 0.5833333333333334,
+          "f1-score": 0.5873015873015873,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.825,
+          "recall": 0.8,
+          "f1-score": 0.7904761904761904,
+          "support": 10.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.8278787878787879,
+    "f1_prioridade": 0.9333333333333333,
+    "f1_categoria": 0.8904761904761905,
+    "f1_equipe": 0.7904761904761904,
+    "unsupported_fields_rate": 0.825,
+    "critical_underestimation_rate": 0.25,
+    "human_review_rate": 0.3,
+    "latency": {
+      "media": 16.83298000425566,
+      "std": 19.58682897172225,
+      "min": 5.152600002475083,
+      "max": 74.35010001063347
+    },
+    "tokens": {
+      "entrada_media": 0.0,
+      "saida_media": 0.0,
+      "total_medio": 0.0,
+      "total_soma": 0.0
+    },
+    "robustness": {
+      "urgencia": 0.0,
+      "prioridade": 0.0,
+      "categoria": 0.0
+    },
+    "failure_events": {
+      "equipes_alucinadas": 0,
+      "parse_falhou": 0,
+      "fallbacks_extracao": 0
+    },
+    "total_cases": 10,
+    "total_errors": 0
+  },
+  "llm": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.3333333333333333,
+          "recall": 0.2,
+          "f1-score": 0.25,
+          "support": 5.0
+        },
+        "IMEDIATA": {
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2222222222222222,
+          "support": 3.0
+        },
+        "MEDIA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "accuracy": 0.2,
+        "macro avg": {
+          "precision": 0.16666666666666666,
+          "recall": 0.17777777777777778,
+          "f1-score": 0.1574074074074074,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.21666666666666665,
+          "recall": 0.2,
+          "f1-score": 0.19166666666666665,
+          "support": 10.0
+        }
+      },
+      "prioridade": {
+        "P1": {
+          "precision": 0.16666666666666666,
+          "recall": 0.25,
+          "f1-score": 0.2,
+          "support": 4.0
+        },
+        "P2": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "P3": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "P4": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.1,
+        "macro avg": {
+          "precision": 0.041666666666666664,
+          "recall": 0.0625,
+          "f1-score": 0.05,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.06666666666666667,
+          "recall": 0.1,
+          "f1-score": 0.08,
+          "support": 10.0
+        }
+      },
+      "categoria": {
+        "ELETRICA": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "f1-score": 0.8,
+          "support": 2.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "MECANICA": {
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.8,
+          "support": 3.0
+        },
+        "UTILIDADES": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "f1-score": 0.8,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.8666666666666666,
+          "recall": 0.8333333333333333,
+          "f1-score": 0.8133333333333332,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.8666666666666666,
+          "recall": 0.8,
+          "f1-score": 0.7933333333333333,
+          "support": 10.0
+        }
+      },
+      "equipe": {
+        "Infraestrutura e Facilities": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "f1-score": 0.8,
+          "support": 2.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 3.0
+        },
+        "Revisão Manual": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Utilidades": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.7777777777777777,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.688888888888889,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.9333333333333332,
+          "recall": 0.8,
+          "f1-score": 0.8266666666666668,
+          "support": 10.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            3,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.19166666666666665,
+    "f1_prioridade": 0.08,
+    "f1_categoria": 0.7933333333333333,
+    "f1_equipe": 0.8266666666666668,
+    "unsupported_fields_rate": 0.125,
+    "critical_underestimation_rate": 0.75,
+    "human_review_rate": 0.6,
+    "latency": {
+      "media": 22001.40844999987,
+      "std": 6288.954768020035,
+      "min": 13491.321000008611,
+      "max": 34505.228199996054
+    },
+    "tokens": {
+      "entrada_media": 1434.4,
+      "saida_media": 467.7,
+      "total_medio": 1902.1,
+      "total_soma": 19021.0
+    },
+    "robustness": {
+      "urgencia": 0.0,
+      "prioridade": 0.0,
+      "categoria": 0.0
+    },
+    "failure_events": {
+      "equipes_alucinadas": 1,
+      "parse_falhou": 0,
+      "fallbacks_extracao": 0
+    },
+    "total_cases": 10,
+    "total_errors": 0
+  },
+  "hibrido": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1-score": 0.9090909090909091,
+          "support": 5.0
+        },
+        "IMEDIATA": {
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.8,
+          "support": 3.0
+        },
+        "MEDIA": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.7777777777777778,
+          "recall": 0.7222222222222222,
+          "f1-score": 0.7363636363636363,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.8166666666666668,
+          "recall": 0.8,
+          "f1-score": 0.7945454545454546,
+          "support": 10.0
+        }
+      },
+      "prioridade": {
+        "P1": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 4.0
+        },
+        "P2": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1-score": 0.75,
+          "support": 4.0
+        },
+        "P3": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 2.0
+        },
+        "accuracy": 0.6,
+        "macro avg": {
+          "precision": 0.5833333333333334,
+          "recall": 0.5833333333333334,
+          "f1-score": 0.5833333333333334,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1-score": 0.6,
+          "support": 10.0
+        }
+      },
+      "categoria": {
+        "ELETRICA": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "MECANICA": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1-score": 0.8571428571428571,
+          "support": 3.0
+        },
+        "UTILIDADES": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "accuracy": 0.9,
+        "macro avg": {
+          "precision": 0.95,
+          "recall": 0.9,
+          "f1-score": 0.9047619047619048,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.925,
+          "recall": 0.9,
+          "f1-score": 0.8904761904761905,
+          "support": 10.0
+        }
+      },
+      "equipe": {
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1-score": 0.8571428571428571,
+          "support": 3.0
+        },
+        "Revisão necessária": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Utilidades": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "accuracy": 0.8,
+        "macro avg": {
+          "precision": 0.625,
+          "recall": 0.5833333333333334,
+          "f1-score": 0.5873015873015873,
+          "support": 10.0
+        },
+        "weighted avg": {
+          "precision": 0.825,
+          "recall": 0.8,
+          "f1-score": 0.7904761904761904,
+          "support": 10.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.7945454545454546,
+    "f1_prioridade": 0.6,
+    "f1_categoria": 0.8904761904761905,
+    "f1_equipe": 0.7904761904761904,
+    "unsupported_fields_rate": 0.6,
+    "critical_underestimation_rate": 0.5,
+    "human_review_rate": 0.3,
+    "latency": {
+      "media": 17703.50296999968,
+      "std": 3294.2284521550905,
+      "min": 11171.751500005485,
+      "max": 23689.166700001806
+    },
+    "tokens": {
+      "entrada_media": 490.4,
+      "saida_media": 431.5,
+      "total_medio": 921.9,
+      "total_soma": 9219.0
+    },
+    "robustness": {
+      "urgencia": 0.0,
+      "prioridade": 0.0,
+      "categoria": 0.0
+    },
+    "failure_events": {
+      "equipes_alucinadas": 0,
+      "parse_falhou": 0,
+      "fallbacks_extracao": 0
+    },
+    "total_cases": 10,
+    "total_errors": 0
+  }
+}

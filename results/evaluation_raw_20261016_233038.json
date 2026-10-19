@@ -1,0 +1,2550 @@
+{
+  "timestamp": "2026-10-16T23:16:51.408908",
+  "dataset_size": 20,
+  "approaches": {
+    "regras": {
+      "results": [
+        {
+          "id": "7da9fc50-9711-455d-b92e-06ddd6e2bc42",
+          "timestamp": "2026-10-16T23:16:51.620681",
+          "abordagem": "REGRAS",
+          "texto_entrada": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "vibração, ruído, bomba",
+            "localizacao": "Setor A - Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 112.11290000937879,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "c65805d1-4699-486b-9a05-fad228f8bf98",
+          "timestamp": "2026-10-16T23:16:51.633921",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "vibração, bomba, produção",
+            "localizacao": "Setor B - Produção",
+            "impacto_producao": "producao parada"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 9.601099998690188,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "a8c355af-827a-4ebd-aecd-eeb1aac83911",
+          "timestamp": "2026-10-16T23:16:51.646299",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-005",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "COMP-002",
+            "sintomas": "compressor, tubulação, PID"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha mecânica grave (ruptura/rompimento) — avaliação estrutural necessária antes do retorno",
+          "confianca": 0.88,
+          "latencia_ms": 11.578099976759404,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "25985e86-3423-4613-aef7-0c016481b7f3",
+          "timestamp": "2026-10-16T23:16:51.659340",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo": "PANEL-001",
+            "sintomas": "queimado, faísca, cheiro de queimado",
+            "localizacao": "Subestação Principal"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização",
+          "confianca": 0.9,
+          "latencia_ms": 11.669499974232167,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "0fd62f2a-238b-4cad-96f8-3cf26f2125d6",
+          "timestamp": "2026-10-16T23:16:51.670112",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "GER-001",
+            "sintomas": "motor, gerador",
+            "localizacao": "Área Externa - Gerador"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 9.936799993738532,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "61fdfe10-1c4d-4390-a7dd-623faf05b35e",
+          "timestamp": "2026-10-16T23:16:51.683466",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "INSTRUMENTACAO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [
+            "RULE-007"
+          ],
+          "evidencias": {
+            "ativo": "TRANS-002",
+            "sintomas": "transmissor, sinal falso"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.8,
+          "latencia_ms": 12.483300000894815,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "b2d8786d-1cd8-4116-a096-54d194a1a76b",
+          "timestamp": "2026-10-16T23:16:51.696261",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "INSTRUMENTACAO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [
+            "RULE-007"
+          ],
+          "evidencias": {
+            "ativo": "VALV-001",
+            "sintomas": "deriva, válvula de controle, posicionador"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.8,
+          "latencia_ms": 12.01129995752126,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "d1e0182d-7b3c-4a24-9a3e-306e36645238",
+          "timestamp": "2026-10-16T23:16:51.708095",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-006",
+            "RULE-008",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CAL-001",
+            "sintomas": "caldeira, vapor, produção",
+            "localizacao": "Setor B - Produção",
+            "impacto_producao": "producao parada"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": "Caldeira com impacto na produção — intervenção sujeita a NR-13, requer inspetor habilitado",
+          "confianca": 0.85,
+          "latencia_ms": 10.84389997413382,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "d25cc0d3-090d-4e4b-8c79-d3b585ceee3a",
+          "timestamp": "2026-10-16T23:16:51.720751",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CHIL-001",
+            "sintomas": "chiller, água gelada, refrigeração"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 11.523700028192252,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "7a03e035-b95a-4588-a314-bb340813a9b4",
+          "timestamp": "2026-10-16T23:16:51.735093",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "urgencia": "DESCONHECIDA",
+          "prioridade": "DESCONHECIDA",
+          "categoria": "INFRAESTRUTURA",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [],
+          "evidencias": {
+            "ativo": "HVAC-001",
+            "sintomas": "climatização, HVAC, temperatura ambiente"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Nenhuma regra de triagem disparada — informações insuficientes para classificação automática.",
+          "confianca": 0.0,
+          "latencia_ms": 13.348300009965897,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "ab4c0c7f-536e-475f-8c7c-6685092f64e0",
+          "timestamp": "2026-10-16T23:16:51.749895",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "TI_AUTOMACAO",
+          "equipe_sugerida": "TI e Automação",
+          "regras_acionadas": [
+            "RULE-012"
+          ],
+          "evidencias": {
+            "sintomas": "CLP, falha de comunicação, SCADA",
+            "localizacao": "Setor B - Produção"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 13.709799968637526,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "776173a6-53c4-4eff-beab-8a008e9f56ec",
+          "timestamp": "2026-10-16T23:16:51.763604",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "PROCESSO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-013"
+          ],
+          "evidencias": {
+            "sintomas": "desvio, processo, produção",
+            "localizacao": "Setor B - Produção",
+            "impacto_producao": "producao parada"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 12.667799950577319,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "709badb2-8eed-48d2-8e33-de96c42f4ecc",
+          "timestamp": "2026-10-16T23:16:51.778064",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "urgencia": "DESCONHECIDA",
+          "prioridade": "DESCONHECIDA",
+          "categoria": "QUALIDADE",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [],
+          "evidencias": {
+            "sintomas": "especificação, fora de especificação, análise"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Nenhuma regra de triagem disparada — informações insuficientes para classificação automática.",
+          "confianca": 0.0,
+          "latencia_ms": 13.376999995671213,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "83e9bbf4-6ff3-49bb-ad62-ef03b3241c9b",
+          "timestamp": "2026-10-16T23:16:51.792118",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "SEGURANCA",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [
+            "RULE-001",
+            "RULE-002"
+          ],
+          "evidencias": {
+            "ativo": "COMP-002",
+            "sintomas": "compressor, fogo, fumaça",
+            "localizacao": "Setor C - Produção",
+            "risco_seguranca": "fogo",
+            "urgencia_mencionada": "emergencia"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Risco de segurança confirmado — revisão humana obrigatória antes de qualquer ação",
+          "confianca": 0.95,
+          "latencia_ms": 12.917499989271164,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao"
+          ]
+        },
+        {
+          "id": "ae2f3f31-b30d-4748-b844-e0090ceb9e5b",
+          "timestamp": "2026-10-16T23:16:51.803813",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-014",
+            "RULE-016"
+          ],
+          "evidencias": {
+            "ativo": "MOTOR-001",
+            "sintomas": "motor, correia, nc"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 10.803400014992803,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "1cc0b838-d138-4d7b-8c09-68300ad0e692",
+          "timestamp": "2026-10-16T23:16:51.819730",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "barulho, bomba, nc",
+            "localizacao": "Setor A - Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 15.001600026153028,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "30c1165b-27e1-46d1-9d1e-1aa072807a97",
+          "timestamp": "2026-10-16T23:16:51.830423",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "vibração",
+            "urgencia_mencionada": "urgente"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 9.782200038898736,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "f7c625d1-8b74-4e47-a2e9-ecda6d696519",
+          "timestamp": "2026-10-16T23:16:51.844886",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "COMP-002",
+            "sintomas": "tubulação, PID, processo"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 13.619599980302155,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "60434fb3-e4bc-41cb-9f7b-02d9250b185d",
+          "timestamp": "2026-10-16T23:16:51.857917",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo": "PANEL-001",
+            "sintomas": "queimado, faísca, cheiro de queimado"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização",
+          "confianca": 0.9,
+          "latencia_ms": 11.092100001405925,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "eb582ddd-4b3e-4f7e-8b68-d9c9791b11ee",
+          "timestamp": "2026-10-16T23:16:51.872742",
+          "abordagem": "REGRAS",
+          "texto_entrada": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "GER-001",
+            "sintomas": "motor"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 13.618399971164763,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "CASE-001",
+          "tipo": "CANONICO",
+          "texto": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Caso base: vibração mecânica em ativo crítico sem impacto de produção. RULE-011 dispara."
+        },
+        {
+          "id": "CASE-002",
+          "tipo": "CANONICO",
+          "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Distingue de CASE-001 pelo impacto na produção elevando prioridade para P1. RULE-004 e RULE-011 disparam."
+        },
+        {
+          "id": "CASE-003",
+          "tipo": "CANONICO",
+          "texto": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'ruptura' dispara RULE-005. Urgência IMEDIATA por falha grave."
+        },
+        {
+          "id": "CASE-004",
+          "tipo": "CANONICO",
+          "texto": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-003 dispara: painel elétrico com faísca. Requer revisão por NR-10."
+        },
+        {
+          "id": "CASE-005",
+          "tipo": "CANONICO",
+          "texto": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-010 dispara: falha elétrica geral sem alta tensão explícita."
+        },
+        {
+          "id": "CASE-006",
+          "tipo": "CANONICO",
+          "texto": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'sinal falso' dispara RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-007",
+          "tipo": "CANONICO",
+          "texto": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Deriva' é keyword específica de RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-008",
+          "tipo": "CANONICO",
+          "texto": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Produção parada' + 'caldeira' dispara RULE-006 (NR-13). Urgência IMEDIATA."
+        },
+        {
+          "id": "CASE-009",
+          "tipo": "CANONICO",
+          "texto": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Ausência de impacto de produção mantém urgência em MEDIA. RULE-015 dispara."
+        },
+        {
+          "id": "CASE-010",
+          "tipo": "CANONICO",
+          "texto": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "INFRAESTRUTURA",
+            "equipe": "Infraestrutura e Facilities",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-011",
+          "tipo": "CANONICO",
+          "texto": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'SCADA' + 'CLP' + 'falha de comunicação' → TI_AUTOMACAO. RULE-012 dispara."
+        },
+        {
+          "id": "CASE-012",
+          "tipo": "CANONICO",
+          "texto": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "PROCESSO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Linha de produção parada' dispara impacto=True. RULE-013 dispara para PROCESSO."
+        },
+        {
+          "id": "CASE-013",
+          "tipo": "CANONICO",
+          "texto": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "QUALIDADE",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-014",
+          "tipo": "CANONICO",
+          "texto": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "SEGURANCA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Gap de equipe: regras identificam urgência corretamente mas não definem equipe para SEGURANCA. RULE-001 e RULE-002 disparam."
+        },
+        {
+          "id": "CASE-015",
+          "tipo": "CANONICO",
+          "texto": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "esperado": {
+            "urgencia": "BAIXA",
+            "prioridade": "P4",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Limitação: RULE-014 (prio=40) supera RULE-016 (prio=30) causando over-escalation. Híbrido/LLM deve capturar contexto 'preventiva'."
+        },
+        {
+          "id": "CASE-016",
+          "tipo": "PARAFRASES",
+          "texto": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-001",
+          "notas": "Paráfrase de CASE-001. Linguagem informal: 'fazendo barulho e tremendo' em vez de 'vibração excessiva e ruído anormal'."
+        },
+        {
+          "id": "CASE-017",
+          "tipo": "PARAFRASES",
+          "texto": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-002",
+          "notas": "Paráfrase de CASE-002. Voz passiva e ordem invertida: efeito antes da causa."
+        },
+        {
+          "id": "CASE-018",
+          "tipo": "PARAFRASES",
+          "texto": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-003",
+          "notas": "Paráfrase de CASE-003. Sinonímia: 'rompeu' no lugar de 'ruptura'."
+        },
+        {
+          "id": "CASE-019",
+          "tipo": "PARAFRASES",
+          "texto": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-004",
+          "notas": "Paráfrase de CASE-004. Perspectiva do operador em primeira pessoa."
+        },
+        {
+          "id": "CASE-020",
+          "tipo": "PARAFRASES",
+          "texto": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-005",
+          "notas": "Paráfrase de CASE-005. Acréscimo de contexto temporal: 'de hoje'."
+        }
+      ],
+      "elapsed_seconds": 0.462921800033655
+    },
+    "llm": {
+      "results": [
+        {
+          "id": "fd697f43-9233-4b49-bd2a-032ddda3969a",
+          "timestamp": "2026-10-16T23:17:30.180758",
+          "abordagem": "LLM",
+          "texto_entrada": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 38142.46959995944,
+          "tokens_entrada": 1437,
+          "tokens_saida": 414,
+          "tokens_total": 1851,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "99132a34-528c-420b-b85a-98fe89393482",
+          "timestamp": "2026-10-16T23:17:59.346346",
+          "abordagem": "LLM",
+          "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A análise do relato destaca a necessidade de reparação imediata para a bomba BOMB-001, indicando vibração intensa e paragem da linha. A confiança na classificação é baseada na evidência direta do problema mecânico.",
+          "confianca": 1.0,
+          "latencia_ms": 29162.278099975083,
+          "tokens_entrada": 1432,
+          "tokens_saida": 640,
+          "tokens_total": 2072,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "b23cb5a0-32d5-4baa-afc2-416387858fa3",
+          "timestamp": "2026-10-16T23:18:14.530140",
+          "abordagem": "LLM",
+          "texto_entrada": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.9,
+          "latencia_ms": 15182.384699990507,
+          "tokens_entrada": 1432,
+          "tokens_saida": 311,
+          "tokens_total": 1743,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "cfc77e00-8cae-4c53-ac36-bb8b20e16c96",
+          "timestamp": "2026-10-16T23:18:29.840248",
+          "abordagem": "LLM",
+          "texto_entrada": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A apresentação do painel de distribuição principal indica um problema de segurança e falha de equipamento, necessitando de manutenção elétrica para garantir a continuidade da rede.",
+          "confianca": 0.9,
+          "latencia_ms": 15308.353499975055,
+          "tokens_entrada": 1435,
+          "tokens_saida": 318,
+          "tokens_total": 1753,
+          "campos_sem_suporte": [
+            "evidencias",
+            "regras_acionadas"
+          ]
+        },
+        {
+          "id": "1f6565a4-9e21-4050-81e6-cd92b7f79ee6",
+          "timestamp": "2026-10-16T23:18:52.537127",
+          "abordagem": "LLM",
+          "texto_entrada": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A falha no teste de partida automático semanal demonstra um problema de operação crítica, exigindo uma revisão detalhada.",
+          "confianca": 0.8,
+          "latencia_ms": 22694.98480000766,
+          "tokens_entrada": 1431,
+          "tokens_saida": 480,
+          "tokens_total": 1911,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "34a21343-2bda-484f-91c5-296e8820e1da",
+          "timestamp": "2026-10-16T23:19:13.342419",
+          "abordagem": "LLM",
+          "texto_entrada": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "urgencia": "MEDIA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 0.0,
+          "latencia_ms": 20803.45710000256,
+          "tokens_entrada": 1436,
+          "tokens_saida": 445,
+          "tokens_total": 1881,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "0cd440de-0e0a-4aa5-9080-bbf18e410254",
+          "timestamp": "2026-10-16T23:19:31.578321",
+          "abordagem": "LLM",
+          "texto_entrada": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "urgencia": "ALTA",
+          "prioridade": "P3",
+          "categoria": "INSTRUMENTACAO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A análise demonstra que a válvula de controle está desviada, o que pode afetar a operação do sistema. A prioridade é alta, pois a falha pode impactar a qualidade do processo.",
+          "confianca": 0.9,
+          "latencia_ms": 18234.476600016933,
+          "tokens_entrada": 1437,
+          "tokens_saida": 388,
+          "tokens_total": 1825,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "507123de-1e12-44bb-aa8e-070d7390dcf2",
+          "timestamp": "2026-10-16T23:19:59.620085",
+          "abordagem": "LLM",
+          "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "urgencia": "ALTA",
+          "prioridade": "P4",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 28038.78689999692,
+          "tokens_entrada": 1430,
+          "tokens_saida": 617,
+          "tokens_total": 2047,
+          "campos_sem_suporte": [
+            "categoria",
+            "categoria"
+          ]
+        },
+        {
+          "id": "4c821d9b-e1b1-4b1e-93f4-1ab58a23c25d",
+          "timestamp": "2026-10-16T23:20:22.431249",
+          "abordagem": "LLM",
+          "texto_entrada": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Revisão Manual",
+          "regras_acionadas": [],
+          "evidencias": {
+            "equipe_llm_bruta": "CHIL-001"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 1.0,
+          "latencia_ms": 22777.194699971005,
+          "tokens_entrada": 1437,
+          "tokens_saida": 474,
+          "tokens_total": 1911,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "033a4dd5-be57-4e68-a0b0-bb1ab6f4b6c6",
+          "timestamp": "2026-10-16T23:20:49.336404",
+          "abordagem": "LLM",
+          "texto_entrada": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "INFRAESTRUTURA",
+          "equipe_sugerida": "Infraestrutura e Facilities",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A falha no sistema de climatização indica que há um problema com a temperatura, o que pode levar a falhas futuras. A prioridade é alta, pois a falha afeta a qualidade do ambiente.",
+          "confianca": 0.9,
+          "latencia_ms": 26902.53359999042,
+          "tokens_entrada": 1437,
+          "tokens_saida": 590,
+          "tokens_total": 2027,
+          "campos_sem_suporte": [
+            "evidencias"
+          ]
+        },
+        {
+          "id": "2ff33af1-6a94-4adb-ac2b-4b751b73353d",
+          "timestamp": "2026-10-16T23:21:13.283219",
+          "abordagem": "LLM",
+          "texto_entrada": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "INFRAESTRUTURA",
+          "equipe_sugerida": "Revisão Manual",
+          "regras_acionadas": [],
+          "evidencias": {
+            "equipe_llm_bruta": "INFRAESTRUTURA"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A falha de comunicação com o CLP do Setor B e a falta de atualização do sistema SCADA justificam uma ação imediata para resolver a falha crítica.",
+          "confianca": 1.0,
+          "latencia_ms": 23943.97270004265,
+          "tokens_entrada": 1436,
+          "tokens_saida": 530,
+          "tokens_total": 1966,
+          "campos_sem_suporte": [
+            "SCADA",
+            "CLP"
+          ]
+        },
+        {
+          "id": "71dc1e8a-9e6e-44f9-977e-71b946411edc",
+          "timestamp": "2026-10-16T23:21:39.279917",
+          "abordagem": "LLM",
+          "texto_entrada": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "urgencia": "ALTA",
+          "prioridade": "P3",
+          "categoria": "PROCESSO",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A falha no controle de qualidade e a operação desviada no sistema demonstram necessidade de revisão humana para identificar causas específicas.",
+          "confianca": 0.9,
+          "latencia_ms": 25995.189999986906,
+          "tokens_entrada": 1431,
+          "tokens_saida": 596,
+          "tokens_total": 2027,
+          "campos_sem_suporte": [
+            "VALV-001",
+            "VALV-002",
+            "SENS-001",
+            "TRANS-002",
+            "GER-001",
+            "MANUTENÇÃO MECANICA"
+          ]
+        },
+        {
+          "id": "3024c94e-d1da-4d93-9d09-ed257de9be8d",
+          "timestamp": "2026-10-16T23:22:05.328547",
+          "abordagem": "LLM",
+          "texto_entrada": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 0.8,
+          "latencia_ms": 26046.019100002013,
+          "tokens_entrada": 1434,
+          "tokens_saida": 599,
+          "tokens_total": 2033,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "96b06485-5499-4b5d-beb9-eb3230eb8e4e",
+          "timestamp": "2026-10-16T23:22:33.290215",
+          "abordagem": "LLM",
+          "texto_entrada": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A situação é crítica, pois há risco de incêndio e necessidade de manutenção imediata. A equipe sugerida é adequada para a tarefa.",
+          "confianca": 0.9,
+          "latencia_ms": 27958.228899980895,
+          "tokens_entrada": 1438,
+          "tokens_saida": 625,
+          "tokens_total": 2063,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "7017e17e-1d6f-4144-8bc9-ac42386287e4",
+          "timestamp": "2026-10-16T23:22:49.030992",
+          "abordagem": "LLM",
+          "texto_entrada": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "urgencia": "MEDIA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 1.0,
+          "latencia_ms": 15738.866699975915,
+          "tokens_entrada": 1439,
+          "tokens_saida": 345,
+          "tokens_total": 1784,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "38afa822-d1b0-4f0a-bc85-7db5d722c786",
+          "timestamp": "2026-10-16T23:23:11.381069",
+          "abordagem": "LLM",
+          "texto_entrada": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 0.8,
+          "latencia_ms": 22348.435499996413,
+          "tokens_entrada": 1433,
+          "tokens_saida": 485,
+          "tokens_total": 1918,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "bd6c55e4-7135-4ded-b3fe-fcfe6d7be571",
+          "timestamp": "2026-10-16T23:23:28.557506",
+          "abordagem": "LLM",
+          "texto_entrada": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Revisão Manual",
+          "regras_acionadas": [],
+          "evidencias": {
+            "equipe_llm_bruta": "Manutenimento Mecânico"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 17174.08590001287,
+          "tokens_entrada": 1433,
+          "tokens_saida": 366,
+          "tokens_total": 1799,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "3c359739-2c16-4955-8b88-51a5aef30759",
+          "timestamp": "2026-10-16T23:23:45.020823",
+          "abordagem": "LLM",
+          "texto_entrada": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 1.0,
+          "latencia_ms": 16461.996399972122,
+          "tokens_entrada": 1433,
+          "tokens_saida": 363,
+          "tokens_total": 1796,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "58c054ff-cd1d-460b-9448-00953e635487",
+          "timestamp": "2026-10-16T23:24:11.584774",
+          "abordagem": "LLM",
+          "texto_entrada": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P3",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 0.8,
+          "latencia_ms": 26551.734399981797,
+          "tokens_entrada": 1432,
+          "tokens_saida": 598,
+          "tokens_total": 2030,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "00b32eec-9553-485f-b17a-78a9946d5272",
+          "timestamp": "2026-10-16T23:24:34.020298",
+          "abordagem": "LLM",
+          "texto_entrada": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "confianca": 1.0,
+          "latencia_ms": 22433.868899999652,
+          "tokens_entrada": 1430,
+          "tokens_saida": 500,
+          "tokens_total": 1930,
+          "campos_sem_suporte": [
+            "urgencia",
+            "prioridade",
+            "categoria",
+            "equipe_sugerida",
+            "regras_acionadas",
+            "evidencias",
+            "revisao_humana",
+            "motivo_revisao",
+            "confianca"
+          ]
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "CASE-001",
+          "tipo": "CANONICO",
+          "texto": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Caso base: vibração mecânica em ativo crítico sem impacto de produção. RULE-011 dispara."
+        },
+        {
+          "id": "CASE-002",
+          "tipo": "CANONICO",
+          "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Distingue de CASE-001 pelo impacto na produção elevando prioridade para P1. RULE-004 e RULE-011 disparam."
+        },
+        {
+          "id": "CASE-003",
+          "tipo": "CANONICO",
+          "texto": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'ruptura' dispara RULE-005. Urgência IMEDIATA por falha grave."
+        },
+        {
+          "id": "CASE-004",
+          "tipo": "CANONICO",
+          "texto": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-003 dispara: painel elétrico com faísca. Requer revisão por NR-10."
+        },
+        {
+          "id": "CASE-005",
+          "tipo": "CANONICO",
+          "texto": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-010 dispara: falha elétrica geral sem alta tensão explícita."
+        },
+        {
+          "id": "CASE-006",
+          "tipo": "CANONICO",
+          "texto": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'sinal falso' dispara RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-007",
+          "tipo": "CANONICO",
+          "texto": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Deriva' é keyword específica de RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-008",
+          "tipo": "CANONICO",
+          "texto": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Produção parada' + 'caldeira' dispara RULE-006 (NR-13). Urgência IMEDIATA."
+        },
+        {
+          "id": "CASE-009",
+          "tipo": "CANONICO",
+          "texto": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Ausência de impacto de produção mantém urgência em MEDIA. RULE-015 dispara."
+        },
+        {
+          "id": "CASE-010",
+          "tipo": "CANONICO",
+          "texto": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "INFRAESTRUTURA",
+            "equipe": "Infraestrutura e Facilities",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-011",
+          "tipo": "CANONICO",
+          "texto": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'SCADA' + 'CLP' + 'falha de comunicação' → TI_AUTOMACAO. RULE-012 dispara."
+        },
+        {
+          "id": "CASE-012",
+          "tipo": "CANONICO",
+          "texto": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "PROCESSO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Linha de produção parada' dispara impacto=True. RULE-013 dispara para PROCESSO."
+        },
+        {
+          "id": "CASE-013",
+          "tipo": "CANONICO",
+          "texto": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "QUALIDADE",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-014",
+          "tipo": "CANONICO",
+          "texto": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "SEGURANCA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Gap de equipe: regras identificam urgência corretamente mas não definem equipe para SEGURANCA. RULE-001 e RULE-002 disparam."
+        },
+        {
+          "id": "CASE-015",
+          "tipo": "CANONICO",
+          "texto": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "esperado": {
+            "urgencia": "BAIXA",
+            "prioridade": "P4",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Limitação: RULE-014 (prio=40) supera RULE-016 (prio=30) causando over-escalation. Híbrido/LLM deve capturar contexto 'preventiva'."
+        },
+        {
+          "id": "CASE-016",
+          "tipo": "PARAFRASES",
+          "texto": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-001",
+          "notas": "Paráfrase de CASE-001. Linguagem informal: 'fazendo barulho e tremendo' em vez de 'vibração excessiva e ruído anormal'."
+        },
+        {
+          "id": "CASE-017",
+          "tipo": "PARAFRASES",
+          "texto": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-002",
+          "notas": "Paráfrase de CASE-002. Voz passiva e ordem invertida: efeito antes da causa."
+        },
+        {
+          "id": "CASE-018",
+          "tipo": "PARAFRASES",
+          "texto": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-003",
+          "notas": "Paráfrase de CASE-003. Sinonímia: 'rompeu' no lugar de 'ruptura'."
+        },
+        {
+          "id": "CASE-019",
+          "tipo": "PARAFRASES",
+          "texto": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-004",
+          "notas": "Paráfrase de CASE-004. Perspectiva do operador em primeira pessoa."
+        },
+        {
+          "id": "CASE-020",
+          "tipo": "PARAFRASES",
+          "texto": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-005",
+          "notas": "Paráfrase de CASE-005. Acréscimo de contexto temporal: 'de hoje'."
+        }
+      ],
+      "elapsed_seconds": 461.9903989000013
+    },
+    "hibrido": {
+      "results": [
+        {
+          "id": "b4a97a81-b91b-4c44-af6b-d8d9448d3175",
+          "timestamp": "2026-10-16T23:24:55.582471",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 20997.343899973202,
+          "tokens_entrada": 493,
+          "tokens_saida": 435,
+          "tokens_total": 928,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "b209e4d4-4ca6-4e63-8971-03355040f15a",
+          "timestamp": "2026-10-16T23:25:12.757307",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "bomba BOMB-001",
+            "sintomas": "vibração intensa",
+            "localizacao": "Setor A",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 17173.397600010503,
+          "tokens_entrada": 488,
+          "tokens_saida": 419,
+          "tokens_total": 907,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "8c63aed1-c3c8-4d0a-a0a7-1bd0de2c97af",
+          "timestamp": "2026-10-16T23:25:34.016725",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-005",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "COMP-002",
+            "sintomas": "[]",
+            "localizacao": "tubulação de alta pressão",
+            "urgencia_mencionada": "None",
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-002 — Compressor de Processo",
+            "regras_classificacao": "Regras: RULE-005, RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha mecânica grave (ruptura/rompimento) — avaliação estrutural necessária antes do retorno",
+          "confianca": 0.88,
+          "latencia_ms": 21257.682499999646,
+          "tokens_entrada": 488,
+          "tokens_saida": 531,
+          "tokens_total": 1019,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "0dbfce10-e7de-49a7-ac87-e4e1a484dd4b",
+          "timestamp": "2026-10-16T23:25:50.424954",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "PANEL-001",
+            "sintomas": "faísca",
+            "localizacao": "subestação principal",
+            "ativo_encontrado": "recuperado de assets.yaml: PANEL-001 — Painel de Distribuição Principal",
+            "regras_classificacao": "Regras: RULE-003, RULE-010"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização",
+          "confianca": 0.9,
+          "latencia_ms": 16406.925300019793,
+          "tokens_entrada": 491,
+          "tokens_saida": 392,
+          "tokens_total": 883,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "bd341b64-246e-46fe-9b9f-70b1ebba3ca6",
+          "timestamp": "2026-10-16T23:26:07.488865",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "gerador GER-001",
+            "sintomas": "falhou",
+            "localizacao": "teste automático",
+            "urgencia_mencionada": "sem resposta",
+            "ativo_encontrado": "recuperado de assets.yaml: GER-001 — Gerador de Emergência 500kVA",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 17062.056499999017,
+          "tokens_entrada": 487,
+          "tokens_saida": 398,
+          "tokens_total": 885,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "f1b25f45-8d64-48a9-ac61-ea1536f09219",
+          "timestamp": "2026-10-16T23:26:23.064000",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "INSTRUMENTACAO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [
+            "RULE-007"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: TRANS-002 — Transmissor de Pressão 4-20mA",
+            "regras_classificacao": "Regras: RULE-007"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.8,
+          "latencia_ms": 15572.846300026868,
+          "tokens_entrada": 492,
+          "tokens_saida": 369,
+          "tokens_total": 861,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "5b9ac29f-7b07-446f-829d-bd869dd74b7d",
+          "timestamp": "2026-10-16T23:26:41.077880",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "INSTRUMENTACAO",
+          "equipe_sugerida": "Instrumentação e Controle",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-007"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "VALV-001",
+            "sintomas": "deriva progressiva",
+            "localizacao": "Setor A",
+            "ativo_encontrado": "recuperado de assets.yaml: VALV-001 — Válvula de Controle Pneumática",
+            "regras_classificacao": "Regras: RULE-004, RULE-007"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 18001.502199971583,
+          "tokens_entrada": 493,
+          "tokens_saida": 439,
+          "tokens_total": 932,
+          "campos_sem_suporte": [
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "ce2c9bd2-66dd-41c1-9618-1f5da3ac0994",
+          "timestamp": "2026-10-16T23:26:53.744636",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "regras_classificacao": "Regras: RULE-015"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+          "confianca": 0.65,
+          "latencia_ms": 12664.961899979971,
+          "tokens_entrada": 486,
+          "tokens_saida": 273,
+          "tokens_total": 759,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "0c6bee18-c2dd-4635-9bd6-b1a3ea91197a",
+          "timestamp": "2026-10-16T23:27:18.277820",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CHIL-001",
+            "sintomas": "['alta pressão']",
+            "localizacao": "circuito de refrigeração",
+            "urgencia_mencionada": "alarme",
+            "ativo_encontrado": "recuperado de assets.yaml: CHIL-001 — Chiller de Água Gelada",
+            "regras_classificacao": "Regras: RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 24531.653099984396,
+          "tokens_entrada": 493,
+          "tokens_saida": 613,
+          "tokens_total": 1106,
+          "campos_sem_suporte": [
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "a10186ba-89de-4b67-9101-c8c3b165f213",
+          "timestamp": "2026-10-16T23:27:36.134394",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "INFRAESTRUTURA",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [
+            "RULE-004"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "HVAC-001",
+            "sintomas": "temperatura ambiente subindo",
+            "localizacao": "sala de controle",
+            "ativo_encontrado": "recuperado de assets.yaml: HVAC-001 — Sistema de Climatização Sala de Controle",
+            "regras_classificacao": "Regras: RULE-004"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 17854.959500022233,
+          "tokens_entrada": 493,
+          "tokens_saida": 446,
+          "tokens_total": 939,
+          "campos_sem_suporte": [
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "11b9b8e3-a01f-4804-ba52-dd1fa1bbdcd4",
+          "timestamp": "2026-10-16T23:27:57.825142",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "TI_AUTOMACAO",
+          "equipe_sugerida": "TI e Automação",
+          "regras_acionadas": [
+            "RULE-012"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-002 — Bomba de Transferência de Produto",
+            "regras_classificacao": "Regras: RULE-012"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 21688.7216999894,
+          "tokens_entrada": 492,
+          "tokens_saida": 553,
+          "tokens_total": 1045,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "813904cb-b09a-479a-b86c-002415e520df",
+          "timestamp": "2026-10-16T23:28:17.291783",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "urgencia": "DESCONHECIDA",
+          "prioridade": "DESCONHECIDA",
+          "categoria": "PROCESSO",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [],
+          "evidencias": {
+            "ativo_mencionado": "parâmetros",
+            "sintomas": "desvio parâmetros",
+            "localizacao": "Reator",
+            "ativo_encontrado": "recuperado de assets.yaml: SENS-001 — Sensor de Temperatura PT100"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Nenhuma regra de triagem disparada — informações insuficientes para classificação automática.",
+          "confianca": 0.0,
+          "latencia_ms": 19465.30059998622,
+          "tokens_entrada": 487,
+          "tokens_saida": 495,
+          "tokens_total": 982,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "4ee11dea-e20a-442a-96f4-9d7b52f9df31",
+          "timestamp": "2026-10-16T23:28:30.607717",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "QUALIDADE",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [
+            "RULE-004"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-002 — Bomba de Transferência de Produto",
+            "regras_classificacao": "Regras: RULE-004"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 13314.450299949385,
+          "tokens_entrada": 490,
+          "tokens_saida": 315,
+          "tokens_total": 805,
+          "campos_sem_suporte": [
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "4a3c4daa-8703-4f2f-ac10-b9b2bd0350c5",
+          "timestamp": "2026-10-16T23:28:49.663271",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "SEGURANCA",
+          "equipe_sugerida": "Revisão necessária",
+          "regras_acionadas": [
+            "RULE-002"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "compressor COMP-002",
+            "sintomas": "fumaça visível",
+            "localizacao": "Setor C",
+            "urgencia_mencionada": "fogo",
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-002 — Compressor de Processo",
+            "regras_classificacao": "Regras: RULE-002"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Palavras de emergência detectadas — situação crítica requer avaliação imediata",
+          "confianca": 0.9,
+          "latencia_ms": 19054.26019994775,
+          "tokens_entrada": 494,
+          "tokens_saida": 492,
+          "tokens_total": 986,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "496bee9f-b0e7-4517-b0b6-e986a9c7efc7",
+          "timestamp": "2026-10-16T23:29:07.373637",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-014",
+            "RULE-016"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "MOTOR-001",
+            "sintomas": "[]",
+            "localizacao": "MOTOR-001",
+            "urgencia_mencionada": "Urgente",
+            "ativo_encontrado": "recuperado de assets.yaml: MOTOR-001 — Motor de Correia Transportadora",
+            "regras_classificacao": "Regras: RULE-014, RULE-016"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 17708.344999991823,
+          "tokens_entrada": 495,
+          "tokens_saida": 429,
+          "tokens_total": 924,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "5f741a4b-3b6d-4f33-830e-40eb88c8e123",
+          "timestamp": "2026-10-16T23:29:26.701217",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "bomba BOMB-001",
+            "sintomas": "fazendo barulho e tremendo muito no Setor A",
+            "localizacao": "Setor A",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 19313.16949997563,
+          "tokens_entrada": 489,
+          "tokens_saida": 438,
+          "tokens_total": 927,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "c8196616-5132-49a3-ac6e-0307c4f6ee33",
+          "timestamp": "2026-10-16T23:29:43.498682",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "BOMB-001",
+            "sintomas": "vibração intensa",
+            "localizacao": "Setor A",
+            "urgencia_mencionada": "urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 16795.536699995864,
+          "tokens_entrada": 489,
+          "tokens_saida": 398,
+          "tokens_total": 887,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "5b67a008-8da5-43fe-8da4-be1d0385b08e",
+          "timestamp": "2026-10-16T23:30:05.787107",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "COMP-002",
+            "localizacao": "COMP-002",
+            "urgencia_mencionada": "Processo interrompido imediatamente",
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-002 — Compressor de Processo",
+            "regras_classificacao": "Regras: RULE-004, RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 22286.443699966185,
+          "tokens_entrada": 489,
+          "tokens_saida": 525,
+          "tokens_total": 1014,
+          "campos_sem_suporte": [
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "ff885408-0f4a-4470-80a4-1dc3d4f81fd4",
+          "timestamp": "2026-10-16T23:30:25.935964",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "PANEL-001",
+            "sintomas": "['faísca saindo do PANEL-001']",
+            "localizacao": "subestação",
+            "ativo_encontrado": "recuperado de assets.yaml: PANEL-001 — Painel de Distribuição Principal",
+            "regras_classificacao": "Regras: RULE-003, RULE-010"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização",
+          "confianca": 0.9,
+          "latencia_ms": 20138.75669997651,
+          "tokens_entrada": 488,
+          "tokens_saida": 468,
+          "tokens_total": 956,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "551d18a9-feb8-4a0f-a181-f765eb873bf6",
+          "timestamp": "2026-10-16T23:30:37.854101",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: GER-001 — Gerador de Emergência 500kVA",
+            "regras_classificacao": "Regras: RULE-011, RULE-014"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+          "confianca": 0.75,
+          "latencia_ms": 11916.709399956744,
+          "tokens_entrada": 486,
+          "tokens_saida": 273,
+          "tokens_total": 759,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "CASE-001",
+          "tipo": "CANONICO",
+          "texto": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Caso base: vibração mecânica em ativo crítico sem impacto de produção. RULE-011 dispara."
+        },
+        {
+          "id": "CASE-002",
+          "tipo": "CANONICO",
+          "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Distingue de CASE-001 pelo impacto na produção elevando prioridade para P1. RULE-004 e RULE-011 disparam."
+        },
+        {
+          "id": "CASE-003",
+          "tipo": "CANONICO",
+          "texto": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'ruptura' dispara RULE-005. Urgência IMEDIATA por falha grave."
+        },
+        {
+          "id": "CASE-004",
+          "tipo": "CANONICO",
+          "texto": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-003 dispara: painel elétrico com faísca. Requer revisão por NR-10."
+        },
+        {
+          "id": "CASE-005",
+          "tipo": "CANONICO",
+          "texto": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-010 dispara: falha elétrica geral sem alta tensão explícita."
+        },
+        {
+          "id": "CASE-006",
+          "tipo": "CANONICO",
+          "texto": "Transmissor de pressão TRANS-002 com sinal falso. Indicação fixa em 3,8mA sem variação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'sinal falso' dispara RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-007",
+          "tipo": "CANONICO",
+          "texto": "Válvula de controle VALV-001 com posicionador apresentando deriva progressiva. Malha PID desviando do setpoint.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "INSTRUMENTACAO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Deriva' é keyword específica de RULE-007 de instrumentação."
+        },
+        {
+          "id": "CASE-008",
+          "tipo": "CANONICO",
+          "texto": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Produção parada' + 'caldeira' dispara RULE-006 (NR-13). Urgência IMEDIATA."
+        },
+        {
+          "id": "CASE-009",
+          "tipo": "CANONICO",
+          "texto": "Chiller CHIL-001 com alarme de alta pressão no circuito de refrigeração. Temperatura da água gelada elevada.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Ausência de impacto de produção mantém urgência em MEDIA. RULE-015 dispara."
+        },
+        {
+          "id": "CASE-010",
+          "tipo": "CANONICO",
+          "texto": "Sistema de climatização HVAC-001 da sala de controle com falha. Temperatura ambiente subindo para 29 graus Celsius.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "INFRAESTRUTURA",
+            "equipe": "Infraestrutura e Facilities",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-011",
+          "tipo": "CANONICO",
+          "texto": "Sistema SCADA com falha de comunicação com o CLP do Setor B. Tela do supervisório sem atualização de dados.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'SCADA' + 'CLP' + 'falha de comunicação' → TI_AUTOMACAO. RULE-012 dispara."
+        },
+        {
+          "id": "CASE-012",
+          "tipo": "CANONICO",
+          "texto": "Linha de produção parada por desvio nos parâmetros do processo. Reator fora dos limites de operação.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "PROCESSO",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "'Linha de produção parada' dispara impacto=True. RULE-013 dispara para PROCESSO."
+        },
+        {
+          "id": "CASE-013",
+          "tipo": "CANONICO",
+          "texto": "Análise de laboratório indica produto fora de especificação. pH fora do padrão. Lote reprovado para retrabalho.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "QUALIDADE",
+            "equipe": "Instrumentação e Controle",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Lacuna documentada: regras produzem DESCONHECIDA. Abordagem híbrida/LLM deve preencher esta lacuna."
+        },
+        {
+          "id": "CASE-014",
+          "tipo": "CANONICO",
+          "texto": "Fogo detectado próximo ao compressor COMP-002. Fumaça visível no Setor C. Emergência acionada e área evacuada.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "SEGURANCA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Gap de equipe: regras identificam urgência corretamente mas não definem equipe para SEGURANCA. RULE-001 e RULE-002 disparam."
+        },
+        {
+          "id": "CASE-015",
+          "tipo": "CANONICO",
+          "texto": "Solicitação de manutenção preventiva programada para MOTOR-001. Troca de correia e alinhamento conforme plano semestral.",
+          "esperado": {
+            "urgencia": "BAIXA",
+            "prioridade": "P4",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "⚠ Limitação: RULE-014 (prio=40) supera RULE-016 (prio=30) causando over-escalation. Híbrido/LLM deve capturar contexto 'preventiva'."
+        },
+        {
+          "id": "CASE-016",
+          "tipo": "PARAFRASES",
+          "texto": "Bomba BOMB-001 está fazendo barulho e tremendo muito no Setor A. Precisa de atenção.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-001",
+          "notas": "Paráfrase de CASE-001. Linguagem informal: 'fazendo barulho e tremendo' em vez de 'vibração excessiva e ruído anormal'."
+        },
+        {
+          "id": "CASE-017",
+          "tipo": "PARAFRASES",
+          "texto": "Linha parou por causa da vibração intensa da BOMB-001. Aguardando reparo urgente.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-002",
+          "notas": "Paráfrase de CASE-002. Voz passiva e ordem invertida: efeito antes da causa."
+        },
+        {
+          "id": "CASE-018",
+          "tipo": "PARAFRASES",
+          "texto": "Rompeu a tubulação do COMP-002 sob alta pressão. Processo interrompido imediatamente.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-003",
+          "notas": "Paráfrase de CASE-003. Sinonímia: 'rompeu' no lugar de 'ruptura'."
+        },
+        {
+          "id": "CASE-019",
+          "tipo": "PARAFRASES",
+          "texto": "Vi faísca saindo do PANEL-001 na subestação e sinto cheiro de queimado.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": "CASE-004",
+          "notas": "Paráfrase de CASE-004. Perspectiva do operador em primeira pessoa."
+        },
+        {
+          "id": "CASE-020",
+          "tipo": "PARAFRASES",
+          "texto": "GER-001 não ligou no teste automático de hoje. Motor de arranque sem resposta alguma.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": "CASE-005",
+          "notas": "Paráfrase de CASE-005. Acréscimo de contexto temporal: 'de hoje'."
+        }
+      ],
+      "elapsed_seconds": 363.2930180999683
+    }
+  }
+}

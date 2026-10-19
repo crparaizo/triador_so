@@ -41,11 +41,11 @@ dmypy.json
 .pyre/
 
 # --- Sessões e resultados gerados (manter apenas .gitkeep) ---
-sessions/*.json
-sessions/*.csv
+# sessions/*.json
+# sessions/*.csv
 
-results/*.json
-results/*.csv
+# results/*.json
+# results/*.csv
 
 # --- Datasets gerados automaticamente ---
 datasets/generated/

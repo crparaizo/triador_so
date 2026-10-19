@@ -1,0 +1,2376 @@
+{
+  "regras": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.696969696969697,
+          "recall": 0.6571428571428571,
+          "f1-score": 0.6764705882352942,
+          "support": 35.0
+        },
+        "BAIXA": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.3939393939393939,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.52,
+          "support": 17.0
+        },
+        "IMEDIATA": {
+          "precision": 0.8888888888888888,
+          "recall": 0.6153846153846154,
+          "f1-score": 0.7272727272727273,
+          "support": 26.0
+        },
+        "MEDIA": {
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.3333333333333333,
+          "support": 12.0
+        },
+        "accuracy": 0.6,
+        "macro avg": {
+          "precision": 0.6626262626262627,
+          "recall": 0.5541133376427495,
+          "f1-score": 0.5657010440539852,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.682020202020202,
+          "recall": 0.6,
+          "f1-score": 0.6113984721161192,
+          "support": 100.0
+        }
+      },
+      "prioridade": {
+        "DESCONHECIDA": {
+          "precision": 0.3939393939393939,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.52,
+          "support": 17.0
+        },
+        "P1": {
+          "precision": 0.84,
+          "recall": 0.7,
+          "f1-score": 0.7636363636363637,
+          "support": 30.0
+        },
+        "P2": {
+          "precision": 0.7307692307692307,
+          "recall": 0.6129032258064516,
+          "f1-score": 0.6666666666666666,
+          "support": 31.0
+        },
+        "P3": {
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.3333333333333333,
+          "support": 12.0
+        },
+        "P4": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "accuracy": 0.61,
+        "macro avg": {
+          "precision": 0.6596083916083917,
+          "recall": 0.5621884882985453,
+          "f1-score": 0.5710129870129871,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6855081585081585,
+          "recall": 0.61,
+          "f1-score": 0.6213004329004329,
+          "support": 100.0
+        }
+      },
+      "categoria": {
+        "DESCONHECIDA": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.5925925925925926,
+          "support": 15.0
+        },
+        "ELETRICA": {
+          "precision": 0.9090909090909091,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7692307692307693,
+          "support": 15.0
+        },
+        "FORA_DO_ESCOPO": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 8.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 5.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1-score": 0.7,
+          "support": 10.0
+        },
+        "MECANICA": {
+          "precision": 0.6,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.6521739130434783,
+          "support": 21.0
+        },
+        "OUTROS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "PROCESSO": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "QUALIDADE": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1-score": 0.3333333333333333,
+          "support": 2.0
+        },
+        "SEGURANCA": {
+          "precision": 0.5714285714285714,
+          "recall": 0.8,
+          "f1-score": 0.6666666666666666,
+          "support": 5.0
+        },
+        "TI_AUTOMACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "UTILIDADES": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1-score": 0.8888888888888888,
+          "support": 9.0
+        },
+        "accuracy": 0.67,
+        "macro avg": {
+          "precision": 0.6696729196729195,
+          "recall": 0.7169312169312169,
+          "f1-score": 0.6520923654981625,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.7099350649350649,
+          "recall": 0.67,
+          "f1-score": 0.6690078037904125,
+          "support": 100.0
+        }
+      },
+      "equipe": {
+        "DESCONHECIDA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 25.0
+        },
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 0.8571428571428571,
+          "recall": 0.4,
+          "f1-score": 0.5454545454545454,
+          "support": 15.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 1.0,
+          "recall": 0.6875,
+          "f1-score": 0.8148148148148148,
+          "support": 16.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 0.6923076923076923,
+          "recall": 0.6428571428571429,
+          "f1-score": 0.6666666666666666,
+          "support": 28.0
+        },
+        "Revisão necessária": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "TI e Automação": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Utilidades": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1-score": 0.8888888888888888,
+          "support": 9.0
+        },
+        "accuracy": 0.45,
+        "macro avg": {
+          "precision": 0.5547924297924298,
+          "recall": 0.45240575396825394,
+          "f1-score": 0.48947811447811446,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.5824175824175823,
+          "recall": 0.45,
+          "f1-score": 0.49885521885521883,
+          "support": 100.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            16,
+            6,
+            2,
+            0,
+            2
+          ],
+          [
+            1,
+            23,
+            2,
+            0,
+            9
+          ],
+          [
+            1,
+            2,
+            4,
+            0,
+            5
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            0,
+            2,
+            2,
+            0,
+            13
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            21,
+            4,
+            3,
+            0,
+            2
+          ],
+          [
+            2,
+            19,
+            1,
+            0,
+            9
+          ],
+          [
+            1,
+            2,
+            4,
+            0,
+            5
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            1,
+            1,
+            2,
+            0,
+            13
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            2,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            7,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            4,
+            2
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.6113984721161192,
+    "f1_prioridade": 0.6213004329004329,
+    "f1_categoria": 0.6690078037904125,
+    "f1_equipe": 0.49885521885521883,
+    "unsupported_fields_rate": 0.9325,
+    "critical_underestimation_rate": 0.3333333333333333,
+    "human_review_rate": 0.55,
+    "latency": {
+      "media": 7.902427000044554,
+      "std": 36.894660722243366,
+      "min": 1.4535000009345822,
+      "max": 373.9372000018193
+    },
+    "robustness": {
+      "urgencia": 0.8,
+      "prioridade": 0.7333333333333333,
+      "categoria": 0.9333333333333333
+    },
+    "total_cases": 100,
+    "total_errors": 0
+  },
+  "llm": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.38461538461538464,
+          "recall": 0.2857142857142857,
+          "f1-score": 0.32786885245901637,
+          "support": 35.0
+        },
+        "BAIXA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.6666666666666666,
+          "recall": 0.35294117647058826,
+          "f1-score": 0.46153846153846156,
+          "support": 17.0
+        },
+        "IMEDIATA": {
+          "precision": 0.29411764705882354,
+          "recall": 0.5769230769230769,
+          "f1-score": 0.38961038961038963,
+          "support": 26.0
+        },
+        "MEDIA": {
+          "precision": 0.2,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.18181818181818182,
+          "support": 12.0
+        },
+        "accuracy": 0.33,
+        "macro avg": {
+          "precision": 0.309079939668175,
+          "recall": 0.2764490411549235,
+          "f1-score": 0.2721671770852099,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.34841930618401207,
+          "recall": 0.33,
+          "f1-score": 0.31633251993907735,
+          "support": 100.0
+        }
+      },
+      "prioridade": {
+        "DESCONHECIDA": {
+          "precision": 1.0,
+          "recall": 0.058823529411764705,
+          "f1-score": 0.1111111111111111,
+          "support": 17.0
+        },
+        "P1": {
+          "precision": 0.35714285714285715,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.5,
+          "support": 30.0
+        },
+        "P2": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 31.0
+        },
+        "P3": {
+          "precision": 0.07692307692307693,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.10526315789473684,
+          "support": 12.0
+        },
+        "P4": {
+          "precision": 1.0,
+          "recall": 0.1,
+          "f1-score": 0.18181818181818182,
+          "support": 10.0
+        },
+        "accuracy": 0.29,
+        "macro avg": {
+          "precision": 0.48681318681318686,
+          "recall": 0.23176470588235296,
+          "f1-score": 0.17963849016480596,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.38637362637362643,
+          "recall": 0.29,
+          "f1-score": 0.1997022860180755,
+          "support": 100.0
+        }
+      },
+      "categoria": {
+        "DESCONHECIDA": {
+          "precision": 0.6666666666666666,
+          "recall": 0.13333333333333333,
+          "f1-score": 0.2222222222222222,
+          "support": 15.0
+        },
+        "ELETRICA": {
+          "precision": 0.7222222222222222,
+          "recall": 0.8666666666666667,
+          "f1-score": 0.7878787878787878,
+          "support": 15.0
+        },
+        "FORA_DO_ESCOPO": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 0.38461538461538464,
+          "recall": 1.0,
+          "f1-score": 0.5555555555555556,
+          "support": 5.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 0.8571428571428571,
+          "recall": 0.6,
+          "f1-score": 0.7058823529411765,
+          "support": 10.0
+        },
+        "MECANICA": {
+          "precision": 0.6666666666666666,
+          "recall": 0.9523809523809523,
+          "f1-score": 0.7843137254901961,
+          "support": 21.0
+        },
+        "OUTROS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "PROCESSO": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "QUALIDADE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "SEGURANCA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "TI_AUTOMACAO": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "UTILIDADES": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "f1-score": 0.5,
+          "support": 9.0
+        },
+        "accuracy": 0.55,
+        "macro avg": {
+          "precision": 0.30255392755392757,
+          "recall": 0.37936507936507935,
+          "f1-score": 0.29632105367399486,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.4832783882783883,
+          "recall": 0.55,
+          "f1-score": 0.4595870469399881,
+          "support": 100.0
+        }
+      },
+      "equipe": {
+        "BOMB-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "CAL-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "COMP-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "COMP-002": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "COMP-003": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.3333333333333333,
+          "recall": 0.04,
+          "f1-score": 0.07142857142857142,
+          "support": 25.0
+        },
+        "ELETRICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "ELEV-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "GER-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 1.0,
+          "recall": 0.06666666666666667,
+          "f1-score": 0.125,
+          "support": 15.0
+        },
+        "MANUTENÇÃO ELETRICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "MANUTENÇÃO ELÉTRICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "MANUTENÇÃO MECANICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "MECANICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "MECHANICA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "MOTOR-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "Manutenção Instrumentação e Controle": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 0.5757575757575758,
+          "recall": 0.6785714285714286,
+          "f1-score": 0.6229508196721312,
+          "support": 28.0
+        },
+        "OPERADOR": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "OUTROS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Operador informa fogo...": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "P1": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "PANEL-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "PANEL-002": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Panel-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "QUALIDADE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Revisão Manual": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "SALAS DE CONTROLE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Sens-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Setor A - Utilidades": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Setor B": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "TI e Automação": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "UTILIDADES": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Utilidades": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "VALV-001": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "VALV-002": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "none": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.21,
+        "macro avg": {
+          "precision": 0.04656319290465632,
+          "recall": 0.01915214866434379,
+          "f1-score": 0.019984863197578112,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.39454545454545453,
+          "recall": 0.21,
+          "f1-score": 0.21103337236533956,
+          "support": 100.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            15,
+            10,
+            0,
+            1,
+            0
+          ],
+          [
+            21,
+            10,
+            2,
+            2,
+            0
+          ],
+          [
+            5,
+            3,
+            2,
+            0,
+            2
+          ],
+          [
+            5,
+            1,
+            3,
+            0,
+            1
+          ],
+          [
+            5,
+            2,
+            3,
+            1,
+            6
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            25,
+            0,
+            5,
+            0,
+            0
+          ],
+          [
+            19,
+            0,
+            12,
+            0,
+            0
+          ],
+          [
+            8,
+            2,
+            2,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            10,
+            0,
+            6,
+            0,
+            1
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            20,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            13,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            3,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            2
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.31633251993907735,
+    "f1_prioridade": 0.1997022860180755,
+    "f1_categoria": 0.4595870469399881,
+    "f1_equipe": 0.21103337236533956,
+    "unsupported_fields_rate": 0.255,
+    "critical_underestimation_rate": 0.4666666666666667,
+    "human_review_rate": 0.72,
+    "latency": {
+      "media": 64586.831361000084,
+      "std": 12070.222010087455,
+      "min": 44543.63430000012,
+      "max": 112121.8437000025
+    },
+    "robustness": {
+      "urgencia": 0.4,
+      "prioridade": 0.4666666666666667,
+      "categoria": 0.8666666666666667
+    },
+    "total_cases": 100,
+    "total_errors": 0
+  },
+  "hibrido": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.6578947368421053,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.684931506849315,
+          "support": 35.0
+        },
+        "BAIXA": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.4482758620689655,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.5652173913043478,
+          "support": 17.0
+        },
+        "IMEDIATA": {
+          "precision": 0.85,
+          "recall": 0.6538461538461539,
+          "f1-score": 0.7391304347826086,
+          "support": 26.0
+        },
+        "MEDIA": {
+          "precision": 0.2222222222222222,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.19047619047619047,
+          "support": 12.0
+        },
+        "accuracy": 0.61,
+        "macro avg": {
+          "precision": 0.6356785642266586,
+          "recall": 0.5399008834302952,
+          "f1-score": 0.5502368189682066,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6541367211131276,
+          "recall": 0.61,
+          "f1-score": 0.6079868969624775,
+          "support": 100.0
+        }
+      },
+      "prioridade": {
+        "DESCONHECIDA": {
+          "precision": 0.4482758620689655,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.5652173913043478,
+          "support": 17.0
+        },
+        "P1": {
+          "precision": 0.7096774193548387,
+          "recall": 0.7333333333333333,
+          "f1-score": 0.7213114754098361,
+          "support": 30.0
+        },
+        "P2": {
+          "precision": 0.7037037037037037,
+          "recall": 0.6129032258064516,
+          "f1-score": 0.6551724137931034,
+          "support": 31.0
+        },
+        "P3": {
+          "precision": 0.2222222222222222,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.19047619047619047,
+          "support": 12.0
+        },
+        "P4": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "accuracy": 0.6,
+        "macro avg": {
+          "precision": 0.616775841469946,
+          "recall": 0.5355218216318784,
+          "f1-score": 0.5407212084824098,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6339249371729906,
+          "recall": 0.6,
+          "f1-score": 0.595583847420552,
+          "support": 100.0
+        }
+      },
+      "categoria": {
+        "DESCONHECIDA": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.5925925925925926,
+          "support": 15.0
+        },
+        "ELETRICA": {
+          "precision": 0.9090909090909091,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7692307692307693,
+          "support": 15.0
+        },
+        "FORA_DO_ESCOPO": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 8.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 5.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1-score": 0.7,
+          "support": 10.0
+        },
+        "MECANICA": {
+          "precision": 0.6,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.6521739130434783,
+          "support": 21.0
+        },
+        "OUTROS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "PROCESSO": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "QUALIDADE": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1-score": 0.3333333333333333,
+          "support": 2.0
+        },
+        "SEGURANCA": {
+          "precision": 0.5714285714285714,
+          "recall": 0.8,
+          "f1-score": 0.6666666666666666,
+          "support": 5.0
+        },
+        "TI_AUTOMACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "UTILIDADES": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1-score": 0.8888888888888888,
+          "support": 9.0
+        },
+        "accuracy": 0.67,
+        "macro avg": {
+          "precision": 0.6696729196729195,
+          "recall": 0.7169312169312169,
+          "f1-score": 0.6520923654981625,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.7099350649350649,
+          "recall": 0.67,
+          "f1-score": 0.6690078037904125,
+          "support": 100.0
+        }
+      },
+      "equipe": {
+        "DESCONHECIDA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 25.0
+        },
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 0.8571428571428571,
+          "recall": 0.4,
+          "f1-score": 0.5454545454545454,
+          "support": 15.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 1.0,
+          "recall": 0.6875,
+          "f1-score": 0.8148148148148148,
+          "support": 16.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 0.6923076923076923,
+          "recall": 0.6428571428571429,
+          "f1-score": 0.6666666666666666,
+          "support": 28.0
+        },
+        "Revisão necessária": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "TI e Automação": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Utilidades": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1-score": 0.8888888888888888,
+          "support": 9.0
+        },
+        "accuracy": 0.45,
+        "macro avg": {
+          "precision": 0.5547924297924298,
+          "recall": 0.45240575396825394,
+          "f1-score": 0.48947811447811446,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.5824175824175823,
+          "recall": 0.45,
+          "f1-score": 0.49885521885521883,
+          "support": 100.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            17,
+            5,
+            2,
+            0,
+            2
+          ],
+          [
+            2,
+            25,
+            2,
+            0,
+            6
+          ],
+          [
+            1,
+            5,
+            2,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            0,
+            3,
+            1,
+            0,
+            13
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            22,
+            3,
+            3,
+            0,
+            2
+          ],
+          [
+            5,
+            19,
+            1,
+            0,
+            6
+          ],
+          [
+            3,
+            3,
+            2,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            1,
+            2,
+            1,
+            0,
+            13
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            2,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            7,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            4,
+            2
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.6079868969624775,
+    "f1_prioridade": 0.595583847420552,
+    "f1_categoria": 0.6690078037904125,
+    "f1_equipe": 0.49885521885521883,
+    "unsupported_fields_rate": 0.785,
+    "critical_underestimation_rate": 0.3333333333333333,
+    "human_review_rate": 0.6,
+    "latency": {
+      "media": 36558.67234099995,
+      "std": 16046.568431609903,
+      "min": 14462.586800000281,
+      "max": 89442.90560000081
+    },
+    "robustness": {
+      "urgencia": 0.6,
+      "prioridade": 0.5333333333333333,
+      "categoria": 0.9333333333333333
+    },
+    "total_cases": 100,
+    "total_errors": 0
+  },
+  "regras_catref": {
+    "classification": {
+      "urgencia": {
+        "ALTA": {
+          "precision": 0.696969696969697,
+          "recall": 0.6571428571428571,
+          "f1-score": 0.6764705882352942,
+          "support": 35.0
+        },
+        "BAIXA": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "DESCONHECIDA": {
+          "precision": 0.45714285714285713,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.6153846153846154,
+          "support": 17.0
+        },
+        "IMEDIATA": {
+          "precision": 0.8947368421052632,
+          "recall": 0.6538461538461539,
+          "f1-score": 0.7555555555555555,
+          "support": 26.0
+        },
+        "MEDIA": {
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1-score": 0.2857142857142857,
+          "support": 12.0
+        },
+        "accuracy": 0.63,
+        "macro avg": {
+          "precision": 0.6764365459102302,
+          "recall": 0.5804330963154493,
+          "f1-score": 0.5809107232636644,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.694285258601048,
+          "recall": 0.63,
+          "f1-score": 0.6292531063707535,
+          "support": 100.0
+        }
+      },
+      "prioridade": {
+        "DESCONHECIDA": {
+          "precision": 0.45714285714285713,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.6153846153846154,
+          "support": 17.0
+        },
+        "P1": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7333333333333333,
+          "f1-score": 0.7857142857142857,
+          "support": 30.0
+        },
+        "P2": {
+          "precision": 0.7307692307692307,
+          "recall": 0.6129032258064516,
+          "f1-score": 0.6666666666666666,
+          "support": 31.0
+        },
+        "P3": {
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1-score": 0.2857142857142857,
+          "support": 12.0
+        },
+        "P4": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 10.0
+        },
+        "accuracy": 0.64,
+        "macro avg": {
+          "precision": 0.6734798534798535,
+          "recall": 0.587482605945604,
+          "f1-score": 0.5849816849816849,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.698098901098901,
+          "recall": 0.64,
+          "f1-score": 0.6384249084249084,
+          "support": 100.0
+        }
+      },
+      "categoria": {
+        "DESCONHECIDA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 15.0
+        },
+        "ELETRICA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 15.0
+        },
+        "FORA_DO_ESCOPO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 8.0
+        },
+        "INFRAESTRUTURA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 5.0
+        },
+        "INSTRUMENTACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 10.0
+        },
+        "MECANICA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "OUTROS": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 5.0
+        },
+        "PROCESSO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 3.0
+        },
+        "QUALIDADE": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "SEGURANCA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 5.0
+        },
+        "TI_AUTOMACAO": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "UTILIDADES": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 9.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 100.0
+        }
+      },
+      "equipe": {
+        "DESCONHECIDA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 25.0
+        },
+        "Infraestrutura e Facilities": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Instrumentação e Controle": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 15.0
+        },
+        "Manutenção Elétrica": {
+          "precision": 1.0,
+          "recall": 0.9375,
+          "f1-score": 0.967741935483871,
+          "support": 16.0
+        },
+        "Manutenção Mecânica": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1-score": 0.8571428571428571,
+          "support": 28.0
+        },
+        "Revisão necessária": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "TI e Automação": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Utilidades": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 9.0
+        },
+        "accuracy": 0.53,
+        "macro avg": {
+          "precision": 0.625,
+          "recall": 0.5109375,
+          "f1-score": 0.5495391705069125,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.7,
+          "recall": 0.53,
+          "f1-score": 0.590552995391705,
+          "support": 100.0
+        }
+      }
+    },
+    "confusion_matrices": {
+      "urgencia": {
+        "labels": [
+          "IMEDIATA",
+          "ALTA",
+          "MEDIA",
+          "BAIXA",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            17,
+            7,
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            23,
+            2,
+            0,
+            9
+          ],
+          [
+            1,
+            2,
+            3,
+            0,
+            6
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            16
+          ]
+        ]
+      },
+      "prioridade": {
+        "labels": [
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            22,
+            5,
+            2,
+            0,
+            1
+          ],
+          [
+            2,
+            19,
+            2,
+            0,
+            8
+          ],
+          [
+            1,
+            2,
+            3,
+            0,
+            6
+          ],
+          [
+            0,
+            0,
+            2,
+            4,
+            4
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            16
+          ]
+        ]
+      },
+      "categoria": {
+        "labels": [
+          "MECANICA",
+          "ELETRICA",
+          "INSTRUMENTACAO",
+          "UTILIDADES",
+          "SEGURANCA",
+          "QUALIDADE",
+          "PROCESSO",
+          "INFRAESTRUTURA",
+          "TI_AUTOMACAO",
+          "OUTROS",
+          "FORA_DO_ESCOPO",
+          "DESCONHECIDA"
+        ],
+        "matrix": [
+          [
+            21,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            15,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            15
+          ]
+        ]
+      }
+    },
+    "f1_urgencia": 0.6292531063707535,
+    "f1_prioridade": 0.6384249084249084,
+    "f1_categoria": 1.0,
+    "f1_equipe": 0.590552995391705,
+    "unsupported_fields_rate": 0.9325,
+    "critical_underestimation_rate": 0.3333333333333333,
+    "human_review_rate": 0.58,
+    "latency": {
+      "media": 1.3051919996723882,
+      "std": 0.6724886189453648,
+      "min": 0.720500000170432,
+      "max": 5.922299998928793
+    },
+    "robustness": {
+      "urgencia": 0.8,
+      "prioridade": 0.7333333333333333,
+      "categoria": 1.0
+    },
+    "total_cases": 100,
+    "total_errors": 0
+  }
+}

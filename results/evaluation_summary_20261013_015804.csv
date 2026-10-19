@@ -1,0 +1,2 @@
+abordagem,f1_urgencia,f1_prioridade,f1_categoria,f1_equipe,taxa_revisao_humana,taxa_subestimacao_critica,latencia_media_ms,total_cases,total_errors
+regras,0.6113984721161192,0.6213004329004329,0.6690078037904125,0.49885521885521883,0.55,0.3333333333333333,21.00055599992629,100,0

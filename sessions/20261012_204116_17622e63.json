@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-10-12T20:41:16.456508",
+  "texto": "a bomba de agua da linha 3 está perdendo pressão e fazendo muito barulho",
+  "results": {
+    "regras": {
+      "id": "6fc4d76d-61f9-4613-9398-c62f2a43e6e9",
+      "timestamp": "2026-10-12T20:40:20.169657",
+      "abordagem": "REGRAS",
+      "texto_entrada": "a bomba de agua da linha 3 está perdendo pressão e fazendo muito barulho",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-014"
+      ],
+      "evidencias": {
+        "sintomas": "barulho, bomba"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 0.835900000311085,
+      "campos_sem_suporte": [
+        "ativo_mencionado",
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "167edf56-3df5-4417-ba0e-b1ab3136c4eb",
+      "timestamp": "2026-10-12T20:40:41.154843",
+      "abordagem": "LLM",
+      "texto_entrada": "a bomba de agua da linha 3 está perdendo pressão e fazendo muito barulho",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "A descrição especifica um problema com a bomba de água, indicando uma necessidade de atuação imediata.",
+      "confianca": 1.0,
+      "latencia_ms": 20984.78990000058,
+      "campos_sem_suporte": []
+    },
+    "hibrido": {
+      "id": "60a397a0-22a8-44e2-94af-74dcabfbe37b",
+      "timestamp": "2026-10-12T20:41:16.441613",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "a bomba de agua da linha 3 está perdendo pressão e fazendo muito barulho",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-014"
+      ],
+      "evidencias": {
+        "ativo_mencionado": "pump",
+        "sintomas": "pressão perdida",
+        "localizacao": "linha 3",
+        "urgencia_mencionada": "fazendo muito barulho",
+        "regras_classificacao": "Regras: RULE-014"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 35283.23619999992,
+      "campos_sem_suporte": [
+        "risco_seguranca",
+        "ativo_mencionado"
+      ]
+    }
+  }
+}

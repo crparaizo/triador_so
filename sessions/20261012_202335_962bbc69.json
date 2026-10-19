@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-10-12T20:23:35.619770",
+  "texto": "estou sem internet",
+  "results": {
+    "regras": {
+      "id": "032bd66b-048a-42ec-ba49-c3ede6584a14",
+      "timestamp": "2026-10-12T20:21:59.758004",
+      "abordagem": "REGRAS",
+      "texto_entrada": "estou sem internet",
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe_sugerida": "Revisão necessária",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Nenhuma regra de triagem disparada — informações insuficientes para classificação automática.",
+      "confianca": 0.0,
+      "latencia_ms": 186.0384999999951,
+      "campos_sem_suporte": [
+        "ativo_mencionado",
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "2f496d5d-e047-4d2b-86a4-08863cab2b25",
+      "timestamp": "2026-10-12T20:22:40.913870",
+      "abordagem": "LLM",
+      "texto_entrada": "estou sem internet",
+      "urgencia": "BAIXA",
+      "prioridade": "P1",
+      "categoria": "OUTROS",
+      "equipe_sugerida": "OUTROS",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Sem evidências diretas no texto.",
+      "confianca": 0.0,
+      "latencia_ms": 41155.09999999995,
+      "campos_sem_suporte": [
+        "OUTROS",
+        "P1"
+      ]
+    },
+    "hibrido": {
+      "id": "1aece8c4-4da0-4c95-b64d-3ac5083b8941",
+      "timestamp": "2026-10-12T20:23:35.602759",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "estou sem internet",
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe_sugerida": "Revisão necessária",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+      "confianca": 0.0,
+      "latencia_ms": 54678.73900000086,
+      "campos_sem_suporte": [
+        "ativo_mencionado",
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    }
+  }
+}
