@@ -59,7 +59,7 @@ Permite regenerar os diagramas pela linha de comando:
 python -m src.orchestration
 ```
 
-O arquivo `docs/fluxos_langchain.md` é gerado; não deve ser editado à mão. Um teste (`tests/test_orchestration.py`) falha se o arquivo estiver desatualizado em relação ao código. A exportação usa apenas `langchain_core`; nenhuma dependência foi adicionada ao `requirements.txt`.
+O arquivo `docs/fluxos_langchain.md` não é versionado; pode ser gerado a qualquer momento com `python -m src.orchestration` e não deve ser editado à mão. A exportação usa apenas `langchain_core`; nenhuma dependência foi adicionada ao `requirements.txt`.
 
 ### `__init__.py`
 

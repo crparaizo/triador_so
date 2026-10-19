@@ -317,11 +317,3 @@ def test_salvar_diagramas_mermaid(tmp_path):
     caminho = salvar_diagramas_mermaid(tmp_path / "f.md")
     texto = caminho.read_text(encoding="utf-8")
     assert texto.count("```mermaid") == 3
-
-
-def test_docs_fluxos_langchain_atualizado():
-    """docs/fluxos_langchain.md deve conter os diagramas atuais (rodar python -m src.orchestration)."""
-    doc = Path(__file__).resolve().parents[1] / "docs" / "fluxos_langchain.md"
-    texto = doc.read_text(encoding="utf-8")
-    for diagrama in gerar_diagramas_mermaid().values():
-        assert diagrama.strip() in texto

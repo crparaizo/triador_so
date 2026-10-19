@@ -2,7 +2,7 @@
 
 Esta pasta contém os **três pipelines completos de triagem** que são comparados no trabalho. Cada arquivo implementa uma abordagem diferente, todas recebendo o mesmo texto como entrada e retornando um `TriageResult` como saída.
 
-Cada pipeline é um **fluxo LCEL** (LangChain Expression Language): uma cadeia de nós `Runnable` com nomes próprios, montada por `build_*_flow()`. As funções `run_*` apenas chamam `build_*_flow().invoke(...)`. A estrutura comum dos fluxos (envelope de falha segura, paralelismo entre extração e categoria) é definida em `src/orchestration/triage_flow.py`; as funções que executam cada nó ficam aqui. Ver `src/orchestration/README.md` e o diagrama gerado em `docs/fluxos_langchain.md`.
+Cada pipeline é um **fluxo LCEL** (LangChain Expression Language): uma cadeia de nós `Runnable` com nomes próprios, montada por `build_*_flow()`. As funções `run_*` apenas chamam `build_*_flow().invoke(...)`. A estrutura comum dos fluxos (envelope de falha segura, paralelismo entre extração e categoria) é definida em `src/orchestration/triage_flow.py`; as funções que executam cada nó ficam aqui. Ver `src/orchestration/README.md` e os diagramas gerados por `python -m src.orchestration` (`docs/fluxos_langchain.md`).
 
 ---
 

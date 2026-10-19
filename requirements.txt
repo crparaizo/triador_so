@@ -21,6 +21,7 @@ pandas==3.0.6
 
 # Avaliação
 scikit-learn==1.9.1
+scipy==1.18.1  # usado por scripts/analise_estatistica.py (McNemar, Clopper-Pearson)
 tabulate==0.10.0
 
 # Utilitários

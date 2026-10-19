@@ -2,7 +2,7 @@
 
 Esta pasta armazena o **histórico das triagens realizadas** pela interface Streamlit. Cada análise feita pelo usuário na tela de "Triagem" gera um arquivo aqui.
 
-> Os arquivos nesta pasta são gerados em tempo de execução. A pasta está vazia no repositório — os arquivos surgem ao usar a interface.
+> Os arquivos nesta pasta são gerados em tempo de execução ao usar a interface. Os dois arquivos versionados aqui são sessões de demonstração (texto de teste, sem dados reais) e não fazem parte do experimento da monografia.
 
 ---
 

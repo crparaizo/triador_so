@@ -230,6 +230,16 @@ Cada execução cria 4 arquivos com timestamp (`YYYYMMDD_HHMMSS`) para evitar so
 Um exemplo de relatório de avaliação sintético está disponível em
 `datasets/sample_report.json` para referência de formato.
 
+### Análise estatística da monografia
+
+A execução de referência da monografia (`results/evaluation_*_20261016_100014`) pode ser reanalisada com:
+
+```powershell
+python scripts/analise_estatistica.py results/evaluation_raw_20261016_100014.json
+```
+
+O script reproduz as Tabelas 2, 3, 5, 6 e 8 (IC 95% por *bootstrap*, teste de McNemar, Clopper-Pearson, métricas de revisão humana e verificabilidade das evidências). Detalhes e a lista das execuções em `results/README.md`.
+
 ---
 
 ## Executar os Testes Automatizados
