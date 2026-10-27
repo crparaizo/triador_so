@@ -1,13 +1,13 @@
 # src/interface/ — Interface web Streamlit
 
-Esta pasta contém a **interface gráfica** do sistema — a tela que o usuário vê ao executar `streamlit run src/interface/app.py`.
+Esta pasta contém a **interface gráfica** do sistema — a tela que o usuário vê ao executar `python -m streamlit run src/interface/app.py`.
 
 ---
 
 ## Como iniciar
 
 ```bash
-streamlit run src/interface/app.py
+python -m streamlit run src/interface/app.py
 # Acesse em: http://localhost:8501
 ```
 

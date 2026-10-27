@@ -578,7 +578,7 @@ http://localhost:8501
 Se a porta 8501 estiver em uso, use:
 
 ```powershell
-streamlit run src/interface/app.py --server.port 8502
+python -m streamlit run src/interface/app.py --server.port 8502
 ```
 
 ---
