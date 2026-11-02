@@ -1,0 +1,422 @@
+{
+  "timestamp": "2026-10-27T19:40:33.089937",
+  "dataset_size": 5,
+  "approaches": {
+    "regras": {
+      "results": [
+        {
+          "id": "0b740465-5aeb-426f-9ce7-98f4c821dcbb",
+          "timestamp": "2026-10-27T19:40:33.259375",
+          "abordagem": "REGRAS",
+          "texto_entrada": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "vibração, ruído, bomba",
+            "localizacao": "Setor A - Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 73.69099999777973,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "54113f5b-5ad0-4c78-8a09-bc48282c8db1",
+          "timestamp": "2026-10-27T19:40:33.274900",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-004",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "vibração, bomba, produção",
+            "localizacao": "Setor B - Produção",
+            "impacto_producao": "producao parada"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.85,
+          "latencia_ms": 8.306600000651088,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "1d56a98e-e49c-4203-994f-69a0f25be42e",
+          "timestamp": "2026-10-27T19:40:33.282397",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-005",
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "COMP-002",
+            "sintomas": "compressor, tubulação, PID"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha mecânica grave (ruptura/rompimento) — avaliação estrutural necessária antes do retorno",
+          "confianca": 0.88,
+          "latencia_ms": 6.904000001668464,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "4c90ef97-c0c3-4de4-af8c-3a903b736520",
+          "timestamp": "2026-10-27T19:40:33.291340",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo": "PANEL-001",
+            "sintomas": "queimado, faísca, cheiro de queimado",
+            "localizacao": "Subestação Principal"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização",
+          "confianca": 0.9,
+          "latencia_ms": 7.975799999258015,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        },
+        {
+          "id": "29ce9b15-c8cf-4df3-b0ba-039a83f4a9eb",
+          "timestamp": "2026-10-27T19:40:33.299974",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "GER-001",
+            "sintomas": "motor, gerador",
+            "localizacao": "Área Externa - Gerador"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 6.756999999197433,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ]
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "CASE-001",
+          "tipo": "CANONICO",
+          "texto": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Caso base: vibração mecânica em ativo crítico sem impacto de produção. RULE-011 dispara."
+        },
+        {
+          "id": "CASE-002",
+          "tipo": "CANONICO",
+          "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Distingue de CASE-001 pelo impacto na produção elevando prioridade para P1. RULE-004 e RULE-011 disparam."
+        },
+        {
+          "id": "CASE-003",
+          "tipo": "CANONICO",
+          "texto": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'ruptura' dispara RULE-005. Urgência IMEDIATA por falha grave."
+        },
+        {
+          "id": "CASE-004",
+          "tipo": "CANONICO",
+          "texto": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-003 dispara: painel elétrico com faísca. Requer revisão por NR-10."
+        },
+        {
+          "id": "CASE-005",
+          "tipo": "CANONICO",
+          "texto": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-010 dispara: falha elétrica geral sem alta tensão explícita."
+        }
+      ],
+      "elapsed_seconds": 0.20875030000024708
+    },
+    "llm": {
+      "results": [
+        {
+          "id": "054e68d2-cad9-4c2d-9397-b6ccb0b8804e",
+          "timestamp": "2026-10-27T19:41:09.186937",
+          "abordagem": "LLM",
+          "texto_entrada": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 35668.92050000024,
+          "tokens_entrada": 1437,
+          "tokens_saida": 414,
+          "tokens_total": 1851,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "1bb52806-f79c-4bc9-93fb-fd3c4af9848f",
+          "timestamp": "2026-10-27T19:41:36.448205",
+          "abordagem": "LLM",
+          "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A análise do relato destaca a necessidade de reparação imediata para a bomba BOMB-001, indicando vibração intensa e paragem da linha. A confiança na classificação é baseada na evidência direta do problema mecânico.",
+          "confianca": 1.0,
+          "latencia_ms": 27260.386499998276,
+          "tokens_entrada": 1432,
+          "tokens_saida": 640,
+          "tokens_total": 2072,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "36d599df-66b3-435d-a5fa-31fbef37ac7c",
+          "timestamp": "2026-10-27T19:41:50.412105",
+          "abordagem": "LLM",
+          "texto_entrada": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.9,
+          "latencia_ms": 13962.757900000724,
+          "tokens_entrada": 1432,
+          "tokens_saida": 311,
+          "tokens_total": 1743,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "a2f7e81a-41a5-4ac7-9262-05f3b1bbc40d",
+          "timestamp": "2026-10-27T19:42:04.799352",
+          "abordagem": "LLM",
+          "texto_entrada": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A apresentação do painel de distribuição principal indica um problema de segurança e falha de equipamento, necessitando de manutenção elétrica para garantir a continuidade da rede.",
+          "confianca": 0.9,
+          "latencia_ms": 14382.33809999656,
+          "tokens_entrada": 1435,
+          "tokens_saida": 318,
+          "tokens_total": 1753,
+          "campos_sem_suporte": [
+            "evidencias",
+            "regras_acionadas"
+          ]
+        },
+        {
+          "id": "7e26c6b6-ceae-49c9-a54c-683b10445290",
+          "timestamp": "2026-10-27T19:42:26.641538",
+          "abordagem": "LLM",
+          "texto_entrada": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A falha no teste de partida automático semanal demonstra um problema de operação crítica, exigindo uma revisão detalhada.",
+          "confianca": 0.8,
+          "latencia_ms": 21830.112200001167,
+          "tokens_entrada": 1431,
+          "tokens_saida": 480,
+          "tokens_total": 1911,
+          "campos_sem_suporte": []
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "CASE-001",
+          "tipo": "CANONICO",
+          "texto": "A bomba BOMB-001 apresenta vibração excessiva e ruído anormal. Operando no Setor A - Utilidades.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Caso base: vibração mecânica em ativo crítico sem impacto de produção. RULE-011 dispara."
+        },
+        {
+          "id": "CASE-002",
+          "tipo": "CANONICO",
+          "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Distingue de CASE-001 pelo impacto na produção elevando prioridade para P1. RULE-004 e RULE-011 disparam."
+        },
+        {
+          "id": "CASE-003",
+          "tipo": "CANONICO",
+          "texto": "Compressor de processo COMP-002 com ruptura na tubulação de alta pressão. Processo interrompido.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Palavra-chave 'ruptura' dispara RULE-005. Urgência IMEDIATA por falha grave."
+        },
+        {
+          "id": "CASE-004",
+          "tipo": "CANONICO",
+          "texto": "Painel de distribuição principal PANEL-001 apresenta faísca e cheiro de queimado na subestação principal.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-003 dispara: painel elétrico com faísca. Requer revisão por NR-10."
+        },
+        {
+          "id": "CASE-005",
+          "tipo": "CANONICO",
+          "texto": "Gerador GER-001 falhou no teste de partida automática semanal. Motor de arranque sem resposta.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "RULE-010 dispara: falha elétrica geral sem alta tensão explícita."
+        }
+      ],
+      "elapsed_seconds": 113.1298248000021
+    }
+  }
+}

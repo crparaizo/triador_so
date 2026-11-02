@@ -101,7 +101,7 @@ O nó `chamada_llm` instancia o `ChatOllama` em tempo de execução e envia o pr
 
 ### Por que o motor de regras é um único nó
 
-As 18 regras de produção continuam declaradas em `data/rules.yaml` e são avaliadas por `apply_rules` (`src/rules/engine.py`), que trata prioridade entre regras e resolução de conflitos. Transformar cada regra em um `Runnable` espalharia essa lógica pelo grafo e tiraria do especialista a possibilidade de editar as regras em um arquivo legível. O LCEL organiza as etapas; o conhecimento simbólico permanece no YAML.
+As 21 regras de produção continuam declaradas em `data/rules.yaml` e são avaliadas por `apply_rules` (`src/rules/engine.py`), que trata prioridade entre regras e resolução de conflitos. Transformar cada regra em um `Runnable` espalharia essa lógica pelo grafo e tiraria do especialista a possibilidade de editar as regras em um arquivo legível. O LCEL organiza as etapas; o conhecimento simbólico permanece no YAML.
 
 ### Fallbacks
 

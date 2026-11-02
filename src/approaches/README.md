@@ -21,7 +21,7 @@ Nós:
 3. `extracao_palavras_chave` ∥ `deteccao_categoria` — em paralelo: o extrator identifica sintomas, ativo, riscos e impacto; a categoria é detectada por palavras-chave (ou fixada por `categoria_ref` no cenário-diagnóstico)
 4. `enriquecimento_contexto` — busca o ativo e a equipe na base local
 5. `motor_regras_producao` — o motor de regras inteiro, um único nó, classifica urgência, prioridade e equipe
-6. `montagem_resultado` — `TriageResult` com `abordagem=REGRAS`
+6. `montagem_resultado` — `TriageResult` com `abordagem=REGRAS`; às evidências da extração somam-se `palavras_categoria` (termos que definiram a categoria) e `regras_classificacao` (regras e rastro por campo)
 
 **Ponto forte**: rápido, previsível, totalmente auditável  
 **Ponto fraco**: limitado ao vocabulário das listas de palavras-chave; paráfrases e erros de escrita podem passar despercebidos
@@ -65,7 +65,7 @@ Nós:
    - a categoria é detectada de forma determinística por palavras-chave
 4. `enriquecimento_contexto` — busca o ativo na base local
 5. `motor_regras_producao` — **regras classificam** urgência, prioridade e equipe
-6. `montagem_resultado` — consolida evidências (LLM + `ativo_encontrado` + `regras_classificacao`), campos sem suporte e revisão humana (fallback ou confiança de extração < 0,4); `abordagem=HIBRIDO`
+6. `montagem_resultado` — consolida evidências (LLM + `ativo_encontrado` + `palavras_categoria` + `regras_classificacao`), campos sem suporte e revisão humana (fallback ou confiança de extração < 0,4); `abordagem=HIBRIDO`
 
 O código usa comentários `# LLM extrai` e `# Regras classificam` para marcar visualmente a separação de responsabilidades.
 

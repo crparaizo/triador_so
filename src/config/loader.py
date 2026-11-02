@@ -9,8 +9,9 @@ Chamar get_settings.cache_clear() em testes para reiniciar o cache.
 """
 
 from functools import lru_cache
+from typing import Optional
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -101,6 +102,21 @@ class Settings(BaseSettings):
             "resposta truncada segue a política de falha segura (revisão humana)."
         ),
     )
+    ollama_reasoning: Optional[bool] = Field(
+        default=None,
+        description=(
+            "Modo de raciocínio do modelo (parâmetro reasoning do ChatOllama). "
+            "None mantém o padrão do modelo — ativado no qwen3, configuração da "
+            "execução de referência. False desativa o raciocínio (variante "
+            "experimental, OLLAMA_REASONING=false)."
+        ),
+    )
+
+    @field_validator("ollama_reasoning", mode="before")
+    @classmethod
+    def _reasoning_vazio_e_padrao(cls, v):
+        """OLLAMA_REASONING vazio equivale a não definido (padrão do modelo)."""
+        return None if isinstance(v, str) and not v.strip() else v
 
 
 @lru_cache(maxsize=1)

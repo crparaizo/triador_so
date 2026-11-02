@@ -15,6 +15,8 @@ sem validação por especialistas de manutenção e segurança.
 import unicodedata
 from typing import Optional
 
+from src.extraction.keyword_extractor import contem_termo
+from src.extraction.medicoes import pressoes_kpa
 from src.rules.definitions import Rule, RuleCondition
 from src.schemas.extraction import ContextData, ExtractedInfo
 
@@ -36,6 +38,7 @@ def _avalia_condicao(
     context: ContextData,
     texto_norm: str,
     categoria_detectada: str,
+    texto_original: str = "",
 ) -> bool:
     """
     Avalia se as condições de uma regra são satisfeitas pela entrada.
@@ -52,6 +55,7 @@ def _avalia_condicao(
         context: dados de contexto enriquecido da base local.
         texto_norm: texto original normalizado (sem acentos, minúsculas).
         categoria_detectada: string do enum FailureCategory detectado pelo extrator.
+        texto_original: texto bruto do relato, usado para ler valores de pressão.
 
     Returns:
         True se as condições são satisfeitas conforme o operador.
@@ -85,15 +89,38 @@ def _avalia_condicao(
         else:
             verificacoes.append(ativo.criticidade == cond.criticidade_ativo)
 
-    # Verificação de palavras-chave no texto normalizado ou nos sintomas
-    if cond.palavras_chave:
-        sintomas_norm = [_normalize(s) for s in extracted.sintomas]
-        correspondencia = any(
-            _normalize(kw) in texto_norm
-            or any(_normalize(kw) in s for s in sintomas_norm)
-            for kw in cond.palavras_chave
+    # Pressão relatada acima da PMTA do ativo cadastrado (NR-13, Glossário).
+    # Lida do texto original, que preserva a vírgula decimal e a unidade.
+    if cond.pressao_acima_pmta is not None:
+        ativo = context.ativo_encontrado
+        pmta = ativo.pmta_kpa if ativo is not None else None
+        acima = pmta is not None and any(p > pmta for p in pressoes_kpa(texto_original))
+        verificacoes.append(acima == cond.pressao_acima_pmta)
+
+    # Verificação de palavras-chave no texto normalizado ou nos sintomas.
+    # Cada grupo (palavras_chave e palavras_chave_condicao) é uma condição
+    # própria, com OR interno entre os termos do grupo.
+    sintomas_norm = [_normalize(s) for s in extracted.sintomas]
+
+    def _casa_grupo(grupo: list[str]) -> bool:
+        return any(
+            contem_termo(_normalize(kw), texto_norm)
+            or any(contem_termo(_normalize(kw), s) for s in sintomas_norm)
+            for kw in grupo
         )
-        verificacoes.append(correspondencia)
+
+    # Norma do ativo cadastrado: alternativa (OR) ao grupo palavras_chave
+    ativo_na_norma: Optional[bool] = None
+    if cond.norma_ativo is not None:
+        ativo = context.ativo_encontrado
+        ativo_na_norma = ativo is not None and cond.norma_ativo in ativo.normas_aplicaveis
+
+    if cond.palavras_chave:
+        verificacoes.append(bool(ativo_na_norma) or _casa_grupo(cond.palavras_chave))
+    elif ativo_na_norma is not None:
+        verificacoes.append(ativo_na_norma)
+    if cond.palavras_chave_condicao:
+        verificacoes.append(_casa_grupo(cond.palavras_chave_condicao))
 
     # Nenhuma condição definida → não dispara
     if not verificacoes:
@@ -118,6 +145,7 @@ def apply_rules(
 
     Avalia cada regra, coleta as que disparam, ordena por prioridade_regra
     decrescente e faz merge dos campos de ação (primeira regra não-None ganha).
+    A revisão humana é a exceção: basta uma regra disparada exigi-la.
 
     Fallback quando nenhuma regra dispara: urgência/prioridade DESCONHECIDA,
     requer_revisao_humana=True com motivo padrão.
@@ -131,7 +159,8 @@ def apply_rules(
 
     Returns:
         dict com chaves: urgencia, prioridade, equipe, requer_revisao_humana,
-        motivo_revisao, confianca, regras_acionadas.
+        motivo_revisao, confianca, regras_acionadas e rastro (campo → regra
+        que definiu o valor; em 'revisao', todas as que exigiram a revisão).
     """
     texto_norm = _normalize(texto_original)
     cat_str = categoria_detectada or ""
@@ -140,7 +169,7 @@ def apply_rules(
     regras_disparadas = [
         rule
         for rule in rules
-        if _avalia_condicao(rule.condicoes, extracted, context, texto_norm, cat_str)
+        if _avalia_condicao(rule.condicoes, extracted, context, texto_norm, cat_str, texto_original)
     ]
 
     # Fallback: nenhuma regra disparou
@@ -156,6 +185,7 @@ def apply_rules(
             ),
             "confianca": 0.0,
             "regras_acionadas": [],
+            "rastro": {},
         }
 
     # Ordenar por prioridade_regra decrescente (maior = mais prioritário)
@@ -163,34 +193,34 @@ def apply_rules(
         regras_disparadas, key=lambda r: r.prioridade_regra, reverse=True
     )
 
-    # Merge de campos: primeiro valor não-None de maior prioridade prevalece
-    urgencia: Optional[str] = None
-    prioridade: Optional[str] = None
-    equipe: Optional[str] = None
-    requer_revisao_humana: Optional[bool] = None
-    motivo_revisao: Optional[str] = None
-    confianca: Optional[float] = None
-
+    # Merge de campos: primeiro valor não-None de maior prioridade prevalece.
+    # 'rastro' guarda a regra que definiu cada campo (explicação da decisão).
+    valores: dict = {}
+    rastro: dict[str, str] = {}
     for rule in regras_ordenadas:
-        if urgencia is None and rule.acoes.urgencia is not None:
-            urgencia = rule.acoes.urgencia
-        if prioridade is None and rule.acoes.prioridade is not None:
-            prioridade = rule.acoes.prioridade
-        if equipe is None and rule.acoes.equipe is not None:
-            equipe = rule.acoes.equipe
-        if requer_revisao_humana is None and rule.acoes.requer_revisao_humana is not None:
-            requer_revisao_humana = rule.acoes.requer_revisao_humana
-        if motivo_revisao is None and rule.acoes.motivo_revisao is not None:
-            motivo_revisao = rule.acoes.motivo_revisao
-        if confianca is None and rule.acoes.confianca is not None:
-            confianca = rule.acoes.confianca
+        for campo in ("urgencia", "prioridade", "equipe", "confianca"):
+            valor = getattr(rule.acoes, campo)
+            if campo not in valores and valor is not None:
+                valores[campo] = valor
+                rastro[campo] = rule.id
+
+    # Revisão humana por disjunção: basta uma regra disparada exigi-la, mesmo
+    # que outra de maior precedência defina os demais campos. Os motivos dessas
+    # regras são combinados na ordem de precedência.
+    regras_revisao = [r for r in regras_ordenadas if r.acoes.requer_revisao_humana]
+    requer_revisao_humana = bool(regras_revisao)
+    motivos = dict.fromkeys(
+        r.acoes.motivo_revisao for r in regras_revisao if r.acoes.motivo_revisao
+    )
+    motivo_revisao: Optional[str] = " | ".join(motivos) or None
+    if regras_revisao:
+        rastro["revisao"] = ", ".join(r.id for r in regras_revisao)
 
     # Aplicar defaults para campos não definidos por nenhuma regra
-    urgencia = urgencia if urgencia is not None else "DESCONHECIDA"
-    prioridade = prioridade if prioridade is not None else "DESCONHECIDA"
-    equipe = equipe if equipe is not None else "Revisão necessária"
-    requer_revisao_humana = requer_revisao_humana if requer_revisao_humana is not None else False
-    confianca = confianca if confianca is not None else 0.0
+    urgencia = valores.get("urgencia", "DESCONHECIDA")
+    prioridade = valores.get("prioridade", "DESCONHECIDA")
+    equipe = valores.get("equipe", "Revisão necessária")
+    confianca = valores.get("confianca", 0.0)
 
     # Garantir motivo_revisao quando requer_revisao_humana=True
     # (protege contra TriageResult @model_validator que rejeita motivo None)
@@ -207,4 +237,29 @@ def apply_rules(
         "motivo_revisao": motivo_revisao,
         "confianca": confianca,
         "regras_acionadas": [r.id for r in regras_ordenadas],
+        "rastro": rastro,
     }
+
+
+_ROTULOS_RASTRO = {
+    "urgencia": "urgência",
+    "prioridade": "prioridade",
+    "equipe": "equipe",
+    "confianca": "confiança",
+    "revisao": "revisão",
+}
+
+
+def descrever_regras(resultado: dict) -> str:
+    """
+    Texto da evidência 'regras_classificacao': regras disparadas e, por campo,
+    a regra que definiu o valor (ex: "urgência ← RULE-019; revisão ← RULE-019,
+    RULE-001").
+    """
+    texto = "Regras: " + ", ".join(resultado["regras_acionadas"])
+    rastro = resultado.get("rastro") or {}
+    if rastro:
+        texto += ". " + "; ".join(
+            f"{_ROTULOS_RASTRO[campo]} ← {regras}" for campo, regras in rastro.items()
+        )
+    return texto

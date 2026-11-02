@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-10-27T19:46:21.265762",
+  "texto": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada",
+  "results": {
+    "regras": {
+      "id": "20d624e1-e870-4edd-a283-3255cee1d3a2",
+      "timestamp": "2026-10-27T19:45:45.925917",
+      "abordagem": "REGRAS",
+      "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada",
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-004",
+        "RULE-006",
+        "RULE-008",
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo": "CAL-001",
+        "sintomas": "caldeira, vapor, produção",
+        "localizacao": "Setor B - Produção",
+        "impacto_producao": "producao parada"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": "Caldeira com impacto na produção — intervenção sujeita a NR-13, requer inspetor habilitado",
+      "confianca": 0.85,
+      "latencia_ms": 20.856699997239048,
+      "tokens_entrada": 0,
+      "tokens_saida": 0,
+      "tokens_total": 0,
+      "campos_sem_suporte": [
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "1228e68e-2ca6-4436-add5-c964d41a700a",
+      "timestamp": "2026-10-27T19:46:10.694213",
+      "abordagem": "LLM",
+      "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+      "confianca": 0.8,
+      "latencia_ms": 24767.62360000066,
+      "tokens_entrada": 1430,
+      "tokens_saida": 565,
+      "tokens_total": 1995,
+      "campos_sem_suporte": []
+    },
+    "hibrido": {
+      "id": "a8049a2c-6d7e-416f-ae6c-a3daab076f99",
+      "timestamp": "2026-10-27T19:46:21.264105",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "Caldeira CAL-001 sem pressão de vapor. Sistema de vapor desligado e produção parada",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+        "regras_classificacao": "Regras: RULE-015"
+      },
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+      "confianca": 0.65,
+      "latencia_ms": 10569.154799999524,
+      "tokens_entrada": 486,
+      "tokens_saida": 273,
+      "tokens_total": 759,
+      "campos_sem_suporte": [
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada",
+        "urgencia"
+      ]
+    }
+  }
+}

@@ -57,6 +57,21 @@ class RuleCondition(BaseModel):
     # Lista de palavras-chave — basta uma coincidir no texto ou sintomas
     palavras_chave: Optional[list[str]] = None
 
+    # Segundo grupo de palavras-chave, avaliado como uma condição à parte
+    # (OR interno). Permite exigir, com operador AND, termos de dois grupos —
+    # por exemplo, o equipamento (caldeira) e o dispositivo de segurança.
+    palavras_chave_condicao: Optional[list[str]] = None
+
+    # Norma a que o ativo encontrado está sujeito (campo normas_aplicaveis de
+    # assets.yaml, ex: "NR-13"). Com palavras_chave definidas, as duas formam
+    # uma única condição (OR): basta o ativo cadastrado estar sujeito à norma
+    # ou o relato citar o equipamento — útil quando a tag não é mencionada.
+    norma_ativo: Optional[str] = None
+
+    # Pressão escrita no relato (kPa ou MPa) acima da PMTA cadastrada do ativo
+    # encontrado (True) — False quando não há valor de pressão ou PMTA cadastrada
+    pressao_acima_pmta: Optional[bool] = None
+
     # Operador lógico que combina as condições não-nulas desta regra
     operador: Literal["AND", "OR"] = "AND"
 
@@ -67,6 +82,8 @@ class RuleAction(BaseModel):
 
     Todos os campos são opcionais. O motor de regras aplica os valores
     por precedência — o campo da regra com maior prioridade_regra prevalece.
+    A exceção é requer_revisao_humana, combinado por disjunção: basta uma
+    regra disparada exigir a revisão.
 
     Quando requer_revisao_humana=True, o campo motivo_revisao deve ser
     preenchido. Esta restrição é validada no YAML de entrada e respeitada
@@ -115,6 +132,10 @@ class Rule(BaseModel):
 
     # Precedência no motor de regras — maior valor = maior prioridade
     prioridade_regra: int = Field(..., ge=1, description="Maior valor = maior precedência")
+
+    # Origem do conhecimento da regra: norma e item (ex: "NR-13, item 13.3.1")
+    # ou "Critério da autora" quando não há norma que a determine
+    fundamentacao: Optional[str] = None
 
 
 @lru_cache(maxsize=1)

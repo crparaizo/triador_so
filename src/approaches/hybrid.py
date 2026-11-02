@@ -62,7 +62,7 @@ from src.orchestration.triage_flow import (
     no,
 )
 from src.rules.definitions import RULE_FORA_DO_ESCOPO_ID, load_rules
-from src.rules.engine import apply_rules
+from src.rules.engine import apply_rules, descrever_regras
 from src.schemas.extraction import ExtractedInfo
 from src.schemas.triage import (
     ApproachType,
@@ -203,10 +203,14 @@ def _montar_resultado(estado: dict) -> TriageResult:
             f"recuperado de assets.yaml: {context.ativo_encontrado.tag}"
             f" — {context.ativo_encontrado.nome}"
         )
+    dados = estado["dados"]
+    termos = KeywordExtractor(dados["kb"], dados["cats"]).termos_categoria(
+        estado["texto_entrada"], categoria.name
+    )
+    if termos:
+        evidencias["palavras_categoria"] = ", ".join(termos)
     if resultado["regras_acionadas"]:
-        evidencias["regras_classificacao"] = (
-            "Regras: " + ", ".join(resultado["regras_acionadas"])
-        )
+        evidencias["regras_classificacao"] = descrever_regras(resultado)
 
     # -------------------------------------------------------------------
     # Pós-processamento: revisão humana, confiança e motivo

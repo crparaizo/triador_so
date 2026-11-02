@@ -4,17 +4,17 @@ Análise estatística e de auditabilidade da monografia.
 
 Reproduz, a partir de um arquivo evaluation_raw_<timestamp>.json e do dataset
 sintético, os números dos Capítulos 3 e 4: F1 ponderado com IC 95% por
-bootstrap (Tabela 2), diferenças pareadas com teste exato de McNemar
-(Tabela 3), subestimação de casos críticos com IC de Clopper-Pearson,
-métricas de revisão humana com e sem disjunção (Tabela 8), análise de
-sensibilidade do rótulo de equipe e verificabilidade das evidências
-(Tabela 6 e Seção 4.3).
+bootstrap (Tabela 2), diferenças pareadas com teste exato de McNemar e
+ajuste de Holm sobre os 15 testes (Tabela 3), subestimação de casos
+críticos com IC de Clopper-Pearson, métricas de revisão humana (Tabela 9),
+análise de sensibilidade do rótulo de equipe e verificabilidade das
+evidências (Tabela 7 e Seção 4.3).
 
 Uso:
-    python scripts/analise_estatistica.py results/evaluation_raw_20261016_100014.json
+    python scripts/analise_estatistica.py results/evaluation_raw_20261028_115033.json
     python scripts/analise_estatistica.py <raw.json> --saida results/analise.json
 
-Dependências: numpy, scipy, pyyaml (scipy não consta em requirements.txt:
+Dependências: numpy, scipy (scipy não consta em requirements.txt:
 pip install scipy).
 Parâmetros fixos: 10.000 amostras bootstrap, semente 42
 (numpy.random.default_rng).
@@ -31,7 +31,6 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
-import yaml
 from scipy.stats import beta, binomtest
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -67,6 +66,15 @@ def mcnemar_exato(b: int, c: int) -> float:
     return 1.0 if b + c == 0 else float(binomtest(min(b, c), b + c, 0.5).pvalue)
 
 
+def holm(pvals: list[float]) -> list[float]:
+    """Valores de p ajustados pelo método de Holm, na ordem original."""
+    n, ajustados, maximo = len(pvals), [0.0] * len(pvals), 0.0
+    for pos, i in enumerate(sorted(range(n), key=lambda k: pvals[k])):
+        maximo = max(maximo, (n - pos) * pvals[i])
+        ajustados[i] = min(1.0, maximo)
+    return ajustados
+
+
 def clopper_pearson(k: int, n: int, alfa: float = 0.05) -> tuple[float, float]:
     lo = 0.0 if k == 0 else beta.ppf(alfa / 2, k, n - k + 1)
     hi = 1.0 if k == n else beta.ppf(1 - alfa / 2, k + 1, n - k)
@@ -76,11 +84,9 @@ def clopper_pearson(k: int, n: int, alfa: float = 0.05) -> tuple[float, float]:
 # ----------------------------------------------------------------------------
 # Carga
 # ----------------------------------------------------------------------------
-def carregar(raw_path: Path):
+def carregar(raw_path: Path, dataset: Path = RAIZ / "datasets" / "synthetic_cases.json"):
     raw = json.loads(raw_path.read_text(encoding="utf-8"))["approaches"]
-    casos = json.loads((RAIZ / "datasets" / "synthetic_cases.json").read_text(encoding="utf-8"))
-    regras = {r["id"]: r for r in yaml.safe_load(
-        (RAIZ / "data" / "rules.yaml").read_text(encoding="utf-8"))["regras"]}
+    casos = json.loads(dataset.read_text(encoding="utf-8"))
     res = {}
     for a in ABORDAGENS:
         lista = raw[a]["results"]
@@ -88,7 +94,7 @@ def carregar(raw_path: Path):
         assert all(r["texto_entrada"] == c["texto"] for r, c in zip(lista, casos)), \
             f"{a}: resultados desalinhados do dataset"
         res[a] = lista
-    return res, casos, regras
+    return res, casos
 
 
 def pred(r: dict, campo: str) -> str:
@@ -136,6 +142,16 @@ def assertividade(res, casos):
         x1, x2 = int((ok[a] & ~ok[b]).sum()), int((ok[b] & ~ok[a]).sum())
         up[f"{a}-{b}"] = {"a_favor_1o": x1, "a_favor_2o": x2, "p": round(mcnemar_exato(x1, x2), 3)}
     out["urgencia_e_prioridade"] = up
+    # Ajuste de Holm sobre a família de testes de McNemar da Tabela 3
+    # (4 campos + urgência e prioridade, em 3 comparações = 15 testes): os p são
+    # ordenados do menor para o maior, o i-ésimo é multiplicado por (n - i + 1) e
+    # o ajustado é o máximo acumulado, limitado a 1 (Aickin; Gensler, 1996, p. 727).
+    familia = [out[f]["mcnemar"][par] for f in CAMPOS for par in out[f]["mcnemar"]]
+    familia += [up[par] for par in up if par != "acertos"]
+    for t, p_holm in zip(familia, holm([mcnemar_exato(t["a_favor_1o"], t["a_favor_2o"])
+                                         for t in familia])):
+        t["p_holm"] = round(p_holm, 3)
+    out["n_testes_holm"] = len(familia)
     return out
 
 
@@ -164,7 +180,7 @@ def criticos(res, casos):
     return out
 
 
-def revisao(res, casos, regras):
+def revisao(res, casos):
     esp = np.array([c["esperado"]["requer_revisao_humana"] for c in casos])
     crit = np.array([c["esperado"]["urgencia"] == "IMEDIATA" or c["esperado"]["prioridade"] == "P1"
                      for c in casos])
@@ -182,11 +198,6 @@ def revisao(res, casos, regras):
 
     for a in ABORDAGENS:
         linha(a, np.array([bool(r["requer_revisao_humana"]) for r in res[a]]))
-    for a in ["regras", "hibrido"]:   # disjunção: basta uma regra acionada exigir revisão
-        linha(f"{a}_disjuncao", np.array([
-            bool(r["requer_revisao_humana"]) or
-            any(regras[x]["acoes"].get("requer_revisao_humana") for x in r["regras_acionadas"])
-            for r in res[a]]))
     x1 = int((flags["hibrido"] & esp & ~flags["regras"]).sum())
     x2 = int((flags["regras"] & esp & ~flags["hibrido"]).sum())
     out["mcnemar_revocacao_hibrido_vs_regras"] = {"so_hibrido": x1, "so_regras": x2,
@@ -217,7 +228,8 @@ def evidencias(res):
 
     Campos considerados: ativo, ativo_mencionado, sintomas, risco_seguranca,
     impacto_producao, urgencia_mencionada. Excluídos: localização (vem do
-    cadastro), ativo_encontrado, regras_classificacao e registros de falha.
+    cadastro), ativo_encontrado, palavras_categoria, regras_classificacao e
+    registros de falha.
     Evidência verificável: trecho localizado no relato após remover acentos,
     caixa e pontuação. Na abordagem por regras, 'sintomas' é uma lista de
     palavras-chave separadas por vírgula e cada termo é verificado
@@ -293,13 +305,15 @@ def main() -> None:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("raw", type=Path, help="results/evaluation_raw_<timestamp>.json")
     ap.add_argument("--saida", type=Path, help="grava o resultado também em JSON")
+    ap.add_argument("--dataset", type=Path, default=RAIZ / "datasets" / "synthetic_cases.json",
+                    help="dataset avaliado (padrão: synthetic_cases.json)")
     args = ap.parse_args()
-    res, casos, regras = carregar(args.raw)
+    res, casos = carregar(args.raw, args.dataset)
     resultado = {
         "arquivo": args.raw.name,
         "assertividade": assertividade(res, casos),
         "criticos": criticos(res, casos),
-        "revisao_humana": revisao(res, casos, regras),
+        "revisao_humana": revisao(res, casos),
         "sensibilidade_equipe": sensibilidade_equipe(res, casos),
         "evidencias": evidencias(res),
         "custo": custo(res),

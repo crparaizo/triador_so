@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-10-27T19:48:04.949404",
+  "texto": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+  "results": {
+    "regras": {
+      "id": "e27f1875-c36c-429e-a6c1-5b03cb314e97",
+      "timestamp": "2026-10-27T19:47:20.599252",
+      "abordagem": "REGRAS",
+      "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-004",
+        "RULE-011",
+        "RULE-014"
+      ],
+      "evidencias": {
+        "ativo": "BOMB-001",
+        "sintomas": "vibração, bomba, produção",
+        "localizacao": "Setor B - Produção",
+        "impacto_producao": "producao parada"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.85,
+      "latencia_ms": 8.18000000072061,
+      "tokens_entrada": 0,
+      "tokens_saida": 0,
+      "tokens_total": 0,
+      "campos_sem_suporte": [
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "244f5ff9-3530-44e6-a17c-b70db6dbeb41",
+      "timestamp": "2026-10-27T19:47:48.384165",
+      "abordagem": "LLM",
+      "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "A análise do relato destaca a necessidade de reparação imediata para a bomba BOMB-001, indicando vibração intensa e paragem da linha. A confiança na classificação é baseada na evidência direta do problema mecânico.",
+      "confianca": 1.0,
+      "latencia_ms": 27783.942999998544,
+      "tokens_entrada": 1432,
+      "tokens_saida": 640,
+      "tokens_total": 2072,
+      "campos_sem_suporte": []
+    },
+    "hibrido": {
+      "id": "0d0ffb70-54fa-44a4-9e1e-a0a160ca698b",
+      "timestamp": "2026-10-27T19:48:04.947135",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "Bomba BOMB-001 com vibração intensa. Linha de produção parada aguardando reparo.",
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-011",
+        "RULE-014"
+      ],
+      "evidencias": {
+        "ativo_mencionado": "bomba BOMB-001",
+        "sintomas": "vibração intensa",
+        "localizacao": "Setor A",
+        "urgencia_mencionada": "Urgente!",
+        "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+        "regras_classificacao": "Regras: RULE-011, RULE-014"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.75,
+      "latencia_ms": 16561.573099999805,
+      "tokens_entrada": 488,
+      "tokens_saida": 419,
+      "tokens_total": 907,
+      "campos_sem_suporte": [
+        "impacto_producao",
+        "risco_seguranca"
+      ]
+    }
+  }
+}

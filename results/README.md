@@ -44,9 +44,24 @@ Para preservar o histórico. Cada vez que você rodar a avaliação (com o LLM a
 
 ## Execução de referência da monografia
 
-Os números do Capítulo 4 e do Apêndice D da monografia vêm da execução **`20261016_100014`** (`evaluation_raw_`, `evaluation_per_case_` e `evaluation_summary_` com esse timestamp): 3 abordagens, 100 casos, `qwen3:0.6b`, temperatura 0 e semente 42.
+Os números do Capítulo 4 e do Apêndice D da monografia vêm da execução **`20261028_115033`** (`evaluation_raw_`, `evaluation_per_case_` e `evaluation_summary_` com esse timestamp): 3 abordagens, 100 casos, `qwen3:0.6b`, temperatura 0 e semente 42, com a base de 20 regras (RULE-019 da NR-13 e RULE-020 da NR-35), a revisão humana combinada por disjunção e o casamento por palavra inteira dos termos de até 3 letras.
 
-As execuções completas `20261017_023149`, `20261017_023150` (arquivos duplicados, gravados com 1 s de diferença) e `20261018_203650` foram feitas nas mesmas condições e reproduzem exatamente as classificações e o consumo de tokens; só a latência varia (a das regras, por exemplo, ficou entre 7,4 e 28,0 ms).
+A **primeira execução**, com a versão inicial da base de regras (18 regras, revisão combinada por prioridade), é a **`20261016_100014`**, citada na monografia para comparação. As execuções completas `20261017_023149`, `20261017_023150` (arquivos duplicados, gravados com 1 s de diferença) e `20261018_203650` foram feitas nas mesmas condições dela e reproduzem exatamente as classificações e o consumo de tokens; só a latência varia (a das regras, por exemplo, ficou entre 7,4 e 28,0 ms). A execução `20261028_115033` reproduziu, caso a caso, as classificações do LLM puro e o consumo de tokens das duas abordagens com modelo obtidos na `20261016_100014`.
+
+O experimento complementar de hardware (Tabela 7 da monografia) está em `experimento_cpu_gpu_20261102_023354.csv` (dez relatos), gerado por `scripts/experimento_cpu_gpu.py`; `experimento_cpu_gpu_20261028_103424.csv` é a rodada preliminar com três relatos.
+
+Execuções complementares de 01 e 02/11/2026 (todas com 21 regras, incluindo a RULE-021 da PMTA). O arquivo bruto de cada uma registra a configuração do modelo em `config_llm`:
+
+| Execução | O que é |
+|---|---|
+| `20261101_231417` | Só regras, 100 casos: confirma que a RULE-021 não altera o conjunto principal (saídas idênticas às da `20261028_115033`) |
+| `20261101_231430` | Só regras, 10 alarmes simulados (`datasets/alarm_cases.json`), conferência antes da rodada noturna |
+| `20261102_002222` | Alarmes simulados, três abordagens, configuração padrão (Tabela 14) |
+| `20261102_004216` | 100 casos, LLM puro e híbrida sem o modo de raciocínio, `OLLAMA_REASONING=false` (Tabela 8) |
+| `20261102_004434` | Alarmes simulados, LLM puro e híbrida sem o modo de raciocínio (Tabela 14) |
+| `20261102_065123` | Conjunto de validação (`datasets/holdout_cases.json`), 100 casos novos, três abordagens, configuração padrão (Tabela 5); análise em `analise_estatistica_20261102_065123.json` |
+
+A rodada de 02/11 foi executada por `scripts/rodada_noturna.ps1`, com registro em `rodada_noturna.log`.
 
 As demais execuções são anteriores ou parciais e **não** devem ser usadas para comparação:
 
@@ -58,16 +73,20 @@ As demais execuções são anteriores ou parciais e **não** devem ser usadas pa
 | `20261016_030318` | Classificação e tokens iguais à referência; latência ligeiramente diferente |
 | `20261017_012121`, `20261017_015851` | Execuções interrompidas: só regras, e regras + LLM puro (sem a híbrida) |
 | `20261016_2316*`, `20261016_2324*`, `20261016_2330*`, `20261018_185715`, `20261018_190055`, `20261018_190353` | Execuções parciais de verificação (10 ou 20 casos) |
+| `20261027_*` | Testes com 5 casos e uma execução completa (`20261027_152450`) anterior aos ajustes finais da base de regras |
+| `20261028_094847`, `20261028_103605` | Prévias só da abordagem por regras durante os ajustes da base de regras |
 
 ### Reproduzir as tabelas estatísticas da monografia
 
 ```bash
-python scripts/analise_estatistica.py results/evaluation_raw_20261016_100014.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261028_115033.json
 # opcional: gravar o resultado em JSON
-python scripts/analise_estatistica.py results/evaluation_raw_20261016_100014.json --saida results/analise_20261016_100014.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261028_115033.json --saida results/analise_20261028_115033.json
+# conjunto de validação
+python scripts/analise_estatistica.py results/evaluation_raw_20261102_065123.json --dataset datasets/holdout_cases.json
 ```
 
-O script calcula F1 ponderado com IC 95% por *bootstrap* (10.000 amostras, semente 42), diferenças pareadas com teste exato de McNemar, subestimação de casos críticos com IC de Clopper-Pearson, métricas de revisão humana (com e sem disjunção), sensibilidade do rótulo de equipe e verificabilidade das evidências (Tabelas 2, 3, 5, 6 e 8 da monografia). Requer `scipy` (já em `requirements.txt`).
+O script calcula F1 ponderado com IC 95% por *bootstrap* (10.000 amostras, semente 42), diferenças pareadas com teste exato de McNemar (com ajuste de Holm sobre os 15 testes da Tabela 3), subestimação de casos críticos com IC de Clopper-Pearson, métricas de revisão humana, sensibilidade do rótulo de equipe e verificabilidade das evidências (Tabelas 2, 3, 6, 9 e 11 da monografia; com `--dataset datasets/holdout_cases.json`, os dados do conjunto de validação da Tabela 5). Requer `scipy` (já em `requirements.txt`).
 
 ---
 

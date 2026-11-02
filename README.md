@@ -23,7 +23,7 @@ As três abordagens são comparadas sobre os mesmos casos de teste e dados de co
 
 | Abordagem | Descrição |
 |---|---|
-| **Regras** | Classificação determinística por 18 regras de produção explícitas e documentadas |
+| **Regras** | Classificação determinística por 21 regras de produção explícitas e documentadas |
 | **LLM puro** | Extração e classificação inteiramente via modelo de linguagem local (Ollama) |
 | **Híbrido** | LLM extrai informações estruturadas do texto; regras de produção classificam e encaminham |
 
@@ -104,6 +104,8 @@ Todos os campos têm valores padrão funcionais — o sistema roda sem `.env` co
 |---|---|---|
 | `OLLAMA_MODEL` | `qwen3:0.6b` | Nome do modelo Ollama. Deve estar baixado localmente (`ollama pull <modelo>`). |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | URL base do servidor Ollama. Alterar se a porta 11434 estiver em uso. |
+| `OLLAMA_TEMPERATURE` | `0.0` | Temperatura de geração do LLM. `0.0` torna a saída praticamente determinística (valor usado na monografia). |
+| `OLLAMA_SEED` | `42` | Semente de geração do LLM. Fixada junto com a temperatura 0 para reprodutibilidade. |
 | `DATA_DIR` | `data` | Diretório com os arquivos YAML de ativos, equipes e categorias. |
 | `RESULTS_DIR` | `results` | Diretório onde os relatórios de avaliação são salvos. |
 | `SESSIONS_DIR` | `sessions` | Diretório onde as sessões da interface são persistidas. |
@@ -232,13 +234,31 @@ Um exemplo de relatório de avaliação sintético está disponível em
 
 ### Análise estatística da monografia
 
-A execução de referência da monografia (`results/evaluation_*_20261016_100014`) pode ser reanalisada com:
+A execução de referência da monografia (`results/evaluation_*_20261028_115033`) pode ser reanalisada com:
 
 ```powershell
-python scripts/analise_estatistica.py results/evaluation_raw_20261016_100014.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261028_115033.json
 ```
 
-O script reproduz as Tabelas 2, 3, 5, 6 e 8 (IC 95% por *bootstrap*, teste de McNemar, Clopper-Pearson, métricas de revisão humana e verificabilidade das evidências). Detalhes e a lista das execuções em `results/README.md`.
+O script reproduz as Tabelas 2, 3, 6, 9 e 11 (IC 95% por *bootstrap*, teste de McNemar, Clopper-Pearson, métricas de revisão humana e verificabilidade das evidências). Detalhes e a lista das execuções em `results/README.md`.
+
+### Entrada por alarmes de um supervisório simulado
+
+O módulo `src/alarms` converte um evento de alarme estruturado (tag, variável, valor, limite) no texto de uma OS, que segue sem alteração para as três abordagens. A pressão escrita no texto é lida por `src/extraction/medicoes.py` e comparada à PMTA cadastrada do ativo pela RULE-021 (NR-13). Os 10 eventos de exemplo estão em `datasets/alarm_events.json`:
+
+```powershell
+python scripts/gerar_casos_alarme.py
+python -m src.evaluation --dataset datasets/alarm_cases.json
+```
+
+### Conjunto de validação (casos não vistos pelas regras)
+
+`datasets/holdout_cases.json` traz 100 casos novos (`VAL-001` a `VAL-100`), na mesma distribuição por tipo do conjunto principal, redigidos depois de concluída a base de regras. Serve para medir o sobreajuste das regras (Tabela 5 da monografia) e **não** deve orientar ajustes nelas:
+
+```powershell
+python -m src.evaluation --dataset datasets/holdout_cases.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261102_065123.json --dataset datasets/holdout_cases.json
+```
 
 ---
 
@@ -248,7 +268,7 @@ O script reproduz as Tabelas 2, 3, 5, 6 e 8 (IC 95% por *bootstrap*, teste de Mc
 pytest tests/ -v
 ```
 
-Resultado esperado: **232 testes aprovados, 0 falhas.**
+Resultado esperado: **265 testes aprovados, 0 falhas.**
 
 > Os testes **não dependem do Ollama**. Chamadas ao LLM são simuladas por mocks.
 > Execute os testes mesmo sem o Ollama instalado.
@@ -302,7 +322,7 @@ hibrido/
 │       ├── extraction.py        # ExtractedInfo (saída do extrator LLM)
 │       └── assets.py            # Asset, Team, Category (dados de domínio)
 ├── data/
-│   ├── rules.yaml           # 18 regras de produção com condições e ações
+│   ├── rules.yaml           # 21 regras de produção com condições e ações
 │   ├── assets.yaml          # Ativos industriais sintéticos (tag, criticidade, equipe)
 │   ├── teams.yaml           # 6 equipes com especialidades
 │   └── categories.yaml      # 12 categorias de falha com palavras-chave
@@ -321,10 +341,8 @@ hibrido/
 │   ├── test_dataset.py
 │   ├── test_orchestration.py  # Estrutura dos grafos LCEL e fallbacks
 │   └── ...
-├── results/                 # Relatórios gerados (*.json, *.csv — não versionados)
-│   └── .gitkeep
-├── sessions/                # Sessões da interface (*.json — não versionadas)
-│   └── .gitkeep
+├── results/                 # Relatórios de avaliação (*.json, *.csv — versionados; ver results/README.md)
+├── sessions/                # Sessões salvas pela interface (*.json — versionadas)
 ├── run_app.py               # Ponto de entrada alternativo para IDEs
 ├── .env.example             # Modelo de variáveis de ambiente (sem segredos)
 ├── requirements.txt         # Dependências com versões fixadas
@@ -647,12 +665,14 @@ O tamanho do dataset é insuficiente para afirmações de significância estatí
 ### Modelo LLM local
 O comportamento do LLM varia com o modelo e a quantização utilizada. O modelo padrão (`qwen3:0.6b`)
 é um modelo muito compacto — pode produzir saídas inconsistentes, especialmente para relatos
-ambíguos ou com erros de escrita. Resultados variam entre execuções (temperatura > 0).
+ambíguos ou com erros de escrita. Por padrão, a temperatura é 0 e a semente é 42
+(`OLLAMA_TEMPERATURE` e `OLLAMA_SEED`), o que torna as saídas reprodutíveis entre execuções
+nas mesmas condições; com temperatura maior que zero, os resultados passam a variar.
 Se a infraestrutura disponível permitir (GPU com 4 GB+ de VRAM), recomenda-se utilizar
 modelos maiores como `qwen3:4b` para maior qualidade de extração.
 
 ### Motor de regras
-O sistema contém **18 regras de produção** que cobrem cenários genéricos. Cenários
+O sistema contém **21 regras de produção** que cobrem cenários genéricos. Cenários
 não cobertos resultam em `urgencia=DESCONHECIDA` e `requer_revisao_humana=True`.
 Para uso real, as regras precisariam ser revisadas e estendidas por especialistas
 de domínio familiarizados com as normas aplicáveis (NR-10, NR-13, NR-35, etc.).

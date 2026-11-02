@@ -1,0 +1,839 @@
+{
+  "timestamp": "2026-11-02T00:42:19.869653",
+  "config_llm": {
+    "modelo": "qwen3:0.6b",
+    "temperatura": 0.0,
+    "semente": 42,
+    "num_predict": 1024,
+    "raciocinio": false
+  },
+  "dataset_size": 10,
+  "approaches": {
+    "llm": {
+      "results": [
+        {
+          "id": "2819e5d4-6426-4ae9-bb2f-f94f19f13601",
+          "timestamp": "2026-11-02T00:42:28.329285",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de pressão alta em Caldeira de Vapor (CAL-001) é um evento de interesse, mas não há evidências diretas sobre a causa ou a relevância para a ordem de serviço. A categoria 'Utilidades' é a mais adequada.",
+          "confianca": 0.9,
+          "latencia_ms": 8451.28970000951,
+          "tokens_entrada": 1461,
+          "tokens_saida": 161,
+          "tokens_total": 1622,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "21faec65-ff57-4f91-b337-7a440a385855",
+          "timestamp": "2026-11-02T00:42:35.841844",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+          "confianca": 0.0,
+          "latencia_ms": 7510.955000005197,
+          "tokens_entrada": 1461,
+          "tokens_saida": 160,
+          "tokens_total": 1621,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "4048a86e-b2b4-4a74-89f5-c8c9c7768074",
+          "timestamp": "2026-11-02T00:42:43.370909",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de pressão alta em Caldeira de Vapor (CAL-001) é um evento de interesse, mas não há evidências diretas sobre a causa ou a relevância para a ordem de serviço. A categoria 'Utilidades' é a mais adequada.",
+          "confianca": 0.9,
+          "latencia_ms": 7526.907999999821,
+          "tokens_entrada": 1459,
+          "tokens_saida": 161,
+          "tokens_total": 1620,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "311d04e4-622c-4d4c-a28c-c0086f06930b",
+          "timestamp": "2026-11-02T00:42:51.188478",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de temperatura alta indica um problema na bomba centrífuga, que pode levar a falhas de operação. A prioridade é alta para prevenir danos.",
+          "confianca": 0.9,
+          "latencia_ms": 7816.995699991821,
+          "tokens_entrada": 1463,
+          "tokens_saida": 158,
+          "tokens_total": 1621,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "ed681e0a-285e-4222-bba9-c1d3163afe21",
+          "timestamp": "2026-11-02T00:42:58.127474",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de vibração indica um problema mecânico, o qual pode ser resolvido com manutenção prévia.",
+          "confianca": 0.9,
+          "latencia_ms": 6938.201800003299,
+          "tokens_entrada": 1464,
+          "tokens_saida": 135,
+          "tokens_total": 1599,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "478641ff-be3c-4651-931c-61ebedc76527",
+          "timestamp": "2026-11-02T00:43:05.871156",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de corrente alta indica um problema de circuito, o qual pode ser causado por falhas no sistema elétrico. A equipe de manutenção elétrica é responsável por identificar e resolver a falha.",
+          "confianca": 0.9,
+          "latencia_ms": 7742.474799990305,
+          "tokens_entrada": 1460,
+          "tokens_saida": 156,
+          "tokens_total": 1616,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "f26ead19-9933-4e8c-bfc6-12b16f5a6d4e",
+          "timestamp": "2026-11-02T00:43:15.896711",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "urgencia": "DESCONHECIDA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de perda de comunicação do CLP gerado pelo supervisório localiza-se na Linha 2 (Setor C). Isso sugere que há um problema de comunicação elétrica, que pode estar relacionado a falhas nos equipamentos elétricos ou em conexões. A equipe de Manutenção Elétrica é responsável por manter a infraestrutura elétrica, e a presença de falhas pode indicar necessidade de revisão.",
+          "confianca": 0.9,
+          "latencia_ms": 10023.35609999136,
+          "tokens_entrada": 1440,
+          "tokens_saida": 224,
+          "tokens_total": 1664,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "e8239e7e-2064-4941-bee7-4e783185b2a2",
+          "timestamp": "2026-11-02T00:43:23.356729",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de temperatura alta indica um problema em CHIL-001, que pode ser causado por falhas no sistema de refrigeração. A prioridade é P3 para atender a demanda imediata.",
+          "confianca": 0.9,
+          "latencia_ms": 7458.81830000144,
+          "tokens_entrada": 1458,
+          "tokens_saida": 148,
+          "tokens_total": 1606,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "86a069d2-5e90-4273-8243-64f7d6602977",
+          "timestamp": "2026-11-02T00:43:32.811063",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de nível baixo em Gerador de Emergência 500kVA (GER-001) indica que há um problema com a capacidade do gerador, o que pode afetar a operação da planta. A informação fornecida é clara e não há indícios de falhas em outros equipamentos.",
+          "confianca": 0.9,
+          "latencia_ms": 9452.236600001925,
+          "tokens_entrada": 1460,
+          "tokens_saida": 193,
+          "tokens_total": 1653,
+          "campos_sem_suporte": []
+        },
+        {
+          "id": "c77cdfd3-82ca-4740-bee7-10179d50937f",
+          "timestamp": "2026-11-02T00:43:41.078950",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de pressão baixa indica um problema com o compressor, que pode ser causado por falhas em componentes ou configurações. A prioridade de P3 é justificada pela natureza do problema e pela necessidade de atender a demanda imediata.",
+          "confianca": 0.9,
+          "latencia_ms": 8266.47149999917,
+          "tokens_entrada": 1460,
+          "tokens_saida": 166,
+          "tokens_total": 1626,
+          "campos_sem_suporte": []
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "ALM-001",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+        },
+        {
+          "id": "ALM-002",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+        },
+        {
+          "id": "ALM-003",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+        },
+        {
+          "id": "ALM-004",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-005",
+          "tipo": "ALARME",
+          "texto": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+        },
+        {
+          "id": "ALM-006",
+          "tipo": "ALARME",
+          "texto": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+        },
+        {
+          "id": "ALM-007",
+          "tipo": "ALARME",
+          "texto": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+        },
+        {
+          "id": "ALM-008",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-009",
+          "tipo": "ALARME",
+          "texto": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+        },
+        {
+          "id": "ALM-010",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+        }
+      ],
+      "elapsed_seconds": 81.20773069999996
+    },
+    "hibrido": {
+      "results": [
+        {
+          "id": "f9da6fd1-5828-48bc-938c-ba83e23368e5",
+          "timestamp": "2026-11-02T00:43:47.511855",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "caldeira de vapor CAL-001",
+            "sintomas": "[]",
+            "localizacao": "Caldeira de Vapor",
+            "urgencia_mencionada": "1.080 kPa",
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 6430.174299995997,
+          "tokens_entrada": 517,
+          "tokens_saida": 151,
+          "tokens_total": 668,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "14bff0ba-2c8d-4b6a-862e-a926fa7d794a",
+          "timestamp": "2026-11-02T00:43:53.758239",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "caldeira de vapor CAL-001",
+            "sintomas": "[]",
+            "localizacao": "Caldeira de Vapor",
+            "urgencia_mencionada": "1,04 MPa",
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 6245.492899994133,
+          "tokens_entrada": 517,
+          "tokens_saida": 149,
+          "tokens_total": 666,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "293d4b33-1974-49d4-aa6c-5e4295f7bc2c",
+          "timestamp": "2026-11-02T00:43:57.795684",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 4035.424799993052,
+          "tokens_entrada": 515,
+          "tokens_saida": 87,
+          "tokens_total": 602,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "b3b7e368-1a65-49f8-b558-2b71d4ea549c",
+          "timestamp": "2026-11-02T00:44:02.059189",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "palavras_categoria": "bomba, temperatura alta",
+            "regras_classificacao": "Regras: RULE-011, RULE-014. urgência ← RULE-011; prioridade ← RULE-011; equipe ← RULE-011; confiança ← RULE-011"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+          "confianca": 0.75,
+          "latencia_ms": 4262.663300003624,
+          "tokens_entrada": 519,
+          "tokens_saida": 83,
+          "tokens_total": 602,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "ec80d478-837f-4176-8a05-5e21622575d0",
+          "timestamp": "2026-11-02T00:44:08.534186",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "Motor-001",
+            "sintomas": "[]",
+            "localizacao": "Motor de Correia Transportadora",
+            "urgencia_mencionada": "11,2 mm/s",
+            "ativo_encontrado": "recuperado de assets.yaml: MOTOR-001 — Motor de Correia Transportadora",
+            "palavras_categoria": "vibração, motor, correia",
+            "regras_classificacao": "Regras: RULE-014. urgência ← RULE-014; prioridade ← RULE-014; equipe ← RULE-014; confiança ← RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 6473.657299997285,
+          "tokens_entrada": 520,
+          "tokens_saida": 148,
+          "tokens_total": 668,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "24f687fb-7c47-4b7f-84fb-839f6963a078",
+          "timestamp": "2026-11-02T00:44:15.361979",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "PANEL-002",
+            "sintomas": "[]",
+            "localizacao": "Motor Control Center (PANEL-002)",
+            "urgencia_mencionada": "Alarme de corrente alta",
+            "ativo_encontrado": "recuperado de assets.yaml: PANEL-002 — Painel MCC - Motor Control Center",
+            "palavras_categoria": "corrente alta, painel",
+            "regras_classificacao": "Regras: RULE-003, RULE-010. urgência ← RULE-003; prioridade ← RULE-003; equipe ← RULE-003; confiança ← RULE-003; revisão ← RULE-003"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Intervenção em instalação elétrica — sujeita à NR-10, exige trabalhador autorizado",
+          "confianca": 0.9,
+          "latencia_ms": 6827.108099998441,
+          "tokens_entrada": 516,
+          "tokens_saida": 156,
+          "tokens_total": 672,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ]
+        },
+        {
+          "id": "d148d368-8269-47a4-b896-bd677dcb2ba7",
+          "timestamp": "2026-11-02T00:44:18.985655",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "TI_AUTOMACAO",
+          "equipe_sugerida": "TI e Automação",
+          "regras_acionadas": [
+            "RULE-012"
+          ],
+          "evidencias": {
+            "palavras_categoria": "comunicação, CLP",
+            "regras_classificacao": "Regras: RULE-012. urgência ← RULE-012; prioridade ← RULE-012; equipe ← RULE-012; confiança ← RULE-012"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Baixa confiança na extração LLM — revisar manualmente.",
+          "confianca": 0.75,
+          "latencia_ms": 3622.4264000047697,
+          "tokens_entrada": 496,
+          "tokens_saida": 77,
+          "tokens_total": 573,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "cdb9b5cb-1114-427e-a9a6-781a7d9606d3",
+          "timestamp": "2026-11-02T00:44:25.708726",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CHIL-001",
+            "sintomas": "[]",
+            "localizacao": "Chiller de Água Gelada (CHIL-001)",
+            "urgencia_mencionada": "None",
+            "ativo_encontrado": "recuperado de assets.yaml: CHIL-001 — Chiller de Água Gelada",
+            "palavras_categoria": "chiller, água gelada",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 6722.247400000924,
+          "tokens_entrada": 514,
+          "tokens_saida": 152,
+          "tokens_total": 666,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "2f972979-56b6-43cd-9545-ae338ff80d9c",
+          "timestamp": "2026-11-02T00:44:30.339739",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-002",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: GER-001 — Gerador de Emergência 500kVA",
+            "palavras_categoria": "gerador",
+            "regras_classificacao": "Regras: RULE-002, RULE-010. urgência ← RULE-002; prioridade ← RULE-002; confiança ← RULE-002; equipe ← RULE-010; revisão ← RULE-002"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Palavras de emergência detectadas — situação crítica requer avaliação imediata",
+          "confianca": 0.9,
+          "latencia_ms": 4630.192600001465,
+          "tokens_entrada": 516,
+          "tokens_saida": 93,
+          "tokens_total": 609,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        },
+        {
+          "id": "20622448-ceed-4130-82b9-f25af8d6bf50",
+          "timestamp": "2026-11-02T00:44:34.770985",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-009",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-001 — Compressor de Ar Instrumento",
+            "palavras_categoria": "compressor de ar, ar instrumento",
+            "regras_classificacao": "Regras: RULE-009, RULE-015. urgência ← RULE-009; prioridade ← RULE-009; equipe ← RULE-009; confiança ← RULE-009"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.78,
+          "latencia_ms": 4429.232599999523,
+          "tokens_entrada": 516,
+          "tokens_saida": 88,
+          "tokens_total": 604,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ]
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "ALM-001",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+        },
+        {
+          "id": "ALM-002",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+        },
+        {
+          "id": "ALM-003",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+        },
+        {
+          "id": "ALM-004",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-005",
+          "tipo": "ALARME",
+          "texto": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+        },
+        {
+          "id": "ALM-006",
+          "tipo": "ALARME",
+          "texto": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+        },
+        {
+          "id": "ALM-007",
+          "tipo": "ALARME",
+          "texto": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+        },
+        {
+          "id": "ALM-008",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-009",
+          "tipo": "ALARME",
+          "texto": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+        },
+        {
+          "id": "ALM-010",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+        }
+      ],
+      "elapsed_seconds": 53.69160489999922
+    }
+  }
+}

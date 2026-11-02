@@ -1,0 +1,2 @@
+abordagem,f1_urgencia,f1_prioridade,f1_categoria,f1_equipe,taxa_revisao_humana,taxa_subestimacao_critica,latencia_media_ms,tokens_total_medio,tokens_total_soma,equipes_alucinadas,parse_falhou,fallbacks_extracao,total_cases,total_errors
+regras,1.0,1.0,0.7809523809523808,0.7809523809523808,0.4,0.0,30.484959999739658,0.0,0.0,0,0,0,5,0

@@ -79,7 +79,7 @@ extracao_palavras_chave        deteccao_categoria
 enriquecimento_contexto       (enrich_context: ativo, criticidade, equipe)
                    │
                    ▼
-motor_regras_producao         (apply_rules: avalia as 18 regras por prioridade_regra)
+motor_regras_producao         (apply_rules: avalia as 21 regras por prioridade_regra)
                    │
                    ▼
 montagem_resultado → TriageResult (abordagem=REGRAS)
@@ -89,7 +89,7 @@ montagem_resultado → TriageResult (abordagem=REGRAS)
 - Determinístico: mesmo texto sempre produz o mesmo resultado
 - Rápido: sem chamada de rede (latência tipicamente < 50 ms)
 - Rastreável: campo `regras_acionadas` lista cada regra disparada
-- Limitado: cobre apenas os cenários modelados nas 18 regras
+- Limitado: cobre apenas os cenários modelados nas 21 regras
 
 ---
 
@@ -162,7 +162,7 @@ motor_regras_producao         (regras determinam urgência/prioridade/equipe)
                        │
                        ▼
 montagem_resultado → TriageResult (abordagem=HIBRIDO, regras_acionadas=[...])
-  (evidências LLM + ativo_encontrado + regras_classificacao;
+  (evidências LLM + ativo_encontrado + palavras_categoria + regras_classificacao;
    revisão se fallback ou confiança de extração < 0,4)
 ```
 
@@ -256,11 +256,11 @@ contraditórios, sinalizando incerteza via `requer_revisao_humana=True` quando a
 1. Abra `data/rules.yaml` em um editor de texto.
 
 2. Adicione um novo bloco seguindo a estrutura existente. Escolha um ID sequencial
-   (`RULE-019`, `RULE-020`, etc.) e defina `prioridade_regra` — maior valor significa
+   (`RULE-021`, `RULE-022`, etc.) e defina `prioridade_regra` — maior valor significa
    maior precedência:
 
 ```yaml
-- id: "RULE-019"
+- id: "RULE-021"
   descricao: "Descrição clara em português do que esta regra cobre"
   condicoes:
     categoria: "MECANICA"          # valor de FailureCategory (opcional)
@@ -270,6 +270,7 @@ contraditórios, sinalizando incerteza via `requer_revisao_humana=True` quando a
     risco_seguranca: true          # bool (opcional)
     impacto_producao: true         # bool (opcional)
     criticidade_ativo: "ALTA"      # "ALTA" | "MEDIA" | "BAIXA" (opcional)
+    norma_ativo: "NR-13"           # norma do ativo em assets.yaml; OR com palavras_chave (opcional)
     operador: "AND"                # "AND" (padrão) ou "OR" entre condições acima
   acoes:
     urgencia: "ALTA"               # valor de UrgencyLevel
@@ -278,6 +279,7 @@ contraditórios, sinalizando incerteza via `requer_revisao_humana=True` quando a
     requer_revisao_humana: false
     confianca: 0.80                # float 0..1
   prioridade_regra: 45             # inteiro; maior = maior precedência
+  fundamentacao: "Critério da autora"  # ou norma e item (ex: "NR-13, item 13.3.1")
 ```
 
 3. Valide carregando as regras:
@@ -290,9 +292,10 @@ python -c "from src.rules.definitions import load_rules; r = load_rules(); print
 pytest tests/test_rules_engine.py tests/test_rules_definitions.py -v
 ```
 
-> **Nota sobre precedência:** o motor aplica a primeira regra (maior `prioridade_regra`)
-> cujas condições são satisfeitas. Verifique se a nova regra não colide com regras
-> existentes de prioridade próxima.
+> **Nota sobre precedência:** cada campo de ação vem da regra disparada de maior
+> `prioridade_regra` que o define; a revisão humana é exigida se **qualquer** regra
+> disparada a exigir. Verifique se a nova regra não colide com regras existentes de
+> prioridade próxima.
 
 ---
 
@@ -403,7 +406,7 @@ sistema. Para abordagens LLM, a variância é alta e depende do hardware local.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `data/rules.yaml` | 18 regras de produção |
+| `data/rules.yaml` | 21 regras de produção |
 | `data/assets.yaml` | 18 ativos industriais sintéticos |
 | `data/teams.yaml` | 6 equipes de manutenção |
 | `data/categories.yaml` | 12 categorias de falha com palavras-chave |

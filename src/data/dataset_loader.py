@@ -33,6 +33,8 @@ CaseType = Literal[
     "FORA_ESCOPO",
     "ALTA_CRITICIDADE",
     "REVISAO_HUMANA",
+    # OS geradas a partir de alarmes do supervisório simulado (datasets/alarm_cases.json)
+    "ALARME",
 ]
 
 # ---------------------------------------------------------------------------

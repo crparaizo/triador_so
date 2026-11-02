@@ -183,8 +183,8 @@ def test_dataset_case_invalido_alta_criticidade_sem_imediata():
 
 
 def test_distribuicao_todos_tipos_presentes(dataset: list[DatasetCase]):
-    """Todos os 10 tipos definidos em CaseType devem estar presentes no dataset."""
+    """Os 10 tipos do dataset principal devem estar presentes (ALARME fica em arquivo próprio)."""
     tipos_no_dataset = {c.tipo for c in dataset}
-    todos_tipos = set(get_args(CaseType))
+    todos_tipos = set(get_args(CaseType)) - {"ALARME"}
     ausentes = todos_tipos - tipos_no_dataset
     assert ausentes == set(), f"Tipos ausentes no dataset: {ausentes}"

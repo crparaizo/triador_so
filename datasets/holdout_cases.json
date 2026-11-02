@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "VAL-001",
+    "tipo": "CANONICO",
+    "texto": "A bomba de transferência BOMB-002 apresenta aquecimento anormal no mancal e ruído metálico. Setor B - Produção.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha mecânica em ativo de criticidade ALTA, sem impacto declarado: ALTA/P2."
+  },
+  {
+    "id": "VAL-002",
+    "tipo": "CANONICO",
+    "texto": "Compressor de ar instrumento COMP-001 desarmou duas vezes no turno. As válvulas pneumáticas da Linha 2 perderam pressão de atuação e a produção da linha foi interrompida.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Ativo crítico com produção interrompida: prioridade P1, como no CASE-002."
+  },
+  {
+    "id": "VAL-003",
+    "tipo": "CANONICO",
+    "texto": "Motor da correia transportadora MOTOR-001 com ruído de rolamento e leve vibração. Equipamento segue operando.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha mecânica em ativo de criticidade MEDIA, sem impacto: MEDIA/P3."
+  },
+  {
+    "id": "VAL-004",
+    "tipo": "CANONICO",
+    "texto": "Painel MCC PANEL-002 com cheiro de isolamento queimado e disjuntor de um dos inversores desarmando repetidamente.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha em painel elétrico de potência com indício de queima: intervenção sujeita à NR-10, como no CASE-004."
+  },
+  {
+    "id": "VAL-005",
+    "tipo": "CANONICO",
+    "texto": "Transformador TRANS-001 com temperatura do óleo acima do normal no monitoramento contínuo. Sem desligamento até o momento.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Anomalia em transformador de potência ainda sem falha: ALTA/P2, com revisão por envolver intervenção sujeita à NR-10."
+  },
+  {
+    "id": "VAL-006",
+    "tipo": "CANONICO",
+    "texto": "Sensor de temperatura SENS-001 do Reator 1 com leitura oscilando 15 °C em poucos segundos, sem mudança no processo.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Leitura incoerente de instrumento: ALTA/P2, critério de instrumentação do conjunto principal."
+  },
+  {
+    "id": "VAL-007",
+    "tipo": "CANONICO",
+    "texto": "Válvula de controle elétrica VALV-002 não responde ao comando do supervisório; atuador sem retorno de posição.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha de elemento final de controle: ALTA/P2."
+  },
+  {
+    "id": "VAL-008",
+    "tipo": "CANONICO",
+    "texto": "Caldeira CAL-001 com chama apagando várias vezes durante a manhã. Produção de vapor instável e linha de envase parada.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Caldeira com impacto na produção, equipamento abrangido pela NR-13: IMEDIATA/P1, como no CASE-008."
+  },
+  {
+    "id": "VAL-009",
+    "tipo": "CANONICO",
+    "texto": "Compressor de refrigeração COMP-003 com consumo de corrente acima do habitual e ciclos curtos. Temperatura da câmara ainda dentro do limite.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Utilidade de criticidade MEDIA sem impacto: MEDIA/P3."
+  },
+  {
+    "id": "VAL-010",
+    "tipo": "CANONICO",
+    "texto": "Elevador de carga ELEV-001 parando fora do nível do andar na área de armazenagem.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Infraestrutura sem risco declarado: MEDIA/P3, como no CASE-010."
+  },
+  {
+    "id": "VAL-011",
+    "tipo": "CANONICO",
+    "texto": "Estação de engenharia não consegue baixar a lógica para o CLP da Linha 2; erro de comunicação na rede industrial.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "TI_AUTOMACAO",
+      "equipe": "TI e Automação",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha de automação (CLP e rede industrial): ALTA/P2."
+  },
+  {
+    "id": "VAL-012",
+    "tipo": "CANONICO",
+    "texto": "Reator 1 com temperatura de reação acima do setpoint e controle automático saturado. Produção do Setor B reduzida.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "PROCESSO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Desvio de processo com redução de produção: ALTA/P2, como no CASE-012."
+  },
+  {
+    "id": "VAL-013",
+    "tipo": "CANONICO",
+    "texto": "Lote produzido no turno da noite com viscosidade fora da especificação. Produto segregado para análise.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "QUALIDADE",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Produto fora de especificação: ALTA/P2, como no CASE-013."
+  },
+  {
+    "id": "VAL-014",
+    "tipo": "CANONICO",
+    "texto": "Vazamento de vapor quente na casa de caldeiras atingiu um operador, que sofreu queimadura leve. Área isolada.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "SEGURANCA",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Acidente com trabalhador: grave e iminente risco (NR-3)."
+  },
+  {
+    "id": "VAL-015",
+    "tipo": "CANONICO",
+    "texto": "Inspeção preventiva semestral do painel PANEL-001 com termografia, conforme plano de manutenção.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Manutenção preventiva programada, sem falha relatada: BAIXA/P4, como no CASE-015."
+  },
+  {
+    "id": "VAL-016",
+    "tipo": "PARAFRASES",
+    "texto": "O mancal da BOMB-002 está esquentando demais e fazendo um barulho de metal raspando, lá no setor de produção B.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-001",
+    "notas": "Paráfrase de VAL-001 em linguagem informal."
+  },
+  {
+    "id": "VAL-017",
+    "tipo": "PARAFRASES",
+    "texto": "A Linha 2 parou porque as válvulas ficaram sem ar: o COMP-001 desligou sozinho duas vezes hoje.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-002",
+    "notas": "Paráfrase de VAL-002 com efeito antes da causa."
+  },
+  {
+    "id": "VAL-018",
+    "tipo": "PARAFRASES",
+    "texto": "Correia transportadora: o motor MOTOR-001 está com barulho de rolamento e tremendo um pouco, mas continua funcionando.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-003",
+    "notas": "Paráfrase de VAL-003."
+  },
+  {
+    "id": "VAL-019",
+    "tipo": "PARAFRASES",
+    "texto": "Sentimos cheiro de queimado no MCC (PANEL-002) e um dos disjuntores dos inversores não para de desarmar.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": "VAL-004",
+    "notas": "Paráfrase de VAL-004."
+  },
+  {
+    "id": "VAL-020",
+    "tipo": "PARAFRASES",
+    "texto": "O monitoramento do TRANS-001 mostra o óleo mais quente que o normal; o transformador ainda não desligou.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": "VAL-005",
+    "notas": "Paráfrase de VAL-005."
+  },
+  {
+    "id": "VAL-021",
+    "tipo": "PARAFRASES",
+    "texto": "A leitura do SENS-001 no Reator 1 sobe e desce uns 15 graus em segundos, sem nada mudar no processo.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-006",
+    "notas": "Paráfrase de VAL-006."
+  },
+  {
+    "id": "VAL-022",
+    "tipo": "PARAFRASES",
+    "texto": "O supervisório manda abrir a VALV-002 e ela não se mexe; também não aparece a posição do atuador.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-007",
+    "notas": "Paráfrase de VAL-007."
+  },
+  {
+    "id": "VAL-023",
+    "tipo": "PARAFRASES",
+    "texto": "A chama da CAL-001 apagou várias vezes desde cedo, o vapor oscila e o envase está parado.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": "VAL-008",
+    "notas": "Paráfrase de VAL-008."
+  },
+  {
+    "id": "VAL-024",
+    "tipo": "PARAFRASES",
+    "texto": "COMP-003 da refrigeração puxando mais corrente que o normal e ligando e desligando toda hora; a câmara ainda segura a temperatura.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-009",
+    "notas": "Paráfrase de VAL-009."
+  },
+  {
+    "id": "VAL-025",
+    "tipo": "PARAFRASES",
+    "texto": "O ELEV-001 do armazém está parando desalinhado com o piso dos andares.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-010",
+    "notas": "Paráfrase de VAL-010."
+  },
+  {
+    "id": "VAL-026",
+    "tipo": "PARAFRASES",
+    "texto": "Não conseguimos carregar o programa no CLP da Linha 2 pela estação de engenharia: dá falha de comunicação na rede.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "TI_AUTOMACAO",
+      "equipe": "TI e Automação",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-011",
+    "notas": "Paráfrase de VAL-011."
+  },
+  {
+    "id": "VAL-027",
+    "tipo": "PARAFRASES",
+    "texto": "Temperatura do Reator 1 passou do setpoint e a malha de controle está no limite; o Setor B reduziu a produção.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "PROCESSO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-012",
+    "notas": "Paráfrase de VAL-012."
+  },
+  {
+    "id": "VAL-028",
+    "tipo": "PARAFRASES",
+    "texto": "O lote da noite saiu com viscosidade fora do especificado e foi separado para análise.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "QUALIDADE",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-013",
+    "notas": "Paráfrase de VAL-013."
+  },
+  {
+    "id": "VAL-029",
+    "tipo": "PARAFRASES",
+    "texto": "Um operador foi atingido por vapor quente que vazou na casa de caldeiras e teve uma queimadura leve; isolamos a área.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "SEGURANCA",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": "VAL-014",
+    "notas": "Paráfrase de VAL-014."
+  },
+  {
+    "id": "VAL-030",
+    "tipo": "PARAFRASES",
+    "texto": "Programar a termografia semestral do PANEL-001, prevista no plano de manutenção preventiva.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": "VAL-015",
+    "notas": "Paráfrase de VAL-015."
+  },
+  {
+    "id": "VAL-031",
+    "tipo": "ABREVIACOES",
+    "texto": "BOMB-002 c/ temp. alta no mancal e ruído metál. Set. B.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: c/, temp., metál., Set."
+  },
+  {
+    "id": "VAL-032",
+    "tipo": "ABREVIACOES",
+    "texto": "COMP-001 desarmou, s/ ar p/ válv. pneum. L2 parada.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: s/, p/, válv., pneum., L2. Produção interrompida."
+  },
+  {
+    "id": "VAL-033",
+    "tipo": "ABREVIACOES",
+    "texto": "PANEL-002 c/ ch. de queimado, disj. desarmando. Verif. NR-10.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: ch., disj., Verif. Indício de queima em painel (NR-10)."
+  },
+  {
+    "id": "VAL-034",
+    "tipo": "ABREVIACOES",
+    "texto": "TRANS-002 c/ sinal travado em 20 mA, s/ var. Verif. instr.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: s/ var., instr. Sinal travado de transmissor."
+  },
+  {
+    "id": "VAL-035",
+    "tipo": "ABREVIACOES",
+    "texto": "CAL-001 c/ válv. seg. vazando e press. oscilando. Verif. urg.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: válv. seg., press., urg. Dispositivo de segurança da caldeira com defeito (NR-13)."
+  },
+  {
+    "id": "VAL-036",
+    "tipo": "ABREVIACOES",
+    "texto": "CLP L1 s/ com. c/ SCADA. Tela congelada.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "TI_AUTOMACAO",
+      "equipe": "TI e Automação",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: L1, s/ com. Perda de comunicação CLP-SCADA."
+  },
+  {
+    "id": "VAL-037",
+    "tipo": "ABREVIACOES",
+    "texto": "Eqp. parado set. C, s/ info.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações e ausência de informação: sem ativo nem sintoma."
+  },
+  {
+    "id": "VAL-038",
+    "tipo": "ABREVIACOES",
+    "texto": "Prev. mens. MOTOR-001: lubrif. e insp. correia.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Abreviações: Prev. mens., lubrif., insp. Manutenção preventiva mensal."
+  },
+  {
+    "id": "VAL-039",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Bomba BOMB-002 com mancal esquentano e baruho metalico no setor B.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: esquentano, baruho, metalico."
+  },
+  {
+    "id": "VAL-040",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Compresor COMP-001 desamrou e a linha 2 pârou sem ar nas valvulas.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Compresor, desamrou, pârou, valvulas. Produção interrompida."
+  },
+  {
+    "id": "VAL-041",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Painel PANEL-002 com xeiro de queimado e disjuntor desarmano toda ora.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: xeiro, desarmano, ora. Indício de queima em painel (NR-10)."
+  },
+  {
+    "id": "VAL-042",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Transmisor TRANS-002 com sinau parado, não varia com a presão.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Transmisor, sinau, presão."
+  },
+  {
+    "id": "VAL-043",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Caudeira CAL-001 sem controle de nivel de agua funcionando, operador no manual.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Caudeira, nivel, agua. Controle de nível indisponível: NR-13, item 13.3.1, alínea d."
+  },
+  {
+    "id": "VAL-044",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Chiler CHIL-001 com temperatura da agua gelada subino devagar.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Chiler, agua, subino. Utilidade sem impacto, como no CASE-009."
+  },
+  {
+    "id": "VAL-045",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Ta dando problema em algum equipamento do setor A, ninguem sabe direito.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Ta, ninguem. Relato vago."
+  },
+  {
+    "id": "VAL-046",
+    "tipo": "ERROS_ESCRITA",
+    "texto": "Elevadro ELEV-001 com porta nao fechando direito.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Erros: Elevadro, nao. Infraestrutura sem risco declarado."
+  },
+  {
+    "id": "VAL-047",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "BOMB-002 com vibração alta, vazamento pelo selo mecânico e corrente do motor elevada. Setor B.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas mecânicos e elétricos; categoria dominante mecânica; ativo crítico sem impacto."
+  },
+  {
+    "id": "VAL-048",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "COMP-002 com temperatura de descarga alta, óleo escurecido e queda de vazão. Produção do Setor C parada.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas mecânicos e de processo com produção parada: P1."
+  },
+  {
+    "id": "VAL-049",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "PANEL-001 com aquecimento em barramento detectado na termografia, ruído de zumbido e oscilação de tensão na planta.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas elétricos em painel principal com efeito na planta (NR-10)."
+  },
+  {
+    "id": "VAL-050",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "VALV-001 com vazamento pela gaxeta, posicionador oscilando e malha de pressão do Reator 1 instável.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas de instrumentação e processo; categoria dominante instrumentação."
+  },
+  {
+    "id": "VAL-051",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "CHIL-001 com alarme de baixa pressão de sucção, gelo na linha e água gelada acima do setpoint.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas de refrigeração sem impacto declarado: MEDIA/P3, como no CASE-009."
+  },
+  {
+    "id": "VAL-052",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "SCADA lento, histórico com lacunas e alarmes chegando com atraso ao operador.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "TI_AUTOMACAO",
+      "equipe": "TI e Automação",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas de automação no supervisório."
+  },
+  {
+    "id": "VAL-053",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "Motor MOTOR-001 com cheiro de queimado, correia patinando e ruído de rolamento.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Cheiro de queimado eleva a urgência em relação a uma falha mecânica comum em ativo de criticidade MEDIA."
+  },
+  {
+    "id": "VAL-054",
+    "tipo": "MULTIPLOS_SINTOMAS",
+    "texto": "Vários sintomas no Setor C: ruído, aquecimento e cheiro forte, sem identificação do equipamento.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintomas múltiplos sem ativo identificado."
+  },
+  {
+    "id": "VAL-055",
+    "tipo": "INCOMPLETOS",
+    "texto": "Parou de novo. Mesma coisa de ontem.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sem ativo, sintoma ou local."
+  },
+  {
+    "id": "VAL-056",
+    "tipo": "INCOMPLETOS",
+    "texto": "Preciso de um técnico no Setor B o quanto antes.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Só local e pedido de urgência, sem sintoma."
+  },
+  {
+    "id": "VAL-057",
+    "tipo": "INCOMPLETOS",
+    "texto": "Equipamento com defeito, favor verificar.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Relato genérico."
+  },
+  {
+    "id": "VAL-058",
+    "tipo": "INCOMPLETOS",
+    "texto": "Deu problema na produção.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Relato genérico."
+  },
+  {
+    "id": "VAL-059",
+    "tipo": "INCOMPLETOS",
+    "texto": "Alguma coisa vazando perto da casa de máquinas.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Vazamento sem identificação do fluido nem do equipamento."
+  },
+  {
+    "id": "VAL-060",
+    "tipo": "INCOMPLETOS",
+    "texto": "Motor fazendo barulho estranho, não sei qual.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma mecânico sem ativo identificado: MEDIA/P3, como no CASE-060."
+  },
+  {
+    "id": "VAL-061",
+    "tipo": "INCOMPLETOS",
+    "texto": "Painel elétrico com luz de falha acesa, local não informado.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma elétrico sem ativo nem local: MEDIA/P3, como no CASE-062."
+  },
+  {
+    "id": "VAL-062",
+    "tipo": "INCOMPLETOS",
+    "texto": "Válvula travada em alguma linha do Setor C.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma de instrumentação sem ativo identificado."
+  },
+  {
+    "id": "VAL-063",
+    "tipo": "CONTRADITORIOS",
+    "texto": "COMP-002 desligou por alarme de alta temperatura, mas o operador diz que o equipamento está frio e operando.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Contradição entre desligamento por alarme e equipamento operando."
+  },
+  {
+    "id": "VAL-064",
+    "tipo": "CONTRADITORIOS",
+    "texto": "TRANS-002 indica pressão zero na Linha 2, porém o manômetro local mostra pressão normal.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Prevalece a evidência técnica: indicação falsa do transmissor."
+  },
+  {
+    "id": "VAL-065",
+    "tipo": "CONTRADITORIOS",
+    "texto": "Relato de vazamento grande de óleo na BOMB-001; a equipe que foi ao local diz que não encontrou vazamento.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Relato não confirmado em campo."
+  },
+  {
+    "id": "VAL-066",
+    "tipo": "CONTRADITORIOS",
+    "texto": "PANEL-001 com cheiro de queimado segundo o turno da noite; o turno da manhã não sentiu nada.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Indício de queima não confirmado: prevalece a cautela, com revisão (NR-10)."
+  },
+  {
+    "id": "VAL-067",
+    "tipo": "CONTRADITORIOS",
+    "texto": "Chiller CHIL-001 parado por falha, mas a sala de controle informa que a água gelada está no setpoint.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Contradição entre falha e variável controlada normal."
+  },
+  {
+    "id": "VAL-068",
+    "tipo": "CONTRADITORIOS",
+    "texto": "Elevador ELEV-001 funcionando normalmente, mas preso entre andares com carga.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Contradição; prevalece o fato de o elevador estar preso com carga."
+  },
+  {
+    "id": "VAL-069",
+    "tipo": "CONTRADITORIOS",
+    "texto": "Falha urgente sem importância no Setor A.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Contradição interna e ausência de informação."
+  },
+  {
+    "id": "VAL-070",
+    "tipo": "CONTRADITORIOS",
+    "texto": "CAL-001 com pressão alta segundo o painel e baixa segundo o operador de campo.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Leituras divergentes em caldeira: revisão para confirmar antes de agir."
+  },
+  {
+    "id": "VAL-071",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Solicito segunda via do holerite do mês passado.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: folha de pagamento."
+  },
+  {
+    "id": "VAL-072",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Preciso agendar minhas férias para dezembro.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: gestão de pessoas."
+  },
+  {
+    "id": "VAL-073",
+    "tipo": "FORA_ESCOPO",
+    "texto": "A impressora do escritório está sem toner.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: suprimentos de escritório."
+  },
+  {
+    "id": "VAL-074",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Gostaria de reservar o auditório para o treinamento da equipe comercial.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: reserva de espaço."
+  },
+  {
+    "id": "VAL-075",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Preciso trocar a senha do sistema de folha de pagamento.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: acesso a sistema corporativo."
+  },
+  {
+    "id": "VAL-076",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Pedido de compra de cadeiras novas para o setor comercial.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: compras."
+  },
+  {
+    "id": "VAL-077",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Dúvida sobre o reembolso do plano de saúde.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: benefícios."
+  },
+  {
+    "id": "VAL-078",
+    "tipo": "FORA_ESCOPO",
+    "texto": "Preciso do relatório de vendas do trimestre para a diretoria.",
+    "esperado": {
+      "urgencia": "BAIXA",
+      "prioridade": "P4",
+      "categoria": "FORA_DO_ESCOPO",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": false
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Fora do escopo: relatório comercial."
+  },
+  {
+    "id": "VAL-079",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Incêndio no painel PANEL-002, chamas visíveis no Setor A. Brigada acionada.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Incêndio em painel elétrico."
+  },
+  {
+    "id": "VAL-080",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Explosão seguida de vazamento de vapor na linha da CAL-001. Área evacuada.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Explosão e vazamento de vapor em caldeira."
+  },
+  {
+    "id": "VAL-081",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Válvula de segurança da caldeira CAL-001 bloqueada para manutenção com a caldeira em operação.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Bloqueio de dispositivo de segurança com a caldeira operando: NR-13, item 13.3.1, alínea c."
+  },
+  {
+    "id": "VAL-082",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Operador caiu de uma plataforma durante a troca de lâmpadas no galpão; atendimento médico a caminho.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "SEGURANCA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Acidente com queda de trabalhador."
+  },
+  {
+    "id": "VAL-083",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Vazamento de gás refrigerante do COMP-003 na casa de máquinas, operadores com tontura.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "SEGURANCA",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Vazamento de gás com efeito sobre trabalhadores."
+  },
+  {
+    "id": "VAL-084",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Reator 1 com pressão subindo sem controle e alarme de emergência ativo. Risco de ruptura.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "PROCESSO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Perda de controle de processo com risco de ruptura."
+  },
+  {
+    "id": "VAL-085",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Transformador TRANS-001 em chamas na subestação principal. Planta sem energia.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Incêndio em transformador com perda total de energia."
+  },
+  {
+    "id": "VAL-086",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Rompimento do eixo da BOMB-001 com projeção de peças. Operador atingido de raspão.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe": "Manutenção Mecânica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Falha mecânica grave com trabalhador atingido."
+  },
+  {
+    "id": "VAL-087",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Indicador de pressão da caldeira CAL-001 quebrado e nível de água sem controle automático, com a caldeira operando.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Dispositivos de segurança da caldeira indisponíveis: NR-13, item 13.3.1, alíneas a e d."
+  },
+  {
+    "id": "VAL-088",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Choque elétrico em técnico durante intervenção no PANEL-001 energizado.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "SEGURANCA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Acidente elétrico em intervenção (NR-10)."
+  },
+  {
+    "id": "VAL-089",
+    "tipo": "ALTA_CRITICIDADE",
+    "texto": "Alarme geral de emergência acionado no Setor D sem causa conhecida; evacuação em andamento.",
+    "esperado": {
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "OUTROS",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Emergência geral sem causa identificada, como no CASE-089."
+  },
+  {
+    "id": "VAL-090",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Barulho estranho em algum ponto da linha, some e volta sem padrão.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma intermitente sem origem identificada."
+  },
+  {
+    "id": "VAL-091",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Operador acha que algo pode estar errado com a caldeira, mas não sabe dizer o quê.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Suspeita vaga em equipamento identificado."
+  },
+  {
+    "id": "VAL-092",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Leituras divergentes entre dois sensores redundantes do Reator 1; não se sabe qual está correto.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INSTRUMENTACAO",
+      "equipe": "Instrumentação e Controle",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Incerteza de medição entre instrumentos redundantes."
+  },
+  {
+    "id": "VAL-093",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Possível falha intermitente na rede industrial, ainda sem confirmação.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "TI_AUTOMACAO",
+      "equipe": "TI e Automação",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Suspeita não confirmada de falha de automação."
+  },
+  {
+    "id": "VAL-094",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Funcionário relata ter visto faísca, mas não lembra em qual painel.",
+    "esperado": {
+      "urgencia": "ALTA",
+      "prioridade": "P2",
+      "categoria": "ELETRICA",
+      "equipe": "Manutenção Elétrica",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Indício elétrico sem ativo identificado: cautela e revisão (NR-10)."
+  },
+  {
+    "id": "VAL-095",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Troca de telhas danificadas no telhado do galpão exige trabalho em altura.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Serviço de infraestrutura com trabalho em altura: revisão pela NR-35, itens 35.2.1 e 35.3.1."
+  },
+  {
+    "id": "VAL-096",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Cheiro diferente na área de armazenagem desde ontem, origem desconhecida.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma vago sem origem."
+  },
+  {
+    "id": "VAL-097",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "O desempenho da planta caiu sem motivo aparente nesta semana.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Sintoma global sem ativo nem causa."
+  },
+  {
+    "id": "VAL-098",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Equipamento com comportamento diferente após a última manutenção; ninguém confirma o problema.",
+    "esperado": {
+      "urgencia": "DESCONHECIDA",
+      "prioridade": "DESCONHECIDA",
+      "categoria": "DESCONHECIDA",
+      "equipe": "DESCONHECIDA",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Suspeita não confirmada, sem ativo."
+  },
+  {
+    "id": "VAL-099",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Montagem de andaime para inspeção da tubulação de vapor a 6 metros de altura.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe": "Utilidades",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Serviço com trabalho em altura acima de 2 m: revisão pela NR-35."
+  },
+  {
+    "id": "VAL-100",
+    "tipo": "REVISAO_HUMANA",
+    "texto": "Alarmes repetidos do HVAC-001 aparecem e somem; a sala de controle às vezes fica quente.",
+    "esperado": {
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "INFRAESTRUTURA",
+      "equipe": "Infraestrutura e Facilities",
+      "requer_revisao_humana": true
+    },
+    "referencia_caso_canonico": null,
+    "notas": "Comportamento intermitente, como no CASE-096."
+  }
+]

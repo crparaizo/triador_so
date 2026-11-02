@@ -1,0 +1,52 @@
+[
+  {
+    "evento": {"id": "ALM-001", "tag": "CAL-001", "variavel": "pressao", "sentido": "alto", "valor": 1080, "limite": 950, "unidade": "kPa"},
+    "esperado": {"urgencia": "IMEDIATA", "prioridade": "P1", "categoria": "UTILIDADES", "equipe": "Utilidades", "requer_revisao_humana": true},
+    "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+  },
+  {
+    "evento": {"id": "ALM-002", "tag": "CAL-001", "variavel": "pressao", "sentido": "alto", "valor": 1.04, "limite": 0.95, "unidade": "MPa"},
+    "esperado": {"urgencia": "IMEDIATA", "prioridade": "P1", "categoria": "UTILIDADES", "equipe": "Utilidades", "requer_revisao_humana": true},
+    "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+  },
+  {
+    "evento": {"id": "ALM-003", "tag": "CAL-001", "variavel": "pressao", "sentido": "alto", "valor": 980, "limite": 950, "unidade": "kPa"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "UTILIDADES", "equipe": "Utilidades", "requer_revisao_humana": false},
+    "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+  },
+  {
+    "evento": {"id": "ALM-004", "tag": "BOMB-001", "variavel": "temperatura", "sentido": "alto", "valor": 92, "limite": 80, "unidade": "°C"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "MECANICA", "equipe": "Manutenção Mecânica", "requer_revisao_humana": false},
+    "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+  },
+  {
+    "evento": {"id": "ALM-005", "tag": "MOTOR-001", "variavel": "vibracao", "sentido": "alto", "valor": 11.2, "limite": 7.1, "unidade": "mm/s"},
+    "esperado": {"urgencia": "MEDIA", "prioridade": "P3", "categoria": "MECANICA", "equipe": "Manutenção Mecânica", "requer_revisao_humana": false},
+    "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+  },
+  {
+    "evento": {"id": "ALM-006", "tag": "PANEL-002", "variavel": "corrente", "sentido": "alto", "valor": 420, "limite": 380, "unidade": "A"},
+    "esperado": {"urgencia": "IMEDIATA", "prioridade": "P1", "categoria": "ELETRICA", "equipe": "Manutenção Elétrica", "requer_revisao_humana": true},
+    "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+  },
+  {
+    "evento": {"id": "ALM-007", "local": "Linha 2 (Setor C)", "descricao": "perda de comunicação do CLP"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "TI_AUTOMACAO", "equipe": "TI e Automação", "requer_revisao_humana": false},
+    "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+  },
+  {
+    "evento": {"id": "ALM-008", "tag": "CHIL-001", "variavel": "temperatura", "sentido": "alto", "valor": 12, "limite": 9, "unidade": "°C"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "UTILIDADES", "equipe": "Utilidades", "requer_revisao_humana": false},
+    "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+  },
+  {
+    "evento": {"id": "ALM-009", "tag": "GER-001", "variavel": "nivel", "sentido": "baixo", "valor": 65, "limite": 80, "unidade": "%"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "ELETRICA", "equipe": "Manutenção Elétrica", "requer_revisao_humana": false},
+    "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+  },
+  {
+    "evento": {"id": "ALM-010", "tag": "COMP-001", "variavel": "pressao", "sentido": "baixo", "valor": 420, "limite": 550, "unidade": "kPa"},
+    "esperado": {"urgencia": "ALTA", "prioridade": "P2", "categoria": "MECANICA", "equipe": "Manutenção Mecânica", "requer_revisao_humana": false},
+    "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+  }
+]

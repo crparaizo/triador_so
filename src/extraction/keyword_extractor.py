@@ -32,6 +32,20 @@ def _normalize(texto: str) -> str:
     return nfd.encode("ascii", "ignore").decode()
 
 
+def contem_termo(termo_norm: str, texto_norm: str) -> bool:
+    """
+    Verifica se um termo normalizado ocorre no texto normalizado.
+
+    Abreviações de até 3 letras (ex.: "nc", "pid", "cor", "rh") são comparadas
+    como palavra inteira, pois como substring casariam dentro de outras
+    palavras ("segurança", "rápido", "corrosão"). Termos maiores seguem por
+    substring, o que tolera plurais e flexões.
+    """
+    if len(termo_norm) <= 3:
+        return re.search(rf"\b{re.escape(termo_norm)}\b", texto_norm) is not None
+    return termo_norm in texto_norm
+
+
 class KeywordExtractor:
     """
     Extrator de informações por palavras-chave a partir de texto livre.
@@ -137,7 +151,7 @@ class KeywordExtractor:
             palavras = cat_data.get("palavras_chave", [])
             for palavra in palavras:
                 palavra_norm = _normalize(palavra)
-                if palavra_norm in texto_norm and palavra not in sintomas_vistos:
+                if contem_termo(palavra_norm, texto_norm) and palavra not in sintomas_vistos:
                     sintomas_vistos.add(palavra)
                     sintomas.append(palavra)
 
@@ -167,7 +181,7 @@ class KeywordExtractor:
         # --- Passo 7: detectar risco de segurança ---
         risco_seguranca: Optional[bool] = None
         for kw in self._RISCO_KEYWORDS:
-            if kw in texto_norm:
+            if contem_termo(kw, texto_norm):
                 risco_seguranca = True
                 evidencias["risco_seguranca"] = kw
                 break
@@ -224,15 +238,11 @@ class KeywordExtractor:
         Returns:
             FailureCategory enum — nunca retorna string.
         """
-        texto_norm = _normalize(texto)
         max_contagem = 0
         melhor_categoria: Optional[str] = None
 
-        for categoria_nome, cat_data in self.categories.items():
-            palavras = cat_data.get("palavras_chave", [])
-            contagem = sum(
-                1 for p in palavras if _normalize(p) in texto_norm
-            )
+        for categoria_nome in self.categories:
+            contagem = len(self.termos_categoria(texto, categoria_nome))
             if contagem > max_contagem:
                 max_contagem = contagem
                 melhor_categoria = categoria_nome
@@ -244,3 +254,21 @@ class KeywordExtractor:
                 return FailureCategory.DESCONHECIDA
 
         return FailureCategory.DESCONHECIDA
+
+    def termos_categoria(self, texto: str, categoria: str) -> list[str]:
+        """
+        Lista as palavras-chave da categoria encontradas no relato.
+
+        São os termos contados por detect_category; registrados como evidência,
+        mostram por que a categoria foi escolhida.
+
+        Args:
+            texto: relato livre da ocorrência.
+            categoria: nome da categoria (ex: 'MECANICA').
+
+        Returns:
+            Palavras-chave na forma cadastrada em categories.yaml.
+        """
+        texto_norm = _normalize(texto)
+        palavras = self.categories.get(categoria, {}).get("palavras_chave", [])
+        return [p for p in palavras if contem_termo(_normalize(p), texto_norm)]

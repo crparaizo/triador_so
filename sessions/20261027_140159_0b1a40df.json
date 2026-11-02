@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-10-27T14:01:59.897010",
+  "texto": "A bomba de água da linha 3 está fazendo barulho estranho e perdendo pressão",
+  "results": {
+    "regras": {
+      "id": "d128cd2e-2c97-49fa-9a7f-00f1b80af7bd",
+      "timestamp": "2026-10-27T14:01:11.321695",
+      "abordagem": "REGRAS",
+      "texto_entrada": "A bomba de água da linha 3 está fazendo barulho estranho e perdendo pressão",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-014"
+      ],
+      "evidencias": {
+        "sintomas": "barulho, bomba"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 300.3917000005458,
+      "tokens_entrada": 0,
+      "tokens_saida": 0,
+      "tokens_total": 0,
+      "campos_sem_suporte": [
+        "ativo_mencionado",
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "28f3aa94-a76e-4ffe-b4c0-bb04b3f3acf8",
+      "timestamp": "2026-10-27T14:01:37.691280",
+      "abordagem": "LLM",
+      "texto_entrada": "A bomba de água da linha 3 está fazendo barulho estranho e perdendo pressão",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 1.0,
+      "latencia_ms": 26368.09220000032,
+      "tokens_entrada": 1429,
+      "tokens_saida": 457,
+      "tokens_total": 1886,
+      "campos_sem_suporte": []
+    },
+    "hibrido": {
+      "id": "e72f9fb3-7f77-470d-84e6-9ac8b9259742",
+      "timestamp": "2026-10-27T14:01:59.888606",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "A bomba de água da linha 3 está fazendo barulho estranho e perdendo pressão",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "MECANICA",
+      "equipe_sugerida": "Manutenção Mecânica",
+      "regras_acionadas": [
+        "RULE-014"
+      ],
+      "evidencias": {
+        "regras_classificacao": "Regras: RULE-014"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 22196.39939999979,
+      "tokens_entrada": 485,
+      "tokens_saida": 426,
+      "tokens_total": 911,
+      "campos_sem_suporte": [
+        "risco_seguranca",
+        "ativo_mencionado"
+      ]
+    }
+  }
+}

@@ -54,6 +54,18 @@ _ABORDAGENS: dict = {
 }
 
 
+def _config_llm() -> dict:
+    """Parâmetros do modelo usados na execução, gravados no arquivo bruto de resultados."""
+    s = get_settings()
+    return {
+        "modelo": s.ollama_model,
+        "temperatura": s.ollama_temperature,
+        "semente": s.ollama_seed,
+        "num_predict": s.ollama_num_predict,
+        "raciocinio": s.ollama_reasoning,
+    }
+
+
 def _fallback_result_erro(
     texto: str, approach_name: str, latencia_ms: float, motivo: str
 ) -> TriageResult:
@@ -234,6 +246,7 @@ def run_evaluation(
 
     result: dict = {
         "timestamp": datetime.datetime.now().isoformat(),
+        "config_llm": _config_llm(),
         "dataset_size": len(cases),
         "approaches": {},
     }

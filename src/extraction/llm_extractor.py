@@ -103,6 +103,7 @@ class LLMExtractor:
         self._temperature: float = settings.ollama_temperature
         self._seed: int = settings.ollama_seed
         self._num_predict: int = settings.ollama_num_predict
+        self._reasoning: bool | None = settings.ollama_reasoning
 
     def _build_prompt(self, texto: str) -> str:
         """Monta o prompt substituindo {texto} no template."""
@@ -122,6 +123,8 @@ class LLMExtractor:
             # Limite de tokens: com format="json" o modelo pode repetir chaves
             # indefinidamente sem fechar o objeto (observado no qwen3:0.6b).
             num_predict=self._num_predict,
+            # None = padrão do modelo (referência); False = variante sem raciocínio
+            reasoning=self._reasoning,
         )
 
     def _dict_para_extracted_info(

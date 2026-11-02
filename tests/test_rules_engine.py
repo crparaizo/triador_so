@@ -15,7 +15,7 @@ from src.approaches.rules_only import run_rules_only
 from src.data.loader import load_categories, load_knowledge_base
 from src.orchestration.chains import build_rules_chain
 from src.rules.definitions import Rule, RuleAction, RuleCondition, load_rules
-from src.rules.engine import apply_rules
+from src.rules.engine import apply_rules, descrever_regras
 from src.schemas.assets import Asset
 from src.schemas.extraction import ContextData, ExtractedInfo
 from src.schemas.triage import ApproachType, TriageResult
@@ -424,3 +424,126 @@ def test_build_rules_chain_invoke_retorna_triage_result():
     assert result.abordagem == ApproachType.REGRAS, (
         f"Esperado abordagem REGRAS, obtido: {result.abordagem}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Regras alinhadas às NR (RULE-019: NR-13 item 13.3.1; RULE-020: NR-35)
+# ---------------------------------------------------------------------------
+
+
+def test_palavras_chave_condicao_exige_os_dois_grupos():
+    """Com operador AND, os dois grupos de palavras-chave precisam coincidir."""
+    regra = Rule(
+        id="RULE-MOCK",
+        descricao="mock",
+        condicoes=RuleCondition(
+            palavras_chave=["caldeira"],
+            palavras_chave_condicao=["válvula de segurança"],
+            operador="AND",
+        ),
+        acoes=RuleAction(urgencia="IMEDIATA"),
+        prioridade_regra=50,
+    )
+    so_equipamento = apply_rules(ExtractedInfo(), ContextData(), [regra], "caldeira parada")
+    os_dois = apply_rules(
+        ExtractedInfo(), ContextData(), [regra], "caldeira com valvula de seguranca travada"
+    )
+    assert so_equipamento["regras_acionadas"] == []
+    assert os_dois["regras_acionadas"] == ["RULE-MOCK"]
+
+
+def test_nr13_dispositivo_de_seguranca_bloqueado_e_imediato():
+    """Válvula de alívio travada em caldeira é grave e iminente risco (NR-13, 13.3.1),
+    mesmo sem menção a impacto na produção (relato do CASE-086)."""
+    result = run_rules_only(
+        "Caldeira CAL-001 com falha total no sistema de segurança. "
+        "Válvula de alívio de pressão travada fechada."
+    )
+    assert "RULE-019" in result.regras_acionadas
+    assert result.urgencia.value == "IMEDIATA"
+    assert result.requer_revisao_humana is True
+
+
+def test_nr35_trabalho_em_altura_exige_revisao():
+    """Atividade em altura com risco de queda exige revisão humana (NR-35)."""
+    result = run_rules_only("Troca de lâmpada no galpão exige trabalho em altura sobre andaime.")
+    assert "RULE-020" in result.regras_acionadas
+    assert result.requer_revisao_humana is True
+
+
+# ---------------------------------------------------------------------------
+# Arquitetura do sistema de produção: combinação, explicação e base de dados
+# ---------------------------------------------------------------------------
+
+
+def test_revisao_humana_por_disjuncao():
+    """Basta uma regra disparada exigir revisão, mesmo com outra de maior
+    precedência definindo revisão falsa; os motivos são combinados."""
+    alta = _regra("RULE-A", risco_seguranca=True, urgencia="ALTA",
+                  requer_revisao=False, prioridade_regra=90)
+    baixa = _regra("RULE-B", risco_seguranca=True, requer_revisao=True,
+                   motivo="motivo B", prioridade_regra=10)
+    resultado = apply_rules(ExtractedInfo(risco_seguranca=True), ContextData(), [alta, baixa])
+    assert resultado["requer_revisao_humana"] is True
+    assert resultado["motivo_revisao"] == "motivo B"
+    assert resultado["rastro"]["revisao"] == "RULE-B"
+
+
+def test_rastro_indica_a_regra_de_cada_campo():
+    """O rastro registra, por campo, a regra que definiu o valor."""
+    alta = _regra("RULE-A", risco_seguranca=True, urgencia="IMEDIATA", prioridade_regra=90)
+    baixa = _regra("RULE-B", risco_seguranca=True, urgencia="BAIXA",
+                   equipe="Utilidades", prioridade_regra=10)
+    resultado = apply_rules(ExtractedInfo(risco_seguranca=True), ContextData(), [alta, baixa])
+    assert resultado["rastro"]["urgencia"] == "RULE-A"
+    assert resultado["rastro"]["equipe"] == "RULE-B"
+    texto = descrever_regras(resultado)
+    assert texto.startswith("Regras: RULE-A, RULE-B")
+    assert "urgência ← RULE-A" in texto and "equipe ← RULE-B" in texto
+
+
+def test_norma_ativo_e_alternativa_ao_grupo_de_equipamento():
+    """norma_ativo forma uma condição OR com palavras_chave: o ativo cadastrado
+    sujeito à NR-13 basta, mesmo sem o relato citar o equipamento."""
+    regra = Rule(
+        id="RULE-MOCK",
+        descricao="mock",
+        condicoes=RuleCondition(
+            palavras_chave=["caldeira"],
+            norma_ativo="NR-13",
+            palavras_chave_condicao=["válvula de segurança"],
+        ),
+        acoes=RuleAction(urgencia="IMEDIATA"),
+        prioridade_regra=50,
+    )
+    caldeira = Asset(
+        id="cal", nome="Gerador de vapor", tag="CAL-001", tipo="Utilidades",
+        localizacao="Casa de Caldeiras", equipe_responsavel="Utilidades",
+        criticidade="ALTA", normas_aplicaveis=["NR-13"],
+    )
+    texto = "valvula de seguranca travada no gerador de vapor"
+    com_ativo = apply_rules(ExtractedInfo(), ContextData(ativo_encontrado=caldeira), [regra], texto)
+    sem_ativo = apply_rules(ExtractedInfo(), ContextData(), [regra], texto)
+    assert com_ativo["regras_acionadas"] == ["RULE-MOCK"]
+    assert sem_ativo["regras_acionadas"] == []
+
+
+def test_abreviacao_curta_casa_como_palavra_inteira():
+    """Abreviações de até 3 letras não casam dentro de outras palavras."""
+    regra = _regra("RULE-MOCK", palavras_chave=["nc"], urgencia="BAIXA")
+    dentro = apply_rules(ExtractedInfo(), ContextData(), [regra], "falha de segurança")
+    isolada = apply_rules(ExtractedInfo(), ContextData(), [regra], "abrir NC do lote")
+    assert dentro["regras_acionadas"] == []
+    assert isolada["regras_acionadas"] == ["RULE-MOCK"]
+
+
+def test_todas_as_regras_tem_fundamentacao():
+    """Cada regra de rules.yaml declara a norma que a fundamenta ou o critério da autora."""
+    assert all(r.fundamentacao for r in load_rules())
+
+
+def test_evidencias_de_categoria_e_rastro_nas_regras():
+    """A abordagem por regras registra os termos da categoria e o rastro por campo."""
+    result = run_rules_only("curto no painel elétrico")
+    assert "palavras_categoria" in result.evidencias
+    assert "←" in result.evidencias["regras_classificacao"]

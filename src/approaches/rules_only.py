@@ -43,7 +43,7 @@ from src.orchestration.triage_flow import (
     no,
 )
 from src.rules.definitions import RULE_FORA_DO_ESCOPO_ID, load_rules
-from src.rules.engine import apply_rules
+from src.rules.engine import apply_rules, descrever_regras
 from src.schemas.triage import (
     ApproachType,
     FailureCategory,
@@ -139,6 +139,18 @@ def _montar_resultado(estado: dict) -> TriageResult:
     if RULE_FORA_DO_ESCOPO_ID in resultado["regras_acionadas"]:
         categoria = FailureCategory.FORA_DO_ESCOPO
 
+    # Evidências: extração + termos que definiram a categoria + rastro das regras
+    evidencias = dict(extracted.evidencias)
+    if estado["categoria_ref"] is None:
+        dados = estado["dados"]
+        termos = KeywordExtractor(dados["kb"], dados["cats"]).termos_categoria(
+            estado["texto_entrada"], categoria.name
+        )
+        if termos:
+            evidencias["palavras_categoria"] = ", ".join(termos)
+    if resultado["regras_acionadas"]:
+        evidencias["regras_classificacao"] = descrever_regras(resultado)
+
     latencia = (time.perf_counter() - estado["inicio"]) * 1000
 
     return TriageResult(
@@ -149,7 +161,7 @@ def _montar_resultado(estado: dict) -> TriageResult:
         categoria=categoria,
         equipe_sugerida=resultado["equipe"],
         regras_acionadas=resultado["regras_acionadas"],
-        evidencias=extracted.evidencias,
+        evidencias=evidencias,
         requer_revisao_humana=resultado["requer_revisao_humana"],
         motivo_revisao=resultado.get("motivo_revisao"),
         confianca=resultado["confianca"],

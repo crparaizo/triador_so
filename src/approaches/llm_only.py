@@ -409,6 +409,8 @@ def _chamar_llm(estado: dict):
         # Limite de tokens: com format="json" o modelo pode repetir chaves
         # indefinidamente sem fechar o objeto (observado no qwen3:0.6b, CASE-050).
         num_predict=settings.ollama_num_predict,
+        # None = padrão do modelo (referência); False = variante sem raciocínio
+        reasoning=settings.ollama_reasoning,
     )
     return llm.invoke(estado["preparo"]["prompt"])
 

@@ -31,7 +31,6 @@ CASE-073,Sistema de e-mail corporativo fora do ar. Não consigo enviar nem receb
 CASE-074,Preciso de ajuda para revisão de contrato de prestação de serviço com terceiros.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
 CASE-076,Solicitação de reembolso de despesas de viagem corporativa da semana passada.,BAIXA,DESCONHECIDA,,2,Fora do escopo com vocabulário não cadastrado na RULE-017
 CASE-083,Gerador GER-001 com falha catastrófica no alternador. Planta inteira sem energia elétrica.,IMEDIATA,ALTA,RULE-010,6,Julgamento do anotador sem regra correspondente
-CASE-086,Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada.,IMEDIATA,MEDIA,RULE-015,3,Limitação lexical da extração por palavras-chave
 CASE-092,Ruído incomum ouvido pelo turno da manhã não foi confirmado pelo turno da tarde. Sem evidência física.,DESCONHECIDA,MEDIA,RULE-014,5,Gabarito sem classificação e regra acionada
 CASE-095,Sensor SENS-001 apresentou leitura muito alta por 30 segundos e logo voltou ao normal. Investigar causa.,MEDIA,DESCONHECIDA,,6,Julgamento do anotador sem regra correspondente
 CASE-096,HVAC-001 oscilando entre 18°C e 32°C sem causa aparente. Sala de controle com temperatura instável.,MEDIA,DESCONHECIDA,,1,Categoria sem regra aplicável

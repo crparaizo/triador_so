@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-10-27T23:13:52.467205",
+  "texto": "Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada",
+  "results": {
+    "regras": {
+      "id": "12215020-ae9e-4df0-882d-ca4031ffe1ea",
+      "timestamp": "2026-10-27T23:12:42.085449",
+      "abordagem": "REGRAS",
+      "texto_entrada": "Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo": "CAL-001",
+        "sintomas": "caldeira, nc"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 26.850199996260926,
+      "tokens_entrada": 0,
+      "tokens_saida": 0,
+      "tokens_total": 0,
+      "campos_sem_suporte": [
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "64d72f21-e65a-441d-92b2-a819d84ee44e",
+      "timestamp": "2026-10-27T23:13:30.484231",
+      "abordagem": "LLM",
+      "texto_entrada": "Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Revisão solicitada pelo LLM — verificar manualmente.",
+      "confianca": 0.9,
+      "latencia_ms": 48397.59170000616,
+      "tokens_entrada": 1439,
+      "tokens_saida": 528,
+      "tokens_total": 1967,
+      "campos_sem_suporte": [
+        "urgencia",
+        "prioridade",
+        "categoria",
+        "equipe_sugerida",
+        "regras_acionadas",
+        "evidencias",
+        "motivo_revisao_humana",
+        "confianca"
+      ]
+    },
+    "hibrido": {
+      "id": "c9104a97-63cf-49ba-9b8d-247a2f973b14",
+      "timestamp": "2026-10-27T23:13:52.464454",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "Caldeira CAL-001 com falha total no sistema de segurança. Válvula de alívio de pressão travada fechada",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-001",
+        "RULE-004",
+        "RULE-006",
+        "RULE-008",
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+        "regras_classificacao": "Regras: RULE-001, RULE-004, RULE-006, RULE-008, RULE-015"
+      },
+      "requer_revisao_humana": true,
+      "motivo_revisao": "Risco de segurança confirmado — revisão humana obrigatória antes de qualquer ação",
+      "confianca": 0.95,
+      "latencia_ms": 21979.26980000193,
+      "tokens_entrada": 495,
+      "tokens_saida": 367,
+      "tokens_total": 862,
+      "campos_sem_suporte": []
+    }
+  }
+}

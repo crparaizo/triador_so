@@ -40,7 +40,9 @@ dmypy.json
 .pytype/
 .pyre/
 
-# --- Sessões e resultados gerados (manter apenas .gitkeep) ---
+# --- Sessões e resultados gerados ---
+# Versionados para permitir reproduzir e auditar a análise da monografia
+# (regras mantidas comentadas apenas como referência).
 # sessions/*.json
 # sessions/*.csv
 

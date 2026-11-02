@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-10-27T19:47:00.345582",
+  "texto": "Cal. CAL-001 s/ press. de vapor. Prod. parada. O.S. urg. p/ utilidades.",
+  "results": {
+    "regras": {
+      "id": "cde36587-01b6-40bb-be84-b1501d389d37",
+      "timestamp": "2026-10-27T19:46:29.633706",
+      "abordagem": "REGRAS",
+      "texto_entrada": "Cal. CAL-001 s/ press. de vapor. Prod. parada. O.S. urg. p/ utilidades.",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo": "CAL-001",
+        "sintomas": "vapor, utilidades",
+        "localizacao": "Setor A - Utilidades"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 17.346699998597614,
+      "tokens_entrada": 0,
+      "tokens_saida": 0,
+      "tokens_total": 0,
+      "campos_sem_suporte": [
+        "impacto_producao",
+        "risco_seguranca",
+        "urgencia_mencionada"
+      ]
+    },
+    "llm": {
+      "id": "a0bc1c03-68b6-4bd0-9097-ae9f62878509",
+      "timestamp": "2026-10-27T19:46:42.460181",
+      "abordagem": "LLM",
+      "texto_entrada": "Cal. CAL-001 s/ press. de vapor. Prod. parada. O.S. urg. p/ utilidades.",
+      "urgencia": "IMEDIATA",
+      "prioridade": "P1",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [],
+      "evidencias": {},
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.0,
+      "latencia_ms": 12825.810700000147,
+      "tokens_entrada": 1434,
+      "tokens_saida": 288,
+      "tokens_total": 1722,
+      "campos_sem_suporte": []
+    },
+    "hibrido": {
+      "id": "fff83c5e-619f-474c-8095-ac9f47f8ec85",
+      "timestamp": "2026-10-27T19:47:00.343962",
+      "abordagem": "HIBRIDO",
+      "texto_entrada": "Cal. CAL-001 s/ press. de vapor. Prod. parada. O.S. urg. p/ utilidades.",
+      "urgencia": "MEDIA",
+      "prioridade": "P3",
+      "categoria": "UTILIDADES",
+      "equipe_sugerida": "Utilidades",
+      "regras_acionadas": [
+        "RULE-015"
+      ],
+      "evidencias": {
+        "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+        "regras_classificacao": "Regras: RULE-015"
+      },
+      "requer_revisao_humana": false,
+      "motivo_revisao": null,
+      "confianca": 0.65,
+      "latencia_ms": 17882.93970000086,
+      "tokens_entrada": 490,
+      "tokens_saida": 478,
+      "tokens_total": 968,
+      "campos_sem_suporte": [
+        "localizacao",
+        "impacto_producao",
+        "risco_seguranca"
+      ]
+    }
+  }
+}

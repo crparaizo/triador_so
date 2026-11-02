@@ -37,12 +37,12 @@ def test_load_rules_retorna_lista_de_rules():
     assert isinstance(rules[0], Rule), "Cada elemento deve ser instância de Rule"
 
 
-def test_load_rules_quantidade_entre_15_e_20():
-    """O total de regras no YAML deve ser entre 15 e 20 inclusive."""
+def test_load_rules_quantidade_entre_15_e_25():
+    """O total de regras no YAML deve ser entre 15 e 25 inclusive."""
     rules = load_rules()
 
-    assert 15 <= len(rules) <= 20, (
-        f"Esperado entre 15 e 20 regras, encontrado: {len(rules)}"
+    assert 15 <= len(rules) <= 25, (
+        f"Esperado entre 15 e 25 regras, encontrado: {len(rules)}"
     )
 
 

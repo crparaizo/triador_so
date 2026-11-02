@@ -109,62 +109,64 @@ Para casos sem regra aplicável, o gabarito reflete o julgamento humano esperado
 
 ## Fundamentação Normativa
 
-Embora sintético, o dataset e os dados de domínio não foram concebidos de forma
-arbitrária: sua nomenclatura, estrutura e critérios de conformidade apoiam-se em
-normas reconhecidas de manutenção industrial e segurança do trabalho. O objetivo
-é dar rastreabilidade normativa ao caso de uso — e não certificar conformidade,
-já que se trata de um protótipo acadêmico com dados fictícios.
+Embora sintético, o dataset usa as Normas Regulamentadoras (NR) de segurança do
+trabalho como gatilhos de revisão humana obrigatória nas regras de segurança. O
+objetivo é dar rastreabilidade a esses critérios, sem certificar conformidade, já
+que se trata de um protótipo acadêmico com dados fictícios.
 
-### Normas de referência
-
-| Norma | Título | O que fundamenta neste projeto |
+| Norma | Redação considerada | O que fundamenta neste projeto |
 |---|---|---|
-| **ABNT NBR ISO 14224** (base ISO 14224:2016) | Indústrias de petróleo e gás natural — Coleta e intercâmbio de dados de confiabilidade e manutenção para equipamentos | Taxonomia de classes de equipamento (campo `classe_iso14224` em `data/assets.yaml`) e a organização dos dados de falha/manutenção. |
-| **ABNT NBR 5462:1994** | Confiabilidade e mantenabilidade (terminologia) | Vocabulário de falha, defeito, pane, manutenção corretiva/preventiva, confiabilidade, mantenabilidade e criticidade usado nos relatos e no sistema. |
-| **NR-10** | Segurança em Instalações e Serviços em Eletricidade | Gatilho de revisão humana obrigatória para intervenções elétricas de risco (RULE-003; ver `data/rules.yaml`). |
-| **NR-13** | Caldeiras, Vasos de Pressão, Tubulações e Tanques Metálicos de Armazenamento | Gatilho de revisão humana obrigatória para caldeiras/vapor (RULE-006). |
-| **NR-35** | Trabalho em Altura | Gatilho de revisão para cenários de segurança em altura (RULE-001/002, categoria SEGURANCA). |
+| **NR-1** — Disposições gerais e gerenciamento de riscos ocupacionais | Redação vigente (gerenciamento de riscos ocupacionais) | Nível de risco pela combinação de severidade e probabilidade (item 1.5.4.4.2) e exigência de critérios documentados (item 1.5.4.4.2.2): cada regra registra no campo `fundamentacao` a norma que a determina ou se o critério é da autora. |
+| **NR-3** — Embargo e interdição | Portaria SEPRT nº 1.068/2019 | Conceito de grave e iminente risco (item 3.2.1), base da urgência IMEDIATA com revisão obrigatória nas regras de segurança (RULE-001, RULE-002 e RULE-019). |
+| **NR-10** — Segurança em instalações e serviços em eletricidade | Portaria SEPRT nº 915/2019 (vigente até 31/05/2027) | Revisão humana obrigatória para intervenções em painéis, quadros e equipamentos elétricos de potência (RULE-003). "Alta tensão" segue o glossário: acima de 1000 V CA ou 1500 V CC. |
+| **NR-13** — Caldeiras, vasos de pressão, tubulações e tanques metálicos de armazenamento | Portaria MTP nº 1.846/2022, alterada pela Portaria MTP nº 4.219/2022 | Campo de aplicação (item 13.2.1) e condições de grave e iminente risco (item 13.3.1): dispositivo de segurança ausente, bloqueado ou indisponível em caldeira ou vaso de pressão leva a IMEDIATA/P1 com revisão (RULE-019). A caldeira CAL-001 traz `normas_aplicaveis: ["NR-13"]` em `assets.yaml`, de modo que a RULE-019 reconhece o equipamento pelo cadastro mesmo quando o relato não o nomeia. Caldeira com impacto na produção: RULE-006. Pressão relatada acima da PMTA cadastrada da caldeira (PMTA, Glossário; válvula de segurança ajustada em valor igual ou inferior à PMTA, item 13.4.1.2, a): RULE-021, com urgência IMEDIATA por critério da autora. |
+| **NR-35** — Trabalho em altura | Portaria MTE nº 1.259/2026 | Atividade com diferença de nível acima de 2 m e risco de queda (item 35.2.1) exige revisão humana, por depender de análise de risco e permissão de trabalho (item 35.3.1) (RULE-020). |
 
-> Confira o título e o ano/edição vigentes no catálogo oficial da ABNT e no site do
-> Ministério do Trabalho e Emprego (MTE) antes da citação final na monografia — a
-> edição nacional da NBR ISO 14224 e as redações das NRs são atualizadas
-> periodicamente.
+O campo `criticidade` (ALTA/MEDIA/BAIXA) dos ativos foi definido pela autora com
+base na lógica de priorização de ordens de serviço que combina a prioridade do
+tipo de trabalho, a criticidade do ativo e o tempo decorrido desde a abertura da
+OS (English; Yunusa-Kaltungo, 2022, Seção 4).
 
-### Mapeamento ISO 14224 dos ativos
+---
 
-Cada ativo em `data/assets.yaml` recebeu o campo `classe_iso14224`, mapeando-o à
-taxonomia de classes de equipamento da norma. Como a ISO 14224 é específica das
-indústrias de petróleo, gás e petroquímica, parte dos ativos (quadros de
-distribuição, MCC, HVAC, elevador) **não possui classe direta** — esses casos são
-marcados explicitamente como "Não coberto diretamente pela ISO 14224", evidenciando
-os limites de aplicabilidade da norma a uma planta genérica.
+## Conjunto de alarmes simulados
 
-| Classe ISO 14224 | Ativos (tags) |
-|---|---|
-| Bombas (Pumps) | BOMB-001, BOMB-002 |
-| Compressores (Compressors) | COMP-001, COMP-002, COMP-003 |
-| Motores elétricos (Electric motors) | MOTOR-001 |
-| Transformadores de potência (Power transformers) | TRANS-001 |
-| Geradores elétricos (Electric generators) | GER-001 |
-| Dispositivos de entrada (Input devices) | SENS-001, TRANS-002 |
-| Válvulas (Valves) | VALV-001, VALV-002 |
-| Aquecedores e caldeiras (Heaters and boilers) | CAL-001 |
-| Trocadores de calor (Heat exchangers) | CHIL-001 |
-| Não coberto diretamente pela ISO 14224 | PANEL-001, PANEL-002, HVAC-001, ELEV-001 |
+O arquivo `datasets/alarm_events.json` traz 10 eventos de um supervisório (SCADA)
+simulado, cada um com o gabarito anotado pela autora e o critério em `notas`.
+O script `scripts/gerar_casos_alarme.py` converte cada evento no texto de uma OS
+(`src/alarms`) e grava `datasets/alarm_cases.json`, com casos do tipo `ALARME`,
+que podem ser avaliados como o conjunto principal:
 
-### Glossário (terminologia ABNT NBR 5462:1994)
+```bash
+python scripts/gerar_casos_alarme.py
+python -m src.evaluation --dataset datasets/alarm_cases.json
+```
 
-Termos empregados nos relatos, regras e métricas, conforme a terminologia da norma:
+A PMTA da caldeira CAL-001 em `data/assets.yaml` (1.000 kPa) é fictícia e serve
+apenas para a RULE-021. Nenhum dos 100 relatos do conjunto principal contém valor
+de pressão, de modo que essa regra não altera os resultados dele.
 
-- **Falha**: término da capacidade de um item desempenhar a função requerida.
-- **Defeito**: desvio de uma característica em relação aos requisitos, que pode ou não levar à falha.
-- **Pane**: estado de um item incapaz de desempenhar a função requerida (resultado de uma falha).
-- **Manutenção corretiva**: efetuada após a ocorrência de uma pane, para recolocar o item em condição de funcionamento.
-- **Manutenção preventiva**: efetuada em intervalos predeterminados para reduzir a probabilidade de falha (relacionada ao tipo de caso e à RULE-016).
-- **Criticidade**: grau de impacto de um item sobre a produção/segurança — base do campo `criticidade` (ALTA/MEDIA/BAIXA) dos ativos.
+---
 
-> As definições acima são paráfrases para uso interno; o texto normativo exato
-> deve ser consultado na ABNT NBR 5462:1994 ao citá-las na monografia.
+## Conjunto de validação (casos não vistos pelas regras)
+
+O arquivo `datasets/holdout_cases.json` traz 100 casos novos (`VAL-001` a `VAL-100`),
+redigidos depois de concluída a base de regras, na mesma distribuição por tipo do
+conjunto principal e com os mesmos ativos, categorias e equipes. Os relatos foram
+escritos a partir do cadastro de ativos e das categorias, sem consulta às listas de
+palavras-chave das regras, e o critério de cada gabarito está em `notas`. O arquivo é
+gerado por `scripts/gerar_casos_validacao.py`; a planilha de revisão do gabarito está
+em `results/holdout_revisao_gabarito.csv`.
+
+```bash
+python scripts/gerar_casos_validacao.py
+python -m src.evaluation --dataset datasets/holdout_cases.json
+python scripts/analise_estatistica.py results/evaluation_raw_<timestamp>.json --dataset datasets/holdout_cases.json
+```
+
+As regras e o motor **não** devem ser ajustados com base nos erros deste conjunto;
+caso contrário, ele deixa de medir o desempenho em casos não vistos (Seção 3.4.5 da
+monografia).
 
 ---
 
@@ -203,8 +205,8 @@ As seguintes situações expõem limitações conhecidas do motor de regras:
 
 | Arquivo | Conteúdo |
 |---|---|
-| `data/rules.yaml` | 18 regras de produção com condições e ações |
-| `data/assets.yaml` | 18 ativos com tag, criticidade, localização, equipe responsável e classe ISO 14224 |
+| `data/rules.yaml` | 21 regras de produção com condições e ações |
+| `data/assets.yaml` | 18 ativos com tag, criticidade, localização, equipe responsável e normas aplicáveis (NR-10 nos equipamentos de potência, NR-13 na caldeira) |
 | `data/teams.yaml` | 6 equipes com especialidades e disponibilidade |
 | `data/categories.yaml` | 12 categorias com palavras-chave e equipe padrão |
 

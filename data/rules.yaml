@@ -14,6 +14,13 @@
 #     impacto_producao   — bool
 #     criticidade_ativo  — "ALTA" | "MEDIA" | "BAIXA"
 #     palavras_chave     — lista; internamente é OR (basta uma corresponder)
+#     palavras_chave_condicao — segundo grupo de palavras-chave (OR interno),
+#                          avaliado como condição própria e combinado pelo operador
+#     norma_ativo        — norma do campo normas_aplicaveis do ativo encontrado
+#                          (assets.yaml); com palavras_chave, forma com elas uma
+#                          única condição (OR): ativo sujeito à norma ou termo citado
+#     pressao_acima_pmta — bool; pressão escrita no relato (kPa ou MPa) acima da
+#                          PMTA cadastrada do ativo encontrado (assets.yaml)
 #     operador           — "AND" (padrão) ou "OR" entre as condições acima
 #   acoes           — ações disparadas quando as condições são satisfeitas
 #     urgencia           — valor de UrgencyLevel
@@ -23,18 +30,30 @@
 #     motivo_revisao     — obrigatório quando requer_revisao_humana=true
 #     confianca          — float 0..1
 #   prioridade_regra — inteiro; maior valor = maior precedência no motor
+#   fundamentacao   — norma e item que fundamentam a regra, ou "Critério da autora"
 #
 # Semântica de operador:
 #   AND: TODAS as condições não-nulas devem ser satisfeitas.
 #   OR : QUALQUER condição não-nula satisfeita dispara a regra.
 #   palavras_chave internamente é sempre OR (basta uma palavra corresponder).
+#   Abreviações de até 3 letras (ex.: "pm", "rh") casam só como palavra inteira.
+#
+# Combinação no motor: cada campo de ação vem da regra disparada de maior
+# prioridade_regra que o define; a revisão humana é a exceção — basta uma regra
+# disparada exigi-la (disjunção), e os motivos são combinados.
+#
+# Critérios documentados: a NR-1 (item 1.5.4.4.2) gradua o nível de risco pela
+# combinação de severidade e probabilidade e exige que os critérios adotados
+# sejam documentados (item 1.5.4.4.2.2). O campo fundamentacao registra, em
+# cada regra, a norma que a determina ou se o critério é da autora.
 # =============================================================================
 
 regras:
 
   # ---------------------------------------------------------------------------
   # RULE-001 — Risco de segurança confirmado (prioridade máxima)
-  # Cobre: cenário de segurança imediata (NR-35, NR-10, etc.)
+  # Cobre: risco à segurança indicado no relato. A urgência IMEDIATA segue o
+  # conceito de grave e iminente risco da NR-3 (item 3.2.1).
   # ---------------------------------------------------------------------------
   - id: "RULE-001"
     descricao: "Risco de segurança confirmado pelo extrator — atendimento imediato obrigatório"
@@ -48,6 +67,7 @@ regras:
       motivo_revisao: "Risco de segurança confirmado — revisão humana obrigatória antes de qualquer ação"
       confianca: 0.95
     prioridade_regra: 100
+    fundamentacao: "NR-3, item 3.2.1 (grave e iminente risco)"
 
   # ---------------------------------------------------------------------------
   # RULE-002 — Palavras de emergência detectadas no relato
@@ -72,13 +92,16 @@ regras:
       motivo_revisao: "Palavras de emergência detectadas — situação crítica requer avaliação imediata"
       confianca: 0.90
     prioridade_regra: 95
+    fundamentacao: "NR-3, item 3.2.1 (grave e iminente risco)"
 
   # ---------------------------------------------------------------------------
-  # RULE-003 — Falha elétrica em equipamento de alta tensão (NR-10)
-  # Cobre: painel, transformador, subestação, quadro elétrico de alta tensão
+  # RULE-003 — Falha em painel, quadro ou equipamento de potência (NR-10)
+  # Cobre: intervenções em instalações elétricas, sujeitas à NR-10 em qualquer
+  # nível de tensão. "Alta tensão" segue o glossário da NR-10: acima de 1000 V
+  # CA ou 1500 V CC (ex.: TRANS-001); o PANEL-001 (480 V) é baixa tensão.
   # ---------------------------------------------------------------------------
   - id: "RULE-003"
-    descricao: "Falha elétrica em equipamento de alta tensão — risco NR-10"
+    descricao: "Falha em painel, quadro ou equipamento elétrico de potência — intervenção sujeita à NR-10"
     condicoes:
       categoria: "ELETRICA"
       palavras_chave:
@@ -93,9 +116,10 @@ regras:
       prioridade: "P1"
       equipe: "Manutenção Elétrica"
       requer_revisao_humana: true
-      motivo_revisao: "Falha elétrica em alta tensão — intervenção sujeita a NR-10, requer autorização"
+      motivo_revisao: "Intervenção em instalação elétrica — sujeita à NR-10, exige trabalhador autorizado"
       confianca: 0.90
     prioridade_regra: 90
+    fundamentacao: "NR-10, item 10.1.2 (campo de aplicação) e glossário (alta tensão)"
 
   # ---------------------------------------------------------------------------
   # RULE-004 — Impacto na produção + ativo de criticidade ALTA
@@ -113,6 +137,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.85
     prioridade_regra: 85
+    fundamentacao: "Critério da autora — criticidade do ativo e impacto na produção (English; Yunusa-Kaltungo, 2022, Seção 4)"
 
   # ---------------------------------------------------------------------------
   # RULE-005 — Falha mecânica grave (ruptura, rompimento, fratura)
@@ -136,13 +161,16 @@ regras:
       motivo_revisao: "Falha mecânica grave (ruptura/rompimento) — avaliação estrutural necessária antes do retorno"
       confianca: 0.88
     prioridade_regra: 82
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
-  # RULE-006 — Caldeira com problema + impacto na produção (NR-13)
-  # Cobre: falhas em caldeiras e sistemas de vapor com impacto produtivo
+  # RULE-006 — Caldeira ou vapor com impacto na produção
+  # Cobre: falhas em caldeiras (equipamento abrangido pela NR-13, item 13.2.1)
+  # com impacto produtivo. As condições de grave e iminente risco do item 13.3.1
+  # são tratadas pela RULE-019, independentemente do impacto na produção.
   # ---------------------------------------------------------------------------
   - id: "RULE-006"
-    descricao: "Falha em caldeira ou sistema de vapor com impacto na produção — risco NR-13"
+    descricao: "Falha em caldeira ou sistema de vapor com impacto na produção — equipamento abrangido pela NR-13"
     condicoes:
       categoria: "UTILIDADES"
       palavras_chave:
@@ -155,9 +183,10 @@ regras:
       prioridade: "P1"
       equipe: "Utilidades"
       requer_revisao_humana: true
-      motivo_revisao: "Caldeira com impacto na produção — intervenção sujeita a NR-13, requer inspetor habilitado"
+      motivo_revisao: "Caldeira com impacto na produção — equipamento abrangido pela NR-13, requer avaliação de profissional habilitado"
       confianca: 0.88
     prioridade_regra: 80
+    fundamentacao: "NR-13, item 13.2.1 (campo de aplicação)"
 
   # ---------------------------------------------------------------------------
   # RULE-007 — Instrumentação com leitura incorreta ou sinal falso
@@ -181,6 +210,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.80
     prioridade_regra: 75
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-008 — Falha de utilidades com impacto generalizado na produção
@@ -199,6 +229,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.78
     prioridade_regra: 70
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-009 — Compressor de ar instrumento (COMP-001, COMP-003, ar comprimido)
@@ -221,6 +252,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.78
     prioridade_regra: 68
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-010 — Falha elétrica geral (sem alta tensão)
@@ -238,6 +270,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.75
     prioridade_regra: 65
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-011 — Falha mecânica em ativo de criticidade ALTA
@@ -256,6 +289,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.75
     prioridade_regra: 60
+    fundamentacao: "Critério da autora — criticidade do ativo e impacto na produção (English; Yunusa-Kaltungo, 2022, Seção 4)"
 
   # ---------------------------------------------------------------------------
   # RULE-012 — Falha de TI ou automação industrial
@@ -273,6 +307,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.75
     prioridade_regra: 55
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-013 — Falha de processo com impacto na produção
@@ -291,6 +326,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.72
     prioridade_regra: 52
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-014 — Falha mecânica padrão (sem criticidade especificada)
@@ -308,6 +344,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.65
     prioridade_regra: 40
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-015 — Falha de utilidades padrão
@@ -325,6 +362,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.65
     prioridade_regra: 35
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-016 — Manutenção preventiva ou programada
@@ -347,6 +385,7 @@ regras:
       requer_revisao_humana: false
       confianca: 0.80
     prioridade_regra: 30
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-017 — Solicitação fora do escopo de manutenção industrial
@@ -372,6 +411,7 @@ regras:
       motivo_revisao: "Solicitação fora do escopo de manutenção industrial — encaminhar ao setor competente"
       confianca: 0.70
     prioridade_regra: 15
+    fundamentacao: "Critério da autora"
 
   # ---------------------------------------------------------------------------
   # RULE-018 — Relato com informação insuficiente
@@ -394,3 +434,87 @@ regras:
       motivo_revisao: "Relato com informação insuficiente — dados necessários para triagem automática não encontrados"
       confianca: 0.30
     prioridade_regra: 5
+    fundamentacao: "Critério da autora"
+
+  # ---------------------------------------------------------------------------
+  # RULE-019 — Grave e iminente risco em caldeira ou vaso de pressão (NR-13)
+  # Fundamentação: NR-13, item 13.3.1 (alíneas a, c e d): operar sem os
+  # dispositivos de segurança exigidos (13.4.1.2: válvula de segurança,
+  # indicador de pressão, controle automático do nível de água), ou com esses
+  # dispositivos ausentes, bloqueados ou indisponíveis, constitui condição de
+  # grave e iminente risco, sem depender de impacto na produção.
+  # ---------------------------------------------------------------------------
+  - id: "RULE-019"
+    descricao: "Dispositivo de segurança de caldeira ou vaso de pressão comprometido — grave e iminente risco (NR-13, item 13.3.1)"
+    condicoes:
+      palavras_chave:
+        - "caldeira"
+        - "cal-001"
+        - "vaso de pressão"
+      norma_ativo: "NR-13"
+      palavras_chave_condicao:
+        - "válvula de segurança"
+        - "válvula de alívio"
+        - "dispositivo de segurança"
+        - "sistema de segurança"
+        - "controle de nível"
+        - "nível de água"
+        - "indicador de pressão"
+        - "manômetro"
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      equipe: "Utilidades"
+      requer_revisao_humana: true
+      motivo_revisao: "Dispositivo de segurança de caldeira ou vaso de pressão comprometido — grave e iminente risco (NR-13, item 13.3.1); revisão humana obrigatória"
+      confianca: 0.90
+    prioridade_regra: 92
+    fundamentacao: "NR-13, item 13.3.1, alíneas a, c e d, e item 13.4.1.2; NR-3, item 3.2.1"
+
+  # ---------------------------------------------------------------------------
+  # RULE-020 — Trabalho em altura com risco de queda (NR-35)
+  # Fundamentação: NR-35, item 35.2.1 (atividade com diferença de nível acima
+  # de 2 m onde haja risco de queda) e item 35.3.1 (análise de risco e permissão
+  # de trabalho). Não define urgência: exige apenas a revisão humana.
+  # ---------------------------------------------------------------------------
+  - id: "RULE-020"
+    descricao: "Atividade em altura com risco de queda — sujeita à NR-35"
+    condicoes:
+      palavras_chave:
+        - "trabalho em altura"
+        - "risco de queda"
+        - "andaime"
+        - "plataforma elevada"
+        - "linha de vida"
+      operador: "OR"
+    acoes:
+      requer_revisao_humana: true
+      motivo_revisao: "Atividade em altura com risco de queda — sujeita à NR-35 (análise de risco e permissão de trabalho); revisão humana obrigatória"
+      confianca: 0.80
+    prioridade_regra: 93
+    fundamentacao: "NR-35, itens 35.2.1 e 35.3.1"
+
+  # ---------------------------------------------------------------------------
+  # RULE-021 — Pressão acima da PMTA da caldeira (NR-13)
+  # Fundamentação: a PMTA é o maior valor de pressão a que o equipamento pode
+  # ser submetido continuamente (NR-13, Glossário), e a válvula de segurança da
+  # caldeira deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a).
+  # A NR-13 não classifica essa situação como grave e iminente risco; a urgência
+  # IMEDIATA é critério da autora. Dispara com o valor de pressão escrito no
+  # relato — em especial nas OS geradas por alarmes do supervisório simulado.
+  # ---------------------------------------------------------------------------
+  - id: "RULE-021"
+    descricao: "Pressão relatada acima da PMTA da caldeira — NR-13 (Glossário e item 13.4.1.2)"
+    condicoes:
+      pressao_acima_pmta: true
+      operador: "AND"
+    acoes:
+      urgencia: "IMEDIATA"
+      prioridade: "P1"
+      equipe: "Utilidades"
+      requer_revisao_humana: true
+      motivo_revisao: "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória"
+      confianca: 0.90
+    prioridade_regra: 94
+    fundamentacao: "NR-13, Glossário (PMTA) e item 13.4.1.2, alínea a; urgência por critério da autora"

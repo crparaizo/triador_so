@@ -245,3 +245,15 @@ def test_detect_category_desconhecida(extractor):
     assert categoria == FailureCategory.DESCONHECIDA, (
         f"Esperado FailureCategory.DESCONHECIDA, obtido: {categoria}"
     )
+
+
+def test_abreviacao_curta_nao_casa_dentro_de_palavra(extractor: KeywordExtractor):
+    """"nc" (QUALIDADE) não deve casar dentro de "segurança"."""
+    assert "nc" not in extractor.termos_categoria("falha no sistema de segurança", "QUALIDADE")
+
+
+def test_termos_categoria_lista_as_palavras_que_definiram_a_categoria(extractor: KeywordExtractor):
+    """termos_categoria devolve as palavras-chave contadas por detect_category."""
+    texto = "curto-circuito no painel elétrico"
+    categoria = extractor.detect_category(texto)
+    assert extractor.termos_categoria(texto, categoria.name)
