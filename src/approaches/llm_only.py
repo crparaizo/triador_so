@@ -59,7 +59,7 @@ from src.schemas.triage import (
     TriageResult,
     UrgencyLevel,
 )
-from src.utils.parsers import parsear_json_llm, truncar_resposta
+from src.utils.parsers import parsear_json_llm, textos_da_resposta, truncar_resposta
 from src.utils.tokens import extrair_uso_tokens
 
 # Logger do módulo — erros registrados sem expor traceback ao usuário final
@@ -103,6 +103,45 @@ _PROMPT_LLM_ONLY = (
     "---\n\n"
     "Retorne APENAS o JSON puro. Sem explicações, sem markdown, sem comentários."
 )
+
+
+
+def esquema_saida_llm(equipes: list[str]) -> dict:
+    """
+    Esquema JSON da resposta do LLM puro, passado ao Ollama em format=.
+
+    O Ollama restringe a geração a este esquema (saída estruturada): os campos
+    de classificação só admitem os valores dos enums e equipe_sugerida só admite
+    os nomes cadastrados. A ordem das propriedades segue a do prompt.
+    """
+    texto_ou_nulo = {"type": ["string", "null"]}
+    return {
+        "type": "object",
+        "properties": {
+            "urgencia": {"type": "string", "enum": [e.value for e in UrgencyLevel]},
+            "prioridade": {"type": "string", "enum": [e.value for e in PriorityLevel]},
+            "categoria": {"type": "string", "enum": [e.value for e in FailureCategory]},
+            "equipe_sugerida": {"type": "string", "enum": list(equipes)},
+            "regras_acionadas": {"type": "array", "items": {"type": "string"}},
+            "evidencias": {
+                "type": "object",
+                "properties": {
+                    campo: texto_ou_nulo
+                    for campo in ("urgencia", "prioridade", "categoria", "equipe_sugerida")
+                },
+                "required": ["urgencia", "prioridade", "categoria", "equipe_sugerida"],
+            },
+            "requer_revisao_humana": {"type": "boolean"},
+            "motivo_revisao": texto_ou_nulo,
+            "confianca": {"type": "number"},
+            "campos_sem_suporte": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": [
+            "urgencia", "prioridade", "categoria", "equipe_sugerida", "regras_acionadas",
+            "evidencias", "requer_revisao_humana", "motivo_revisao", "confianca",
+            "campos_sem_suporte",
+        ],
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -388,10 +427,12 @@ def _preparar_prompt(estado: dict) -> dict:
         equipes_lista_nomes=equipes_lista_nomes,
         texto=estado["texto_entrada"],
     )
+    equipes_validas = [t.nome for t in kb.teams]
     return {
         "prompt": prompt,
         "settings": settings,
-        "equipes_validas": [t.nome for t in kb.teams],
+        "equipes_validas": equipes_validas,
+        "esquema": esquema_saida_llm(equipes_validas),
     }
 
 
@@ -405,11 +446,13 @@ def _chamar_llm(estado: dict):
         base_url=settings.ollama_base_url,
         temperature=settings.ollama_temperature,
         seed=settings.ollama_seed,
-        format="json",  # força geração de JSON válido no nível do tokenizador
-        # Limite de tokens: com format="json" o modelo pode repetir chaves
-        # indefinidamente sem fechar o objeto (observado no qwen3:0.6b, CASE-050).
+        # Saída restrita ao esquema JSON (enums e nomes de equipe cadastrados)
+        format=estado["preparo"]["esquema"],
+        # Limite de tokens: o modelo pode repetir chaves indefinidamente sem
+        # fechar o objeto (observado no qwen3:0.6b, CASE-050).
         num_predict=settings.ollama_num_predict,
-        # None = padrão do modelo (referência); False = variante sem raciocínio
+        num_ctx=settings.ollama_num_ctx,
+        # True = raciocínio ativado e registrado (referência); False = variante sem raciocínio
         reasoning=settings.ollama_reasoning,
     )
     return llm.invoke(estado["preparo"]["prompt"])
@@ -417,9 +460,7 @@ def _chamar_llm(estado: dict):
 
 def _parsear_resposta(estado: dict) -> dict:
     """Nó parser_defensivo: três passos (json direto → regex → erro)."""
-    resposta = estado["resposta"]
-    # Extrair texto da resposta (AIMessage.content ou str)
-    texto_resposta = resposta.content if hasattr(resposta, "content") else str(resposta)
+    texto_resposta, _ = textos_da_resposta(estado["resposta"])
     data, erro = parsear_json_llm(texto_resposta)
     return {"dados": data, "erro": erro}
 
@@ -433,23 +474,24 @@ def _montar_resultado(estado: dict) -> TriageResult:
     equipes_validas = estado.get("preparo", {}).get("equipes_validas", [])
     # Contagem de tokens da resposta do LLM (custo computacional da abordagem)
     tokens = extrair_uso_tokens(estado.get("resposta"))
+    # Texto completo da resposta e do raciocínio, registrados em todos os casos
+    texto_bruto, raciocinio = textos_da_resposta(estado.get("resposta"))
 
     if erro or data is None:
         # Preservar o texto bruto devolvido pelo modelo como evidência da falha
-        resposta = estado.get("resposta")
-        texto_bruto = resposta.content if hasattr(resposta, "content") else (
-            str(resposta) if resposta is not None else ""
-        )
-        return _fallback_parse(
+        resultado = _fallback_parse(
             estado["texto_entrada"],
             latencia_ms,
             f"Resposta inválida do LLM: {erro}",
             tokens,
             truncar_resposta(texto_bruto),
         )
-
-    return _dict_para_triage_result(
-        data, estado["texto_entrada"], latencia_ms, equipes_validas, tokens
+    else:
+        resultado = _dict_para_triage_result(
+            data, estado["texto_entrada"], latencia_ms, equipes_validas, tokens
+        )
+    return resultado.model_copy(
+        update={"resposta_llm_bruta": texto_bruto, "raciocinio_llm": raciocinio}
     )
 
 

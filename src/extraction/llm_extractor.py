@@ -18,7 +18,7 @@ from langchain_ollama import ChatOllama  # import seguro — sem conexão TCP
 
 from src.config.loader import get_settings
 from src.schemas.extraction import ExtractedInfo
-from src.utils.parsers import parsear_json_llm, truncar_resposta
+from src.utils.parsers import parsear_json_llm, textos_da_resposta, truncar_resposta
 from src.utils.tokens import extrair_uso_tokens
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,33 @@ _CAMPOS_RASTREÁVEIS: list[str] = [
     "risco_seguranca",
     "urgencia_mencionada",
 ]
+
+# Esquema JSON da resposta, passado ao Ollama em format= (saída estruturada).
+# Mesmos campos e ordem do exemplo do prompt; ausência de informação é null.
+_TEXTO_OU_NULO = {"type": ["string", "null"]}
+_BOOL_OU_NULO = {"type": ["boolean", "null"]}
+_CAMPOS_EVIDENCIA = ["ativo_mencionado", "sintomas", "localizacao", "urgencia_mencionada"]
+ESQUEMA_EXTRACAO: dict = {
+    "type": "object",
+    "properties": {
+        "ativo_mencionado": _TEXTO_OU_NULO,
+        "sintomas": {"type": "array", "items": {"type": "string"}},
+        "localizacao": _TEXTO_OU_NULO,
+        "impacto_producao": _BOOL_OU_NULO,
+        "risco_seguranca": _BOOL_OU_NULO,
+        "urgencia_mencionada": _TEXTO_OU_NULO,
+        "evidencias": {
+            "type": "object",
+            "properties": {campo: _TEXTO_OU_NULO for campo in _CAMPOS_EVIDENCIA},
+            "required": _CAMPOS_EVIDENCIA,
+        },
+        "confianca_extracao": {"type": "number"},
+    },
+    "required": [
+        "ativo_mencionado", "sintomas", "localizacao", "impacto_producao",
+        "risco_seguranca", "urgencia_mencionada", "evidencias", "confianca_extracao",
+    ],
+}
 
 # Prompt em português. Chaves {{ e }} no exemplo one-shot são literais Python
 # (escapadas) — apenas {texto} é substituído em .format(texto=...).
@@ -103,6 +130,7 @@ class LLMExtractor:
         self._temperature: float = settings.ollama_temperature
         self._seed: int = settings.ollama_seed
         self._num_predict: int = settings.ollama_num_predict
+        self._num_ctx: int = settings.ollama_num_ctx
         self._reasoning: bool | None = settings.ollama_reasoning
 
     def _build_prompt(self, texto: str) -> str:
@@ -119,11 +147,12 @@ class LLMExtractor:
             base_url=self._base_url,
             temperature=self._temperature,
             seed=self._seed,
-            format="json",  # força geração de JSON válido no nível do tokenizador
-            # Limite de tokens: com format="json" o modelo pode repetir chaves
-            # indefinidamente sem fechar o objeto (observado no qwen3:0.6b).
+            format=ESQUEMA_EXTRACAO,  # saída restrita ao esquema JSON da extração
+            # Limite de tokens: o modelo pode repetir chaves indefinidamente sem
+            # fechar o objeto (observado no qwen3:0.6b).
             num_predict=self._num_predict,
-            # None = padrão do modelo (referência); False = variante sem raciocínio
+            num_ctx=self._num_ctx,
+            # True = raciocínio ativado e registrado (referência); False = variante sem raciocínio
             reasoning=self._reasoning,
         )
 
@@ -207,10 +236,8 @@ class LLMExtractor:
                 llm = self._criar_llm()
                 resposta = llm.invoke(prompt)
 
-                # Obter texto da resposta (AIMessage.content ou str)
-                texto_resposta = (
-                    resposta.content if hasattr(resposta, "content") else str(resposta)
-                )
+                # Texto da resposta e do raciocínio, registrados em todos os casos
+                texto_resposta, raciocinio = textos_da_resposta(resposta)
 
                 data, erro = parsear_json_llm(texto_resposta)
 
@@ -221,11 +248,15 @@ class LLMExtractor:
                     return ExtractedInfo(
                         erro_parse=erro,
                         evidencias={"resposta_llm_bruta": truncar_resposta(texto_resposta)},
+                        resposta_llm_bruta=texto_resposta,
+                        raciocinio_llm=raciocinio,
                     )
 
                 # Parse bem-sucedido — anexar contagem de tokens da chamada
                 tokens = extrair_uso_tokens(resposta)
-                return self._dict_para_extracted_info(data, tokens)
+                return self._dict_para_extracted_info(data, tokens).model_copy(
+                    update={"resposta_llm_bruta": texto_resposta, "raciocinio_llm": raciocinio}
+                )
 
             except Exception as exc:
                 # Qualquer exceção de invoke = falha de conexão/runtime → retry

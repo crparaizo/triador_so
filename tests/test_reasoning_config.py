@@ -1,7 +1,8 @@
 """
 Testes da opção OLLAMA_REASONING (variante sem o modo de raciocínio do qwen3).
 
-O padrão (None) mantém a configuração da execução de referência; False desativa
+O padrão (True) ativa o raciocínio de forma explícita, mesma geração do padrão
+do qwen3 usado na execução de referência, com o texto do raciocínio registrado; False desativa
 o raciocínio no LLM puro e na extração da híbrida. Nenhum teste requer Ollama.
 
 Protótipo acadêmico — monografia de especialização em Controle e Automação.
@@ -22,9 +23,9 @@ def limpar_settings():
 
 
 def test_padrao_mantem_a_configuracao_de_referencia(monkeypatch):
-    """Sem a variável de ambiente, o raciocínio fica no padrão do modelo (None)."""
+    """Sem a variável de ambiente, o raciocínio fica ativado (True) e é registrado."""
     monkeypatch.delenv("OLLAMA_REASONING", raising=False)
-    assert Settings(_env_file=None).ollama_reasoning is None
+    assert Settings(_env_file=None).ollama_reasoning is True
 
 
 def test_variavel_de_ambiente_desativa_o_raciocinio(monkeypatch):
@@ -36,6 +37,6 @@ def test_variavel_de_ambiente_desativa_o_raciocinio(monkeypatch):
 
 
 def test_variavel_vazia_equivale_ao_padrao(monkeypatch):
-    """OLLAMA_REASONING vazio não quebra a configuração e mantém o padrão do modelo."""
+    """OLLAMA_REASONING vazio não quebra a configuração e mantém o raciocínio ativado."""
     monkeypatch.setenv("OLLAMA_REASONING", "")
-    assert get_settings().ollama_reasoning is None
+    assert get_settings().ollama_reasoning is True

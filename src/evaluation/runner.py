@@ -62,7 +62,9 @@ def _config_llm() -> dict:
         "temperatura": s.ollama_temperature,
         "semente": s.ollama_seed,
         "num_predict": s.ollama_num_predict,
+        "num_ctx": s.ollama_num_ctx,
         "raciocinio": s.ollama_reasoning,
+        "formato_saida": "esquema JSON",
     }
 
 

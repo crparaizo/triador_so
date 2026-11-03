@@ -1,0 +1,486 @@
+{
+  "arquivo": "evaluation_raw_20261103_025551.json",
+  "assertividade": {
+    "urgencia": {
+      "f1": {
+        "regras": {
+          "f1": 0.474,
+          "ic95": [
+            0.372,
+            0.573
+          ],
+          "acuracia": 0.47
+        },
+        "llm": {
+          "f1": 0.319,
+          "ic95": [
+            0.229,
+            0.418
+          ],
+          "acuracia": 0.34
+        },
+        "hibrido": {
+          "f1": 0.446,
+          "ic95": [
+            0.344,
+            0.545
+          ],
+          "acuracia": 0.44
+        }
+      },
+      "dif": {
+        "hibrido-regras": {
+          "delta_f1": -0.028,
+          "ic95": [
+            -0.086,
+            0.028
+          ]
+        },
+        "hibrido-llm": {
+          "delta_f1": 0.127,
+          "ic95": [
+            -0.001,
+            0.249
+          ]
+        },
+        "regras-llm": {
+          "delta_f1": 0.155,
+          "ic95": [
+            0.029,
+            0.275
+          ]
+        }
+      },
+      "mcnemar": {
+        "hibrido-regras": {
+          "a_favor_1o": 3,
+          "a_favor_2o": 6,
+          "p": 0.508,
+          "p_holm": 1.0
+        },
+        "hibrido-llm": {
+          "a_favor_1o": 25,
+          "a_favor_2o": 15,
+          "p": 0.154,
+          "p_holm": 1.0
+        },
+        "regras-llm": {
+          "a_favor_1o": 27,
+          "a_favor_2o": 14,
+          "p": 0.06,
+          "p_holm": 0.536
+        }
+      }
+    },
+    "prioridade": {
+      "f1": {
+        "regras": {
+          "f1": 0.431,
+          "ic95": [
+            0.331,
+            0.531
+          ],
+          "acuracia": 0.43
+        },
+        "llm": {
+          "f1": 0.13,
+          "ic95": [
+            0.07,
+            0.201
+          ],
+          "acuracia": 0.18
+        },
+        "hibrido": {
+          "f1": 0.379,
+          "ic95": [
+            0.278,
+            0.48
+          ],
+          "acuracia": 0.39
+        }
+      },
+      "dif": {
+        "hibrido-regras": {
+          "delta_f1": -0.052,
+          "ic95": [
+            -0.13,
+            0.024
+          ]
+        },
+        "hibrido-llm": {
+          "delta_f1": 0.25,
+          "ic95": [
+            0.13,
+            0.362
+          ]
+        },
+        "regras-llm": {
+          "delta_f1": 0.302,
+          "ic95": [
+            0.176,
+            0.419
+          ]
+        }
+      },
+      "mcnemar": {
+        "hibrido-regras": {
+          "a_favor_1o": 5,
+          "a_favor_2o": 9,
+          "p": 0.424,
+          "p_holm": 1.0
+        },
+        "hibrido-llm": {
+          "a_favor_1o": 33,
+          "a_favor_2o": 12,
+          "p": 0.002,
+          "p_holm": 0.03
+        },
+        "regras-llm": {
+          "a_favor_1o": 36,
+          "a_favor_2o": 11,
+          "p": 0.0,
+          "p_holm": 0.004
+        }
+      }
+    },
+    "categoria": {
+      "f1": {
+        "regras": {
+          "f1": 0.584,
+          "ic95": [
+            0.482,
+            0.679
+          ],
+          "acuracia": 0.59
+        },
+        "llm": {
+          "f1": 0.356,
+          "ic95": [
+            0.26,
+            0.46
+          ],
+          "acuracia": 0.43
+        },
+        "hibrido": {
+          "f1": 0.584,
+          "ic95": [
+            0.482,
+            0.679
+          ],
+          "acuracia": 0.59
+        }
+      },
+      "dif": {
+        "hibrido-regras": {
+          "delta_f1": 0.0,
+          "ic95": [
+            0.0,
+            0.0
+          ]
+        },
+        "hibrido-llm": {
+          "delta_f1": 0.228,
+          "ic95": [
+            0.093,
+            0.353
+          ]
+        },
+        "regras-llm": {
+          "delta_f1": 0.228,
+          "ic95": [
+            0.093,
+            0.353
+          ]
+        }
+      },
+      "mcnemar": {
+        "hibrido-regras": {
+          "a_favor_1o": 0,
+          "a_favor_2o": 0,
+          "p": 1.0,
+          "p_holm": 1.0
+        },
+        "hibrido-llm": {
+          "a_favor_1o": 31,
+          "a_favor_2o": 15,
+          "p": 0.026,
+          "p_holm": 0.285
+        },
+        "regras-llm": {
+          "a_favor_1o": 31,
+          "a_favor_2o": 15,
+          "p": 0.026,
+          "p_holm": 0.285
+        }
+      }
+    },
+    "equipe": {
+      "f1": {
+        "regras": {
+          "f1": 0.426,
+          "ic95": [
+            0.325,
+            0.524
+          ],
+          "acuracia": 0.41
+        },
+        "llm": {
+          "f1": 0.391,
+          "ic95": [
+            0.29,
+            0.497
+          ],
+          "acuracia": 0.46
+        },
+        "hibrido": {
+          "f1": 0.443,
+          "ic95": [
+            0.34,
+            0.541
+          ],
+          "acuracia": 0.42
+        }
+      },
+      "dif": {
+        "hibrido-regras": {
+          "delta_f1": 0.018,
+          "ic95": [
+            -0.02,
+            0.062
+          ]
+        },
+        "hibrido-llm": {
+          "delta_f1": 0.052,
+          "ic95": [
+            -0.052,
+            0.149
+          ]
+        },
+        "regras-llm": {
+          "delta_f1": 0.034,
+          "ic95": [
+            -0.074,
+            0.137
+          ]
+        }
+      },
+      "mcnemar": {
+        "hibrido-regras": {
+          "a_favor_1o": 2,
+          "a_favor_2o": 1,
+          "p": 1.0,
+          "p_holm": 1.0
+        },
+        "hibrido-llm": {
+          "a_favor_1o": 11,
+          "a_favor_2o": 15,
+          "p": 0.557,
+          "p_holm": 1.0
+        },
+        "regras-llm": {
+          "a_favor_1o": 11,
+          "a_favor_2o": 16,
+          "p": 0.442,
+          "p_holm": 1.0
+        }
+      }
+    },
+    "urgencia_e_prioridade": {
+      "acertos": {
+        "regras": 43,
+        "llm": 8,
+        "hibrido": 38
+      },
+      "hibrido-regras": {
+        "a_favor_1o": 4,
+        "a_favor_2o": 9,
+        "p": 0.267,
+        "p_holm": 1.0
+      },
+      "hibrido-llm": {
+        "a_favor_1o": 33,
+        "a_favor_2o": 3,
+        "p": 0.0,
+        "p_holm": 0.0
+      },
+      "regras-llm": {
+        "a_favor_1o": 37,
+        "a_favor_2o": 2,
+        "p": 0.0,
+        "p_holm": 0.0
+      }
+    },
+    "n_testes_holm": 15
+  },
+  "criticos": {
+    "n_criticos": 27,
+    "abordagens": {
+      "regras": {
+        "subestimados": 11,
+        "taxa": 0.407,
+        "ic_clopper_pearson": [
+          0.224,
+          0.612
+        ],
+        "criticos_com_DESCONHECIDA_nao_contados": 3
+      },
+      "llm": {
+        "subestimados": 19,
+        "taxa": 0.704,
+        "ic_clopper_pearson": [
+          0.498,
+          0.862
+        ],
+        "criticos_com_DESCONHECIDA_nao_contados": 1
+      },
+      "hibrido": {
+        "subestimados": 9,
+        "taxa": 0.333,
+        "ic_clopper_pearson": [
+          0.165,
+          0.54
+        ],
+        "criticos_com_DESCONHECIDA_nao_contados": 3
+      }
+    },
+    "mcnemar_hibrido_vs_llm": {
+      "so_hibrido": 3,
+      "so_llm": 13,
+      "p": 0.021
+    }
+  },
+  "revisao_humana": {
+    "regras": {
+      "encaminhados": 65,
+      "taxa": 0.65,
+      "vp": 40,
+      "precisao": 0.615,
+      "revocacao": 0.741,
+      "f1": 0.672,
+      "criticos_revisados": 15,
+      "criticos_que_exigem_revisao": 22
+    },
+    "llm": {
+      "encaminhados": 69,
+      "taxa": 0.69,
+      "vp": 36,
+      "precisao": 0.522,
+      "revocacao": 0.667,
+      "f1": 0.585,
+      "criticos_revisados": 11,
+      "criticos_que_exigem_revisao": 22
+    },
+    "hibrido": {
+      "encaminhados": 69,
+      "taxa": 0.69,
+      "vp": 41,
+      "precisao": 0.594,
+      "revocacao": 0.759,
+      "f1": 0.667,
+      "criticos_revisados": 16,
+      "criticos_que_exigem_revisao": 22
+    },
+    "mcnemar_revocacao_hibrido_vs_regras": {
+      "so_hibrido": 4,
+      "so_regras": 3,
+      "p": 1.0
+    },
+    "n_exigem_revisao": 54
+  },
+  "sensibilidade_equipe": {
+    "regras": {
+      "acuracia_original": 0.41,
+      "acuracia_harmonizada": 0.61,
+      "f1_ponderado_harmonizado": 0.551
+    },
+    "llm": {
+      "acuracia_original": 0.46,
+      "acuracia_harmonizada": 0.46,
+      "f1_ponderado_harmonizado": 0.391
+    },
+    "hibrido": {
+      "acuracia_original": 0.42,
+      "acuracia_harmonizada": 0.61,
+      "f1_ponderado_harmonizado": 0.568
+    }
+  },
+  "evidencias": {
+    "regras": {
+      "casos_com_regra_acionada_pct": 58,
+      "casos_com_evidencia": 82,
+      "casos_com_evidencia_pct": 82,
+      "casos_evidencias_todas_verificaveis": 82,
+      "casos_regra_e_todas_verificaveis_pct": 57,
+      "evidencias_verificaveis": "204/204",
+      "por_campo": {
+        "ativo": "57/57",
+        "sintomas": "138/138",
+        "urgencia_mencionada": "3/3",
+        "risco_seguranca": "6/6"
+      },
+      "urgencia_mencionada_ausente_no_relato": {}
+    },
+    "llm": {
+      "casos_com_regra_acionada_pct": 0,
+      "casos_com_evidencia": 0,
+      "casos_com_evidencia_pct": 0,
+      "casos_evidencias_todas_verificaveis": 0,
+      "casos_regra_e_todas_verificaveis_pct": 0,
+      "evidencias_verificaveis": "0/0",
+      "por_campo": {},
+      "urgencia_mencionada_ausente_no_relato": {}
+    },
+    "hibrido": {
+      "casos_com_regra_acionada_pct": 61,
+      "casos_com_evidencia": 85,
+      "casos_com_evidencia_pct": 85,
+      "casos_evidencias_todas_verificaveis": 36,
+      "casos_regra_e_todas_verificaveis_pct": 21,
+      "evidencias_verificaveis": "133/196",
+      "por_campo": {
+        "ativo_mencionado": "65/74",
+        "sintomas": "46/61",
+        "urgencia_mencionada": "22/61"
+      },
+      "urgencia_mencionada_ausente_no_relato": {
+        "Urgente!": 15,
+        "urgente!": 11,
+        "urgente": 9,
+        "exterior": 1,
+        "Urgente": 1
+      }
+    }
+  },
+  "custo": {
+    "regras": {
+      "lat_media_ms": 8.2,
+      "lat_dp_ms": 7.8,
+      "lat_min_ms": 4.9,
+      "lat_max_ms": 76.3,
+      "tokens_entrada_medio": 0.0,
+      "tokens_saida_medio": 0.0,
+      "tokens_total_medio": 0.0,
+      "tokens_total_soma": 0
+    },
+    "llm": {
+      "lat_media_ms": 24756.3,
+      "lat_dp_ms": 6066.1,
+      "lat_min_ms": 14657.5,
+      "lat_max_ms": 44994.4,
+      "tokens_entrada_medio": 1430.2,
+      "tokens_saida_medio": 556.8,
+      "tokens_total_medio": 1986.9,
+      "tokens_total_soma": 198694
+    },
+    "hibrido": {
+      "lat_media_ms": 18905.9,
+      "lat_dp_ms": 4425.3,
+      "lat_min_ms": 12286.2,
+      "lat_max_ms": 39521.1,
+      "tokens_entrada_medio": 481.4,
+      "tokens_saida_medio": 477.4,
+      "tokens_total_medio": 958.7,
+      "tokens_total_soma": 95874
+    }
+  }
+}

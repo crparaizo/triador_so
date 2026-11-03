@@ -149,6 +149,14 @@ class TriageResult(BaseModel):
         default_factory=list,
         description="Campos inferidos sem evidência direta no texto (indicador de possível alucinação)",
     )
+    resposta_llm_bruta: Optional[str] = Field(
+        None,
+        description="Texto completo devolvido pelo LLM (None quando o LLM não foi chamado)",
+    )
+    raciocinio_llm: Optional[str] = Field(
+        None,
+        description="Texto do raciocínio do modelo, devolvido à parte da resposta (None sem raciocínio)",
+    )
 
     @model_validator(mode="after")
     def validar_motivo_revisao(self) -> "TriageResult":

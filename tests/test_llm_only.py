@@ -344,14 +344,23 @@ def test_mapear_equipe_valida(valor, esperado):
     assert _mapear_equipe_valida(valor, _EQUIPES_REAIS) == esperado
 
 
-def test_chatollama_recebe_format_json_e_limite_de_tokens(mocker, mock_kb):
-    """O LLM puro deve pedir JSON ao Ollama e limitar os tokens gerados (evita laço)."""
+def test_chatollama_recebe_esquema_contexto_e_limite_de_tokens(mocker, mock_kb, sample_knowledge_base):
+    """O LLM puro deve restringir a saída ao esquema, fixar o contexto e limitar os tokens (evita laço)."""
+    from src.approaches.llm_only import esquema_saida_llm
     from src.config.loader import get_settings
 
     mock_ollama_cls = mocker.patch("src.approaches.llm_only.ChatOllama")
-    mock_ollama_cls.return_value.invoke.return_value = MagicMock(content=JSON_VALIDO)
-    run_llm_only("BOMB-001 com vibração excessiva")
+    mock_ollama_cls.return_value.invoke.return_value = MagicMock(
+        content=JSON_VALIDO, additional_kwargs={"reasoning_content": "raciocínio"}
+    )
+    result = run_llm_only("BOMB-001 com vibração excessiva")
 
     kwargs = mock_ollama_cls.call_args.kwargs
-    assert kwargs["format"] == "json"
+    equipes = [t.nome for t in sample_knowledge_base.teams]
+    assert kwargs["format"] == esquema_saida_llm(equipes)
+    assert kwargs["format"]["properties"]["equipe_sugerida"]["enum"] == equipes
     assert kwargs["num_predict"] == get_settings().ollama_num_predict
+    assert kwargs["num_ctx"] == get_settings().ollama_num_ctx
+    # Resposta completa e raciocínio registrados também no sucesso
+    assert result.resposta_llm_bruta == JSON_VALIDO
+    assert result.raciocinio_llm == "raciocínio"

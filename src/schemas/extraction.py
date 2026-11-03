@@ -83,6 +83,14 @@ class ExtractedInfo(BaseModel):
         ge=0,
         description="Soma de tokens de entrada e saída da extração LLM. 0 no extrator por palavras-chave.",
     )
+    resposta_llm_bruta: Optional[str] = Field(
+        None,
+        description="Texto completo devolvido pelo LLM (None quando o LLM não foi chamado)",
+    )
+    raciocinio_llm: Optional[str] = Field(
+        None,
+        description="Texto do raciocínio do modelo, devolvido à parte da resposta (None sem raciocínio)",
+    )
 
 
 class ContextData(BaseModel):

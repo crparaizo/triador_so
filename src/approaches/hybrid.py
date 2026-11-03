@@ -114,6 +114,8 @@ def _extrair_llm(estado: dict) -> dict:
         raise FalhaExtracaoLLM(
             extracted.erro_parse,
             extracted.evidencias.get("resposta_llm_bruta", ""),
+            extracted.raciocinio_llm,
+            extracted.resposta_llm_bruta,
         )
     return {"extraido": extracted, "fallback_ativado": False}
 
@@ -159,6 +161,14 @@ def _extrair_palavras_chave_fallback(estado: dict) -> dict:
         confianca_extracao=extracted_kw.confianca_extracao,
         campos_sem_suporte=extracted_kw.campos_sem_suporte,
     )
+    # Texto completo da resposta que falhou, fora das evidências (sem truncar)
+    if isinstance(exc, FalhaExtracaoLLM):
+        extracted = extracted.model_copy(
+            update={
+                "resposta_llm_bruta": exc.resposta_completa,
+                "raciocinio_llm": exc.raciocinio,
+            }
+        )
     return {"extraido": extracted, "fallback_ativado": True}
 
 
@@ -272,6 +282,8 @@ def _montar_resultado(estado: dict) -> TriageResult:
         tokens_saida=extracted.tokens_saida,
         tokens_total=extracted.tokens_total,
         campos_sem_suporte=campos_sem_suporte,
+        resposta_llm_bruta=extracted.resposta_llm_bruta,
+        raciocinio_llm=extracted.raciocinio_llm,
     )
 
 

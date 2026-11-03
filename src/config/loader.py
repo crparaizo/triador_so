@@ -102,21 +102,31 @@ class Settings(BaseSettings):
             "resposta truncada segue a política de falha segura (revisão humana)."
         ),
     )
+    ollama_num_ctx: int = Field(
+        default=4096,
+        ge=512,
+        description=(
+            "Janela de contexto do modelo (parâmetro num_ctx do Ollama), fixada "
+            "para não depender do padrão do servidor. 4.096 tokens comportam o "
+            "maior prompt do protótipo somado ao limite de num_predict."
+        ),
+    )
     ollama_reasoning: Optional[bool] = Field(
-        default=None,
+        default=True,
         description=(
             "Modo de raciocínio do modelo (parâmetro reasoning do ChatOllama). "
-            "None mantém o padrão do modelo — ativado no qwen3, configuração da "
-            "execução de referência. False desativa o raciocínio (variante "
-            "experimental, OLLAMA_REASONING=false)."
+            "True ativa o raciocínio de forma explícita — mesma geração do padrão "
+            "do qwen3, mas com o texto do raciocínio devolvido à parte, o que "
+            "permite registrá-lo. False desativa o raciocínio (variante "
+            "experimental, OLLAMA_REASONING=false). None deixa o padrão do modelo."
         ),
     )
 
     @field_validator("ollama_reasoning", mode="before")
     @classmethod
     def _reasoning_vazio_e_padrao(cls, v):
-        """OLLAMA_REASONING vazio equivale a não definido (padrão do modelo)."""
-        return None if isinstance(v, str) and not v.strip() else v
+        """OLLAMA_REASONING vazio equivale a não definido (raciocínio ativado)."""
+        return True if isinstance(v, str) and not v.strip() else v
 
 
 @lru_cache(maxsize=1)

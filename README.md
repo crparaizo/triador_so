@@ -112,7 +112,11 @@ Todos os campos têm valores padrão funcionais — o sistema roda sem `.env` co
 | `LOG_LEVEL` | `INFO` | Nível de log: `DEBUG`, `INFO`, `WARNING` ou `ERROR`. |
 | `MAX_RETRIES_LLM` | `3` | Número máximo de tentativas para chamadas ao LLM em caso de erro. |
 | `LLM_TIMEOUT_SECONDS` | `60` | Base do timeout por caso na avaliação (o runner aguarda 2× este valor). Não é repassado ao cliente HTTP do Ollama. |
-| `OLLAMA_NUM_PREDICT` | `1024` | Limite de tokens gerados por chamada ao LLM (inclui o raciocínio do qwen3). Evita que o modelo entre em laço com `format="json"`; resposta truncada vai para revisão humana. |
+| `OLLAMA_NUM_PREDICT` | `1024` | Limite de tokens gerados por chamada ao LLM (inclui o raciocínio do qwen3). Evita que o modelo entre em laço repetindo chaves do JSON; resposta truncada vai para revisão humana. |
+| `OLLAMA_NUM_CTX` | `4096` | Janela de contexto do modelo, fixada para não depender do padrão do Ollama. Comporta o maior prompt do protótipo somado ao limite de `OLLAMA_NUM_PREDICT`. |
+| `OLLAMA_REASONING` | `true` | Modo de raciocínio do qwen3. `true` (padrão) mantém o raciocínio ativado e grava o texto dele no resultado (`raciocinio_llm`); `false` desativa (variante experimental). |
+
+Nas abordagens com LLM, a saída do modelo é restrita a um esquema JSON passado ao Ollama em `format` (valores permitidos de urgência, prioridade, categoria e equipe), e cada resultado grava a resposta completa do modelo em `resposta_llm_bruta`.
 
 ---
 
@@ -234,10 +238,10 @@ Um exemplo de relatório de avaliação sintético está disponível em
 
 ### Análise estatística da monografia
 
-A execução de referência da monografia (`results/evaluation_*_20261028_115033`) pode ser reanalisada com:
+A execução de referência da monografia (`results/evaluation_*_20261103_014254`) pode ser reanalisada com:
 
 ```powershell
-python scripts/analise_estatistica.py results/evaluation_raw_20261028_115033.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261103_014254.json
 ```
 
 O script reproduz as Tabelas 2, 3, 6, 9 e 11 (IC 95% por *bootstrap*, teste de McNemar, Clopper-Pearson, métricas de revisão humana e verificabilidade das evidências). Detalhes e a lista das execuções em `results/README.md`.
@@ -257,7 +261,7 @@ python -m src.evaluation --dataset datasets/alarm_cases.json
 
 ```powershell
 python -m src.evaluation --dataset datasets/holdout_cases.json
-python scripts/analise_estatistica.py results/evaluation_raw_20261102_065123.json --dataset datasets/holdout_cases.json
+python scripts/analise_estatistica.py results/evaluation_raw_20261103_025551.json --dataset datasets/holdout_cases.json
 ```
 
 ---
@@ -268,7 +272,7 @@ python scripts/analise_estatistica.py results/evaluation_raw_20261102_065123.jso
 pytest tests/ -v
 ```
 
-Resultado esperado: **265 testes aprovados, 0 falhas.**
+Resultado esperado: **266 testes aprovados, 0 falhas.**
 
 > Os testes **não dependem do Ollama**. Chamadas ao LLM são simuladas por mocks.
 > Execute os testes mesmo sem o Ollama instalado.

@@ -76,3 +76,24 @@ def parsear_json_llm(texto_resposta: str) -> tuple[dict | None, str | None]:
 
     # Passo 3: nenhum objeto JSON encontrado na resposta
     return None, "Falha ao parsear JSON: nenhum objeto JSON encontrado na resposta"
+
+
+def textos_da_resposta(resposta) -> tuple[str, str | None]:
+    """
+    Separa o conteúdo e o raciocínio de uma resposta do ChatOllama.
+
+    Com reasoning=True, o langchain-ollama devolve o raciocínio do modelo em
+    additional_kwargs['reasoning_content'], fora do conteúdo visível.
+
+    Args:
+        resposta: objeto retornado por ChatOllama.invoke (AIMessage) ou similar.
+
+    Returns:
+        Tupla (conteudo, raciocinio); raciocinio é None quando ausente.
+    """
+    if resposta is None:
+        return "", None
+    conteudo = resposta.content if hasattr(resposta, "content") else str(resposta)
+    extras = getattr(resposta, "additional_kwargs", None)
+    raciocinio = extras.get("reasoning_content") if isinstance(extras, dict) else None
+    return str(conteudo), (str(raciocinio) if raciocinio else None)

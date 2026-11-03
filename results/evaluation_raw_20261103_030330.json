@@ -1,0 +1,1454 @@
+{
+  "timestamp": "2026-11-03T02:56:00.029097",
+  "config_llm": {
+    "modelo": "qwen3:0.6b",
+    "temperatura": 0.0,
+    "semente": 42,
+    "num_predict": 1024,
+    "num_ctx": 4096,
+    "raciocinio": true,
+    "formato_saida": "esquema JSON"
+  },
+  "dataset_size": 10,
+  "approaches": {
+    "regras": {
+      "results": [
+        {
+          "id": "40186898-5b27-4327-8e3a-95799ffeca3c",
+          "timestamp": "2026-11-03T02:56:00.106224",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CAL-001",
+            "sintomas": "caldeira, vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 62.80990000050224,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "4cedc0bc-fced-47bd-b2d5-bad5b77dd973",
+          "timestamp": "2026-11-03T02:56:00.112088",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CAL-001",
+            "sintomas": "caldeira, vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 5.187100001421641,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "0c0892da-abcd-43a3-b2f8-7a061fb03180",
+          "timestamp": "2026-11-03T02:56:00.117643",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CAL-001",
+            "sintomas": "caldeira, vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 5.002299998523085,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "760cf28c-dff3-4f67-ab3e-159182b01d49",
+          "timestamp": "2026-11-03T02:56:00.123709",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "BOMB-001",
+            "sintomas": "bomba, temperatura alta, centrífuga",
+            "palavras_categoria": "bomba, temperatura alta",
+            "regras_classificacao": "Regras: RULE-011, RULE-014. urgência ← RULE-011; prioridade ← RULE-011; equipe ← RULE-011; confiança ← RULE-011"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 5.619300000034855,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "eeaa5f16-b611-4a5d-9906-8b45f2ed62fb",
+          "timestamp": "2026-11-03T02:56:00.129665",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo": "MOTOR-001",
+            "sintomas": "vibração, motor, correia",
+            "palavras_categoria": "vibração, motor, correia",
+            "regras_classificacao": "Regras: RULE-014. urgência ← RULE-014; prioridade ← RULE-014; equipe ← RULE-014; confiança ← RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 5.427599999165977,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "1c6b0663-f195-4cb8-9570-d2d402d9468e",
+          "timestamp": "2026-11-03T02:56:00.135180",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo": "PANEL-002",
+            "sintomas": "motor, corrente alta, painel",
+            "palavras_categoria": "corrente alta, painel",
+            "regras_classificacao": "Regras: RULE-003, RULE-010. urgência ← RULE-003; prioridade ← RULE-003; equipe ← RULE-003; confiança ← RULE-003; revisão ← RULE-003"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Intervenção em instalação elétrica — sujeita à NR-10, exige trabalhador autorizado",
+          "confianca": 0.9,
+          "latencia_ms": 4.965099999026279,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "3d616613-c638-4be7-9366-26b8a0bca12e",
+          "timestamp": "2026-11-03T02:56:00.141190",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "TI_AUTOMACAO",
+          "equipe_sugerida": "TI e Automação",
+          "regras_acionadas": [
+            "RULE-012"
+          ],
+          "evidencias": {
+            "sintomas": "CLP, comunicação",
+            "localizacao": "Setor C - Produção",
+            "palavras_categoria": "comunicação, CLP",
+            "regras_classificacao": "Regras: RULE-012. urgência ← RULE-012; prioridade ← RULE-012; equipe ← RULE-012; confiança ← RULE-012"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 5.412999998952728,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "a673e42c-9438-4b1f-a1a9-6ba2228abee9",
+          "timestamp": "2026-11-03T02:56:00.147383",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "CHIL-001",
+            "sintomas": "temperatura alta, chiller, água gelada",
+            "palavras_categoria": "chiller, água gelada",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 5.653700000038953,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "fcf14861-b38a-4ef2-9c0a-aad35da98f79",
+          "timestamp": "2026-11-03T02:56:00.153277",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-001",
+            "RULE-002",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo": "GER-001",
+            "sintomas": "gerador, emergência",
+            "localizacao": "Área Externa - Gerador",
+            "risco_seguranca": "emergencia",
+            "urgencia_mencionada": "emergencia",
+            "palavras_categoria": "gerador",
+            "regras_classificacao": "Regras: RULE-001, RULE-002, RULE-010. urgência ← RULE-001; prioridade ← RULE-001; confiança ← RULE-001; equipe ← RULE-010; revisão ← RULE-001, RULE-002"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Risco de segurança confirmado — revisão humana obrigatória antes de qualquer ação | Palavras de emergência detectadas — situação crítica requer avaliação imediata",
+          "confianca": 0.95,
+          "latencia_ms": 5.354599999918719,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "impacto_producao"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        },
+        {
+          "id": "1e47c653-d492-4e5f-ac1c-6dfeea4d14c0",
+          "timestamp": "2026-11-03T02:56:00.167562",
+          "abordagem": "REGRAS",
+          "texto_entrada": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-009",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo": "COMP-001",
+            "sintomas": "compressor, instrumento, compressor de ar",
+            "palavras_categoria": "compressor de ar, ar instrumento",
+            "regras_classificacao": "Regras: RULE-009, RULE-015. urgência ← RULE-009; prioridade ← RULE-009; equipe ← RULE-009; confiança ← RULE-009"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.78,
+          "latencia_ms": 13.497399999323534,
+          "tokens_entrada": 0,
+          "tokens_saida": 0,
+          "tokens_total": 0,
+          "campos_sem_suporte": [
+            "localizacao",
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada"
+          ],
+          "resposta_llm_bruta": null,
+          "raciocinio_llm": null
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "ALM-001",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+        },
+        {
+          "id": "ALM-002",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+        },
+        {
+          "id": "ALM-003",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+        },
+        {
+          "id": "ALM-004",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-005",
+          "tipo": "ALARME",
+          "texto": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+        },
+        {
+          "id": "ALM-006",
+          "tipo": "ALARME",
+          "texto": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+        },
+        {
+          "id": "ALM-007",
+          "tipo": "ALARME",
+          "texto": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+        },
+        {
+          "id": "ALM-008",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-009",
+          "tipo": "ALARME",
+          "texto": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+        },
+        {
+          "id": "ALM-010",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+        }
+      ],
+      "elapsed_seconds": 0.1351319000004878
+    },
+    "llm": {
+      "results": [
+        {
+          "id": "520dc96b-10f2-40cb-bf4f-446b8122c972",
+          "timestamp": "2026-11-03T02:56:25.182104",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "MEDIA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe_sugerida": "Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.9,
+          "latencia_ms": 25012.868799998614,
+          "tokens_entrada": 1455,
+          "tokens_saida": 315,
+          "tokens_total": 1770,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{\n\n\"urgencia\": \"MEDIA\",\n\"prioridade\": \"P1\",\n\"categoria\": \"UTILIDADES\",\n\"equipe_sugerida\": \"Utilidades\",\n\"regras_acionadas\": [],\n\"evidencias\": {\n  \"urgencia\": \"ALTA\",\n  \"prioridade\": \"P1\",\n  \"categoria\": \"UTILIDADES\",\n  \"equipe_sugerida\": \"Utilidades\"\n},\n\"requer_revisao_humana\": false,\n\"motivo_revisao\": null,\n\"confianca\": 0.9,\n\"campos_sem_suporte\": []\n}",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of pressure high in the vapor pump (CAL-001), generated by the supervisor. The task is to classify the service order according to the given fields and return the JSON.\n\nFirst, I need to determine the urgency. The alarm is about pressure, which is a mechanical system, so it's likely a mechanical issue. The priority is probably P1 since it's a minor issue. The category is \"UTILIDADES\" as it's related to utilities. The equipment is the vapor pump, so the team is likely in the \"Utilidades\" category. The reasons given are the pressure limit, so there's no need for evidence, so the fields are filled. Urgency is \"MEDIA\", priority \"P1\", and category \"UTILIDADES\". The JSON should have all these fields correctly filled without any errors.\n"
+        },
+        {
+          "id": "105b85f3-1235-4536-af32-aacce8389763",
+          "timestamp": "2026-11-03T02:56:48.296578",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "1,04 MPa acima do limite de alarme de 0,95 MPa",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe_sugerida": "Utilidades"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A alarme de pressão alta indica um problema crítico na Caldeira de Vapor, necessitando uma revisão para garantir a segurança.",
+          "confianca": 0.8,
+          "latencia_ms": 23112.84709999927,
+          "tokens_entrada": 1455,
+          "tokens_saida": 526,
+          "tokens_total": 1981,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{\n\n\"urgencia\": \"ALTA\",\n\"prioridade\": \"P1\",\n\"categoria\": \"UTILIDADES\",\n\"equipe_sugerida\": \"Utilidades\",\n\"regras_acionadas\": [],\n\"evidencias\": {\n  \"urgencia\": \"1,04 MPa acima do limite de alarme de 0,95 MPa\",\n  \"prioridade\": \"P1\",\n  \"categoria\": \"UTILIDADES\",\n  \"equipe_sugerida\": \"Utilidades\"\n},\n\"requer_revisao_humana\": true,\n\"motivo_revisao\": \"A alarme de pressão alta indica um problema crítico na Caldeira de Vapor, necessitando uma revisão para garantir a segurança.\",\n\"confianca\": 0.8,\n\"campos_sem_suporte\": []\n}",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of pressure high in the vapor pump (CAL-001), which is part of the Utilidades category. The task is to classify the service according to the given JSON fields.\n\nFirst, the urgency. The alarm is 1.04 MPa above the limit, so it's a high pressure issue. Urgency should be \"ALTA\".\n\nNext, priority. Since it's a high pressure issue, maybe it's a critical issue. The options are P1 to P4. High priority would be P1 or P2. But the problem is that the system is already at 1.04 MPa, which is above the limit. So maybe it's a critical issue, so P1 or P2. But the user's example uses P1 for some cases. Let's go with P1.\n\nCategory: Utilidades, as it's a pump or related equipment.\n\nTeam suggestion: Use the Utilidades category. So the team is \"Utilidades\".\n\nEvidences: The report mentions the pressure limit and the supervisory action. So the evidences list should include that.\n\nRequiring human review: The user wants this done manually, so set it to true.\n\nReason for review: Just the alarm details.\n\nConfidence: Since the issue is critical, maybe 0.8 or 0.9. Let's say 0.8.\n\nFields without support: The evidences list is already there, so no need to add anything.\n\nCheck if all fields are filled. Urgency, priority, category, team, etc. All are there. No forbidden fields. Looks good.\n"
+        },
+        {
+          "id": "8dcc9842-e3f1-4d45-86bc-d9a8b56e2cf6",
+          "timestamp": "2026-11-03T02:57:07.052353",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "MEDIA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALARMA DE PRESSÃO ALTA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe_sugerida": "Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 18754.49430000117,
+          "tokens_entrada": 1453,
+          "tokens_saida": 415,
+          "tokens_total": 1868,
+          "campos_sem_suporte": [
+            "urgencia",
+            "prioridade",
+            "categoria",
+            "equipe_sugerida",
+            "regras_acionadas",
+            "evidencias",
+            "requer_revisao_humana",
+            "motivo_revisao",
+            "confianca"
+          ],
+          "resposta_llm_bruta": "{ \"urgencia\": \"MEDIA\", \"prioridade\": \"P1\", \"categoria\": \"UTILIDADES\", \"equipe_sugerida\": \"Utilidades\", \"regras_acionadas\": [], \"evidencias\": {\"urgencia\": \"ALARMA DE PRESSÃO ALTA\", \"prioridade\": \"P1\", \"categoria\": \"UTILIDADES\", \"equipe_sugerida\": \"Utilidades\"}, \"requer_revisao_humana\": false, \"motivo_revisao\": null, \"confianca\": 0.0, \"campos_sem_suporte\": [\"urgencia\", \"prioridade\", \"categoria\", \"equipe_sugerida\", \"regras_acionadas\", \"evidencias\", \"requer_revisao_humana\", \"motivo_revisao\", \"confianca\"] }",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of pressure high in the vapor pump (CAL-001), generated by the supervisor. The task is to classify the service order according to the given fields and return the JSON.\n\nFirst, I need to determine the urgency. The alarm is about pressure, which is a mechanical system, so it's likely a mechanical issue. The priority is probably P1 since it's a minor issue. The category is \"UTILIDADES\" as it's related to utilities. The equipment is the vapor pump, so the team is likely in the \"Utilidades\" category. The reasons given are just the pressure limit, so no evidence here. The JSON fields are filled as per the rules. Urgency is \"MEDIA\", priority \"P1\", category \"UTILIDADES\". The other fields are filled with the given options. No need for revisal, so set that to false. The fields without support are just the ones mentioned. The confianca is 0.0 since there's no evidence. So the final JSON should have all these fields correctly filled.\n"
+        },
+        {
+          "id": "d70a94a9-62e7-491c-a43b-c17bad044a9f",
+          "timestamp": "2026-11-03T02:57:29.439947",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe_sugerida": "Manutenção Mecânica"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 22386.542899999768,
+          "tokens_entrada": 1457,
+          "tokens_saida": 488,
+          "tokens_total": 1945,
+          "campos_sem_suporte": [
+            "urgencia",
+            "prioridade",
+            "categoria",
+            "equipe_sugerida",
+            "regras_acionadas",
+            "evidencias",
+            "requer_revisao_humana",
+            "motivo_revisao",
+            "confianca"
+          ],
+          "resposta_llm_bruta": "{ \"urgencia\": \"ALTA\", \"prioridade\": \"P1\", \"categoria\": \"MECANICA\", \"equipe_sugerida\": \"Manutenção Mecânica\", \"regras_acionadas\": [], \"evidencias\": {\"urgencia\": \"ALTA\", \"prioridade\": \"P1\", \"categoria\": \"MECANICA\", \"equipe_sugerida\": \"Manutenção Mecânica\"}, \"requer_revisao_humana\": false, \"motivo_revisao\": null, \"confianca\": 0.0, \"campos_sem_suporte\": [\"urgencia\", \"prioridade\", \"categoria\", \"equipe_sugerida\", \"regras_acionadas\", \"evidencias\", \"requer_revisao_humana\", \"motivo_revisao\", \"confianca\"] }",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of high temperature in the centrifugal pump (BOMB-001). The task is to classify the service according to the given JSON fields.\n\nFirst, I need to determine the urgency. The alarm is about a temperature exceeding 80°C, which is above the limit. So urgency should be \"ALTA\" since it's a critical issue.\n\nNext, the priority. Since it's a temperature sensor, it's likely a routine maintenance check. The priority would be \"P1\" as it's a straightforward issue.\n\nNow, the category. The problem is with the pump's temperature, which is part of mechanical equipment. So the category is \"MECANICA\".\n\nFor the team suggestion, the user wants a specific name from the list. The available options are Manutenção Mecânica, etc. Since the issue is with the pump, the team is likely a mechanical team. So the team suggestion is \"Manutenção Mecânica\".\n\nEvidences are needed for each field. Urgency has no evidence, so I'll leave it as \"ALTA\". Prioridade is P1, and category is MECANICA. The other fields are filled with \"DESCONHECIDA\" as there's no evidence. The JSON fields are all filled, and the required fields are present. The user wants the JSON without any explanation, so just the final output.\n"
+        },
+        {
+          "id": "74a9ac41-e63c-411d-99ce-ac3ac33bef7c",
+          "timestamp": "2026-11-03T02:57:46.201101",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe_sugerida": "Manutenção Mecânica"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 1.0,
+          "latencia_ms": 16759.404900001755,
+          "tokens_entrada": 1458,
+          "tokens_saida": 366,
+          "tokens_total": 1824,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{ \"urgencia\": \"ALTA\", \"prioridade\": \"P1\", \"categoria\": \"MECANICA\", \"equipe_sugerida\": \"Manutenção Mecânica\", \"regras_acionadas\": [], \"evidencias\": {\"urgencia\": \"ALTA\", \"prioridade\": \"P1\", \"categoria\": \"MECANICA\", \"equipe_sugerida\": \"Manutenção Mecânica\"}, \"requer_revisao_humana\": false, \"motivo_revisao\": null, \"confianca\": 1.0, \"campos_sem_suporte\": [] }",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of high vibration in Motor-001, which is a motor. The task is to classify the service using the given JSON fields.\n\nFirst, I need to determine the urgency. The vibration is above the limit, so it's a high alert. Then, the priority. Since it's a motor, mechanical equipment, so the category is \"MECANICA\". \n\nFor the team suggested, the options are Manutenção Mecânica, etc. The report mentions supervising the motor, so the team is likely the technician handling it. \n\nEvidences are just the text, so I can leave that empty. Urgency is \"ALTA\", priority \"P1\" because it's a high vibration. The category is \"MECANICA\". The JSON fields are filled, and the other fields are empty. Also, the user wants the JSON without any explanation, so just the fields.\n\nCheck if there are any forbidden tags or categories. No, everything is in the list. So the final JSON should have all the fields filled correctly.\n"
+        },
+        {
+          "id": "da203fc4-a203-40fe-ab0c-e80d3c02096b",
+          "timestamp": "2026-11-03T02:58:31.312911",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "urgencia": "DESCONHECIDA",
+          "prioridade": "DESCONHECIDA",
+          "categoria": "DESCONHECIDA",
+          "equipe_sugerida": "Revisão Manual",
+          "regras_acionadas": [],
+          "evidencias": {},
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Falha na classificação: Resposta inválida do LLM: Falha ao parsear JSON: nenhum objeto JSON encontrado na resposta",
+          "confianca": 0.0,
+          "latencia_ms": 45110.90800000056,
+          "tokens_entrada": 1454,
+          "tokens_saida": 1024,
+          "tokens_total": 2478,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "",
+          "raciocinio_llm": "Okay, let's see. The user provided a text about an alarm of 420 A in PANEL-002, which is part of the MCC system. The task is to classify the service order according to the given fields and return the JSON.\n\nFirst, I need to determine the urgency. The alarm is 420 A, which is above the limit of 380 A. So urgency should be \"ALTA\".\n\nNext, the priority. Since it's a single alarm, maybe it's a minor issue. But the text mentions supervising, so maybe it's a routine check. The category is related to electrical equipment, specifically the panel. So the category would be \"ELETRICA\".\n\nFor the team suggestion, the user wants a specific name from the list. The panel is in the electrical category, so the team suggestion is \"Manutenção Elétrica\".\n\nThe evidences section needs to be a list of objects that support the classification. Here, the alarm is in the electrical panel, so the evidences would mention the panel's location and the supervisory action.\n\nThe required fields are all filled, so the JSON should have all the fields. The confianca is a number between 0 and 1, but since there's no evidence, maybe 0.0. The fields without support are \"urgencia\" and \"categoria\", but wait, the user said to list those if there's no evidence. Wait, the user's instruction says to list fields without evidence. But in this case, the alarm is in the electrical panel, so maybe \"urgencia\" and \"categoria\" are supported. Wait, the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the alarm is in the electrical panel, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait, but the user's example shows that if there's no evidence, use \"DESCONHECIDA\". But in this case, the classification is based on the alarm, so maybe \"urgencia\" and \"categoria\" are supported. Wait"
+        },
+        {
+          "id": "0e0752c3-9bb9-4925-9ec8-e7b2eb22d377",
+          "timestamp": "2026-11-03T02:58:52.818180",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P3",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+            "prioridade": "P3",
+            "categoria": "ELETRICA",
+            "equipe_sugerida": "Manutenção Elétrica"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "A alerta indica um problema crítico na comunicação do CLP, exigindo atendimento imediato.",
+          "confianca": 0.8,
+          "latencia_ms": 21504.211100000248,
+          "tokens_entrada": 1434,
+          "tokens_saida": 489,
+          "tokens_total": 1923,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{\n\n\"urgencia\": \"IMEDIATA\",\n\"prioridade\": \"P3\",\n\"categoria\": \"ELETRICA\",\n\"equipe_sugerida\": \"Manutenção Elétrica\",\n\"regras_acionadas\": [],\n\"evidencias\": {\n  \"urgencia\": \"Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).\",\n  \"prioridade\": \"P3\",\n  \"categoria\": \"ELETRICA\",\n  \"equipe_sugerida\": \"Manutenção Elétrica\"\n},\n\"requer_revisao_humana\": true,\n\"motivo_revisao\": \"A alerta indica um problema crítico na comunicação do CLP, exigindo atendimento imediato.\",\n\"confianca\": 0.8,\n\"campos_sem_suporte\": []\n}",
+          "raciocinio_llm": "Okay, let's see. The user provided a text and wants me to classify it into the specified JSON format. The text is about an alarm from the CLP system, specifically on Line 2, Setor C.\n\nFirst, I need to determine the urgency. The alarm is from the supervisory system, so it's a critical issue. Urgency should be \"IMEDIATA\".\n\nNext, the priority. Since it's a system alarm, it's likely a high-priority issue. So priority is \"P3\".\n\nCategory: The text mentions CLP, which is an electrical system. So the category is \"ELETRICA\".\n\nFor the team suggestion, the user wants a specific name from the list. The text is about a supervisory system, so the team is likely \"Manutenção Elétrica\".\n\nEvidences: The text mentions the CLP system, so I need to note that. Maybe mention the location and the setor.\n\nRequiring human review: The user specified to use only the given names, so set this to true.\n\nMotivation for review: Since it's an alarm, maybe just state that.\n\nConfiance: Since it's a critical issue, maybe 0.8 or 0.9.\n\nFields without support: The text doesn't mention any other fields, so leave them as empty.\n\nCheck if all fields are correctly filled. Ensure no tags are used and that the JSON is valid.\n"
+        },
+        {
+          "id": "5db36889-925c-425e-a8d8-f1c4fd126efb",
+          "timestamp": "2026-11-03T02:59:11.292743",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALTA",
+            "prioridade": "P3",
+            "categoria": "UTILIDADES",
+            "equipe_sugerida": "Utilidades"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.0,
+          "latencia_ms": 18472.846000000573,
+          "tokens_entrada": 1452,
+          "tokens_saida": 391,
+          "tokens_total": 1843,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{ \"urgencia\": \"ALTA\", \"prioridade\": \"P3\", \"categoria\": \"UTILIDADES\", \"equipe_sugerida\": \"Utilidades\", \"regras_acionadas\": [], \"evidencias\": {\"urgencia\": \"ALTA\", \"prioridade\": \"P3\", \"categoria\": \"UTILIDADES\", \"equipe_sugerida\": \"Utilidades\"}, \"requer_revisao_humana\": false, \"motivo_revisao\": null, \"confianca\": 0.0, \"campos_sem_suporte\": [] }",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of high temperature in the CHIL-001 chiller. The task is to classify the service order according to the given fields and return the JSON.\n\nFirst, I need to determine the urgency. The alarm is about a temperature exceeding the limit, so it's a high-temperature issue. Urgency should be \"ALTA\".\n\nNext, the priority. Since it's a temperature alarm, it's likely a critical issue. The priority would be \"P3\" as it's a high-priority problem.\n\nNow, the category. The alarm is related to a chiller, which is part of the utilities category. So the category is \"UTILIDADES\".\n\nFor the equipment, the user mentioned the chiller, so the equipment is CHIL-001. The team suggested is \"Utilidades\".\n\nThe evidencias part is just the text, so I can leave that empty. The required fields are all filled, so the JSON should be as specified. I need to make sure there are no forbidden tags and that all fields are correctly filled. Then, check if there's any other field that needs to be reviewed, but in this case, it's all filled. So the final JSON should be correct.\n"
+        },
+        {
+          "id": "264106e8-eae4-45bc-8cc8-218d29599c99",
+          "timestamp": "2026-11-03T02:59:39.044755",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "Alarme gerado pelo supervisório, abaixo do limite de 80%",
+            "prioridade": "P1 - Prioridade máxima para sistemas críticos",
+            "categoria": "ELETRICA - Gerador de Emergência",
+            "equipe_sugerida": "Manutenção Elétrica"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Ajuste a prioridade para P1 e confiança de 0.8",
+          "confianca": 0.8,
+          "latencia_ms": 27750.52329999926,
+          "tokens_entrada": 1454,
+          "tokens_saida": 602,
+          "tokens_total": 2056,
+          "campos_sem_suporte": [],
+          "resposta_llm_bruta": "{\n\n\"urgencia\": \"ALTA\",\n\"prioridade\": \"P1\",\n\"categoria\": \"ELETRICA\",\n\"equipe_sugerida\": \"Manutenção Elétrica\",\n\"regras_acionadas\": [],\n\"evidencias\": {\n  \"urgencia\": \"Alarme gerado pelo supervisório, abaixo do limite de 80%\",\n  \"prioridade\": \"P1 - Prioridade máxima para sistemas críticos\",\n  \"categoria\": \"ELETRICA - Gerador de Emergência\",\n  \"equipe_sugerida\": \"Manutenção Elétrica\"\n},\n\"requer_revisao_humana\": true,\n\"motivo_revisao\": \"Ajuste a prioridade para P1 e confiança de 0.8\",\n\"confianca\": 0.8,\n\"campos_sem_suporte\": []\n}",
+          "raciocinio_llm": "Okay, let's see. The user provided a text about an alarm on the 500kVA emergency generator (GER-001) with 65% below the limit. The task is to classify this into the specified JSON fields.\n\nFirst, I need to determine the urgency. The text mentions an alarm, so it's a problem that needs attention. The limit is below 80%, which is a critical point, so urgency should be \"ALTA\". \n\nNext, the priority. Since it's a generator, it's a critical system, so P1 or P2? P1 is the highest priority. But maybe P2 is also possible. Wait, the options are P1 to P4. Let me check the categories. The user's text doesn't mention any specific priority, so maybe P1. But I need to be sure. The text says it's a generator, which is a critical system, so P1.\n\nFor the category, it's an emergency generator, so \"ELETRICA\" as the category. \n\nThe team suggested field is \"Manutenção Elétrica\" (Electrical Maintenance). That's the correct option.\n\nEvidences: The text states the alarm is from the supervisory, so I can mention that the supervisory is responsible for the alarm. \n\nRequire human review: The user says to return only the JSON, so set it to true. \n\nReason for review: The text doesn't provide specific evidence, so it's a high priority, so set to true. \n\nFields without support: The user's text doesn't mention any other fields, so leave them as empty.\n\nConfiance: Since it's a critical system, maybe 0.8 or 0.9. Let's go with 0.8.\n\nSo putting it all together, the JSON should have urgency as ALTA, priority as P1, category as ELETRICA, team as Manutenção Elétrica, and other fields as empty.\n"
+        },
+        {
+          "id": "99ac7f67-3c77-4b99-82e0-396a64d97362",
+          "timestamp": "2026-11-03T03:00:02.481548",
+          "abordagem": "LLM",
+          "texto_entrada": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P1",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [],
+          "evidencias": {
+            "urgencia": "ALTA",
+            "prioridade": "P1",
+            "categoria": "MECANICA",
+            "equipe_sugerida": "Manutenção Mecânica"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "O alarme de pressão baixa em COMP-001 indica um falha crítica na operação do compressor, necessitando uma revisão de manutenção para garantir a segurança e a eficiência.",
+          "confianca": 0.0,
+          "latencia_ms": 23435.91050000032,
+          "tokens_entrada": 1454,
+          "tokens_saida": 519,
+          "tokens_total": 1973,
+          "campos_sem_suporte": [
+            "evidencias"
+          ],
+          "resposta_llm_bruta": "{\n\n\"urgencia\": \"ALTA\",\n\"prioridade\": \"P1\",\n\"categoria\": \"MECANICA\",\n\"equipe_sugerida\": \"Manutenção Mecânica\",\n\"regras_acionadas\": [],\n\"evidencias\": {\"urgencia\": \"ALTA\", \"prioridade\": \"P1\", \"categoria\": \"MECANICA\", \"equipe_sugerida\": \"Manutenção Mecânica\"},\n\"requer_revisao_humana\": true,\n\"motivo_revisao\": \"O alarme de pressão baixa em COMP-001 indica um falha crítica na operação do compressor, necessitando uma revisão de manutenção para garantir a segurança e a eficiência.\",\n\"confianca\": 0.0,\n\"campos_sem_suporte\": [\"evidencias\"]\n}",
+          "raciocinio_llm": "Okay, let's see. The user provided a report about an alarm of low pressure in the compressor of the instrument (COMP-001). The task is to classify the service order according to the given fields and return the JSON.\n\nFirst, I need to determine the urgency. The alarm is about a pressure drop, which is a critical issue. So urgency should be \"ALTA\" since it's a critical failure.\n\nNext, the priority. Since it's a compressor, which is part of the mechanical category, the priority is likely P1. But wait, the options are P1 to P4. The user didn't specify, but in the given options, P1 is the first priority. So I'll go with P1.\n\nNow, the category. The problem is with a compressor, so it's mechanical. The options include \"MECANICA\", so that's correct.\n\nFor the team suggestion, the user wants a specific name from the list. The list includes \"Manutenção Mecânica\", so I'll use that.\n\nThe evidencias section is empty as per the rules, so leave it as an empty array.\n\nThe required fields are all filled, so the JSON should have all the fields. Also, check if there are any forbidden tags or categories. The user mentioned not to use the active names or categories, so no issues here.\n\nFinally, the confianca is a number between 0 and 1, but there's no evidence given, so I'll set it to 0.0.\n\nMake sure to format the JSON correctly without any markdown and only return the pure JSON.\n"
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "ALM-001",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+        },
+        {
+          "id": "ALM-002",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+        },
+        {
+          "id": "ALM-003",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+        },
+        {
+          "id": "ALM-004",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-005",
+          "tipo": "ALARME",
+          "texto": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+        },
+        {
+          "id": "ALM-006",
+          "tipo": "ALARME",
+          "texto": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+        },
+        {
+          "id": "ALM-007",
+          "tipo": "ALARME",
+          "texto": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+        },
+        {
+          "id": "ALM-008",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-009",
+          "tipo": "ALARME",
+          "texto": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+        },
+        {
+          "id": "ALM-010",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+        }
+      ],
+      "elapsed_seconds": 242.31399579999925
+    },
+    "hibrido": {
+      "results": [
+        {
+          "id": "0c9d45e9-854b-4d1b-a41c-598a05505a4e",
+          "timestamp": "2026-11-03T03:00:23.338950",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CAL-001",
+            "sintomas": "[]",
+            "localizacao": "Caldeira de Vapor",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 20854.865999999674,
+          "tokens_entrada": 511,
+          "tokens_saida": 532,
+          "tokens_total": 1043,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"CAL-001\", \"sintomas\": [], \"localizacao\": \"Caldeira de Vapor\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"Urgente!\", \"evidencias\": { \"ativo_mencionado\": \"CAL-001\", \"sintomas\": \"[]\", \"localizacao\": \"Caldeira de Vapor\", \"urgencia_mencionada\": \"Urgente!\" }, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a pressure alert in CAL-001. First, I need to check which fields are mentioned.\n\nThe fields required are ativo_mencionado, sintomas, localizacao, impacto_producao, risco_seguranca, urgencia_mencionada, evidencias, and confianca_extracao. \n\nLooking at the text: \"Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.\" \n\nFirst, ativo_mencionado is CAL-001, so that's set. Sintomas? The text mentions the alarm, but no specific symptoms. So sintomas would be empty. Localizacao is CAL-001, so that's set. Impacto_producao? The text talks about the alarm, not production impact, so null. Risco_seguranca? No mention of safety risks, so null. Urgencia_mencionada is \"urgente\" as in \"Urgente!\", so that's set. Evidencias: the text gives the values, so I need to include those. But wait, the example uses the values directly. So in evidencias, I should map each field to the text's values. For ativo_mencionado, it's CAL-001. Sintomas: empty. Localizacao: CAL-001. Impacto_producao: null. Risco_seguranca: null. Urgencia_mencionada: \"Urgente!\".\n\nNow, the JSON should be structured with those fields. Let me double-check. All required fields are present, and no other fields are mentioned. So the final JSON should include all these fields with the correct values.\n"
+        },
+        {
+          "id": "f2c3dfed-ad68-4c5b-b439-f3c54aa5c818",
+          "timestamp": "2026-11-03T03:00:40.718324",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-021",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CAL-001",
+            "sintomas": "[]",
+            "localizacao": "Caldeira de Vapor",
+            "urgencia_mencionada": "urgente",
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-021, RULE-015. urgência ← RULE-021; prioridade ← RULE-021; equipe ← RULE-021; confiança ← RULE-021; revisão ← RULE-021"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Pressão acima da PMTA, maior valor a que a caldeira pode ser submetida continuamente (NR-13, Glossário); a válvula de segurança deve abrir em valor igual ou inferior à PMTA (item 13.4.1.2, a); revisão humana obrigatória",
+          "confianca": 0.9,
+          "latencia_ms": 17378.65139999849,
+          "tokens_entrada": 511,
+          "tokens_saida": 456,
+          "tokens_total": 967,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"CAL-001\", \"sintomas\": [], \"localizacao\": \"Caldeira de Vapor\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"urgente\", \"evidencias\": { \"ativo_mencionado\": \"CAL-001\", \"sintomas\": \"[]\", \"localizacao\": \"Caldeira de Vapor\", \"urgencia_mencionada\": \"urgente\" }, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a pressure alert in CAL-001. First, I need to check which fields are mentioned.\n\nThe fields required are ativo_mencionado, sintomas, localizacao, impacto_producao, risco_seguranca, urgencia_mencionada, evidencias, and confianca_extracao. \n\nLooking at the text: \"Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.\" \n\nSo, ativo_mencionado is CAL-001, which is a field. The sintomas would be the symptoms mentioned, but there's no mention of symptoms here. The localizacao is CAL-001. The impacto_producao is null because there's no mention of production impact. The risk_seguranca is null as well. Urgencia_mencionada is \"urgente\" since it's used as a literal expression. Evidencias is a JSON with the fields mentioned. The confianca_extracao is 0.8 as per the example.\n\nWait, the example uses 0.8 confidence. The user's example had 0.8, so I should follow that. Let me make sure I didn't miss any fields. All other fields are null except the ones mentioned. So the final JSON should include those fields with the correct values.\n"
+        },
+        {
+          "id": "c83fff94-77e7-4188-b359-487514191957",
+          "timestamp": "2026-11-03T03:01:00.519521",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CAL-001",
+            "sintomas": "[]",
+            "localizacao": "Caldeira de Vapor",
+            "urgencia_mencionada": "None",
+            "ativo_encontrado": "recuperado de assets.yaml: CAL-001 — Caldeira de Vapor",
+            "palavras_categoria": "caldeira, vapor",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 19799.806799999715,
+          "tokens_entrada": 509,
+          "tokens_saida": 521,
+          "tokens_total": 1030,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"CAL-001\", \"sintomas\": [], \"localizacao\": \"Caldeira de Vapor\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": null, \"evidencias\": { \"ativo_mencionado\": \"CAL-001\", \"sintomas\": \"[]\", \"localizacao\": \"Caldeira de Vapor\", \"urgencia_mencionada\": null }, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a pressure alert in CAL-001. First, I need to check which fields are mentioned.\n\nThe fields required are ativo_mencionado, sintomas, localizacao, impacto_producao, risco_seguranca, urgencia_mencionada, evidencias, and confianca_extracao. \n\nLooking at the text: \"Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.\" \n\nSo, ativo_mencionado is CAL-001. The pressure is mentioned, but the text doesn't specify symptoms or location. The location is Caldeira de Vapor, but the field is called localizacao. The impacto_producao and risk are not mentioned. Urgencia_mencionada is \"Urgente\" but the text says \"gerado pelo supervisório: 980 kPa, acima do limite...\" which is more about the alert than urgency. So urgencia_mencionada should be null. \n\nEvidencias would include the fields mentioned, so ativo_mencionado, sintomas (if any), localizacao. But there's no symptoms listed. So sintomas is empty. The impacto_producao and risk are null. The confianca_extracao is 0.8 based on the example given. \n\nPutting it all together, the JSON should have those fields filled in as per the example, but only the ones present. Let me double-check each field. Yes, CAL-001 is the active, location is Caldeira de Vapor, urgency is null, and others are as per the text. No inventing any data, just the present ones.\n"
+        },
+        {
+          "id": "f77123f1-f96b-4b13-8294-3f7b105f0253",
+          "timestamp": "2026-11-03T03:01:22.526880",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-011",
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "BOMB-001",
+            "sintomas": "temperatura alta",
+            "localizacao": "Bomba Centrífuga de Resfriamento (BOMB-001)",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: BOMB-001 — Bomba Centrífuga de Resfriamento",
+            "palavras_categoria": "bomba, temperatura alta",
+            "regras_classificacao": "Regras: RULE-011, RULE-014. urgência ← RULE-011; prioridade ← RULE-011; equipe ← RULE-011; confiança ← RULE-011"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 22006.716399999277,
+          "tokens_entrada": 513,
+          "tokens_saida": 568,
+          "tokens_total": 1081,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"BOMB-001\", \"sintomas\": [\"temperatura alta\"], \"localizacao\": \"Bomba Centrífuga de Resfriamento (BOMB-001)\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"Urgente!\", \"evidencias\": {\"ativo_mencionado\": \"BOMB-001\", \"sintomas\": \"temperatura alta\", \"localizacao\": \"Bomba Centrífuga de Resfriamento (BOMB-001)\", \"urgencia_mencionada\": \"Urgente!\"}, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a temperature alarm for a centrifugal cooling plant's BOMB-001. \n\nFirst, I need to check the fields mentioned. The example given includes ativo_mencionado, sintomas, localizacao, impacto_producao, etc. Let me look at the text again.\n\nThe text says: \"Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.\" \n\nSo, the active mentioned is BOMB-001. The symptoms are the temperature alarm, which is a symptom. The location is the plant, so localizacao is \"Bomba Centrífuga de Resfriamento (BOMB-001)\". The impact on production is mentioned as \"gerado pelo supervisório\", which is a risk, but the text doesn't specify if it's a risk. The example uses \"risco_seguranca\" as null, so maybe it's null here. Urgency is \"urgente\" as in \"Urgente!\", which matches the example. \n\nEvidencias would be the fields mentioned, so ativo_mencionado, sintomas, localizacao, urgencia_mencionada. The impacto_producao is null because it's not mentioned. The confianca_extracao is 0.8 as per the example. \n\nWait, the user said to return only the JSON without explanations. So I need to make sure all fields are included as per the example. Let me double-check each part. \n\nYes, all fields are present. The output should be a JSON object with those fields. No other fields are mentioned. So the final JSON should include all those fields and be in the specified format.\n"
+        },
+        {
+          "id": "9f59ab22-c8e2-4edc-988a-e0f52a875975",
+          "timestamp": "2026-11-03T03:01:41.066872",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "MECANICA",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-014"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "MOTOR-001",
+            "sintomas": "vibração excessiva",
+            "localizacao": "Motor de Correia Transportadora",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: MOTOR-001 — Motor de Correia Transportadora",
+            "palavras_categoria": "vibração, motor, correia",
+            "regras_classificacao": "Regras: RULE-014. urgência ← RULE-014; prioridade ← RULE-014; equipe ← RULE-014; confiança ← RULE-014"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 18539.355400000204,
+          "tokens_entrada": 514,
+          "tokens_saida": 475,
+          "tokens_total": 989,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"MOTOR-001\", \"sintomas\": [\"vibração excessiva\"], \"localizacao\": \"Motor de Correia Transportadora\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"Urgente\", \"evidencias\": {\"ativo_mencionado\": \"MOTOR-001\", \"sintomas\": \"vibração excessiva\", \"localizacao\": \"Motor de Correia Transportadora\", \"urgencia_mencionada\": \"Urgente!\"}, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a motor having a vibration above the limit. First, I need to check which fields are mentioned.\n\nThe fields required are ativo_mencionado, sintomas, localizacao, impacto_producao, risco_seguranca, urgencia_mencionada, evidencias, and confianca_extracao. \n\nLooking at the text: \"Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.\" \n\nSo, the ativo_mencionado is MOTOR-001. The symptoms mentioned are the vibration, which is part of the sintomas. The localizacao is MOTOR-001. The impacto_producao is null because there's no mention of production impact. The risk_seguranca is null since there's no mention of safety risks. Urgencia_mencionada is \"Urgente\" as the vibration is above the limit. Evidencias include the ativo_mencionado, sintomas, localizacao, and urgencia_mencionada. The confianca_extracao is 0.8 based on the example given.\n\nI need to make sure I'm not adding any other fields. The example shows that if a field isn't mentioned, it's null. So all fields are covered here. Let me structure the JSON accordingly without any extra text.\n"
+        },
+        {
+          "id": "642dae12-455f-42b0-9ad2-7e84a7256313",
+          "timestamp": "2026-11-03T03:02:01.848056",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-003",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "PANEL-002",
+            "sintomas": "",
+            "localizacao": "PANEL-002",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: PANEL-002 — Painel MCC - Motor Control Center",
+            "palavras_categoria": "corrente alta, painel",
+            "regras_classificacao": "Regras: RULE-003, RULE-010. urgência ← RULE-003; prioridade ← RULE-003; equipe ← RULE-003; confiança ← RULE-003; revisão ← RULE-003"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Intervenção em instalação elétrica — sujeita à NR-10, exige trabalhador autorizado",
+          "confianca": 0.9,
+          "latencia_ms": 20779.71819999948,
+          "tokens_entrada": 510,
+          "tokens_saida": 532,
+          "tokens_total": 1042,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{\n\n\"ativo_mencionado\": \"PANEL-002\",\n\"sintomas\": [],\n\"localizacao\": \"PANEL-002\",\n\"impacto_producao\": null,\n\"risco_seguranca\": null,\n\"urgencia_mencionada\": \"Urgente\",\n\"evidencias\": {\n  \"ativo_mencionado\": \"PANEL-002\",\n  \"sintomas\": \"\",\n  \"localizacao\": \"PANEL-002\",\n  \"urgencia_mencionada\": \"Urgente!\"\n},\n\"confianca_extracao\": 0.8\n}",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a current situation in an industrial setting. The example provided shows that when a field is mentioned, like \"urgencia_mencionada\", I need to include that. \n\nFirst, I'll look at the text: \"Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.\" \n\nSo, the main points here are the alarm, the current value, and the limit. The key fields to extract are \"urgencia_mencionada\", \"localizacao\", \"impacto_producao\", \"risco_seguranca\", \"ativo_mencionado\", \"sintomas\", and \"confianca_extracao\". \n\nThe alarm is in the text, so \"urgencia_mencionada\" should be set to \"Urgente\". The location is \"PANEL-002\", so \"localizacao\" is there. The current value is 420 A, which is above the limit, but the impact on production isn't mentioned. The risk of safety isn't specified. The active mentioned is PANEL-002. The symptoms aren't listed here. \n\nSo, putting it all together, the JSON should include all these fields. Let me check again to make sure I didn't miss anything. The example uses \"sintomas\" as an array, but there are no symptoms mentioned. The impact on production is null, and the risk is null. The confianca is 0.8 based on the example. \n\nWait, the user said to return only the JSON without explanations. So I need to make sure all fields are included as per the example, even if some are null. Let me structure the JSON accordingly.\n"
+        },
+        {
+          "id": "244f127a-0247-4df1-ac06-b95411b5c7d7",
+          "timestamp": "2026-11-03T03:02:19.523657",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "TI_AUTOMACAO",
+          "equipe_sugerida": "TI e Automação",
+          "regras_acionadas": [
+            "RULE-012"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "None",
+            "sintomas": "None",
+            "localizacao": "Setor C",
+            "urgencia_mencionada": "urgente",
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-002 — Compressor de Processo",
+            "palavras_categoria": "comunicação, CLP",
+            "regras_classificacao": "Regras: RULE-012. urgência ← RULE-012; prioridade ← RULE-012; equipe ← RULE-012; confiança ← RULE-012"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.75,
+          "latencia_ms": 17674.62119999982,
+          "tokens_entrada": 490,
+          "tokens_saida": 463,
+          "tokens_total": 953,
+          "campos_sem_suporte": [
+            "ativo_mencionado",
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": null, \"sintomas\": [], \"localizacao\": \"Setor C\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"urgente\", \"evidencias\": { \"ativo_mencionado\": null, \"sintomas\": null, \"localizacao\": \"Setor C\", \"urgencia_mencionada\": \"urgente\" }, \"confianca_extracao\": 0.0 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a communication alarm from CLP, located on Line 2 in Setor C. \n\nFirst, I need to check the fields mentioned. The example given includes ativo_mencionado, sintomas, localizacao, impacto_producao, etc. But in this case, the text doesn't mention any active assets or equipment. It's about an alarm and location. \n\nLooking at the fields, the user specified that if a field isn't mentioned, return null. So for ativo_mencionado, there's no mention of an asset. The symptoms are not listed here. The location is Setor C, but that's just the location, not a symptom. The impact on production is not mentioned. The urgency is \"urgente\" but that's part of the alarm, so maybe that's considered. \n\nWait, the example uses \"urgente\" as a literal expression. In this case, the text says \"Alarme de perda de comunicação...\" which translates to \"Communication alarm alert...\" So the urgency is mentioned. \n\nSo the fields to extract would be:\n\n- ativo_mencionado: null\n- sintomas: []\n- localizacao: \"Setor C\"\n- impacto_producao: null\n- risco_seguranca: null\n- urgencia_mencionada: \"urgente\"\n- evidencias: empty array\n- confianca_extracao: 0.0\n\nI need to make sure I'm not adding anything else. The user said to return only the JSON without explanations. So the final JSON should have all these fields as specified.\n"
+        },
+        {
+          "id": "ba36a032-164b-420b-9776-fd8d86ff3251",
+          "timestamp": "2026-11-03T03:02:41.820501",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "urgencia": "MEDIA",
+          "prioridade": "P3",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Utilidades",
+          "regras_acionadas": [
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "CHIL-001",
+            "sintomas": "[]",
+            "localizacao": "CHIL-001",
+            "urgencia_mencionada": "gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C",
+            "ativo_encontrado": "recuperado de assets.yaml: CHIL-001 — Chiller de Água Gelada",
+            "palavras_categoria": "chiller, água gelada",
+            "regras_classificacao": "Regras: RULE-015. urgência ← RULE-015; prioridade ← RULE-015; equipe ← RULE-015; confiança ← RULE-015"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.65,
+          "latencia_ms": 22295.73199999868,
+          "tokens_entrada": 508,
+          "tokens_saida": 573,
+          "tokens_total": 1081,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"CHIL-001\", \"sintomas\": [], \"localizacao\": \"CHIL-001\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C\", \"evidencias\": { \"ativo_mencionado\": \"CHIL-001\", \"sintomas\": \"[]\", \"localizacao\": \"CHIL-001\", \"urgencia_mencionada\": \"gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C\" }, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a chiller, CHIL-001, with a temperature alarm. First, I need to check which fields are mentioned.\n\nThe fields required are ativo_mencionado, sintomas, localizacao, impacto_producao, risco_seguranca, urgencia_mencionada, evidencias, and confianca_extracao. \n\nLooking at the text: \"Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.\" \n\nSo, ativo_mencionado is CHIL-001, which is a valid field. The temperature is mentioned, so maybe impacto_producao is null since it's about a temperature issue, not production impact. The localizacao is CHIL-001, so that's also there. The urgency is mentioned as \"gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C\", which translates to \"generated by the supervisor: 12°C above the alarm limit\". Urgencia_mencionada is set to true. \n\nEvidencias would include the ativo_mencionado, sintomas (if any), localizacao, and urgencia_mencionada. In this case, the sintomas are not mentioned, so they are null. The impacto_producao and risco_seguranca are also null. The confianca_extracao is 0.8 since it's a simple extraction.\n\nWait, the example given had \"urgente\" as a string. The text mentions urgency, so that's correct. So putting it all together, the JSON should include all these fields with the correct values.\n"
+        },
+        {
+          "id": "b584e182-9ac3-4302-869c-30558ffa988b",
+          "timestamp": "2026-11-03T03:03:09.039383",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "urgencia": "IMEDIATA",
+          "prioridade": "P1",
+          "categoria": "ELETRICA",
+          "equipe_sugerida": "Manutenção Elétrica",
+          "regras_acionadas": [
+            "RULE-002",
+            "RULE-010"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "GER-001",
+            "sintomas": "[]",
+            "localizacao": "GER-001",
+            "urgencia_mencionada": "None",
+            "ativo_encontrado": "recuperado de assets.yaml: GER-001 — Gerador de Emergência 500kVA",
+            "palavras_categoria": "gerador",
+            "regras_classificacao": "Regras: RULE-002, RULE-010. urgência ← RULE-002; prioridade ← RULE-002; confiança ← RULE-002; equipe ← RULE-010; revisão ← RULE-002"
+          },
+          "requer_revisao_humana": true,
+          "motivo_revisao": "Palavras de emergência detectadas — situação crítica requer avaliação imediata",
+          "confianca": 0.9,
+          "latencia_ms": 27217.4361999987,
+          "tokens_entrada": 510,
+          "tokens_saida": 700,
+          "tokens_total": 1210,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca",
+            "urgencia_mencionada",
+            "urgencia"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"GER-001\", \"sintomas\": [], \"localizacao\": \"GER-001\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": null, \"evidencias\": { \"ativo_mencionado\": \"GER-001\", \"sintomas\": \"[]\", \"localizacao\": \"GER-001\", \"urgencia_mencionada\": null }, \"confianca_extracao\": 0.0 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a generator's alarm. First, I need to check which fields are mentioned.\n\nThe example given in the instructions includes fields like ativo_mencionado, sintomas, localizacao, etc. Let me look at the provided text again.\n\nThe text says: \"Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.\" \n\nSo, the main points here are the alarm level, the generator's name, and the supervisory percentage. The fields to extract are ativo_mencionado, sintomas, localizacao, etc. \n\nLooking at the text, there's no mention of an active asset or a symptom. The generator's name and the supervisory percentage are mentioned, but nothing about a problem or symptoms. The impact on production is not mentioned, so impact_producao would be null. The risk of safety isn't discussed, so risk_seguranca is null. Urgency is mentioned as \"abscissa do limite de alarme\", which translates to \"below the limit of alarm\", but the example uses \"urgente\" which is urgent. However, the text doesn't explicitly state urgency, so maybe it's inferred. But according to the example, if the text says \"abscissa do limite\", then it's a symptom. Wait, the example uses \"urgente\" which is urgent. So in this case, the text says \"below the limit\", which might imply urgency. But the example uses \"urgente\" as a literal word. So maybe the user expects that if the text says \"below the limit\", then it's a symptom. But in this case, the text doesn't mention symptoms. So sintomas would be empty. \n\nAlso, the localizacao is GER-001, which is the generator's name. So ativo_mencionado is GER-001. The impact_producao is null because there's no mention. The risk_seguranca is null. Urgencia_mencionada would be null since there's no explicit mention. The evidencias would be an empty array. The confianca_extracao is 0.0 since it's a direct extraction. \n\nSo putting it all together, the JSON should have all these fields with the correct values, and no other fields. Let me double-check each part to make sure I didn't miss anything. The text doesn't mention any active assets, symptoms, localizations, production impact, safety risks, or urgency. So all fields are null except for the generator's name and the supervisory percentage. That's it.\n"
+        },
+        {
+          "id": "d0b64152-624b-4515-bd72-f079b1b1cfaf",
+          "timestamp": "2026-11-03T03:03:30.430912",
+          "abordagem": "HIBRIDO",
+          "texto_entrada": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "urgencia": "ALTA",
+          "prioridade": "P2",
+          "categoria": "UTILIDADES",
+          "equipe_sugerida": "Manutenção Mecânica",
+          "regras_acionadas": [
+            "RULE-009",
+            "RULE-015"
+          ],
+          "evidencias": {
+            "ativo_mencionado": "COMP-001",
+            "sintomas": "[]",
+            "localizacao": "Ar Instrumento",
+            "urgencia_mencionada": "Urgente!",
+            "ativo_encontrado": "recuperado de assets.yaml: COMP-001 — Compressor de Ar Instrumento",
+            "palavras_categoria": "compressor de ar, ar instrumento",
+            "regras_classificacao": "Regras: RULE-009, RULE-015. urgência ← RULE-009; prioridade ← RULE-009; equipe ← RULE-009; confiança ← RULE-009"
+          },
+          "requer_revisao_humana": false,
+          "motivo_revisao": null,
+          "confianca": 0.78,
+          "latencia_ms": 21389.081299999816,
+          "tokens_entrada": 510,
+          "tokens_saida": 540,
+          "tokens_total": 1050,
+          "campos_sem_suporte": [
+            "impacto_producao",
+            "risco_seguranca"
+          ],
+          "resposta_llm_bruta": "{ \"ativo_mencionado\": \"COMP-001\", \"sintomas\": [], \"localizacao\": \"Ar Instrumento\", \"impacto_producao\": null, \"risco_seguranca\": null, \"urgencia_mencionada\": \"Urgente!\",\"evidencias\": {\"ativo_mencionado\": \"COMP-001\", \"sintomas\": \"[]\", \"localizacao\": \"Ar Instrumento\", \"urgencia_mencionada\": \"Urgente!\"}, \"confianca_extracao\": 0.8 }",
+          "raciocinio_llm": "Okay, let's see. The user wants me to extract specific fields from the given text. The text is about a compressor, COMP-001, with a pressure limit of 420 kPa below the alarm threshold. \n\nFirst, I need to check for each expected field. The active mentioned is COMP-001, which is a tag. Then, the symptoms are mentioned as \"vibração excessiva\" but that's in the context of the bomb, not the compressor. Wait, the text says the alarm is from the compressor, so maybe the symptoms are related to the compressor. But the user's example uses \"sintomas\" as a list. Let me check again.\n\nThe text states the alarm is from the compressor, so maybe the symptoms are related to the compressor's operation. But the user's example uses \"sintomas\" as a list. However, in this case, the text doesn't mention any symptoms like vibration. So the sintomas field would be empty. \n\nNext, the location is mentioned as \"Compressor de Ar Instrumento\" which translates to \"Ar Instrumento Compressor\". So the localisation is \"Ar Instrumento\". \n\nThe impact on production is not mentioned, so impact_producao is null. The risk of safety is not mentioned, so risk_seguranca is null. Urgency is \"Urgente\" as in the alarm, so urgencia_mencionada is \"Urgente\". \n\nEvidences would include the active, symptoms, location, and urgency. The JSON should only include these fields. Let me structure it properly. \n\nWait, the example uses \"ativ_mencionado\" as the active, which in this case is COMP-001. The sintomas list is empty because there's no mention. So the JSON should have those fields with null where necessary. \n\nDouble-checking all fields to ensure no other information is missed. The user said to return only the JSON without explanations, so just the fields as specified.\n"
+        }
+      ],
+      "errors": [],
+      "dataset_cases": [
+        {
+          "id": "ALM-001",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1.080 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão acima da PMTA cadastrada da CAL-001 (1.000 kPa, valor fictício): NR-13, Glossário e item 13.4.1.2, alínea a. Urgência IMEDIATA por critério da autora."
+        },
+        {
+          "id": "ALM-002",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 1,04 MPa, acima do limite de alarme de 0,95 MPa.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Mesmo critério do ALM-001, com o valor em MPa (1,04 MPa = 1.040 kPa, acima da PMTA)."
+        },
+        {
+          "id": "ALM-003",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão alta em Caldeira de Vapor (CAL-001), gerado pelo supervisório: 980 kPa, acima do limite de alarme de 950 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Controle: alarme de pressão alta abaixo da PMTA. Alarme de processo em ativo de criticidade ALTA, sem risco declarado: ALTA/P2, como no CASE-001."
+        },
+        {
+          "id": "ALM-004",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Bomba Centrífuga de Resfriamento (BOMB-001), gerado pelo supervisório: 92 °C, acima do limite de alarme de 80 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta em bomba de criticidade ALTA, sem risco declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-005",
+          "tipo": "ALARME",
+          "texto": "Alarme de vibração alta em Motor de Correia Transportadora (MOTOR-001), gerado pelo supervisório: 11,2 mm/s, acima do limite de alarme de 7,1 mm/s.",
+          "esperado": {
+            "urgencia": "MEDIA",
+            "prioridade": "P3",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Vibração alta em ativo de criticidade MEDIA, sem impacto declarado: MEDIA/P3."
+        },
+        {
+          "id": "ALM-006",
+          "tipo": "ALARME",
+          "texto": "Alarme de corrente alta em Painel MCC - Motor Control Center (PANEL-002), gerado pelo supervisório: 420 A, acima do limite de alarme de 380 A.",
+          "esperado": {
+            "urgencia": "IMEDIATA",
+            "prioridade": "P1",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": true
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Anomalia em painel elétrico de potência: intervenção sujeita à NR-10 (item 10.1.2), mesmo critério de anotação da RULE-003 no conjunto principal."
+        },
+        {
+          "id": "ALM-007",
+          "tipo": "ALARME",
+          "texto": "Alarme de perda de comunicação do CLP gerado pelo supervisório, local: Linha 2 (Setor C).",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "TI_AUTOMACAO",
+            "equipe": "TI e Automação",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Alarme discreto de comunicação entre CLP e supervisório: TI e automação, ALTA/P2."
+        },
+        {
+          "id": "ALM-008",
+          "tipo": "ALARME",
+          "texto": "Alarme de temperatura alta em Chiller de Água Gelada (CHIL-001), gerado pelo supervisório: 12 °C, acima do limite de alarme de 9 °C.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "UTILIDADES",
+            "equipe": "Utilidades",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Temperatura alta da água gelada em chiller de criticidade ALTA, sem impacto declarado: ALTA/P2."
+        },
+        {
+          "id": "ALM-009",
+          "tipo": "ALARME",
+          "texto": "Alarme de nível baixo em Gerador de Emergência 500kVA (GER-001), gerado pelo supervisório: 65 %, abaixo do limite de alarme de 80 %.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "ELETRICA",
+            "equipe": "Manutenção Elétrica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Nível de combustível abaixo do mínimo de 80% registrado no cadastro do GER-001, ativo de criticidade ALTA: ALTA/P2."
+        },
+        {
+          "id": "ALM-010",
+          "tipo": "ALARME",
+          "texto": "Alarme de pressão baixa em Compressor de Ar Instrumento (COMP-001), gerado pelo supervisório: 420 kPa, abaixo do limite de alarme de 550 kPa.",
+          "esperado": {
+            "urgencia": "ALTA",
+            "prioridade": "P2",
+            "categoria": "MECANICA",
+            "equipe": "Manutenção Mecânica",
+            "requer_revisao_humana": false
+          },
+          "referencia_caso_canonico": null,
+          "notas": "Pressão baixa no compressor de ar instrumento, ativo de criticidade ALTA. Há valor de pressão no texto, mas o ativo não tem PMTA cadastrada: a RULE-021 não deve disparar."
+        }
+      ],
+      "elapsed_seconds": 207.94909990000087
+    }
+  }
+}

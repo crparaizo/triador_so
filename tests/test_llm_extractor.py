@@ -306,14 +306,34 @@ def test_json_com_campos_extras_nao_causa_erro(mock_ollama):
     assert result.erro_parse is None
 
 
-def test_chatollama_extrator_recebe_format_json_e_limite_de_tokens(mocker):
-    """O extrator do híbrido deve pedir JSON ao Ollama e limitar os tokens gerados."""
+def test_chatollama_extrator_recebe_esquema_contexto_e_limite_de_tokens(mocker):
+    """O extrator do híbrido deve restringir a saída ao esquema, fixar o contexto e limitar os tokens."""
     from src.config.loader import get_settings
-    from src.extraction.llm_extractor import LLMExtractor
+    from src.extraction.llm_extractor import ESQUEMA_EXTRACAO, LLMExtractor
 
     mock_classe = mocker.patch("src.extraction.llm_extractor.ChatOllama")
     LLMExtractor()._criar_llm()
 
     kwargs = mock_classe.call_args.kwargs
-    assert kwargs["format"] == "json"
+    assert kwargs["format"] == ESQUEMA_EXTRACAO
+    assert set(ESQUEMA_EXTRACAO["required"]) == set(ESQUEMA_EXTRACAO["properties"])
     assert kwargs["num_predict"] == get_settings().ollama_num_predict
+    assert kwargs["num_ctx"] == get_settings().ollama_num_ctx
+
+
+def test_extrator_registra_resposta_e_raciocinio(mocker):
+    """A resposta completa e o raciocínio do modelo são registrados também no sucesso."""
+    from src.extraction.llm_extractor import LLMExtractor
+
+    resposta = MagicMock(
+        content='{"ativo_mencionado": "BOMB-001"}',
+        additional_kwargs={"reasoning_content": "Vou procurar a tag do ativo."},
+        usage_metadata=None,
+        response_metadata={},
+    )
+    mocker.patch("src.extraction.llm_extractor.ChatOllama").return_value.invoke.return_value = resposta
+    result = LLMExtractor().extract("BOMB-001 vibrando")
+
+    assert result.erro_parse is None
+    assert result.resposta_llm_bruta == '{"ativo_mencionado": "BOMB-001"}'
+    assert result.raciocinio_llm == "Vou procurar a tag do ativo."
